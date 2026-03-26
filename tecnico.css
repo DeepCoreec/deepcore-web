@@ -1,0 +1,165 @@
+/* =============================================
+   DeepCore — Técnico Animado
+   ============================================= */
+
+#tecnico-wrap {
+  position: fixed;
+  bottom: 0; right: -200px;
+  z-index: 998;
+  pointer-events: none;
+  transition: right 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+#tecnico-wrap.entra  { right: 20px; }
+#tecnico-wrap.sale   { right: -200px; }
+
+/* Burbuja de diálogo */
+.tec-burbuja {
+  position: absolute;
+  bottom: 175px; right: 50px;
+  background: rgba(13,13,22,0.95);
+  border: 1px solid #FF0022;
+  border-radius: 12px 12px 0 12px;
+  padding: 8px 14px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem; color: #fff;
+  white-space: nowrap;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 0 12px rgba(255,0,34,0.3);
+}
+.tec-burbuja::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; right: 16px;
+  border: 4px solid transparent;
+  border-top-color: #FF0022;
+}
+.tec-burbuja.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* SVG y canvas ocultos */
+.tec-svg { display: none; }
+.tec-canvas { display: none; }
+
+/* Imagen WebP animada */
+.tec-img {
+  display: block;
+  width: 180px;
+  height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255,0,34,0.35));
+}
+
+/* Imagen del personaje — base */
+.tec-img {
+  display: block;
+  transition: transform 0.15s ease;
+}
+
+/* Rebote suave al caminar (refuerza los frames) */
+.tec-img.caminando {
+  animation: rebote-caminar 0.4s ease-in-out infinite alternate;
+}
+@keyframes rebote-caminar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-5px); }
+}
+
+/* Zoom dramático en el ulti */
+.tec-img.ulti-pose {
+  animation: zoom-ulti 0.3s ease-out forwards;
+}
+@keyframes zoom-ulti {
+  to { transform: scale(1.1) rotate(-8deg); }
+}
+
+/* Parpadeo ojos */
+.tec-ojo {
+  animation: parpadeo 3s ease-in-out infinite;
+}
+@keyframes parpadeo {
+  0%, 90%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+/* ── POSE ULTI ── */
+.tec-brazo.ulti {
+  animation: posar-ulti 0.25s ease-out forwards;
+}
+@keyframes posar-ulti {
+  to { transform: rotate(-50deg) translateY(-6px); }
+}
+
+/* ── LÁSER FINALEM ── */
+/* ── LÁSER ARCOÍRIS FINALEM ── */
+#tec-laser {
+  position: fixed;
+  bottom: 88px;
+  right: 165px;
+  height: 14px;
+  width: 0;
+  border-radius: 7px;
+  background: linear-gradient(to left,
+    #FF0055 0%,
+    #FF6600 12%,
+    #FFE000 25%,
+    #00DD44 38%,
+    #00CCFF 52%,
+    #5566FF 65%,
+    #CC44FF 80%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 8px  #FF00AA,
+    0 0 20px #FF6600,
+    0 0 40px rgba(100, 200, 255, 0.7),
+    0 0 70px rgba(200, 100, 255, 0.4);
+  opacity: 0;
+  transform-origin: right center;
+  pointer-events: none;
+  z-index: 997;
+  filter: brightness(1.3) saturate(1.5);
+}
+#tec-laser.disparando {
+  animation: laser-rainbow 1.1s ease-out forwards;
+}
+@keyframes laser-rainbow {
+  0%   { width: 0;     opacity: 1;   filter: brightness(2) saturate(2); }
+  20%  { width: 55vw;  opacity: 1;   filter: brightness(1.5) saturate(1.8); }
+  55%  { width: 100vw; opacity: 1;   filter: brightness(1.3) saturate(1.5); }
+  80%  { width: 100vw; opacity: 0.6; }
+  100% { width: 100vw; opacity: 0;   }
+}
+
+/* Brillo extra encima del rayo */
+#tec-laser.disparando::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: 4px;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+}
+
+/* ── FLASH DE PANTALLA ── */
+#tec-flash {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg,
+    rgba(255,0,100,0.12),
+    rgba(100,200,255,0.12),
+    rgba(200,100,255,0.12)
+  );
+  pointer-events: none;
+  z-index: 996;
+  opacity: 0;
+  transition: opacity 0.06s;
+}
+#tec-flash.flash-activo {
+  opacity: 1;
+}

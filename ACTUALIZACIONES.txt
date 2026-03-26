@@ -1,0 +1,37 @@
+====================================
+DEEPCORE WEB — RESUMEN DE CAMBIOS
+Hecho mientras dormías 🌙
+====================================
+
+NUEVAS SECCIONES AGREGADAS:
+─────────────────────────────
+1. PROCESO (id: #proceso)
+   - 4 pasos animados: Contacto → Diagnóstico → Trabajo → Entrega
+   - Cards con hover effect y línea roja animada
+   - Flechas conectoras entre pasos
+
+2. FAQ (id: #faq)
+   - 7 preguntas frecuentes con acordeón animado
+   - Clic para abrir/cerrar cada pregunta
+   - Preguntas sobre precios, garantía, tiempos, web, domicilio, pagos, celulares
+
+3. TESTIMONIOS (id: #testimonios)
+   - 3 tarjetas de clientes (placeholder hasta tener clientes reales)
+   - Estrellas ★★★★★ en rojo
+   - Link para que clientes dejen su reseña por WhatsApp
+
+MEJORAS TÉCNICAS:
+─────────────────
+- Contador animado preparado para cifras (ej: 100+ clientes)
+- Navbar actualizado con links a Proceso y FAQ
+- CSS responsivo para móviles en todas las secciones nuevas
+
+PENDIENTE PARA MAÑANA:
+──────────────────────
+→ Arrastra la carpeta DeepCore a Netlify para actualizar la web en vivo
+→ Crear redes sociales (@deepcore.ec en Instagram y Facebook)
+→ Subir foto de perfil generada en Ideogram
+→ Cuando tengas clientes reales, reemplaza los testimonios de ejemplo
+
+URL DE LA WEB: https://deepcore-ec.netlify.app
+====================================
