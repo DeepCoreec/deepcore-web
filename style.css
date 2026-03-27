@@ -452,6 +452,27 @@ body {
 .pf-plan-note { color: var(--muted); font-size: 12px; margin-top: 2px; }
 .pf-note { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
+/* ── Métodos de pago ── */
+.pay-methods { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+.pay-method {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  background: #07090F; border: 1px solid #1A2035;
+  border-radius: 12px; padding: 16px 20px;
+}
+.pay-method-icon { font-size: 28px; flex-shrink: 0; }
+.pay-method-info { flex: 1; min-width: 200px; }
+.pay-method-info strong { color: #EEF4FF; font-size: 15px; display: block; margin-bottom: 3px; }
+.pay-method-info span { color: #5A6A88; font-size: 13px; }
+.pay-method-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.pay-btn {
+  background: transparent; border: 1px solid #0099CC; color: #0099CC;
+  padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  text-decoration: none; transition: background .2s, color .2s;
+}
+.pay-btn:hover { background: #0099CC; color: #fff; }
+.pay-btn-pop { background: #0099CC; color: #fff; }
+.pay-btn-pop:hover { background: #0077AA; }
+
 .products-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
