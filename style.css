@@ -453,6 +453,11 @@ body {
 .pf-note { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
 /* ── Métodos de pago ── */
+.pay-selected-plan {
+  background: rgba(0,153,204,0.12); border: 1px solid rgba(0,153,204,0.4);
+  border-radius: 10px; padding: 10px 16px; color: #0099CC; font-size: 14px;
+  margin-bottom: 4px;
+}
 .pay-methods { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
 .pay-method {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;

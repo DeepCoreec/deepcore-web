@@ -368,23 +368,23 @@
           <li>✅ Sin contratos — cancela cuando quieras</li>
         </ul>
         <div class="pf-plans">
-          <a class="pf-plan" href="https://www.paypal.com/paypalme/DeepCoreec/5" target="_blank">
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Mensual $5')">
             <span class="pf-plan-name">Mensual</span>
             <span class="pf-plan-price">$5</span>
             <span class="pf-plan-note">/ mes</span>
           </a>
-          <a class="pf-plan pf-plan-pop" href="https://www.paypal.com/paypalme/DeepCoreec/14" target="_blank">
+          <a class="pf-plan pf-plan-pop" href="#metodos-pago" onclick="selectPlan('Trimestral $14')">
             <span class="pf-pop-badge">Más popular</span>
             <span class="pf-plan-name">Trimestral</span>
             <span class="pf-plan-price">$14</span>
             <span class="pf-plan-note">/ 3 meses</span>
           </a>
-          <a class="pf-plan" href="https://www.paypal.com/paypalme/DeepCoreec/27" target="_blank">
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Semestral $27')">
             <span class="pf-plan-name">Semestral</span>
             <span class="pf-plan-price">$27</span>
             <span class="pf-plan-note">/ 6 meses</span>
           </a>
-          <a class="pf-plan" href="https://www.paypal.com/paypalme/DeepCoreec/50" target="_blank">
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Anual $50')">
             <span class="pf-plan-name">Anual</span>
             <span class="pf-plan-price">$50</span>
             <span class="pf-plan-note">/ año — 2 meses gratis</span>
@@ -393,19 +393,19 @@
         <p class="pf-note">Elige tu método de pago preferido abajo 👇</p>
 
         <!-- MÉTODOS DE PAGO -->
-        <div class="pay-methods">
+        <div class="pay-methods" id="metodos-pago">
+        <div class="pay-selected-plan" id="plan-seleccionado" style="display:none">
+          Plan seleccionado: <strong id="plan-nombre"></strong>
+        </div>
           <!-- PayPal / Tarjeta -->
           <div class="pay-method">
             <div class="pay-method-icon">💳</div>
             <div class="pay-method-info">
-              <strong>PayPal o Tarjeta</strong>
+              <strong>PayPal o Tarjeta de crédito/débito</strong>
               <span>Visa, Mastercard, American Express — sin necesitar cuenta PayPal</span>
             </div>
             <div class="pay-method-btns">
-              <a href="https://www.paypal.com/paypalme/DeepCoreec/5" target="_blank" class="pay-btn">$5 Mensual</a>
-              <a href="https://www.paypal.com/paypalme/DeepCoreec/14" target="_blank" class="pay-btn">$14 Trimestral</a>
-              <a href="https://www.paypal.com/paypalme/DeepCoreec/27" target="_blank" class="pay-btn">$27 Semestral</a>
-              <a href="https://www.paypal.com/paypalme/DeepCoreec/50" target="_blank" class="pay-btn pay-btn-pop">$50 Anual</a>
+              <a id="btn-paypal" href="https://www.paypal.com/paypalme/DeepCoreec/5" target="_blank" class="pay-btn pay-btn-pop">Pagar con PayPal / Tarjeta</a>
             </div>
           </div>
 
@@ -414,10 +414,10 @@
             <div class="pay-method-icon">🏦</div>
             <div class="pay-method-info">
               <strong>Transferencia Bancaria</strong>
-              <span>Banco de Guayaquil · Cuenta de ahorros · Nº <strong>0048029235</strong> · Michael Pozo</span>
+              <span>Banco de Guayaquil &nbsp;·&nbsp; Cuenta de ahorros &nbsp;·&nbsp; N° <strong>0048029235</strong> &nbsp;·&nbsp; Michael Pozo</span>
             </div>
             <div class="pay-method-btns">
-              <a href="https://wa.me/593986225038?text=Hola, realicé una transferencia al Banco de Guayaquil por la licencia DeepCore. Mi email es:" target="_blank" class="pay-btn">Confirmar por WhatsApp</a>
+              <a id="btn-transferencia" href="https://wa.me/593986225038?text=Hola, realicé una transferencia por el Plan Mensual $5. Mi email es:" target="_blank" class="pay-btn">Confirmar por WhatsApp</a>
             </div>
           </div>
 
@@ -425,14 +425,36 @@
           <div class="pay-method">
             <div class="pay-method-icon">💬</div>
             <div class="pay-method-info">
-              <strong>Pago por WhatsApp</strong>
-              <span>Coordina directamente con nosotros — aceptamos cualquier método</span>
+              <strong>Coordinar por WhatsApp</strong>
+              <span>Cualquier duda o método alternativo — te atendemos directamente</span>
             </div>
             <div class="pay-method-btns">
-              <a href="https://wa.me/593986225038?text=Hola, quiero comprar una licencia DeepCore" target="_blank" class="pay-btn">Escribir al WhatsApp</a>
+              <a id="btn-whatsapp" href="https://wa.me/593986225038?text=Hola, quiero comprar el Plan Mensual $5 de DeepCore" target="_blank" class="pay-btn">Escribir al WhatsApp</a>
             </div>
           </div>
         </div>
+
+        <script>
+        var _planes = {
+          'Mensual $5':     {monto:'5',  texto:'Mensual $5'},
+          'Trimestral $14': {monto:'14', texto:'Trimestral $14'},
+          'Semestral $27':  {monto:'27', texto:'Semestral $27'},
+          'Anual $50':      {monto:'50', texto:'Anual $50'},
+        };
+        function selectPlan(plan) {
+          var p = _planes[plan]; if (!p) return;
+          var el = document.getElementById('plan-nombre');
+          var banner = document.getElementById('plan-seleccionado');
+          if (el) el.textContent = plan;
+          if (banner) banner.style.display = 'block';
+          var bp = document.getElementById('btn-paypal');
+          var bt = document.getElementById('btn-transferencia');
+          var bw = document.getElementById('btn-whatsapp');
+          if (bp) bp.href = 'https://www.paypal.com/paypalme/DeepCoreec/' + p.monto;
+          if (bt) bt.href = 'https://wa.me/593986225038?text=Hola,%20realicé%20una%20transferencia%20por%20el%20Plan%20' + encodeURIComponent(p.texto) + '.%20Mi%20email%20es:';
+          if (bw) bw.href = 'https://wa.me/593986225038?text=Hola,%20quiero%20comprar%20el%20Plan%20' + encodeURIComponent(p.texto) + '%20de%20DeepCore';
+        }
+        </script>
 
         <p class="pf-note" style="margin-top:16px">✅ Al confirmar tu pago te enviamos la clave de activación por email en minutos.</p>
       </div>
