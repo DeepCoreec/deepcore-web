@@ -600,6 +600,111 @@ body {
   font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.01em;
 }
 
+/* ── SECCIÓN ECUADOR ── */
+.ecuador-section {
+  background: linear-gradient(180deg, #05050a 0%, #060810 60%, #05050a 100%);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.ecuador-section::before {
+  content: '';
+  position: absolute;
+  top: -120px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,209,0,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.ecuador-header {
+  display: flex; align-items: flex-start; gap: 24px;
+  margin-bottom: 48px;
+}
+.ecuador-flag {
+  display: flex; flex-direction: column;
+  width: 8px; min-height: 70px;
+  border-radius: 4px; overflow: hidden; flex-shrink: 0; margin-top: 6px;
+}
+.flag-y { flex: 2; background: #FFD100; }
+.flag-b { flex: 1; background: #003087; }
+.flag-r { flex: 1; background: #CE1126; }
+.ecuador-sub {
+  color: var(--muted); font-size: 0.95rem; margin-top: 8px; max-width: 560px;
+}
+.ecuador-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 900px) { .ecuador-grid { grid-template-columns: 1fr; } }
+@media (min-width: 600px) and (max-width: 900px) { .ecuador-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.ecu-card {
+  background: #080b14;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 18px;
+  padding: 28px 24px 24px;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.ecu-card:hover {
+  border-color: rgba(255,209,0,0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+}
+.ecu-soon {
+  position: absolute; top: 16px; right: 16px;
+  background: rgba(255,209,0,0.1);
+  border: 1px solid rgba(255,209,0,0.35);
+  color: #FFD100;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+}
+.ecu-icon {
+  font-size: 2rem; margin-bottom: 12px;
+}
+.ecu-card h3 {
+  font-size: 1.2rem; font-weight: 700;
+  color: #fff; margin-bottom: 10px;
+}
+.ecu-card p {
+  color: var(--muted); font-size: 0.9rem;
+  line-height: 1.6; margin-bottom: 16px;
+}
+.ecu-features {
+  list-style: none; padding: 0; margin: 0 0 20px;
+  display: flex; flex-direction: column; gap: 7px;
+  flex: 1;
+}
+.ecu-features li {
+  font-size: 0.85rem; color: rgba(255,255,255,0.6);
+  padding-left: 16px; position: relative;
+}
+.ecu-features li::before {
+  content: '→'; position: absolute; left: 0;
+  color: #FFD100; font-size: 0.75rem;
+}
+.ecu-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 20px;
+  background: rgba(255,209,0,0.08);
+  border: 1px solid rgba(255,209,0,0.3);
+  border-radius: 10px;
+  color: #FFD100;
+  font-size: 0.9rem; font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+.ecu-btn:hover {
+  background: rgba(255,209,0,0.15);
+  border-color: rgba(255,209,0,0.6);
+  transform: translateY(-1px);
+}
+
 /* ── PRODUCTOS MEJORADO ── */
 .prod-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
