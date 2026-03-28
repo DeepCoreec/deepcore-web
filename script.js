@@ -2,14 +2,14 @@
 
 // ── SCROLL SUAVIZADO (rueda del mouse) ───────────────────────────────────────
 (function () {
-  const VELOCIDAD = 0.028;  // 0.0 = muy lento · 1.0 = instantáneo
+  const VELOCIDAD = 0.055;  // 0.0 = muy lento · 1.0 = instantáneo
   let objetivo = window.scrollY;
   let actual   = window.scrollY;
   let animando = false;
 
   window.addEventListener('wheel', e => {
     e.preventDefault();
-    objetivo += e.deltaY * 1.2;
+    objetivo += e.deltaY * 1.5;
     objetivo = Math.max(0, Math.min(objetivo, document.body.scrollHeight - window.innerHeight));
     if (!animando) { animando = true; animar(); }
   }, { passive: false });
