@@ -2,7 +2,7 @@
 
 // ── SCROLL SUAVIZADO (rueda del mouse) ───────────────────────────────────────
 (function () {
-  const VELOCIDAD = 0.07;   // 0.0 = muy lento · 1.0 = instantáneo
+  const VELOCIDAD = 0.045;  // 0.0 = muy lento · 1.0 = instantáneo
   let objetivo = window.scrollY;
   let actual   = window.scrollY;
   let animando = false;
