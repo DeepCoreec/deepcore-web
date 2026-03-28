@@ -564,6 +564,38 @@ body {
 .prod-btn.primary { background: var(--red); border-color: var(--red); color: var(--white); }
 .prod-btn.primary:hover { background: var(--red2); box-shadow: 0 8px 24px rgba(255,0,34,0.35); }
 
+/* ── OS DOWNLOAD BUTTONS ── */
+.os-btns {
+  display: flex; gap: 7px; margin-top: 18px;
+}
+.os-btn {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 6px 11px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+  transition: all 0.22s ease;
+  position: relative; overflow: hidden;
+}
+.os-btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 120%, rgba(255,0,34,0.1) 0%, transparent 70%);
+  opacity: 0; transition: opacity 0.22s;
+}
+.os-btn:hover::before { opacity: 1; }
+.os-btn:hover {
+  border-color: rgba(255,0,34,0.4);
+  color: rgba(255,255,255,0.95);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,0,34,0.15);
+}
+.os-btn .os-icon { transition: transform 0.22s; }
+.os-btn:hover .os-icon { transform: scale(1.12); }
+
 /* ── PRODUCTOS MEJORADO ── */
 .prod-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
@@ -942,8 +974,8 @@ body {
 
 /* ── REVEAL ── */
 .reveal {
-  opacity: 0; transform: translateY(28px);
-  transition: opacity 0.65s cubic-bezier(.16,1,.3,1), transform 0.65s cubic-bezier(.16,1,.3,1);
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 0.38s ease-out, transform 0.38s ease-out;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
