@@ -1,10 +1,5 @@
 // DeepCore v3 — Scripts
 
-// ── SCROLL — igualar velocidad de la rueda a la del scrollbar ────────────────
-window.addEventListener('wheel', e => {
-  e.preventDefault();
-  window.scrollBy({ top: e.deltaY * 0.35, behavior: 'auto' });
-}, { passive: false });
 
 
 
