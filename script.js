@@ -3,7 +3,7 @@
 // ── SCROLL — reducir velocidad de la rueda ───────────────────────────────────
 window.addEventListener('wheel', e => {
   e.preventDefault();
-  window.scrollBy({ top: e.deltaY * 0.6, behavior: 'auto' });
+  window.scrollBy({ top: e.deltaY * 0.45, behavior: 'auto' });
 }, { passive: false });
 
 
