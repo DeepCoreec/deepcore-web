@@ -1,9 +1,5 @@
 // DeepCore v3 — Scripts
 
-window.addEventListener('wheel', e => {
-  e.preventDefault();
-  window.scrollBy({ top: e.deltaY * 0.5, behavior: 'auto' });
-}, { passive: false });
 
 
 
