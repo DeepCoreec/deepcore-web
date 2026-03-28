@@ -1,30 +1,5 @@
 // DeepCore v3 — Scripts
 
-// ── SCROLL SUAVIZADO (rueda del mouse) ───────────────────────────────────────
-(function () {
-  const VELOCIDAD = 0.15;   // 0.0 = muy lento · 1.0 = instantáneo
-  let objetivo = window.scrollY;
-  let actual   = window.scrollY;
-  let animando = false;
-
-  window.addEventListener('wheel', e => {
-    e.preventDefault();
-    objetivo += e.deltaY * 2.5;
-    objetivo = Math.max(0, Math.min(objetivo, document.body.scrollHeight - window.innerHeight));
-    if (!animando) { animando = true; animar(); }
-  }, { passive: false });
-
-  function animar() {
-    actual += (objetivo - actual) * VELOCIDAD;
-    window.scrollTo(0, actual);
-    if (Math.abs(objetivo - actual) > 0.5) {
-      requestAnimationFrame(animar);
-    } else {
-      window.scrollTo(0, objetivo);
-      animando = false;
-    }
-  }
-})();
 
 // ── CURSOR PERSONALIZADO ──
 const cursor = document.getElementById('cursor');
