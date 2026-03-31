@@ -39,10 +39,19 @@ const DC_KB = [
     id: 'laptop',
     patterns: ['laptop','portatil','notebook','macbook','hp','dell','lenovo','asus','acer','toshiba'],
     replies: [
-      `💻 Reparamos **todas las marcas** de laptops:\n\nHP · Dell · Lenovo · Asus · Acer · Toshiba · MacBook\n\n**Servicios más comunes:**\n• Pantalla rota → desde $30\n• No enciende → diagnóstico gratis\n• Batería que no carga → desde $20 + repuesto\n• Teclado dañado → desde $25\n• Muy lento → optimización desde $20\n• Cambio a SSD → desde $15 + SSD\n• Limpieza interna → desde $15\n• **Placa madre** → desde $60 (depende de la falla)\n\n🔩 *Falla simple (condensador, conector):* $40–$60\n🔩 *Falla media (chip de carga, MOSFET):* $60–$100\n🔩 *Falla compleja (GPU, BGA):* $100–$180\n\n*Diagnóstico gratuito. Solo pagas si decides reparar.*`
+      `💻 Reparamos **todas las marcas** de laptops:\n\nHP · Dell · Lenovo · Asus · Acer · Toshiba · MacBook\n\n**Servicios más comunes:**\n• Pantalla rota → desde $30\n• No enciende → diagnóstico gratis\n• Batería que no carga → desde $20 + repuesto\n• Teclado dañado → desde $25\n• Muy lento → optimización desde $20\n• Cambio a SSD → desde $15 + SSD\n• Limpieza interna → desde $15\n• **Placa madre** → desde $60 (depende de la falla)\n\n🔩 **Falla simple** (condensador, conector suelto): $40–$60\n→ Soldadura básica, repuesto económico, resuelto en 1-2 días.\n\n🔩 **Falla media** (chip de carga, MOSFET, fusible): $60–$100\n→ Requiere diagnóstico con multímetro, soldadura de precisión y repuestos importados.\n\n🔩 **Falla compleja** (GPU, chipset, BGA): $100–$180\n→ Soldadura con estación de calor, microscopio y alto riesgo técnico. Puede tomar 3-5 días.\n\n*Diagnóstico gratuito. Solo pagas si decides reparar.*`
     ],
     options: ['¿Cuánto demora?', '¿Tienen garantía?', 'Agendar revisión', '¿Hacen domicilio?'],
     context: 'laptop'
+  },
+  {
+    id: 'placa',
+    patterns: ['placa','placa madre','motherboard','placa base','no enciende','no prende','muerto','no da imagen','no arranca'],
+    replies: [
+      `🔩 **Reparación de placa madre** — la reparación más técnica:\n\n**¿Por qué cuesta lo que cuesta?**\nRequiere soldadura especializada, estación de calor, microscopio y diagnóstico avanzado. Además el técnico asume el riesgo — si algo falla durante la reparación, el equipo puede quedar irrecuperable.\n\n**Tipos de falla y precio:**\n\n🟢 **Falla simple** — condensador quemado, conector suelto, fusible\n→ $40–$60 · Resuelto en 1-2 días\n\n🟡 **Falla media** — chip de carga (IC), MOSFET, circuito de energía\n→ $60–$100 · Requiere repuestos importados · 2-4 días\n\n🔴 **Falla compleja** — GPU, chipset, soldadura BGA\n→ $100–$180 · Alta dificultad técnica · 3-5 días\n\n✅ *Diagnóstico gratuito — te decimos exactamente qué tiene antes de cobrar nada.*`
+    ],
+    options: ['Agendar revisión', '¿Cuánto demora?', '¿Tienen garantía?', 'Hablar con un asesor'],
+    context: 'placa'
   },
   {
     id: 'pc',
