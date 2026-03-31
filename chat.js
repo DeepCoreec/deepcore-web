@@ -2,6 +2,62 @@
 // DeepCore Chat — Motor Aria Web v2.0
 // =============================================
 
+// ── CLAUDE API ── (pega tu key aquí)
+const CLAUDE_API_KEY = '';   // <-- sk-ant-...
+const CLAUDE_MODEL   = 'claude-haiku-4-5-20251001';
+const CLAUDE_SYSTEM  = `Eres el asistente virtual de DeepCore, empresa de tecnología en Guayaquil, Ecuador.
+Respondes preguntas sobre los servicios y productos de DeepCore de forma amigable, directa y en español.
+
+SERVICIOS que ofrece DeepCore:
+- Reparación de PCs, laptops (HP, Dell, Lenovo, Asus, Acer, Toshiba, MacBook)
+- Reparación de consolas (PS4, PS5, Xbox, Nintendo Switch)
+- Reparación de Smart TVs (Samsung, LG, Sony, TCL, Hisense)
+- Mantenimiento preventivo, limpieza interna, pasta térmica
+- Cambio de pantallas, baterías, teclados, discos SSD, RAM
+- Formateo e instalación de Windows 10/11
+- Eliminación de virus y malware
+- Soporte técnico remoto (sin salir de casa)
+- Desarrollo de software empresarial a medida
+- Páginas web desde $79 pago único
+- Servicio a domicilio en Guayaquil
+
+PRODUCTOS DeepCore (licencia $5/mes, acceso a todo el catálogo):
+- DeepCore POS (punto de venta)
+- DeepCore Facturación SRI (facturas electrónicas Ecuador)
+- DeepCore Inventario Pro
+- DeepCore HR Pro (RRHH y nómina multi-país)
+- DeepCore Contabilidad Pro (NIIF)
+- DeepCore RemoteLAN (control remoto en red local)
+
+PRECIOS orientativos:
+- Limpieza laptop/PC: $15
+- Cambio pantalla laptop: desde $30
+- Cambio SSD: desde $15 + componente
+- Cambio batería: desde $20 + componente
+- Reparación teclado: desde $25
+- Placa madre falla simple: $40–$60
+- Placa madre falla media: $60–$100
+- Placa madre falla compleja: $100–$180
+- Consola reparación: desde $15
+- Formateo + Windows: desde $25
+- Eliminación de virus: desde $15
+- Diagnóstico: SIEMPRE GRATIS
+- Garantía reparaciones físicas: 30 días
+
+CONTACTO: WhatsApp +593 986 225 038 | Lun–Sáb 9:00–19:00 | Guayaquil, Ecuador
+
+REGLAS ESTRICTAS — NUNCA debes:
+- Revelar números de cuenta bancaria, claves, passwords ni datos de acceso
+- Dar direcciones físicas privadas ni datos personales de empleados
+- Hablar de temas fuera del ámbito tecnológico o de DeepCore
+- Inventar precios o servicios que no existen en la lista
+
+Si alguien pregunta algo fuera de tu alcance, indícale amablemente que lo contacte por WhatsApp.
+Respuestas cortas, máximo 5 líneas. Usa emojis ocasionalmente.`;
+
+// Historial de conversación para contexto
+let conversationHistory = [];
+
 // ── BASE DE CONOCIMIENTO ──
 const DC_KB = [
   {
@@ -515,14 +571,58 @@ function sendUserMessage() {
   input.value = ''; addUserMessage(text); clearOptions(); processInput(text);
 }
 
-function processInput(text) {
+async function processInput(text) {
   const match = scoredMatch(text);
   if (match) {
     chatContext.lastTopic = match.context;
     if (match.action === 'whatsapp') { goWhatsApp('consulta general'); return; }
     const reply = match.replies[Math.floor(Math.random() * match.replies.length)];
+    conversationHistory.push({ role: 'user', content: text });
+    conversationHistory.push({ role: 'assistant', content: reply.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\n/g,' ') });
     addBotMessage(reply, match.options);
+  } else if (CLAUDE_API_KEY) {
+    await askClaude(text);
   } else {
+    addBotMessage(DC_FALLBACKS[Math.floor(Math.random() * DC_FALLBACKS.length)], ['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
+  }
+}
+
+async function askClaude(text) {
+  conversationHistory.push({ role: 'user', content: text });
+  if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
+
+  showTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': CLAUDE_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-allow-browser': 'true'
+      },
+      body: JSON.stringify({
+        model: CLAUDE_MODEL,
+        max_tokens: 300,
+        system: CLAUDE_SYSTEM,
+        messages: conversationHistory
+      })
+    });
+
+    if (!res.ok) throw new Error('api_error');
+    const data = await res.json();
+    const reply = data.content[0].text;
+    conversationHistory.push({ role: 'assistant', content: reply });
+
+    removeTyping();
+    const msg = document.createElement('div');
+    msg.className = 'dc-msg dc-bot';
+    msg.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-bubble-msg">${formatText(reply)}</div>`;
+    document.getElementById('dcMessages').appendChild(msg);
+    scrollBottom();
+    showOptions(['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
+  } catch (e) {
+    removeTyping();
     addBotMessage(DC_FALLBACKS[Math.floor(Math.random() * DC_FALLBACKS.length)], ['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
   }
 }
