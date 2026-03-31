@@ -1112,13 +1112,36 @@ body {
   .contact-right { padding: 28px 20px; }
   .footer-top { flex-direction: column; align-items: flex-start; }
   .cursor, .cursor-follower { display: none; }
+
+  /* Productos — mobile */
+  .products-grid { grid-template-columns: 1fr; }
+  .prod-featured { padding: 24px 20px; }
+  .prod-card { padding: 28px 20px; }
+  .pf-plans { flex-direction: column; }
+  .pf-plan { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; padding: 16px 20px; }
+  .pf-plan-name { margin-bottom: 0; }
+  .pf-plan-price { font-size: 24px; }
+  .pay-method { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .pay-method-info { min-width: unset; }
+  .pay-method-btns { width: 100%; }
+  .pay-btn { width: 100%; text-align: center; display: block; }
+  .ecuador-header { flex-direction: column; gap: 16px; }
+  .ecuador-flag { flex-direction: row; width: 60px; height: 8px; min-height: unset; margin-top: 0; border-radius: 4px; }
+  .ecuador-grid { grid-template-columns: 1fr; }
+  .prod-header { flex-direction: column; gap: 16px; }
 }
 
 @media (max-width: 480px) {
   .hero { padding: 120px 20px 60px; }
   .hero-heading { letter-spacing: -1.5px; }
   .hstat { padding: 14px 24px; }
-  .section { padding: 80px 20px; }
+  .section { padding: 80px 16px; }
+  .prod-featured { padding: 20px 16px; }
+  .prod-card { padding: 24px 16px; }
+  .contact-right { padding: 20px 16px; }
+  .pf-header h3 { font-size: 20px; }
+  .hero-cta { gap: 12px; }
+  .btn-fill, .btn-line { padding: 11px 20px; font-size: 0.82rem; }
 }
 
 /* ── BOTONES TERMINAL ── */
@@ -1300,6 +1323,8 @@ body {
   .proceso-grid { flex-direction: column; }
   .paso-card { width: 100%; }
   .testi-grid { grid-template-columns: 1fr; }
+  .testi-card { padding: 24px 20px; }
+  .faq-q { font-size: 0.88rem; }
 }
 
 /* ── SCROLL TO TOP ── */
