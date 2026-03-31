@@ -1113,6 +1113,9 @@ body {
   .footer-top { flex-direction: column; align-items: flex-start; }
   .cursor, .cursor-follower { display: none; }
 
+  /* Hero heading — mobile */
+  .hero-heading { font-size: clamp(2.4rem, 9.5vw, 3.2rem); letter-spacing: -1.5px; }
+
   /* Productos — mobile */
   .products-grid { grid-template-columns: 1fr; }
   .prod-featured { padding: 24px 20px; }
@@ -1133,7 +1136,7 @@ body {
 
 @media (max-width: 480px) {
   .hero { padding: 120px 20px 60px; }
-  .hero-heading { letter-spacing: -1.5px; }
+  .hero-heading { font-size: clamp(1.9rem, 10vw, 2.5rem); letter-spacing: -1px; }
   .hstat { padding: 14px 24px; }
   .section { padding: 80px 16px; }
   .prod-featured { padding: 20px 16px; }
