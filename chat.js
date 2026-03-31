@@ -1,108 +1,345 @@
 // =============================================
-// DeepCore Chat — Widget propio v1.0
+// DeepCore Chat — Motor Aria Web v2.0
 // =============================================
 
-const DC_RESPONSES = [
+// ── BASE DE CONOCIMIENTO ──
+const DC_KB = [
   {
-    patterns: ['hola','buenas','hey','saludos','buenos dias','buenas tardes','buenas noches','hi','ola','buen dia'],
-    reply: `¡Hola! 👋 Bienvenido a **DeepCore**.\n\nSoy el asistente virtual. ¿En qué puedo ayudarte hoy?`,
-    options: ['Ver servicios', '¿Cuánto cuesta?', '¿Dónde están?', 'Hablar con un humano']
+    id: 'saludo',
+    patterns: ['hola','buenas','hey','saludos','buenos dias','buenas tardes','buenas noches','hi','ola','buen dia','que tal','como estas','como estan'],
+    replies: [
+      `¡Hola! 👋 Bienvenido a **DeepCore**.\n\nSoy el asistente virtual. Puedo ayudarte con precios, servicios, horarios y más. ¿En qué te puedo ayudar hoy?`,
+      `¡Buenas! 😊 Gracias por contactar a **DeepCore**.\n\n¿Tienes algún equipo dañado, un proyecto en mente, o quieres saber más sobre nuestros servicios?`,
+      `¡Hola! Estoy aquí para ayudarte. En DeepCore manejamos reparaciones, software y mucho más. ¿Por dónde empezamos?`
+    ],
+    options: ['Ver servicios', '¿Cuánto cuesta?', '¿Dónde están?', 'Hablar con un asesor'],
+    context: 'inicio'
   },
   {
-    patterns: ['servicio','ofrecen','hacen','que hacen','tienen','catalogo'],
-    reply: `En **DeepCore** ofrecemos:\n\n🖥️ Reparación de PCs y Laptops\n🎮 Consolas (PS4, PS5, Xbox, Switch)\n📺 Reparación de Smart TV\n💻 Desarrollo de Software\n🔧 Mantenimiento Preventivo\n🌐 Soporte Técnico Remoto`,
-    options: ['¿Cuánto cuesta?', '¿Tienen garantía?', 'Hacer una consulta']
+    id: 'servicios',
+    patterns: ['servicio','ofrecen','hacen','que hacen','tienen','catalogo','ayudan','trabajan','que pueden'],
+    replies: [
+      `En **DeepCore** somos tu solución tecnológica completa:\n\n🖥️ **Reparación** de PCs, Laptops, Consolas y TVs\n💻 **Desarrollo** de software, sistemas y páginas web\n🔧 **Mantenimiento** preventivo y optimización\n🌐 **Soporte remoto** sin salir de casa\n📦 **Productos** de software empresarial\n\n*El diagnóstico siempre es gratuito.*`,
+      `¡Cubrimos todo el ecosistema tecnológico! 🚀\n\nDesde reparar tu laptop o PS5, hasta crear el sistema de gestión de tu empresa. ¿Qué necesitas específicamente?`
+    ],
+    options: ['Reparación de laptop', 'Reparación de consola', 'Desarrollo de software', '¿Cuánto cuesta?'],
+    context: 'servicios'
   },
   {
-    patterns: ['precio','costo','cuanto','cobran','vale','tarifa','presupuesto','cotizacion'],
-    reply: `Los precios dependen del diagnóstico, pero aquí una guía:\n\n🖥️ **Laptop/PC:** desde $15 (limpieza) hasta $80+ (placa)\n🎮 **Consolas:** desde $20 hasta $60\n📺 **TV:** desde $25 según la falla\n💻 **Software:** cotización personalizada\n\n*El diagnóstico inicial es gratuito.*`,
-    options: ['¿Tienen garantía?', '¿Cuánto demora?', 'Solicitar cotización']
+    id: 'precios',
+    patterns: ['precio','costo','cuanto','cobran','vale','tarifa','presupuesto','cotizacion','barato','caro','economico','cuanto cuesta','cuanto cobran'],
+    replies: [
+      `Los precios varían según la falla, pero aquí una guía rápida:\n\n🖥️ **PC/Laptop:** desde $15 (limpieza) hasta $80+ (placa madre)\n🎮 **Consolas:** desde $20 hasta $65\n📺 **Smart TV:** desde $25 según el daño\n💻 **Software/Web:** desde $79 pago único\n\n✅ *El diagnóstico inicial es siempre gratuito.*\n\n¿Qué equipo o servicio te interesa?`,
+      `¡Precios honestos y diagnóstico gratis! 💪\n\n→ Limpieza y mantenimiento: **$15 - $30**\n→ Cambio de disco SSD: **$20 + componente**\n→ Cambio de pantalla laptop: **$35 - $80**\n→ Reparación de consola: **$20 - $65**\n→ Página web: **desde $79**\n\n¿Quieres un presupuesto para algo específico?`
+    ],
+    options: ['Presupuesto para laptop', 'Presupuesto para consola', 'Presupuesto para TV', 'Hablar con un asesor'],
+    context: 'precios'
   },
   {
-    patterns: ['tiempo','demora','cuanto tarda','dias','horas','cuando','rapido','urgente'],
-    reply: `⏱️ Los tiempos estimados son:\n\n🖥️ Limpieza y optimización: **mismo día**\n💾 Cambio de disco/RAM: **1-2 horas**\n📺 TV / Consolas: **1 a 3 días**\n🔩 Reparación compleja: **3-5 días**\n\n*Casos urgentes tienen prioridad — consúltanos.*`,
-    options: ['¿Hacen domicilios?', '¿Cuánto cuesta?', 'Agendar ahora']
+    id: 'laptop',
+    patterns: ['laptop','portatil','notebook','macbook','hp','dell','lenovo','asus','acer','toshiba'],
+    replies: [
+      `💻 Reparamos **todas las marcas** de laptops:\n\nHP · Dell · Lenovo · Asus · Acer · Toshiba · MacBook\n\n**Servicios más comunes:**\n• Pantalla rota → desde $35\n• No enciende → diagnóstico gratis\n• Batería que no carga → desde $20 + repuesto\n• Teclado dañado → desde $25\n• Muy lento → optimización desde $20\n• Cambio a SSD → desde $20 + SSD\n• Limpieza interna → desde $15\n\n*Diagnóstico gratuito. Solo pagas si decides reparar.*`
+    ],
+    options: ['¿Cuánto demora?', '¿Tienen garantía?', 'Agendar revisión', '¿Hacen domicilio?'],
+    context: 'laptop'
   },
   {
-    patterns: ['domicilio','van','recogen','envian','a domicilio','retiran','delivery'],
-    reply: `🏠 Sí, hacemos **servicio a domicilio** en Guayaquil.\n\nPuedes:\n📦 Traer tu equipo directamente\n🚗 Solicitar que pasemos a recogerlo\n🌐 Soporte remoto para software sin salir de casa\n\n*Consulta disponibilidad y costo de traslado según tu zona.*`,
-    options: ['¿Dónde están?', 'Solicitar recogida', 'Hablar con un humano']
+    id: 'pc',
+    patterns: ['computadora','computador','escritorio','desktop','torre','procesador'],
+    replies: [
+      `🖥️ Reparación y mantenimiento de **PCs de escritorio**:\n\n✅ Diagnóstico completo gratuito\n✅ Cambio de componentes (RAM, disco, fuente, placa)\n✅ Instalación de Windows / Linux\n✅ Limpieza interna y pasta térmica\n✅ Actualización y optimización\n✅ Armado de PCs a medida\n\n¿Tu PC tiene alguna falla específica?`
+    ],
+    options: ['¿Cuánto cuesta?', '¿Cuánto demora?', 'Agendar revisión'],
+    context: 'pc'
   },
   {
-    patterns: ['donde','ubicacion','direccion','estan','queda','localiza','guayaquil'],
-    reply: `📍 Estamos en **Guayaquil, Ecuador**.\n\nPara la dirección exacta y coordinar una visita, escríbenos directamente por WhatsApp y te indicamos el punto de atención más cercano a ti.`,
-    options: ['Escribir por WhatsApp', '¿Hacen domicilios?', 'Horario de atención']
+    id: 'consolas',
+    patterns: ['ps4','ps5','playstation','xbox','switch','nintendo','consola','joystick','mando','gaming'],
+    replies: [
+      `🎮 ¡Sí, reparamos consolas!\n\n**PlayStation 4 / 5:**\n• Error CE / disco → desde $25\n• Sobrecalentamiento → desde $20\n• HDMI roto → desde $35\n• Limpieza interna → desde $20\n\n**Xbox One / Series:**\n• Fallas de arranque → desde $25\n\n**Nintendo Switch:**\n• Joy-Con drift → desde $20\n• Pantalla rota → desde $40\n\n*Diagnóstico gratuito en todos los casos.*`,
+      `¡Claro que reparamos consolas! 🕹️\n\nTenemos experiencia con **PS4, PS5, Xbox, Nintendo Switch**. ¿Cuál es la falla de tu consola? Así te doy el precio exacto.`
+    ],
+    options: ['¿Cuánto demora?', '¿Tienen garantía?', 'Agendar reparación', '¿Hacen domicilio?'],
+    context: 'consolas'
   },
   {
-    patterns: ['horario','atienden','abierto','hora','cuando abren','disponible'],
-    reply: `🕘 Nuestro horario de atención:\n\n📅 **Lunes a Sábado**\n⏰ **9:00 AM – 7:00 PM**\n\n💬 WhatsApp disponible fuera de horario — respondemos lo antes posible.`,
-    options: ['Escribir ahora', '¿Hacen domicilios?', 'Ver servicios']
+    id: 'tv',
+    patterns: ['tv','television','televisor','smart tv','pantalla negra','samsung','hisense','backlight','no enciende tv'],
+    replies: [
+      `📺 Reparamos **Smart TVs de todas las marcas**:\n\nSamsung · LG · Sony · TCL · Hisense · Philips\n\n**Fallas que resolvemos:**\n✅ Pantalla negra / sin imagen\n✅ No enciende o se apaga solo\n✅ Sin sonido\n✅ Backlight fundido\n✅ Placa principal dañada\n\n*Presupuesto sin compromiso. Solo pagas si decides reparar.*`
+    ],
+    options: ['¿Cuánto cuesta?', '¿Hacen domicilio?', '¿Cuánto demora?', 'Agendar revisión'],
+    context: 'tv'
   },
   {
-    patterns: ['celular','telefono','movil','samsung','iphone','android'],
-    reply: `📱 Por ahora nos especializamos en PCs, laptops, consolas y TVs.\n\n**Reparación de celulares próximamente** — estamos en proceso de incorporar este servicio.\n\n¿Te puedo ayudar con otro equipo?`,
-    options: ['Ver servicios', '¿Cuánto cuesta?', 'Hablar con un humano']
+    id: 'celular',
+    patterns: ['celular','telefono','movil','iphone','android','xiaomi','huawei','pantalla celular'],
+    replies: [
+      `📱 Por ahora nos especializamos en PCs, laptops, consolas y TVs.\n\n**Reparación de celulares estará disponible próximamente** — estamos incorporando ese servicio.\n\nMientras tanto, ¿puedo ayudarte con algún otro equipo? 😊`,
+      `Aún no tenemos el servicio de reparación de celulares activo, pero viene pronto. 📲\n\nSi tienes una laptop, PC, consola o TV con problemas, ¡para eso somos expertos!`
+    ],
+    options: ['Ver otros servicios', 'Reparación de laptop', 'Hablar con un asesor'],
+    context: 'celular'
   },
   {
-    patterns: ['software','programa','sistema','app','web','pagina','aplicacion'],
-    reply: `💻 ¡Desarrollamos software a medida!\n\nEjemplos de lo que hacemos:\n🌐 Páginas web profesionales\n📊 Sistemas de gestión empresarial\n🔄 Automatización de procesos\n📱 Aplicaciones web\n\n*Cotización gratuita según tu proyecto.*`,
-    options: ['Solicitar cotización', '¿Cuánto cuesta?', 'Ver productos']
+    id: 'tiempo',
+    patterns: ['tiempo','demora','cuanto tarda','dias','horas','cuando','rapido','urgente','tardan','plazo'],
+    replies: [
+      `⏱️ Tiempos estimados de reparación:\n\n🧹 Limpieza y optimización → **mismo día**\n💾 Cambio de disco/RAM → **1-2 horas**\n🔋 Batería/teclado laptop → **1-2 horas**\n📺 TV y consolas → **1 a 3 días**\n🔩 Reparaciones complejas (placa) → **3-5 días**\n\n⚡ **Casos urgentes tienen prioridad** — consúltanos y vemos opciones.`
+    ],
+    options: ['¿Cuánto cuesta?', '¿Tienen garantía?', 'Agendar ahora', '¿Hacen domicilio?'],
+    context: 'tiempo'
   },
   {
-    patterns: ['pago','efectivo','transferencia','tarjeta','credito','debito','deposito'],
-    reply: `💳 Aceptamos varios métodos de pago:\n\n💵 Efectivo\n📲 Transferencia bancaria\n📱 Pago móvil (Nequi, etc.)\n\n*Se solicita un adelanto para reparaciones mayores.*`,
-    options: ['¿Cuánto cuesta?', 'Agendar reparación', 'Hablar con un humano']
+    id: 'garantia',
+    patterns: ['garantia','garantizan','seguro','respaldo','si falla','vuelve a fallar','queda mal'],
+    replies: [
+      `✅ ¡Sí! Todo trabajo incluye **garantía**:\n\n🔧 Reparaciones físicas → **30 días**\n💻 Software e instalaciones → **15 días**\n🧹 Mantenimiento → **15 días**\n\nSi el mismo problema regresa dentro del período, lo revisamos **sin costo adicional**.\n\n*Tu satisfacción está garantizada.*`,
+      `Por supuesto que tenemos garantía. 💪\n\nNo entregamos ningún equipo sin estar seguros de que queda bien. Si falla por la misma causa dentro del período, lo revisamos gratis.`
+    ],
+    options: ['¿Cuánto demora?', '¿Cuánto cuesta?', 'Agendar reparación'],
+    context: 'garantia'
   },
   {
-    patterns: ['instagram','redes','social','seguir','ig'],
-    reply: `¡Síguenos en nuestras redes! 📱\n\n📸 **Instagram:** @deepcoreec\n👍 **Facebook:** DeepCore\n\nPublicamos tips, trabajos y ofertas exclusivas.`,
-    options: ['Seguir en Instagram', 'Ver en Facebook', 'Ver servicios']
+    id: 'domicilio',
+    patterns: ['domicilio','recogen','retiran','delivery','buscan','pasan','traslado','a mi casa','pueden ir'],
+    replies: [
+      `🏠 ¡Sí hacemos **servicio a domicilio** en Guayaquil!\n\nTienes tres opciones:\n\n🚗 Te pasamos a **recoger el equipo**\n📦 Traes tu equipo tú mismo\n🌐 **Soporte remoto** para fallas de software\n\n*Pregunta por disponibilidad y costo de traslado según tu zona.*`
+    ],
+    options: ['Coordinar recogida', '¿Dónde están?', '¿Cuánto cuesta?'],
+    context: 'domicilio'
   },
   {
-    patterns: ['gracias','perfecto','ok','entendido','listo','genial','chevere','excelente','bacano','bien'],
-    reply: `¡Con gusto! 😊 Estamos para servirte.\n\n¿Hay algo más en lo que te pueda ayudar?`,
-    options: ['Ver servicios', 'Hablar con un humano', 'Cerrar chat']
+    id: 'ubicacion',
+    patterns: ['donde','ubicacion','direccion','estan','queda','localiza','guayaquil','sector'],
+    replies: [
+      `📍 Estamos en **Guayaquil, Ecuador**.\n\nPara darte la dirección exacta, escríbenos por WhatsApp — te indicamos el punto de atención más cercano según tu sector.`,
+      `Nos encontramos en **Guayaquil**. 🗺️\n\nEscríbenos con tu sector y te indicamos cómo llegar o coordinamos la recogida de tu equipo.`
+    ],
+    options: ['Escribir por WhatsApp', '¿Hacen domicilio?', 'Ver horarios'],
+    context: 'ubicacion'
   },
   {
-    patterns: ['ps4','ps5','playstation','xbox','switch','nintendo','consola','joystick','mando'],
-    reply: `🎮 ¡Sí, reparamos consolas!\n\n**PlayStation 4/5:** desde $25\n**Xbox One/Series:** desde $25\n**Nintendo Switch:** desde $20\n\nProblemas comunes que resolvemos:\n✅ Error CE / error de disco\n✅ Sobrecalentamiento\n✅ Joy-Con drift (Switch)\n✅ Lectura de discos\n✅ HDMI roto\n\n*Diagnóstico gratuito.*`,
-    options: ['¿Cuánto demora?', '¿Tienen garantía?', 'Agendar reparación']
+    id: 'horario',
+    patterns: ['horario','atienden','abierto','cuando abren','estan abiertos','cierran','abren','trabajan'],
+    replies: [
+      `🕘 Horario de atención:\n\n📅 **Lunes a Sábado**\n⏰ **9:00 AM – 7:00 PM**\n\n💬 WhatsApp disponible fuera de horario — respondemos lo antes posible.`
+    ],
+    options: ['Escribir ahora por WhatsApp', '¿Dónde están?', '¿Hacen domicilio?'],
+    context: 'horario'
   },
   {
-    patterns: ['laptop','portatil','notebook','pantalla','teclado','bateria','cargador'],
-    reply: `💻 Reparamos todo tipo de laptops:\n\n✅ **Cambio de pantalla**\n✅ **Teclado roto o sin respuesta**\n✅ **Batería que no carga**\n✅ **Cargador o puerto USB**\n✅ **Limpieza interna y pasta térmica**\n✅ **Cambio de disco a SSD**\n\nMarcas: HP, Dell, Lenovo, Asus, Acer, Toshiba, MacBook y más.\n\n*Diagnóstico siempre gratuito.*`,
-    options: ['¿Cuánto cuesta?', '¿Cuánto demora?', 'Agendar revisión']
+    id: 'software',
+    patterns: ['software','programa','sistema','aplicacion','desarrollo','gestion','erp','crm','inventario','facturacion','nomina','rrhh','recursos humanos'],
+    replies: [
+      `💻 ¡Desarrollamos **software a medida** para tu negocio!\n\n📦 **Productos ya disponibles:**\n→ DeepCore Inventario Pro\n→ DeepCore HR Pro (RRHH y nómina)\n→ DeepCore Contabilidad Pro\n→ DeepCore POS (punto de venta)\n→ DeepCore Facturación SRI\n\n🔧 **Software personalizado:**\n→ Sistemas a la medida\n→ Paneles web de administración\n→ Automatización de procesos\n\n*Cotización gratuita.*`
+    ],
+    options: ['Ver productos', '¿Cuánto cuesta?', 'Solicitar cotización', 'Hablar con un asesor'],
+    context: 'software'
   },
   {
-    patterns: ['tv','television','smart tv','pantalla negra','no enciende','imagen','sonido'],
-    reply: `📺 Reparamos Smart TVs de todas las marcas:\n\n✅ Samsung, LG, Sony, TCL, Hisense\n✅ Pantalla negra / sin imagen\n✅ Sin sonido\n✅ No enciende\n✅ Backlight fundido\n✅ Placa principal\n\n*Presupuesto sin compromiso — solo págás si decides reparar.*`,
-    options: ['¿Cuánto cuesta?', '¿Hacen domicilios?', 'Agendar revisión']
+    id: 'paginaweb',
+    patterns: ['pagina web','sitio web','landing','tienda online','ecommerce','negocio online','quiero una web','web'],
+    replies: [
+      `🌐 ¡Creamos tu **página web profesional**!\n\n🏢 Página empresarial → **desde $79** pago único\n🛒 Tienda en línea → **desde $149**\n📊 Sistema de gestión → cotización\n\n✅ Diseño personalizado y moderno\n✅ Dominio + hosting primer año incluido\n✅ Adaptada a celular y PC\n✅ SEO básico para Google\n✅ Entrega en **5-7 días**\n\n*Sin mensualidades ocultas.*`
+    ],
+    options: ['Solicitar cotización', '¿Cuánto demora?', 'Hablar con un asesor'],
+    context: 'paginaweb'
   },
   {
-    patterns: ['virus','lento','formatear','windows','reinstalar','antivirus'],
-    reply: `🦠 ¡Eliminamos virus y optimizamos tu equipo!\n\nServicios de software:\n🔧 **Eliminación de virus/malware**\n💾 **Formateo e instalación de Windows**\n⚡ **Optimización de inicio**\n🔒 **Instalación de antivirus**\n\n*Muchos de estos servicios se hacen el mismo día.*\n\n¿Tu equipo está muy lento o tiene virus?`,
-    options: ['¿Cuánto cuesta?', 'Agendar ahora', 'Soporte remoto']
+    id: 'productos',
+    patterns: ['producto','licencia','deepcore pos','deepcore hr','inventario pro','contabilidad','remotelan','programa empresarial','catalogo software','todos los programas'],
+    replies: [
+      `📦 **Productos DeepCore — Licencia $5/mes:**\n\nCon una sola licencia accedes a **todo el catálogo**:\n\n🛒 **POS** — Punto de venta para tiendas y negocios\n🧾 **Facturación SRI** — Facturas electrónicas Ecuador\n📦 **Inventario Pro** — Gestión de stock y ventas\n👥 **HR Pro** — RRHH y nómina multi-país\n📊 **Contabilidad Pro** — NIIF, asientos, balances\n🖥️ **RemoteLAN** — Control remoto en red local\n\n→ **Mensual $5 · Trimestral $14 · Anual $50**\n\n*Todos incluyen IA integrada y actualizaciones automáticas.*`
+    ],
+    options: ['Ver planes', '¿Cómo activo mi licencia?', 'Solicitar demo', 'Hablar con un asesor'],
+    context: 'productos'
   },
   {
-    patterns: ['remoto','remote','online','sin salir','desde casa','anydesk','teamviewer'],
-    reply: `🌐 ¡Sí tenemos **soporte técnico remoto**!\n\nPodemos ayudarte sin que salgas de casa:\n💻 Eliminación de virus\n⚡ Optimización del sistema\n🔧 Configuración de programas\n📧 Problemas de correo/internet\n\n*Conexión segura — tú ves todo lo que hacemos en tu pantalla.*`,
-    options: ['¿Cuánto cuesta?', 'Solicitar soporte remoto', 'Hablar con un humano']
+    id: 'licencia',
+    patterns: ['licencia','activar','activacion','clave','key','serial','como activo','como usar','instalar','descarga'],
+    replies: [
+      `🔑 **¿Cómo funciona la licencia DeepCore?**\n\n1️⃣ Elige tu plan y realiza el pago\n2️⃣ Recibe tu clave de activación **por email en minutos**\n3️⃣ Descarga el programa desde nuestro GitHub\n4️⃣ Ingresa tu clave al abrir el programa\n5️⃣ ¡Listo! Acceso completo a todos los programas\n\n*Una clave = todos los programas del catálogo.*`
+    ],
+    options: ['Ver planes de precio', '¿Cómo pago?', 'Hablar con un asesor'],
+    context: 'licencia'
   },
   {
-    patterns: ['pagina web','sitio web','tienda','ecommerce','negocio','emprendimiento'],
-    reply: `🌐 ¡Creamos tu página web profesional!\n\n💼 **Página empresarial:** desde $79\n🛒 **Tienda en línea:** desde $149\n📊 **Sistema de gestión:** cotización\n\nIncluye:\n✅ Diseño personalizado\n✅ Dominio y hosting primer año\n✅ SEO básico incluido\n✅ Versión móvil\n✅ Formulario de contacto\n\n*Entrega en 7-10 días hábiles.*`,
-    options: ['Solicitar cotización', '¿Cuánto demora?', 'Ver ejemplos']
+    id: 'pago',
+    patterns: ['pago','efectivo','transferencia','paypal','tarjeta','credito','debito','deposito','como pago','formas de pago','metodo'],
+    replies: [
+      `💳 Métodos de pago disponibles:\n\n💳 **PayPal / Tarjeta** (Visa, Mastercard, Amex)\n🏦 **Transferencia bancaria** — Banco de Guayaquil · Cta. Ahorros · N° 0048029235\n💵 **Efectivo** en punto físico\n💬 **WhatsApp** — coordinamos lo que necesites\n\n*Para reparaciones mayores, se solicita 50% de adelanto.*`
+    ],
+    options: ['Realizar un pago', 'Hablar con un asesor', '¿Cuánto cuesta?'],
+    context: 'pago'
   },
   {
-    patterns: ['garantia','garantizan','seguro','respaldo'],
-    reply: `¡Sí! ✅ Todo trabajo tiene **garantía**.\n\nLa garantía varía según el servicio:\n🔧 Reparaciones físicas: **30 días**\n💻 Software e instalaciones: **15 días**\n🧹 Mantenimiento: **15 días**\n\nSi algo falla dentro del período, lo revisamos sin costo adicional. ¡Tu satisfacción está garantizada!`,
-    options: ['¿Cuánto demora?', '¿Hacen domicilios?', 'Agendar reparación']
+    id: 'virus',
+    patterns: ['virus','lento','lenta','formatear','windows','reinstalar','antivirus','malware','limpiar sistema','optimizar'],
+    replies: [
+      `🦠 ¡Eliminamos virus y dejamos tu equipo rápido!\n\n🔧 **Servicios de software:**\n✅ Eliminación de virus y malware\n✅ Formateo e instalación de Windows 10/11\n✅ Optimización de arranque\n✅ Instalación de antivirus\n✅ Recuperación de archivos\n\n⚡ Muchos de estos servicios se resuelven **el mismo día**.`,
+      `Si tu PC o laptop va lenta o tiene virus, ¡lo resolvemos rápido! 🚀\n\nFormato + Windows nuevo: desde **$25**\nEliminación de virus: desde **$15**\nOptimización sin formato: desde **$20**`
+    ],
+    options: ['¿Cuánto cuesta?', 'Soporte remoto', 'Agendar ahora'],
+    context: 'virus'
   },
+  {
+    id: 'remoto',
+    patterns: ['remoto','remote','online','sin salir','desde casa','anydesk','teamviewer','soporte online'],
+    replies: [
+      `🌐 ¡Sí tenemos **soporte técnico remoto**!\n\nTe ayudamos sin que te muevas de casa:\n💻 Eliminación de virus\n⚡ Optimización del sistema\n🔧 Configuración de programas\n📧 Problemas de correo e internet\n\n🔒 *Conexión 100% segura — ves todo lo que hacemos.*`
+    ],
+    options: ['¿Cuánto cuesta?', 'Solicitar soporte ahora', 'Hablar con un asesor'],
+    context: 'remoto'
+  },
+  {
+    id: 'diagnostico',
+    patterns: ['diagnostico','gratis','gratuito','sin costo','revisar','revision','que le pasa','falla'],
+    replies: [
+      `✅ El **diagnóstico es 100% gratuito**.\n\nNos traes el equipo, lo revisamos y te decimos exactamente qué tiene y cuánto cuesta repararlo.\n\n*No pagas nada si decides no reparar.*\n\n¿Qué equipo necesitas revisar?`
+    ],
+    options: ['Agendar revisión', '¿Dónde están?', '¿Hacen domicilio?'],
+    context: 'diagnostico'
+  },
+  {
+    id: 'mantenimiento',
+    patterns: ['mantenimiento','limpieza','pasta termica','ventilador','calentamiento','se calienta','sobrecalenta','ruido'],
+    replies: [
+      `🔧 **Mantenimiento preventivo** — la mejor inversión:\n\n✅ Limpieza interna profunda\n✅ Cambio de pasta térmica\n✅ Revisión de ventiladores\n✅ Optimización del sistema\n\n💡 Un mantenimiento cada 6-12 meses puede duplicar la vida útil de tu equipo.\n\n🖥️ PC/Laptop → desde **$15** · 🎮 Consola → desde **$20**`
+    ],
+    options: ['Agendar mantenimiento', '¿Cuánto cuesta?', '¿Cuánto demora?'],
+    context: 'mantenimiento'
+  },
+  {
+    id: 'componentes',
+    patterns: ['ssd','disco duro','memoria','ram','componente','actualizar','upgrade','mejorar','mas rapido','cambiar disco','cambiar ram'],
+    replies: [
+      `⚡ ¡Actualizamos los componentes de tu equipo!\n\n**Upgrades más populares:**\n💾 Cambio a SSD → desde $20 + precio del SSD\n🧠 Ampliar RAM → desde $15 + precio de la memoria\n\n**¿Vale la pena?** Pasar a SSD puede hacer tu laptop **3-5 veces más rápida** — muchas veces mejor que comprar uno nuevo. ¿Quieres saber si tu equipo es compatible?`
+    ],
+    options: ['¿Cuánto cuesta?', 'Agendar revisión', 'Hablar con un asesor'],
+    context: 'componentes'
+  },
+  {
+    id: 'pantalla',
+    patterns: ['pantalla rota','pantalla quebrada','pantalla crack','pantalla rayada','no se ve','display','pixeles','lineas pantalla'],
+    replies: [
+      `📺 **Cambio de pantalla de laptop:**\n\n✅ Todas las marcas y tamaños\n✅ Instalación incluida en el precio\n\n💰 Desde **$35** (depende del modelo)\n⏰ 1-2 horas\n\n*Envíanos el modelo de tu laptop y te damos precio exacto.*`
+    ],
+    options: ['¿Cuánto cuesta exactamente?', '¿Cuánto demora?', 'Agendar reparación'],
+    context: 'pantalla'
+  },
+  {
+    id: 'bateria',
+    patterns: ['bateria','no carga','carga poco','se descarga','autonomia','cargador','puerto de carga'],
+    replies: [
+      `🔋 **Problemas de batería o carga:**\n\n✅ Cambio de batería para todas las marcas\n✅ Reparación de puerto de carga\n\n💰 Batería nueva: desde **$20** + costo de la batería\n💰 Puerto de carga: desde **$25**\n⏰ Tiempo: 1-2 horas\n\n¿El problema es que no carga nada, o que la batería dura muy poco?`
+    ],
+    options: ['No carga nada', 'La batería dura poco', 'Agendar revisión'],
+    context: 'bateria'
+  },
+  {
+    id: 'teclado',
+    patterns: ['teclado','tecla','keyboard','teclas no funcionan','letra no sale'],
+    replies: [
+      `⌨️ **Reparación de teclado:**\n\n✅ Cambio de teclas individuales\n✅ Cambio de teclado completo\n\n💰 Desde **$25** (depende del modelo)\n⏰ 1-2 horas\n\n¿Es una sola tecla o varias las que no funcionan?`
+    ],
+    options: ['Solo una tecla', 'Varias teclas', 'Agendar revisión'],
+    context: 'teclado'
+  },
+  {
+    id: 'datos',
+    patterns: ['datos','archivos','fotos','recuperar','perdi','backup','respaldo','no quiero perder'],
+    replies: [
+      `📂 **Recuperación y respaldo de datos:**\n\n✅ Antes de cualquier formateo hacemos **backup completo**\n✅ Recuperación de archivos de discos dañados\n\n⚠️ *Si tu disco falló, no lo uses más — cada uso reduce las chances de recuperación.*`
+    ],
+    options: ['Recuperar datos perdidos', 'Hacer backup antes de formatear', 'Hablar con un asesor'],
+    context: 'datos'
+  },
+  {
+    id: 'redes',
+    patterns: ['instagram','redes','social','seguir','ig','facebook','fb'],
+    replies: [
+      `¡Síguenos para tips y ofertas exclusivas! 📱\n\n📸 **Instagram:** @deepcoreec\n👍 **Facebook:** DeepCore\n\nPublicamos trabajos, consejos de tecnología y promociones.`
+    ],
+    options: ['Seguir en Instagram', 'Ver en Facebook', 'Ver servicios'],
+    context: 'redes'
+  },
+  {
+    id: 'gracias',
+    patterns: ['gracias','perfecto','ok','entendido','listo','genial','excelente','bacano','chevere','buenisimo'],
+    replies: [
+      `¡Con gusto! 😊 Para eso estamos.\n\n¿Hay algo más en lo que te pueda ayudar?`,
+      `¡Perfecto! Si tienes más preguntas, aquí estoy. 🙌`,
+      `¡Claro que sí! No hay problema. ¿Necesitas algo más?`
+    ],
+    options: ['Ver servicios', 'Hablar con un asesor', 'Cerrar chat'],
+    context: null
+  },
+  {
+    id: 'despedida',
+    patterns: ['adios','hasta luego','chao','bye','nos vemos','cuidate','hasta pronto'],
+    replies: [
+      `¡Hasta luego! 👋 Fue un placer atenderte. ¡Que tengas un excelente día!`,
+      `¡Chao! 😊 Cuídate mucho. Si necesitas algo más, vuelve cuando quieras.`
+    ],
+    options: [],
+    context: null
+  },
+  {
+    id: 'contacto',
+    patterns: ['contacto','contactar','escribir','whatsapp','llamar','comunicar','asesor','persona','humano','agente'],
+    replies: [
+      `¡Perfecto! Te conecto con nuestro equipo ahora mismo. 🚀\n\nNuestro equipo responde rápido en horario **Lun–Sáb 9:00–19:00** por WhatsApp.`
+    ],
+    options: ['Escribir por WhatsApp', 'Ver servicios', 'Ver precios'],
+    context: 'contacto',
+    action: 'whatsapp'
+  }
+];
+
+const DC_FALLBACKS = [
+  `Mmm, no tengo esa información exacta, pero nuestro equipo sí puede ayudarte. 💬\n\n¿Quieres que te conecte con un asesor?`,
+  `Buena pregunta. No tengo ese detalle aquí, pero si me cuentas un poco más, intento orientarte. 🤔\n\n¿De qué equipo o servicio se trata?`,
+  `No estoy seguro de eso, pero no te preocupes — escríbenos por WhatsApp y te respondemos en minutos. 🚀`,
+  `Esa consulta específica la maneja mejor nuestro equipo directamente. ¿Te conecto? 💪`
 ];
 
 const WA_NUMBER = '593986225038';
+let chatContext = { lastTopic: null, turnCount: 0 };
 
-// ── CONSTRUIR HTML DEL WIDGET ──
+// ── MOTOR DE MATCHING POR PUNTAJE ──
+function normalize(text) {
+  return text.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[¿?¡!.,;:]/g, ' ')
+    .replace(/\s+/g, ' ').trim();
+}
+
+function scoredMatch(input) {
+  const norm = normalize(input);
+  const words = norm.split(' ');
+  let bestMatch = null, bestScore = 0;
+
+  for (const entry of DC_KB) {
+    let score = 0;
+    for (const pattern of entry.patterns) {
+      const normPat = normalize(pattern);
+      if (norm.includes(normPat)) {
+        score += normPat.split(' ').length * 3;
+      } else {
+        for (const pw of normPat.split(' ')) {
+          if (pw.length > 3 && words.includes(pw)) score += 1;
+          else if (pw.length > 4 && words.some(w => w.startsWith(pw.slice(0,-1)))) score += 0.5;
+        }
+      }
+    }
+    if (score > bestScore) { bestScore = score; bestMatch = entry; }
+  }
+  return bestScore >= 1 ? bestMatch : null;
+}
+
+// ── CONSTRUIR WIDGET ──
 function buildWidget() {
   const widget = document.createElement('div');
   widget.id = 'dc-chat-widget';
@@ -120,26 +357,21 @@ function buildWidget() {
       </span>
       <span class="dc-notif" id="dcNotif">1</span>
     </button>
-
     <div class="dc-window" id="dcWindow">
       <div class="dc-header">
         <div class="dc-header-logo">
           <svg width="28" height="28" viewBox="0 0 40 40">
-            <defs>
-              <linearGradient id="clg" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FF4466"/>
-                <stop offset="100%" stop-color="#CC0018"/>
-              </linearGradient>
-            </defs>
+            <defs><linearGradient id="clg" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FF4466"/><stop offset="100%" stop-color="#CC0018"/>
+            </linearGradient></defs>
             <polygon points="20,1 36,10 36,30 20,39 4,30 4,10" fill="none" stroke="url(#clg)" stroke-width="1.5"/>
-            <polygon points="20,7 31,13.5 31,26.5 20,33 9,26.5 9,13.5" fill="none" stroke="#FF0022" stroke-width="1" opacity="0.4" transform="rotate(30,20,20)"/>
             <circle cx="20" cy="20" r="3.5" fill="#FF0022"/>
             <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.9"/>
           </svg>
         </div>
         <div class="dc-header-info">
-          <span class="dc-header-name"><b>Deep</b><span style="color:#FF0022">Core</span> Chat</span>
-          <span class="dc-header-status"><span class="dc-online-dot"></span> En línea</span>
+          <span class="dc-header-name"><b>Deep</b><span style="color:#FF0022">Core</span> · Asistente</span>
+          <span class="dc-header-status"><span class="dc-online-dot"></span> En línea · Respuesta inmediata</span>
         </div>
         <button class="dc-close-btn" onclick="toggleChat()">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -147,13 +379,11 @@ function buildWidget() {
           </svg>
         </button>
       </div>
-
       <div class="dc-messages" id="dcMessages"></div>
-
       <div class="dc-options" id="dcOptions"></div>
-
       <div class="dc-input-row">
-        <input type="text" id="dcInput" placeholder="Escribe tu pregunta..." autocomplete="off" onkeydown="if(event.key==='Enter') sendUserMessage()" />
+        <input type="text" id="dcInput" placeholder="Escribe tu consulta..." autocomplete="off"
+          onkeydown="if(event.key==='Enter') sendUserMessage()" />
         <button class="dc-send" onclick="sendUserMessage()">
           <svg width="18" height="18" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
             <line x1="22" y1="2" x2="11" y2="13"/>
@@ -161,193 +391,160 @@ function buildWidget() {
           </svg>
         </button>
       </div>
-    </div>
-  `;
+    </div>`;
   document.body.appendChild(widget);
 }
 
-// ── TOGGLE CHAT ──
-let chatOpen = false;
-let firstOpen = true;
+let chatOpen = false, firstOpen = true;
 
 function toggleChat() {
   chatOpen = !chatOpen;
-  const win  = document.getElementById('dcWindow');
+  const win = document.getElementById('dcWindow');
   const notif = document.getElementById('dcNotif');
   const openI = document.querySelector('.open-icon');
   const closeI = document.querySelector('.close-icon');
-
   if (chatOpen) {
     win.classList.add('open');
-    openI.style.display = 'none';
-    closeI.style.display = 'flex';
+    openI.style.display = 'none'; closeI.style.display = 'flex';
     notif.style.display = 'none';
     if (firstOpen) { firstOpen = false; initChat(); }
   } else {
     win.classList.remove('open');
-    openI.style.display = 'flex';
-    closeI.style.display = 'none';
+    openI.style.display = 'flex'; closeI.style.display = 'none';
   }
 }
 
-// ── INIT ──
 function initChat() {
+  const h = new Date().getHours();
+  const gr = h < 12 ? '¡Buenos días!' : h < 18 ? '¡Buenas tardes!' : '¡Buenas noches!';
   setTimeout(() => {
-    addBotMessage(`¡Hola! 👋 Bienvenido a **DeepCore**.\n\nSoy tu asistente virtual. Puedo ayudarte con información sobre servicios, precios, horarios y más.\n\n¿En qué te puedo ayudar hoy?`,
-      ['Ver servicios', '¿Cuánto cuesta?', '¿Dónde están?', 'Hablar con un humano']);
+    addBotMessage(
+      `${gr} 👋 Bienvenido a **DeepCore**.\n\nSoy el asistente virtual. Puedo ayudarte con:\n• 💰 Precios y presupuestos\n• 🔧 Servicios de reparación\n• 💻 Software y productos\n• 📍 Ubicación y horarios\n\n¿En qué te puedo ayudar hoy?`,
+      ['Ver servicios', '¿Cuánto cuesta?', 'Sobre productos', 'Hablar con un asesor']
+    );
   }, 400);
 }
 
-// ── AÑADIR MENSAJE BOT ──
 function addBotMessage(text, options = []) {
   showTyping();
+  const delay = 600 + Math.min(text.length * 5, 1000);
   setTimeout(() => {
     removeTyping();
     const msg = document.createElement('div');
     msg.className = 'dc-msg dc-bot';
-    msg.innerHTML = `
-      <div class="dc-avatar">DC</div>
-      <div class="dc-bubble-msg">${formatText(text)}</div>
-    `;
+    msg.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-bubble-msg">${formatText(text)}</div>`;
     document.getElementById('dcMessages').appendChild(msg);
     scrollBottom();
     if (options.length) showOptions(options);
-  }, 900 + Math.random() * 400);
+  }, delay);
 }
 
-// ── AÑADIR MENSAJE USUARIO ──
 function addUserMessage(text) {
   clearOptions();
   const msg = document.createElement('div');
   msg.className = 'dc-msg dc-user';
-  msg.innerHTML = `<div class="dc-bubble-msg">${text}</div>`;
+  msg.innerHTML = `<div class="dc-bubble-msg">${escapeHtml(text)}</div>`;
   document.getElementById('dcMessages').appendChild(msg);
   scrollBottom();
+  chatContext.turnCount++;
 }
 
-// ── MOSTRAR OPCIONES ──
 function showOptions(opts) {
   clearOptions();
-  const container = document.getElementById('dcOptions');
+  const c = document.getElementById('dcOptions');
   opts.forEach(opt => {
     const btn = document.createElement('button');
-    btn.className = 'dc-opt-btn';
-    btn.textContent = opt;
-    btn.onclick = () => handleOption(opt);
-    container.appendChild(btn);
+    btn.className = 'dc-opt-btn'; btn.textContent = opt;
+    btn.onclick = () => handleOption(opt); c.appendChild(btn);
   });
 }
-function clearOptions() {
-  document.getElementById('dcOptions').innerHTML = '';
-}
+function clearOptions() { document.getElementById('dcOptions').innerHTML = ''; }
 
-// ── MANEJAR OPCIÓN ──
 function handleOption(text) {
   addUserMessage(text);
-
   if (text === 'Seguir en Instagram') {
     window.open('https://www.instagram.com/deepcoreec/', '_blank');
-    addBotMessage('¡Gracias por seguirnos! 🙌 Nos vemos en Instagram **@deepcoreec**.', ['Ver servicios', 'Hablar con un humano']);
-    return;
+    addBotMessage('¡Gracias por seguirnos! 🙌 Nos vemos en **@deepcoreec**.', ['Ver servicios', 'Cerrar chat']); return;
   }
   if (text === 'Ver en Facebook') {
     window.open('https://www.facebook.com/profile.php?id=61577433271167', '_blank');
-    addBotMessage('¡Gracias! 🙌 Nos vemos en Facebook. Dale **Me gusta** a nuestra página.', ['Ver servicios', 'Hablar con un humano']);
-    return;
+    addBotMessage('¡Gracias! 🙌 Dale **Me gusta** a nuestra página.', ['Ver servicios', 'Cerrar chat']); return;
   }
-  if (text === 'Hablar con un humano' || text === 'Escribir por WhatsApp' || text === 'Hacer una consulta' || text === 'Solicitar cotización' || text === 'Agendar reparación' || text === 'Agendar ahora' || text === 'Solicitar recogida' || text === 'Escribir ahora') {
-    goWhatsApp(text);
-    return;
+  if (text === 'Ver productos' || text === 'Sobre productos') {
+    document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
+    addBotMessage('¡Aquí están nuestros productos! 👆\n\nDesplázate para ver el catálogo completo. ¿Tienes alguna duda?', ['¿Cómo activo mi licencia?', '¿Cuánto cuesta?', 'Hablar con un asesor']); return;
+  }
+  if (text === 'Ver planes') {
+    document.getElementById('licencia')?.scrollIntoView({ behavior: 'smooth' });
+    addBotMessage('¡Aquí están los planes! 👆\n\n¿Tienes alguna duda sobre los precios o la activación?', ['¿Cómo activo mi licencia?', '¿Cómo pago?', 'Hablar con un asesor']); return;
   }
   if (text === 'Cerrar chat') { toggleChat(); return; }
-  if (text === 'Ver productos') {
-    document.getElementById('productos')?.scrollIntoView({ behavior: 'smooth' });
-    addBotMessage('¡Aquí puedes ver nuestros productos! 👆\n\nRevisa la sección de **Productos** en la página. ¿Algo más en que pueda ayudarte?', ['Ver servicios', 'Hablar con un humano']);
-    return;
-  }
-
-  processInput(text);
+  const waOpts = ['Hablar con un asesor','Escribir por WhatsApp','Agendar reparación','Agendar ahora','Agendar revisión','Solicitar cotización','Agendar mantenimiento','Coordinar recogida','Solicitar soporte ahora','Realizar un pago','Solicitar demo','Escribir ahora por WhatsApp'];
+  if (waOpts.includes(text)) { goWhatsApp(text); return; }
+  const map = {
+    'Reparación de laptop':'reparar laptop','Reparación de consola':'reparar consola',
+    'Desarrollo de software':'software desarrollo','Presupuesto para laptop':'cuanto cuesta laptop',
+    'Presupuesto para consola':'cuanto cuesta consola','Presupuesto para TV':'cuanto cuesta tv',
+    'No carga nada':'no carga bateria','La batería dura poco':'bateria dura poco',
+    'Solo una tecla':'tecla no funciona','Varias teclas':'teclado no funciona',
+    'Recuperar datos perdidos':'recuperar datos archivos','Hacer backup antes de formatear':'backup datos formatear',
+    'Ver otros servicios':'servicios que hacen','Soporte remoto':'soporte remoto online',
+    'Ver horarios':'horario atienden','Ver servicios':'servicios que hacen',
+    '¿Cuánto cuesta?':'precio cuanto cuesta','Ver precios':'precio cuanto cuesta',
+    '¿Cómo activo mi licencia?':'activar licencia clave','¿Cómo pago?':'pago transferencia',
+    '¿Hacen domicilio?':'domicilio recogen','¿Dónde están?':'ubicacion donde estan',
+    '¿Cuánto demora?':'cuanto tarda tiempo','¿Tienen garantía?':'garantia respaldo',
+    '¿Cuánto cuesta exactamente?':'precio pantalla laptop',
+  };
+  processInput(map[text] || text);
 }
 
-// ── ENVIAR MENSAJE MANUAL ──
 function sendUserMessage() {
   const input = document.getElementById('dcInput');
   const text = input.value.trim();
   if (!text) return;
-  input.value = '';
-  addUserMessage(text);
-  clearOptions();
-  processInput(text);
+  input.value = ''; addUserMessage(text); clearOptions(); processInput(text);
 }
 
-// ── PROCESAR INPUT ──
 function processInput(text) {
-  const lower = text.toLowerCase();
-  const match = DC_RESPONSES.find(r => r.patterns.some(p => lower.includes(p)));
-
+  const match = scoredMatch(text);
   if (match) {
-    addBotMessage(match.reply, match.options);
+    chatContext.lastTopic = match.context;
+    if (match.action === 'whatsapp') { goWhatsApp('consulta general'); return; }
+    const reply = match.replies[Math.floor(Math.random() * match.replies.length)];
+    addBotMessage(reply, match.options);
   } else {
-    // Respuestas de fallback variadas para no sonar repetitivo
-    const fallbacks = [
-      `Hmm, no estoy seguro de cómo responder eso. 🤔\n\nPero puedo conectarte con nuestro equipo por WhatsApp ahora mismo.`,
-      `No tengo esa información precisa, pero nuestro equipo sí puede ayudarte. 💬`,
-      `Esa es una buena pregunta — déjame conectarte con alguien que sepa la respuesta exacta. 🚀`,
-    ];
-    addBotMessage(
-      fallbacks[Math.floor(Math.random() * fallbacks.length)],
-      ['Hablar con un humano', 'Ver servicios', '¿Cuánto cuesta?']
-    );
+    addBotMessage(DC_FALLBACKS[Math.floor(Math.random() * DC_FALLBACKS.length)], ['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
   }
 }
 
-// ── IR A WHATSAPP ──
 function goWhatsApp(motivo) {
+  addBotMessage(`¡Perfecto! Te conecto con nuestro equipo ahora mismo. 🚀\n\nResponden rápido en horario **Lun–Sáb 9:00–19:00**.`, []);
   setTimeout(() => {
-    addBotMessage(`¡Perfecto! Te voy a conectar con nuestro equipo en WhatsApp ahora mismo. 🚀\n\nResponden rápido en horario **Lun–Sáb 9:00–19:00**.`, []);
-    setTimeout(() => {
-      const msg = `Hola DeepCore! Vengo del chat de la web. Consulta: ${motivo}`;
-      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
-    }, 1200);
-  }, 200);
+    const msg = `Hola DeepCore! Vengo del chat de la web. ${motivo !== 'consulta general' ? 'Consulta: ' + motivo : 'Quisiera más información.'}`;
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }, 1400);
 }
 
-// ── TYPING INDICATOR ──
 function showTyping() {
   const t = document.createElement('div');
-  t.className = 'dc-msg dc-bot dc-typing-wrap';
-  t.id = 'dcTyping';
-  t.innerHTML = `
-    <div class="dc-avatar">DC</div>
-    <div class="dc-typing">
-      <span></span><span></span><span></span>
-    </div>
-  `;
-  document.getElementById('dcMessages').appendChild(t);
-  scrollBottom();
+  t.className = 'dc-msg dc-bot dc-typing-wrap'; t.id = 'dcTyping';
+  t.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-typing"><span></span><span></span><span></span></div>`;
+  document.getElementById('dcMessages').appendChild(t); scrollBottom();
 }
-function removeTyping() {
-  document.getElementById('dcTyping')?.remove();
-}
+function removeTyping() { document.getElementById('dcTyping')?.remove(); }
 
-// ── UTILS ──
 function formatText(text) {
-  return text
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+}
+function escapeHtml(text) {
+  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function scrollBottom() {
-  const m = document.getElementById('dcMessages');
-  m.scrollTop = m.scrollHeight;
+  const m = document.getElementById('dcMessages'); m.scrollTop = m.scrollHeight;
 }
 
-// ── INIT WIDGET ──
 document.addEventListener('DOMContentLoaded', () => {
   buildWidget();
-  // Mostrar notificación después de 3 segundos
-  setTimeout(() => {
-    if (!chatOpen) {
-      document.getElementById('dcNotif').style.display = 'flex';
-    }
-  }, 3000);
+  setTimeout(() => { if (!chatOpen) document.getElementById('dcNotif').style.display = 'flex'; }, 3000);
 });
