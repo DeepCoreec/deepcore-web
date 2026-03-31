@@ -29,7 +29,7 @@ const DC_KB = [
     id: 'precios',
     patterns: ['precio','costo','cuanto','cobran','vale','tarifa','presupuesto','cotizacion','barato','caro','economico','cuanto cuesta','cuanto cobran'],
     replies: [
-      `Los precios varían según la falla, pero aquí una guía rápida:\n\n🖥️ **PC/Laptop:** desde $15 (limpieza) hasta $80+ (placa madre)\n🎮 **Consolas:** desde $20 hasta $65\n📺 **Smart TV:** desde $25 según el daño\n💻 **Software/Web:** desde $79 pago único\n\n✅ *El diagnóstico inicial es siempre gratuito.*\n\n¿Qué equipo o servicio te interesa?`,
+      `Los precios varían según la falla, pero aquí una guía rápida:\n\n🖥️ **PC/Laptop:** desde $15 (limpieza) hasta $60+ (placa madre)\n🎮 **Consolas:** desde $15 hasta $60\n📺 **Smart TV:** desde $25 según el daño\n💻 **Software/Web:** desde $79 pago único\n\n✅ *El diagnóstico inicial es siempre gratuito.*\n\n¿Qué equipo o servicio te interesa?`,
       `¡Precios honestos y diagnóstico gratis! 💪\n\n→ Limpieza y mantenimiento: **$10 - $25**\n→ Cambio de disco SSD: **$15 + componente**\n→ Cambio de pantalla laptop: **$30 - $75**\n→ Reparación de consola: **$15 - $60**\n→ Página web: **desde $79**\n\n¿Quieres un presupuesto para algo específico?`
     ],
     options: ['Presupuesto para laptop', 'Presupuesto para consola', 'Presupuesto para TV', 'Hablar con un asesor'],
@@ -39,7 +39,7 @@ const DC_KB = [
     id: 'laptop',
     patterns: ['laptop','portatil','notebook','macbook','hp','dell','lenovo','asus','acer','toshiba'],
     replies: [
-      `💻 Reparamos **todas las marcas** de laptops:\n\nHP · Dell · Lenovo · Asus · Acer · Toshiba · MacBook\n\n**Servicios más comunes:**\n• Pantalla rota → desde $35\n• No enciende → diagnóstico gratis\n• Batería que no carga → desde $20 + repuesto\n• Teclado dañado → desde $25\n• Muy lento → optimización desde $20\n• Cambio a SSD → desde $20 + SSD\n• Limpieza interna → desde $15\n\n*Diagnóstico gratuito. Solo pagas si decides reparar.*`
+      `💻 Reparamos **todas las marcas** de laptops:\n\nHP · Dell · Lenovo · Asus · Acer · Toshiba · MacBook\n\n**Servicios más comunes:**\n• Pantalla rota → desde $30\n• No enciende → diagnóstico gratis\n• Batería que no carga → desde $20 + repuesto\n• Teclado dañado → desde $25\n• Muy lento → optimización desde $20\n• Cambio a SSD → desde $15 + SSD\n• Limpieza interna → desde $15\n• **Placa madre** → desde $60 (depende de la falla)\n\n🔩 *Falla simple (condensador, conector):* $40–$60\n🔩 *Falla media (chip de carga, MOSFET):* $60–$100\n🔩 *Falla compleja (GPU, BGA):* $100–$180\n\n*Diagnóstico gratuito. Solo pagas si decides reparar.*`
     ],
     options: ['¿Cuánto demora?', '¿Tienen garantía?', 'Agendar revisión', '¿Hacen domicilio?'],
     context: 'laptop'
