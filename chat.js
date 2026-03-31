@@ -30,7 +30,7 @@ const DC_KB = [
     patterns: ['precio','costo','cuanto','cobran','vale','tarifa','presupuesto','cotizacion','barato','caro','economico','cuanto cuesta','cuanto cobran'],
     replies: [
       `Los precios varían según la falla, pero aquí una guía rápida:\n\n🖥️ **PC/Laptop:** desde $15 (limpieza) hasta $80+ (placa madre)\n🎮 **Consolas:** desde $20 hasta $65\n📺 **Smart TV:** desde $25 según el daño\n💻 **Software/Web:** desde $79 pago único\n\n✅ *El diagnóstico inicial es siempre gratuito.*\n\n¿Qué equipo o servicio te interesa?`,
-      `¡Precios honestos y diagnóstico gratis! 💪\n\n→ Limpieza y mantenimiento: **$15 - $30**\n→ Cambio de disco SSD: **$20 + componente**\n→ Cambio de pantalla laptop: **$35 - $80**\n→ Reparación de consola: **$20 - $65**\n→ Página web: **desde $79**\n\n¿Quieres un presupuesto para algo específico?`
+      `¡Precios honestos y diagnóstico gratis! 💪\n\n→ Limpieza y mantenimiento: **$10 - $25**\n→ Cambio de disco SSD: **$15 + componente**\n→ Cambio de pantalla laptop: **$30 - $75**\n→ Reparación de consola: **$15 - $60**\n→ Página web: **desde $79**\n\n¿Quieres un presupuesto para algo específico?`
     ],
     options: ['Presupuesto para laptop', 'Presupuesto para consola', 'Presupuesto para TV', 'Hablar con un asesor'],
     context: 'precios'
