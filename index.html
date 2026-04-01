@@ -56,6 +56,15 @@
   }
   </script>
 
+  <!-- Google Analytics GA4 — reemplaza G-XXXXXXXXXX con tu ID real -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css?v=2" />
@@ -63,6 +72,15 @@
   <link rel="stylesheet" href="tecnico.css" />
 </head>
 <body>
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner" id="promoBanner">
+    <span class="promo-banner-text">
+      🔥 Esta semana: <strong>Limpieza desde $10</strong> · Diagnóstico siempre <strong>GRATIS</strong> ·
+      <a href="https://wa.me/593986225038?text=Hola, vi la oferta en la web" target="_blank">Reservar ahora →</a>
+    </span>
+    <button class="promo-banner-close" onclick="closeBanner()" title="Cerrar">✕</button>
+  </div>
 
   <!-- CURSOR -->
   <div class="cursor" id="cursor"></div>
@@ -172,6 +190,42 @@
       <span>Soporte Remoto</span><span class="sep">—</span>
       <span>Mantenimiento</span><span class="sep">—</span>
       <span>Go Deeper</span><span class="sep">—</span>
+    </div>
+  </div>
+
+  <!-- CONTADORES ANIMADOS -->
+  <div class="counters-section">
+    <div class="container">
+      <div class="counters-grid">
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="500">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Equipos Reparados</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="300">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Clientes Satisfechos</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="3">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Años de Experiencia</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="100">0</span>
+            <span class="counter-suffix">%</span>
+          </div>
+          <span class="counter-label">Clientes Recomiendan</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -836,6 +890,50 @@
     </div>
   </section>
 
+  <!-- SECCIÓN GARANTÍA -->
+  <section class="garantia-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Nuestro compromiso</p>
+        <h2 class="section-h">Tu tranquilidad es <em>nuestra prioridad.</em></h2>
+        <p class="section-p">Trabajamos con transparencia y responsabilidad en cada servicio.</p>
+      </div>
+      <div class="garantia-grid">
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <span class="garantia-big">30 días</span>
+          <h3>Garantía en Reparaciones</h3>
+          <p>Todas las reparaciones físicas tienen 30 días de garantía. Si el mismo problema regresa, lo resolvemos sin costo adicional.</p>
+        </div>
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <span class="garantia-big">Gratis</span>
+          <h3>Diagnóstico Sin Costo</h3>
+          <p>Revisamos tu equipo sin cobrar. Solo pagas si decides proceder con la reparación. Sin sorpresas ni compromisos ocultos.</p>
+        </div>
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <span class="garantia-big">Honesto</span>
+          <h3>Presupuesto Transparente</h3>
+          <p>Te decimos exactamente cuánto va a costar antes de empezar. Precio justo, sin cargos adicionales ni letra pequeña.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FAQ -->
   <section class="section faq-section" id="faq">
     <div class="container">
@@ -920,6 +1018,93 @@
     </div>
   </section>
 
+  <!-- GALERÍA DE TRABAJOS -->
+  <section class="gallery-section" id="trabajos">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Nuestros trabajos</p>
+        <h2 class="section-h">Lo que hacemos <em>habla por sí solo.</em></h2>
+        <p class="section-p">Casos reales de equipos y proyectos que pasaron por nuestras manos.</p>
+      </div>
+      <div class="gallery-grid">
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">Laptop</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Cambio de pantalla — HP Pavilion</h4>
+            <p>Pantalla rota reemplazada. Equipo listo en 2 horas con garantía.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">Consola</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h2m-1-1v2M15 11h2M17 11l2-2M12 11v2"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Reparación PS5 — falla de lectura</h4>
+            <p>Lector óptico cambiado. Funcionando perfectamente con 30 días de garantía.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">Software</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Sistema de inventario — negocio local</h4>
+            <p>Software personalizado con control de stock, ventas y reportes. Entrega en 7 días.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">PC</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Limpieza + upgrade SSD — PC de escritorio</h4>
+            <p>Limpieza profunda y migración a SSD. Arranque pasó de 3 min a 12 seg.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">Web</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Página web — restaurante Guayaquil</h4>
+            <p>Diseño profesional, menú digital y reservas online. Entregada en 5 días.</p>
+          </div>
+        </div>
+
+        <div class="gallery-card reveal">
+          <div class="gallery-thumb">
+            <span class="gallery-tag">TV</span>
+            <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><polyline points="17 2 12 7 7 2"/></svg>
+            <span>Foto próximamente</span>
+          </div>
+          <div class="gallery-info">
+            <h4>Reparación Smart TV Samsung 55"</h4>
+            <p>Reemplazo de tarjeta de video. TV recuperado a costo mínimo vs comprar uno nuevo.</p>
+          </div>
+        </div>
+
+      </div>
+      <p class="gallery-note reveal">¿Trabajaste con nosotros? <a href="https://wa.me/593986225038?text=Hola, quiero compartir una foto de mi reparación" target="_blank">Envíanos tu foto antes/después →</a></p>
+    </div>
+  </section>
+
   <!-- BAND CTA -->
   <div class="band-cta">
     <div class="band-inner">
@@ -930,6 +1115,56 @@
       </a>
     </div>
   </div>
+
+  <!-- CALCULADORA DE PRESUPUESTO -->
+  <section class="calc-section" id="calculadora">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Estima tu servicio</p>
+        <h2 class="section-h">Calculadora de <em>Presupuesto.</em></h2>
+        <p class="section-p">Selecciona el servicio y obtén un rango estimado de precio al instante.</p>
+      </div>
+      <div class="calc-wrapper reveal">
+        <div class="calc-form-grid">
+          <div class="calc-group">
+            <label>Tipo de servicio</label>
+            <select id="calcServicio" onchange="calcularPresupuesto()">
+              <option value="">— Selecciona un servicio —</option>
+              <option value="limpieza">Limpieza y mantenimiento</option>
+              <option value="pantalla">Cambio de pantalla (laptop)</option>
+              <option value="ssd">Cambio de SSD / RAM</option>
+              <option value="placa">Reparación placa madre</option>
+              <option value="consola_menor">Reparación consola (menor)</option>
+              <option value="consola_mayor">Reparación consola (mayor / placa)</option>
+              <option value="tv">Reparación Smart TV</option>
+              <option value="web_basica">Página web básica</option>
+              <option value="web_pro">Página web profesional</option>
+              <option value="software">Software a medida</option>
+              <option value="soporte">Soporte técnico remoto</option>
+            </select>
+          </div>
+          <div class="calc-group">
+            <label>Urgencia</label>
+            <select id="calcUrgencia" onchange="calcularPresupuesto()">
+              <option value="normal">Normal (mismo día o siguiente)</option>
+              <option value="express">Express (en horas)</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult">
+          <span class="calc-price" id="calcPrice">—</span>
+          <span class="calc-price-label" id="calcLabel">Selecciona un servicio para ver el estimado</span>
+          <span class="calc-note" id="calcNote"></span>
+        </div>
+        <div class="calc-actions">
+          <a class="btn-fill" id="calcCta" href="https://wa.me/593986225038" target="_blank">
+            Solicitar presupuesto exacto
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- CONTACTO -->
   <section class="section" id="contacto">
@@ -1101,6 +1336,82 @@
     window.addEventListener('scroll', () => {
       document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
     });
+
+    // ── PROMO BANNER ──
+    (function() {
+      const banner = document.getElementById('promoBanner');
+      if (localStorage.getItem('dc_banner_dismissed') === '1') {
+        banner.style.display = 'none';
+      } else {
+        document.body.classList.add('has-banner');
+        // Offset navbar scroll padding
+        document.documentElement.style.scrollPaddingTop = '100px';
+      }
+    })();
+    function closeBanner() {
+      const banner = document.getElementById('promoBanner');
+      banner.style.display = 'none';
+      document.body.classList.remove('has-banner');
+      localStorage.setItem('dc_banner_dismissed', '1');
+    }
+
+    // ── CONTADORES ANIMADOS ──
+    function animateCounter(el, target, duration) {
+      let start = 0;
+      const step = Math.ceil(target / (duration / 16));
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = start.toLocaleString();
+      }, 16);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          animateCounter(el, target, 1800);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter-num[data-target]').forEach(el => counterObserver.observe(el));
+
+    // ── CALCULADORA ──
+    const calcData = {
+      limpieza:       { rango: '$10 – $25',  label: 'Limpieza y mantenimiento',      nota: 'Incluye limpieza interna, pasta térmica y optimización.' },
+      pantalla:       { rango: '$30 – $75',  label: 'Cambio de pantalla (laptop)',    nota: 'Varía según modelo y disponibilidad del repuesto.' },
+      ssd:            { rango: '$15 – $60',  label: 'Cambio de SSD / RAM',            nota: 'Solo mano de obra. El componente se cotiza aparte.' },
+      placa:          { rango: 'desde $60',  label: 'Reparación placa madre',         nota: 'Diagnóstico previo necesario. Varía según la falla.' },
+      consola_menor:  { rango: '$15 – $40',  label: 'Reparación consola (menor)',     nota: 'Limpieza, pasta térmica, HDMI, botones.' },
+      consola_mayor:  { rango: '$45 – $90',  label: 'Reparación consola (mayor)',     nota: 'Fallas de placa, APU, lector óptico.' },
+      tv:             { rango: '$30 – $80',  label: 'Reparación Smart TV',            nota: 'Depende del componente afectado (fuente, T-CON, panel).' },
+      web_basica:     { rango: '$79 – $120', label: 'Página web básica',              nota: 'Landing page, hasta 3 secciones, dominio y hosting 1er año.' },
+      web_pro:        { rango: '$150 – $250',label: 'Página web profesional',         nota: 'Diseño premium, múltiples páginas, galería, chat.' },
+      software:       { rango: 'desde $300', label: 'Software a medida',              nota: 'Cotización personalizada según requerimientos.' },
+      soporte:        { rango: '$10 – $30',  label: 'Soporte técnico remoto',         nota: 'Por sesión. Sin desplazamiento necesario.' },
+    };
+    function calcularPresupuesto() {
+      const servicio  = document.getElementById('calcServicio').value;
+      const urgencia  = document.getElementById('calcUrgencia').value;
+      const priceEl   = document.getElementById('calcPrice');
+      const labelEl   = document.getElementById('calcLabel');
+      const noteEl    = document.getElementById('calcNote');
+      const ctaEl     = document.getElementById('calcCta');
+
+      if (!servicio) {
+        priceEl.textContent = '—';
+        labelEl.textContent = 'Selecciona un servicio para ver el estimado';
+        noteEl.textContent  = '';
+        return;
+      }
+      const d = calcData[servicio];
+      priceEl.textContent = d.rango + (urgencia === 'express' ? ' + $5' : '');
+      labelEl.textContent = d.label;
+      noteEl.textContent  = d.nota + (urgencia === 'express' ? ' · Servicio express incluye recargo de $5.' : '');
+      const msg = encodeURIComponent('Hola DeepCore! Me interesa: ' + d.label + '. ¿Pueden darme un presupuesto exacto?');
+      ctaEl.href = 'https://wa.me/593986225038?text=' + msg;
+    }
   </script>
 </body>
 </html>
