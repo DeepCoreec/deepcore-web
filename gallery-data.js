@@ -1,84 +1,46 @@
 /**
  * =====================================================
- *  GALERÍA DE TRABAJOS — DeepCore
+ *  GALERÍA — DeepCore
  * =====================================================
- *  Cómo agregar un trabajo nuevo:
+ *  Cómo agregar una foto:
  *
- *  1. Pon las fotos en la carpeta  gallery/
- *     Ejemplo:  gallery/laptop-hp-pantalla.jpg
+ *  1. Crea la carpeta  gallery/  si no existe
+ *  2. Pon la foto ahí: ej.  gallery/laptop.jpg
+ *  3. Agrega un bloque así:
  *
- *  2. Copia el bloque de ejemplo de abajo y rellénalo:
- *     - tag        : etiqueta roja (Laptop, Consola, Web, PC, TV, Software, etc.)
- *     - titulo     : título del trabajo
- *     - descripcion: descripción corta
- *     - fotos      : array con rutas de las fotos.
- *                    Una foto → ["gallery/foto.jpg"]
- *                    Varias   → ["gallery/antes.jpg", "gallery/despues.jpg"]
- *                    Sin foto → []  (aparece placeholder)
+ *     { foto: 'gallery/laptop.jpg', comentario: 'Tu comentario aquí' },
  *
- *  3. git add . && git commit -m "galería: nuevo trabajo" && git push origin master
+ *  4. git add . && git commit -m "galería: nueva foto" && git push origin master
+ *
+ *  Tip: foto vacía ('') → muestra placeholder mientras no tengas la foto lista
  * =====================================================
  */
 
 const GALLERY_ITEMS = [
 
-  // ── EJEMPLO 1: sin foto todavía ──
   {
-    tag:         'Laptop',
-    titulo:      'Cambio de pantalla — HP Pavilion',
-    descripcion: 'Pantalla rota reemplazada. Equipo listo en 2 horas con garantía.',
-    fotos:       [],   // agrega rutas aquí cuando tengas fotos
+    foto:       '',
+    comentario: 'Cambio de pantalla HP Pavilion — lista en 2 horas ✓',
   },
-
-  // ── EJEMPLO 2: una sola foto ──
-  // {
-  //   tag:         'Consola',
-  //   titulo:      'Reparación PS5 — falla de lectura',
-  //   descripcion: 'Lector óptico cambiado. Funcionando perfectamente con 30 días de garantía.',
-  //   fotos:       ['gallery/ps5-reparacion.jpg'],
-  // },
-
-  // ── EJEMPLO 3: varias fotos (antes/después con flechas) ──
-  // {
-  //   tag:         'PC',
-  //   titulo:      'Limpieza + upgrade SSD — PC escritorio',
-  //   descripcion: 'Limpieza profunda y migración a SSD. Arranque pasó de 3 min a 12 seg.',
-  //   fotos:       ['gallery/pc-antes.jpg', 'gallery/pc-despues.jpg'],
-  // },
-
   {
-    tag:         'Consola',
-    titulo:      'Reparación PS5 — falla de lectura',
-    descripcion: 'Lector óptico cambiado. Funcionando perfectamente con 30 días de garantía.',
-    fotos:       [],
+    foto:       '',
+    comentario: 'PS5 con falla de lectura — lector cambiado, garantía 30 días ✓',
   },
-
   {
-    tag:         'PC',
-    titulo:      'Limpieza + upgrade SSD — PC escritorio',
-    descripcion: 'Limpieza profunda y migración a SSD. Arranque pasó de 3 min a 12 seg.',
-    fotos:       [],
+    foto:       '',
+    comentario: 'Limpieza profunda + SSD — arranque de 3 min pasó a 12 seg ✓',
   },
-
   {
-    tag:         'Web',
-    titulo:      'Página web — restaurante Guayaquil',
-    descripcion: 'Diseño profesional, menú digital y reservas online. Entregada en 5 días.',
-    fotos:       [],
+    foto:       '',
+    comentario: 'Smart TV Samsung 55" — tarjeta de video reemplazada ✓',
   },
-
   {
-    tag:         'Software',
-    titulo:      'Sistema de inventario — negocio local',
-    descripcion: 'Software con control de stock, ventas y reportes. Entrega en 7 días.',
-    fotos:       [],
+    foto:       '',
+    comentario: 'Página web para restaurante — entregada en 5 días ✓',
   },
-
   {
-    tag:         'TV',
-    titulo:      'Reparación Smart TV Samsung 55"',
-    descripcion: 'Reemplazo de tarjeta de video. TV recuperado vs comprar uno nuevo.',
-    fotos:       [],
+    foto:       '',
+    comentario: 'Sistema de inventario para negocio local — entregado en 7 días ✓',
   },
 
 ];
