@@ -600,6 +600,17 @@ body {
   font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.01em;
 }
 
+/* ── OS BADGE: Próximamente (deshabilitado) ── */
+.os-badge.os-badge-soon {
+  opacity: 0.38;
+  cursor: default;
+  pointer-events: none;
+  filter: grayscale(0.7);
+}
+.os-badge.os-badge-soon .badge-top {
+  color: rgba(255,255,255,0.4);
+}
+
 /* ── SECCIÓN ECUADOR ── */
 .ecuador-section {
   background: linear-gradient(180deg, #05050a 0%, #060810 60%, #05050a 100%);
