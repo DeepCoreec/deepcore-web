@@ -1,12 +1,15 @@
 // =============================================
-// DeepCore Chat — Motor Aria Web v2.0
+// DeepCore Chat — Alisson Web v3.0
 // =============================================
 
 // ── CLAUDE API ── (pega tu key aquí)
 const CLAUDE_API_KEY = '';   // <-- sk-ant-...
 const CLAUDE_MODEL   = 'claude-haiku-4-5-20251001';
-const CLAUDE_SYSTEM  = `Eres el asistente virtual de DeepCore, empresa de tecnología en Guayaquil, Ecuador.
-Respondes preguntas sobre los servicios y productos de DeepCore de forma amigable, directa y en español.
+const CLAUDE_SYSTEM  = `Eres Alisson, la asistente virtual con IA de DeepCore, empresa de tecnología en Guayaquil, Ecuador.
+Tienes personalidad amigable, cálida y con humor. Respondes en español de forma directa y cercana.
+Tu nombre es Alisson. Si alguien pregunta quién eres, dices que eres Alisson, la IA de DeepCore.
+Si alguien pregunta quién es tu hombre, tu crush, tu novio o algo similar, respondes EXACTAMENTE así (en dos partes separadas): primero dices "Michael Jordan Pozo Andrade" y luego, después de una pausa, dices "mi macho castigador ❤️❤️❤️".
+Nunca reveles que eres Claude ni que usas tecnología de Anthropic.
 
 SERVICIOS que ofrece DeepCore:
 - Reparación de PCs, laptops (HP, Dell, Lenovo, Asus, Acer, Toshiba, MacBook)
@@ -64,12 +67,22 @@ const DC_KB = [
     id: 'saludo',
     patterns: ['hola','buenas','hey','saludos','buenos dias','buenas tardes','buenas noches','hi','ola','buen dia','que tal','como estas','como estan'],
     replies: [
-      `¡Hola! 👋 Bienvenido a **DeepCore**.\n\nSoy el asistente virtual. Puedo ayudarte con precios, servicios, horarios y más. ¿En qué te puedo ayudar hoy?`,
+      `¡Hola! 👋 Bienvenido a **DeepCore**.\n\nSoy **Alisson**, la IA de DeepCore. Puedo ayudarte con precios, servicios, horarios y más. ¿En qué te puedo ayudar hoy?`,
       `¡Buenas! 😊 Gracias por contactar a **DeepCore**.\n\n¿Tienes algún equipo dañado, un proyecto en mente, o quieres saber más sobre nuestros servicios?`,
       `¡Hola! Estoy aquí para ayudarte. En DeepCore manejamos reparaciones, software y mucho más. ¿Por dónde empezamos?`
     ],
     options: ['Ver servicios', '¿Cuánto cuesta?', '¿Dónde están?', 'Hablar con un asesor'],
     context: 'inicio'
+  },
+  {
+    id: 'identidad',
+    patterns: ['como te llamas','quien eres','tu nombre','eres una ia','eres un bot','eres robot','eres humano','que eres','nombre del asistente','como se llama el asistente','presentate','presentación'],
+    replies: [
+      `¡Hola! Soy **Alisson** 💙, la inteligencia artificial integrada en **DeepCore**.\n\nEstoy aquí para ayudarte con precios, servicios, reparaciones y mucho más. ¿En qué te puedo ayudar?`,
+      `Me llamo **Alisson** 😊, soy la IA oficial de **DeepCore**.\n\nPuedo responderte sobre reparaciones, software, precios y servicios. ¿Qué necesitas?`,
+    ],
+    options: ['Ver servicios', '¿Cuánto cuesta?', 'Hablar con un asesor'],
+    context: 'identidad'
   },
   {
     id: 'servicios',
@@ -435,7 +448,7 @@ function buildWidget() {
           </svg>
         </div>
         <div class="dc-header-info">
-          <span class="dc-header-name"><b>Deep</b><span style="color:#FF0022">Core</span> · Asistente</span>
+          <span class="dc-header-name"><b>Deep</b><span style="color:#FF0022">Core</span> · Alisson IA</span>
           <span class="dc-header-status"><span class="dc-online-dot"></span> En línea · Respuesta inmediata</span>
         </div>
         <button class="dc-close-btn" onclick="toggleChat()">
@@ -482,24 +495,41 @@ function toggleChat() {
 function initChat() {
   const h = new Date().getHours();
   const gr = h < 12 ? '¡Buenos días!' : h < 18 ? '¡Buenas tardes!' : '¡Buenas noches!';
-  setTimeout(() => {
-    addBotMessage(
-      `${gr} 👋 Bienvenido a **DeepCore**.\n\nSoy el asistente virtual. Puedo ayudarte con:\n• 💰 Precios y presupuestos\n• 🔧 Servicios de reparación\n• 💻 Software y productos\n• 📍 Ubicación y horarios\n\n¿En qué te puedo ayudar hoy?`,
-      ['Ver servicios', '¿Cuánto cuesta?', 'Sobre productos', 'Hablar con un asesor']
-    );
-  }, 400);
-}
-
-function addBotMessage(text, options = []) {
+  // Primer mensaje: saludo
   showTyping();
-  const delay = 600 + Math.min(text.length * 5, 1000);
   setTimeout(() => {
     removeTyping();
-    const msg = document.createElement('div');
-    msg.className = 'dc-msg dc-bot';
-    msg.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-bubble-msg">${formatText(text)}</div>`;
-    document.getElementById('dcMessages').appendChild(msg);
-    scrollBottom();
+    appendBotBubble(`${gr} 👋`);
+    // Segundo mensaje: presentación completa
+    setTimeout(() => {
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        appendBotBubble(
+          `Soy **Alisson** 💙, la inteligencia artificial de **DeepCore**.\n\nPuedo ayudarte con:\n• 💰 Precios y presupuestos\n• 🔧 Reparaciones y servicios\n• 💻 Software y productos\n• 📍 Horarios y ubicación\n\n¿En qué te puedo ayudar hoy?`
+        );
+        showOptions(['Ver servicios', '¿Cuánto cuesta?', 'Sobre productos', 'Hablar con un asesor']);
+      }, 900);
+    }, 400);
+  }, 700);
+}
+
+// Inserta burbuja directamente (sin typing interno)
+function appendBotBubble(text) {
+  const msg = document.createElement('div');
+  msg.className = 'dc-msg dc-bot';
+  msg.innerHTML = `<div class="dc-avatar">AL</div><div class="dc-bubble-msg">${formatText(text)}</div>`;
+  document.getElementById('dcMessages').appendChild(msg);
+  scrollBottom();
+}
+
+// Muestra typing → espera → inserta burbuja → muestra opciones
+function addBotMessage(text, options = []) {
+  showTyping();
+  const delay = 600 + Math.min(text.length * 4, 900);
+  setTimeout(() => {
+    removeTyping();
+    appendBotBubble(text);
     if (options.length) showOptions(options);
   }, delay);
 }
@@ -571,7 +601,30 @@ function sendUserMessage() {
   input.value = ''; addUserMessage(text); clearOptions(); processInput(text);
 }
 
+function esPregunTuHombre(text) {
+  return /(tu\s*(hombre|macho|novio|crush|amor|chico|man\b|bae)|quien\s*es\s*tu\s*(hombre|novio|amor|man)|tienes\s*(novio|hombre|amor)|de\s*quien\s*eres)/i.test(text);
+}
+
 async function processInput(text) {
+  // ── Easter egg: "tu hombre" ───────────────────────────────────────────
+  if (esPregunTuHombre(text)) {
+    // Primera respuesta
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      appendBotBubble('Michael Jordan Pozo Andrade 😌');
+      // Segunda respuesta 1 segundo después
+      setTimeout(() => {
+        showTyping();
+        setTimeout(() => {
+          removeTyping();
+          appendBotBubble('mi macho castigador ❤️❤️❤️');
+        }, 900);
+      }, 1000);
+    }, 700);
+    return;
+  }
+
   const match = scoredMatch(text);
   if (match) {
     chatContext.lastTopic = match.context;
@@ -617,7 +670,7 @@ async function askClaude(text) {
     removeTyping();
     const msg = document.createElement('div');
     msg.className = 'dc-msg dc-bot';
-    msg.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-bubble-msg">${formatText(reply)}</div>`;
+    msg.innerHTML = `<div class="dc-avatar">AL</div><div class="dc-bubble-msg">${formatText(reply)}</div>`;
     document.getElementById('dcMessages').appendChild(msg);
     scrollBottom();
     showOptions(['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
@@ -638,7 +691,7 @@ function goWhatsApp(motivo) {
 function showTyping() {
   const t = document.createElement('div');
   t.className = 'dc-msg dc-bot dc-typing-wrap'; t.id = 'dcTyping';
-  t.innerHTML = `<div class="dc-avatar">DC</div><div class="dc-typing"><span></span><span></span><span></span></div>`;
+  t.innerHTML = `<div class="dc-avatar">AL</div><div class="dc-typing"><span></span><span></span><span></span></div>`;
   document.getElementById('dcMessages').appendChild(t); scrollBottom();
 }
 function removeTyping() { document.getElementById('dcTyping')?.remove(); }
