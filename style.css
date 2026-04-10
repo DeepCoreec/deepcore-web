@@ -1652,3 +1652,130 @@ body.has-banner .navbar { top: 40px; }
   .promo-banner-text { font-size: 0.7rem; }
   .promo-banner { padding: 0 40px; }
 }
+
+/* ── SECCIÓN GRATIS ─────────────────────────────────────────────────────────── */
+.gratis-section { background: var(--bg2); }
+
+.gratis-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 780px;
+  margin: 0 auto;
+  gap: 32px;
+}
+
+.gratis-card {
+  background: var(--card);
+  border: 1px solid var(--border2);
+  border-radius: 20px;
+  padding: 36px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s, transform .3s;
+}
+.gratis-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(34,197,94,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.gratis-card:hover {
+  border-color: rgba(34,197,94,.35);
+  transform: translateY(-3px);
+}
+
+.gratis-card-top {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 4px;
+}
+.gratis-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: rgba(34,197,94,.1);
+  border: 1px solid rgba(34,197,94,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Code block */
+.gratis-code {
+  background: #060810;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 20px 0;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: .82rem;
+}
+.code-topbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  background: rgba(255,255,255,.03);
+}
+.code-dot { width: 10px; height: 10px; border-radius: 50%; }
+.code-body {
+  padding: 18px 20px;
+  margin: 0;
+  line-height: 1.7;
+  color: #cdd6f4;
+  overflow-x: auto;
+  white-space: pre;
+}
+.dc-comment { color: #6c7086; }
+.dc-kw      { color: #cba6f7; font-weight: 600; }
+.dc-fn      { color: #89b4fa; }
+.dc-type    { color: #94e2d5; }
+.dc-str     { color: #a6e3a1; }
+
+/* Botones */
+.gratis-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.gratis-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #22C55E;
+  color: #020c05;
+  font-weight: 700;
+  font-size: .9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: background .2s, transform .2s;
+}
+.gratis-btn-primary:hover { background: #16a34a; transform: translateY(-1px); }
+.gratis-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: transparent;
+  color: var(--off);
+  font-weight: 600;
+  font-size: .9rem;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid var(--border2);
+  transition: border-color .2s, background .2s;
+}
+.gratis-btn-secondary:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.05); }
+
+@media (max-width: 600px) {
+  .gratis-card { padding: 24px 20px; }
+  .gratis-card-top { flex-direction: column; align-items: flex-start; }
+  .gratis-actions { flex-direction: column; }
+  .gratis-btn-primary, .gratis-btn-secondary { justify-content: center; }
+}
