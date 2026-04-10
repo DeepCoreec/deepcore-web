@@ -2201,3 +2201,357 @@ body.has-banner .navbar { top: 40px; }
   .app-tile { padding: 14px 12px 12px; }
   .at-icon { font-size: 1.4rem; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   DeepCore v4 — Visual Redesign
+   Orbs · Glassmorphism · Gradients · Glow
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Dot grid overlay en toda la página ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(255,0,34,0.055) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+/* ── HERO: orbs de luz dramáticos ── */
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+.hero-orb-1 {
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse, rgba(255,0,34,0.14) 0%, transparent 70%);
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  animation: orb-float 8s ease-in-out infinite;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(ellipse, rgba(120,0,255,0.08) 0%, transparent 70%);
+  top: 20%; right: 5%;
+  animation: orb-float 11s ease-in-out infinite reverse;
+}
+.hero-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse, rgba(0,180,255,0.06) 0%, transparent 70%);
+  bottom: 10%; left: 5%;
+  animation: orb-float 9s ease-in-out infinite 2s;
+}
+@keyframes orb-float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-30px) scale(1.05); }
+}
+.hero-orb-1 { animation: orb-float-center 8s ease-in-out infinite; }
+@keyframes orb-float-center {
+  0%,100% { transform: translateX(-50%) translateY(0) scale(1); }
+  50%      { transform: translateX(-50%) translateY(-24px) scale(1.06); }
+}
+
+/* ── Hero heading: gradient animado ── */
+@keyframes grad-sweep {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.hero-heading .grad {
+  background: linear-gradient(120deg, #FF0022 0%, #ff6a8a 30%, #ff0055 60%, #FF0022 100%);
+  background-size: 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: grad-sweep 5s ease infinite;
+}
+
+/* ── Hero pill: glassmorphism ── */
+.hero-pill {
+  background: rgba(255,0,34,0.07);
+  border: 1px solid rgba(255,0,34,0.25);
+  backdrop-filter: blur(12px);
+  color: #ff8899;
+}
+
+/* ── Hero stats: glow ── */
+.hero-stats {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.hstat-v {
+  background: linear-gradient(135deg, #fff 0%, #ff9aaa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.6rem;
+}
+
+/* ── Ticker: rojo vibrante ── */
+.ticker {
+  background: linear-gradient(90deg, var(--bg) 0%, #0d0008 50%, var(--bg) 100%);
+  border-top: 1px solid rgba(255,0,34,0.15);
+  border-bottom: 1px solid rgba(255,0,34,0.15);
+}
+.ticker-track span { color: #6a6d86; }
+.ticker-track .sep { color: var(--red); font-size: 1rem; }
+
+/* ── Counters: fondo oscuro + números gradiente ── */
+.counters-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #08040c 50%, var(--bg) 100%);
+  position: relative; overflow: hidden;
+}
+.counters-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,0,34,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.counter-num {
+  font-size: 3rem;
+  background: linear-gradient(135deg, #ffffff 0%, #ff8899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.counter-suffix {
+  color: var(--red);
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+}
+.counter-item {
+  position: relative;
+}
+.counter-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 40px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  border-radius: 2px;
+}
+
+/* ── Sección eyebrow: glow text ── */
+.eyebrow {
+  text-shadow: 0 0 24px rgba(255,0,34,0.5);
+  letter-spacing: 3px;
+}
+
+/* ── Section-h em: stronger gradient ── */
+.section-h em {
+  background: linear-gradient(120deg, #FF0022 0%, #ff6a8a 50%, #ff0044 100%);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Service cards: glassmorphism + accent ── */
+.svc-grid {
+  background: transparent;
+  border: none;
+  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.svc-card {
+  background: linear-gradient(145deg, rgba(14,14,26,0.9) 0%, rgba(8,8,16,0.95) 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px !important;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.svc-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,0,34,0.6), transparent);
+  border-radius: 20px 20px 0 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.svc-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,0,34,0.2);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,0,34,0.1), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.svc-card:hover::after { opacity: 1; }
+
+.svc-card.svc-large {
+  grid-column: span 2;
+  background: linear-gradient(135deg, rgba(16,8,24,0.95) 0%, rgba(10,6,18,0.95) 100%);
+  border-color: rgba(255,0,34,0.12);
+}
+
+/* ── Svc icon: glowing ── */
+.svc-icon {
+  background: rgba(255,0,34,0.08);
+  border: 1px solid rgba(255,0,34,0.2);
+  box-shadow: 0 0 16px rgba(255,0,34,0.1);
+}
+.svc-card:hover .svc-icon {
+  background: rgba(255,0,34,0.15);
+  border-color: rgba(255,0,34,0.4);
+  box-shadow: 0 0 24px rgba(255,0,34,0.2);
+}
+
+/* ── Sections: alternating bg ── */
+#servicios  { background: linear-gradient(180deg, var(--bg) 0%, #07070f 100%); }
+#productos  { background: linear-gradient(180deg, #07070f 0%, #050508 50%, #07070f 100%); }
+#galeria    { background: linear-gradient(180deg, var(--bg) 0%, #06060e 100%); }
+#ecuador    { background: linear-gradient(180deg, #06060e 0%, var(--bg) 100%); }
+.about-section { background: linear-gradient(180deg, var(--bg) 0%, #0a040e 100%); }
+
+/* ── Prod featured: glow upgrade ── */
+.prod-featured {
+  background: linear-gradient(135deg, rgba(0,120,200,0.07) 0%, rgba(0,60,120,0.03) 100%);
+  border: 1px solid rgba(0,153,204,0.25);
+  box-shadow: 0 0 80px rgba(0,100,200,0.07), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ── App tiles: glassmorphism ── */
+.app-tile {
+  background: linear-gradient(145deg, rgba(15,15,26,0.95) 0%, rgba(9,9,18,0.98) 100%);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.app-tile:hover {
+  background: linear-gradient(145deg, rgba(20,10,28,0.98) 0%, rgba(14,8,20,0.98) 100%);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,0,34,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* ── Roadmap track: glow dot ── */
+.rm-dot {
+  box-shadow: 0 0 0 4px rgba(255,0,34,0.12), 0 0 14px rgba(255,0,34,0.35);
+}
+
+/* ── About card: glass ── */
+.about-card {
+  background: linear-gradient(145deg, rgba(14,8,22,0.95), rgba(8,5,14,0.98));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ── Showcase cards: glow on hover ── */
+.showcase-card {
+  background: linear-gradient(145deg, rgba(12,12,22,0.96), rgba(7,7,14,0.98));
+  backdrop-filter: blur(16px);
+}
+.showcase-card:hover {
+  box-shadow: 0 24px 56px rgba(0,0,0,0.6), 0 0 0 1px color-mix(in srgb, var(--sc-color) 40%, transparent);
+}
+
+/* ── Promo banner: gradient ── */
+.promo-banner {
+  background: linear-gradient(90deg, #12000a 0%, #0d0005 50%, #12000a 100%);
+  border-bottom: 1px solid rgba(255,0,34,0.2);
+}
+
+/* ── Navbar scrolled: stronger glass ── */
+.navbar.scrolled {
+  background: rgba(5,5,8,0.85);
+  backdrop-filter: blur(32px);
+  border-bottom: 1px solid rgba(255,0,34,0.1);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+}
+
+/* ── Nav CTA: glow ── */
+.nav-cta {
+  background: var(--red);
+  box-shadow: 0 0 16px rgba(255,0,34,0.3);
+}
+.nav-cta:hover {
+  box-shadow: 0 4px 24px rgba(255,0,34,0.5);
+}
+
+/* ── Btn fill: glow ── */
+.btn-fill:hover {
+  box-shadow: 0 12px 36px rgba(255,0,34,0.45);
+}
+
+/* ── FAQ items: glass ── */
+.faq-item {
+  background: linear-gradient(145deg, rgba(13,13,22,0.9), rgba(8,8,15,0.95));
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+}
+
+/* ── Footer: gradient ── */
+footer {
+  background: linear-gradient(180deg, var(--bg) 0%, #030206 100%) !important;
+  border-top: 1px solid rgba(255,0,34,0.12) !important;
+}
+
+/* ── WP promo inner: upgrade ── */
+.wp-inner {
+  background: linear-gradient(135deg, #0f0008 0%, #0a0a18 60%, #070318 100%);
+  border: 1px solid rgba(255,0,34,0.18);
+  box-shadow: 0 0 100px rgba(255,0,34,0.05), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ── Testimonios cards: glass ── */
+.test-card {
+  background: linear-gradient(145deg, rgba(13,13,22,0.95), rgba(8,8,16,0.98));
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+/* ── Contact card: glass ── */
+.contact-right {
+  background: linear-gradient(145deg, rgba(14,8,22,0.95), rgba(8,5,14,0.98));
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ── Proceso steps: glass ── */
+.step-card {
+  background: linear-gradient(145deg, rgba(13,13,22,0.9), rgba(8,8,16,0.95));
+  border: 1px solid rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+}
+
+/* ── Ecuador section glow ── */
+.ecuador-section {
+  position: relative;
+}
+.ecuador-section::before {
+  content: '';
+  position: absolute; top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255,209,0,0.4), transparent);
+}
+
+/* ── Values rows ── */
+.vrow {
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: border-color 0.2s, background 0.2s;
+}
+.vrow:hover {
+  border-color: rgba(255,0,34,0.2);
+  background: rgba(255,0,34,0.03);
+}
+
+/* ── Scroll indicator: vivid ── */
+.scroll-line {
+  background: linear-gradient(to bottom, var(--red), rgba(255,0,34,0.2), transparent);
+  width: 1.5px;
+  box-shadow: 0 0 8px rgba(255,0,34,0.4);
+}
