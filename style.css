@@ -2099,3 +2099,105 @@ body.has-banner .navbar { top: 40px; }
   .roadmap-track { padding-left: 16px; }
   .rm-item { gap: 14px; }
 }
+
+/* ── APP GRID — compact program tiles ── */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.app-tile {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.22s, transform 0.22s, box-shadow 0.22s;
+}
+
+.app-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--red), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.app-tile:hover {
+  border-color: rgba(255,0,34,0.28);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+}
+
+.app-tile:hover::before { transform: scaleX(1); }
+
+.at-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.at-icon { font-size: 1.75rem; line-height: 1; }
+
+.at-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.at-avail   { background: rgba(16,185,129,0.12); color: #10B981; border: 1px solid rgba(16,185,129,0.3); }
+.at-custom  { background: rgba(255,0,34,0.1);    color: var(--red); border: 1px solid rgba(255,0,34,0.25); }
+.at-ecuador { background: rgba(255,209,0,0.1);   color: #FFD100;    border: 1px solid rgba(255,209,0,0.3); }
+
+.at-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.25;
+}
+
+.at-desc {
+  font-size: 0.76rem;
+  color: var(--muted);
+  line-height: 1.45;
+  flex: 1;
+}
+
+.at-dl {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.71rem;
+  font-weight: 600;
+  color: var(--red);
+  letter-spacing: 0.2px;
+}
+
+.at-dl-wa { color: #25D366; }
+
+.ecuador-app-grid { margin-top: 0; }
+
+@media (max-width: 768px) {
+  .app-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+}
+
+@media (max-width: 420px) {
+  .app-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .app-tile { padding: 14px 12px 12px; }
+  .at-icon { font-size: 1.4rem; }
+}
