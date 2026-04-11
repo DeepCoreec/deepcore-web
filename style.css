@@ -3,6 +3,14 @@
    Inspirado en Vercel · Linear · Apple
    ============================================= */
 
+@font-face {
+  font-family: 'Caveman';
+  src: url('CAVEMAN_.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -169,7 +177,7 @@ body {
 }
 
 .hero-heading {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Caveman', 'Syne', sans-serif;
   font-size: clamp(3.5rem, 8vw, 7.5rem);
   font-weight: 800; line-height: 0.95;
   letter-spacing: -3px;
