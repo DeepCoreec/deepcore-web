@@ -84,8 +84,7 @@ class Node {
     if (this.x < -50) this.x = W + 50;
     if (this.x > W + 50) this.x = -50;
     if (this.y < -50) this.y = H + 50;
-    if (this.y = H + 50) this.y = -50;
-    if (this.y < 0 || this.y > H) this.vy *= -1;
+    if (this.y > H + 50) this.y = -50;
   }
   draw() {
     const glow = 0.55 + 0.45 * Math.sin(this.pulse);
