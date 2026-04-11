@@ -1130,6 +1130,7 @@ body {
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .svc-grid { grid-template-columns: 1fr 1fr; }
+  .svc-card { padding: 36px 28px; }
   .svc-card.svc-large { grid-column: span 2; }
   .about-layout { grid-template-columns: 1fr; gap: 48px; }
   .contact-layout { grid-template-columns: 1fr; gap: 48px; }
@@ -1144,7 +1145,8 @@ body {
   .hero-heading { letter-spacing: -2px; }
   .hero-stats { flex-direction: column; gap: 0; }
   .hstat-sep { width: 80%; height: 1px; }
-  .svc-grid { grid-template-columns: 1fr; }
+  .svc-grid { grid-template-columns: 1fr; gap: 0; }
+  .svc-card { padding: 28px 24px; }
   .svc-card.svc-large { grid-column: span 1; }
   .band-inner { flex-direction: column; text-align: center; }
   .cform-row { grid-template-columns: 1fr; }
@@ -1184,6 +1186,9 @@ body {
   .pf-header h3 { font-size: 20px; }
   .hero-cta { gap: 12px; }
   .btn-fill, .btn-line { padding: 11px 20px; font-size: 0.82rem; }
+  .svc-card { padding: 24px 20px; }
+  .svc-icon { width: 44px; height: 44px; margin-bottom: 16px; }
+  .svc-card h3 { font-size: 1.1rem; }
 }
 
 /* ── BOTONES TERMINAL ── */
