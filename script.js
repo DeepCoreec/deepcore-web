@@ -280,3 +280,60 @@ function enviarFormulario(e) {
   const texto = `Hola DeepCore! Soy ${nombre} (${email}). Servicio: ${servicio || 'consulta general'}. ${mensaje}`;
   window.open(`https://wa.me/593986225038?text=${encodeURIComponent(texto)}`, '_blank');
 }
+
+// ── GSAP — Animaciones staggered ─────────────────────────────────────────────
+if (typeof gsap !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+  // Hero entrance staggered
+  gsap.from('.hero-pill',    { opacity: 0, y: 20, duration: 0.7, delay: 0.2, ease: 'power3.out' });
+  gsap.from('.line-text',    { opacity: 0, y: 60, duration: 0.9, delay: 0.4, stagger: 0.15, ease: 'power3.out' });
+  gsap.from('.hero-body',    { opacity: 0, y: 30, duration: 0.7, delay: 0.75, ease: 'power3.out' });
+  gsap.from('.btn-fill, .btn-line', { opacity: 0, y: 20, duration: 0.6, delay: 0.9, stagger: 0.1, ease: 'power3.out' });
+  gsap.from('.hstat',        { opacity: 0, y: 20, duration: 0.5, delay: 1.1, stagger: 0.1, ease: 'power3.out' });
+}
+
+// ── Palabras scramble — se acomodan al entrar en viewport ────────────────────
+const wordsContainer = document.getElementById('scrambleWords');
+if (wordsContainer) {
+  const words = wordsContainer.querySelectorAll('span');
+
+  // Distribuir delays escalonados
+  words.forEach((w, i) => {
+    w.style.transitionDelay = `${i * 0.06}s`;
+  });
+
+  const scrambleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        wordsContainer.classList.add('animated');
+        scrambleObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  scrambleObserver.observe(wordsContainer);
+}
+
+// ── Text scramble en el título de la sección scramble ───────────────────────
+const scrambleTitle = document.getElementById('scrambleTitle');
+if (scrambleTitle && typeof gsap !== 'undefined') {
+  ScrollTrigger.create({
+    trigger: scrambleTitle,
+    start: 'top 80%',
+    once: true,
+    onEnter: () => {
+      gsap.from(scrambleTitle, {
+        opacity: 0, y: 50, duration: 1,
+        ease: 'power3.out'
+      });
+    }
+  });
+}
+
+// ── fade-up con IntersectionObserver ────────────────────────────────────────
+document.querySelectorAll('.fade-up').forEach(el => {
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) { el.classList.add('visible'); }
+  }, { threshold: 0.15 }).observe(el);
+});
