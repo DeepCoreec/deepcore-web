@@ -2391,7 +2391,6 @@ body::before {
   background: transparent;
   border: none;
   gap: 16px;
-  grid-template-columns: repeat(3, 1fr);
 }
 
 .svc-card {
