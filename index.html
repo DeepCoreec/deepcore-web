@@ -436,98 +436,55 @@
           <li>✅ Actualizaciones incluidas</li>
           <li>✅ Sin contratos — cancela cuando quieras</li>
         </ul>
-        <div class="pf-plans">
-          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Mensual $5')">
-            <span class="pf-plan-name">Mensual</span>
-            <span class="pf-plan-price">$5</span>
-            <span class="pf-plan-note">/ mes</span>
-          </a>
-          <a class="pf-plan pf-plan-pop" href="#metodos-pago" onclick="selectPlan('Trimestral $14')">
-            <span class="pf-pop-badge">Más popular</span>
-            <span class="pf-plan-name">Trimestral</span>
-            <span class="pf-plan-price">$14</span>
-            <span class="pf-plan-note">/ 3 meses</span>
-          </a>
-          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Semestral $27')">
-            <span class="pf-plan-name">Semestral</span>
-            <span class="pf-plan-price">$27</span>
-            <span class="pf-plan-note">/ 6 meses</span>
-          </a>
-          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Anual $50')">
-            <span class="pf-plan-name">Anual</span>
-            <span class="pf-plan-price">$50</span>
-            <span class="pf-plan-note">/ año — 2 meses gratis</span>
-          </a>
-        </div>
-        <p class="pf-note">Elige tu método de pago preferido abajo 👇</p>
+        <!-- TARJETAS DE PLAN CON STRIPE DIRECTO -->
+        <div class="pricing-grid">
 
-        <!-- MÉTODOS DE PAGO -->
-        <div class="pay-methods" id="metodos-pago">
-        <div class="pay-selected-plan" id="plan-seleccionado" style="display:none">
-          Plan seleccionado: <strong id="plan-nombre"></strong>
-        </div>
-
-          <!-- Stripe / Tarjeta -->
-          <div class="pay-method">
-            <div class="pay-method-icon">💳</div>
-            <div class="pay-method-info">
-              <strong>Tarjeta de crédito / débito</strong>
-              <span>Visa, Mastercard, American Express — pago seguro con Stripe, recibes tu clave al instante</span>
-            </div>
-            <div class="pay-method-btns">
-              <a id="btn-stripe" href="https://web-production-258cb.up.railway.app/comprar/mensual" class="pay-btn pay-btn-pop">Pagar con Tarjeta</a>
-            </div>
+          <div class="pricing-card">
+            <div class="pc-name">Mensual</div>
+            <div class="pc-price"><span class="pc-currency">$</span>5</div>
+            <div class="pc-period">por mes</div>
+            <a href="https://web-production-258cb.up.railway.app/comprar/mensual" class="pc-btn">Comprar ahora →</a>
           </div>
 
-          <!-- Transferencia bancaria -->
-          <div class="pay-method">
-            <div class="pay-method-icon">🏦</div>
-            <div class="pay-method-info">
-              <strong>Transferencia Bancaria</strong>
-              <span>Banco de Guayaquil &nbsp;·&nbsp; Cuenta de ahorros &nbsp;·&nbsp; N° <strong>0048029235</strong> &nbsp;·&nbsp; Michael Pozo</span>
-            </div>
-            <div class="pay-method-btns">
-              <a id="btn-transferencia" href="https://wa.me/593986225038?text=Hola, realicé una transferencia por el Plan Mensual $5. Mi email es:" target="_blank" class="pay-btn">Confirmar por WhatsApp</a>
-            </div>
+          <div class="pricing-card pc-popular">
+            <div class="pc-badge">⭐ Más popular</div>
+            <div class="pc-name">Trimestral</div>
+            <div class="pc-price"><span class="pc-currency">$</span>14</div>
+            <div class="pc-period">por 3 meses · <strong>$4.67/mes</strong></div>
+            <a href="https://web-production-258cb.up.railway.app/comprar/trimestral" class="pc-btn pc-btn-pop">Comprar ahora →</a>
           </div>
 
-          <!-- WhatsApp directo -->
-          <div class="pay-method">
-            <div class="pay-method-icon">💬</div>
-            <div class="pay-method-info">
-              <strong>Coordinar por WhatsApp</strong>
-              <span>Cualquier duda o método alternativo — te atendemos directamente</span>
-            </div>
-            <div class="pay-method-btns">
-              <a id="btn-whatsapp" href="https://wa.me/593986225038?text=Hola, quiero comprar el Plan Mensual $5 de DeepCore" target="_blank" class="pay-btn">Escribir al WhatsApp</a>
-            </div>
+          <div class="pricing-card">
+            <div class="pc-name">Semestral</div>
+            <div class="pc-price"><span class="pc-currency">$</span>27</div>
+            <div class="pc-period">por 6 meses · <strong>$4.50/mes</strong></div>
+            <a href="https://web-production-258cb.up.railway.app/comprar/semestral" class="pc-btn">Comprar ahora →</a>
           </div>
+
+          <div class="pricing-card">
+            <div class="pc-save">2 meses gratis</div>
+            <div class="pc-name">Anual</div>
+            <div class="pc-price"><span class="pc-currency">$</span>50</div>
+            <div class="pc-period">por 12 meses · <strong>$4.17/mes</strong></div>
+            <a href="https://web-production-258cb.up.railway.app/comprar/anual" class="pc-btn">Comprar ahora →</a>
+          </div>
+
         </div>
 
-        <script>
-        var _SERVER = 'https://web-production-258cb.up.railway.app';
-        var _planes = {
-          'Mensual $5':     {slug:'mensual',     monto:'5',  texto:'Mensual $5'},
-          'Trimestral $14': {slug:'trimestral',  monto:'14', texto:'Trimestral $14'},
-          'Semestral $27':  {slug:'semestral',   monto:'27', texto:'Semestral $27'},
-          'Anual $50':      {slug:'anual',        monto:'50', texto:'Anual $50'},
-        };
-        function selectPlan(plan) {
-          var p = _planes[plan]; if (!p) return;
-          var el = document.getElementById('plan-nombre');
-          var banner = document.getElementById('plan-seleccionado');
-          if (el) el.textContent = plan;
-          if (banner) banner.style.display = 'block';
-          var bs = document.getElementById('btn-stripe');
-          var bt = document.getElementById('btn-transferencia');
-          var bw = document.getElementById('btn-whatsapp');
-          if (bs) bs.href = _SERVER + '/comprar/' + p.slug;
-          if (bt) bt.href = 'https://wa.me/593986225038?text=Hola,%20realicé%20una%20transferencia%20por%20el%20Plan%20' + encodeURIComponent(p.texto) + '.%20Mi%20email%20es:';
-          if (bw) bw.href = 'https://wa.me/593986225038?text=Hola,%20quiero%20comprar%20el%20Plan%20' + encodeURIComponent(p.texto) + '%20de%20DeepCore';
-        }
-        </script>
+        <!-- Garantías y trust signals -->
+        <div class="pricing-trust">
+          <span>🔒 Pago seguro con Stripe</span>
+          <span>⚡ Clave por email al instante</span>
+          <span>↩️ Sin contratos</span>
+        </div>
 
-        <p class="pf-note" style="margin-top:16px">✅ Al confirmar tu pago te enviamos la clave de activación por email en minutos.</p>
+        <!-- Métodos alternativos (compacto) -->
+        <div class="pricing-alt">
+          <span>¿Prefieres otro método?</span>
+          <a href="https://wa.me/593986225038?text=Hola, quiero pagar por transferencia bancaria una licencia DeepCore" target="_blank">Transferencia bancaria</a>
+          <span>·</span>
+          <a href="https://wa.me/593986225038?text=Hola, quiero comprar una licencia DeepCore" target="_blank">WhatsApp</a>
+        </div>
       </div>
 
       <!-- PROGRAMAS DISPONIBLES -->
