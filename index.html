@@ -466,15 +466,16 @@
         <div class="pay-selected-plan" id="plan-seleccionado" style="display:none">
           Plan seleccionado: <strong id="plan-nombre"></strong>
         </div>
-          <!-- PayPal / Tarjeta -->
+
+          <!-- Stripe / Tarjeta -->
           <div class="pay-method">
             <div class="pay-method-icon">💳</div>
             <div class="pay-method-info">
-              <strong>PayPal o Tarjeta de crédito/débito</strong>
-              <span>Visa, Mastercard, American Express — sin necesitar cuenta PayPal</span>
+              <strong>Tarjeta de crédito / débito</strong>
+              <span>Visa, Mastercard, American Express — pago seguro con Stripe, recibes tu clave al instante</span>
             </div>
             <div class="pay-method-btns">
-              <a id="btn-paypal" href="https://www.paypal.com/paypalme/DeepCoreec/5" target="_blank" class="pay-btn pay-btn-pop">Pagar con PayPal / Tarjeta</a>
+              <a id="btn-stripe" href="https://web-production-258cb.up.railway.app/comprar/mensual" class="pay-btn pay-btn-pop">Pagar con Tarjeta</a>
             </div>
           </div>
 
@@ -504,11 +505,12 @@
         </div>
 
         <script>
+        var _SERVER = 'https://web-production-258cb.up.railway.app';
         var _planes = {
-          'Mensual $5':     {monto:'5',  texto:'Mensual $5'},
-          'Trimestral $14': {monto:'14', texto:'Trimestral $14'},
-          'Semestral $27':  {monto:'27', texto:'Semestral $27'},
-          'Anual $50':      {monto:'50', texto:'Anual $50'},
+          'Mensual $5':     {slug:'mensual',     monto:'5',  texto:'Mensual $5'},
+          'Trimestral $14': {slug:'trimestral',  monto:'14', texto:'Trimestral $14'},
+          'Semestral $27':  {slug:'semestral',   monto:'27', texto:'Semestral $27'},
+          'Anual $50':      {slug:'anual',        monto:'50', texto:'Anual $50'},
         };
         function selectPlan(plan) {
           var p = _planes[plan]; if (!p) return;
@@ -516,10 +518,10 @@
           var banner = document.getElementById('plan-seleccionado');
           if (el) el.textContent = plan;
           if (banner) banner.style.display = 'block';
-          var bp = document.getElementById('btn-paypal');
+          var bs = document.getElementById('btn-stripe');
           var bt = document.getElementById('btn-transferencia');
           var bw = document.getElementById('btn-whatsapp');
-          if (bp) bp.href = 'https://www.paypal.com/paypalme/DeepCoreec/' + p.monto;
+          if (bs) bs.href = _SERVER + '/comprar/' + p.slug;
           if (bt) bt.href = 'https://wa.me/593986225038?text=Hola,%20realicé%20una%20transferencia%20por%20el%20Plan%20' + encodeURIComponent(p.texto) + '.%20Mi%20email%20es:';
           if (bw) bw.href = 'https://wa.me/593986225038?text=Hola,%20quiero%20comprar%20el%20Plan%20' + encodeURIComponent(p.texto) + '%20de%20DeepCore';
         }
