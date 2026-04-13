@@ -2421,7 +2421,6 @@ body::before {
 .svc-card:hover::after { opacity: 1; }
 
 .svc-card.svc-large {
-  grid-column: span 2;
   background: linear-gradient(135deg, rgba(16,8,24,0.95) 0%, rgba(10,6,18,0.95) 100%);
   border-color: rgba(255,0,34,0.12);
 }
