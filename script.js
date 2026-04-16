@@ -337,3 +337,39 @@ document.querySelectorAll('.fade-up').forEach(el => {
     if (entry.isIntersecting) { el.classList.add('visible'); }
   }, { threshold: 0.15 }).observe(el);
 });
+
+// ── AGENT MOCKUP ANIMATION ──────────────────────────────────────────────────
+(function() {
+  const steps = document.querySelectorAll('#agentMockup .amk-step');
+  const progressBar = document.getElementById('agentProgress');
+  if (!steps.length || !progressBar) return;
+
+  let current = 0;
+  const total = steps.length;
+
+  function showStep(idx) {
+    steps.forEach((s, i) => {
+      s.classList.toggle('amk-step-active', i === idx);
+    });
+    progressBar.style.width = ((idx + 1) / total * 100) + '%';
+  }
+
+  // Reinicia suavemente al completar el ciclo
+  function tick() {
+    current = (current + 1) % total;
+    if (current === 0) {
+      progressBar.style.transition = 'none';
+      progressBar.style.width = '0%';
+      // Pequeño delay para que el reset se vea antes de la transición
+      setTimeout(() => {
+        progressBar.style.transition = 'width 0.35s ease';
+        showStep(0);
+      }, 80);
+    } else {
+      showStep(current);
+    }
+  }
+
+  showStep(0);
+  setInterval(tick, 1500);
+})();

@@ -122,6 +122,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#productos">Productos</a></li>
+        <li><a href="#agente">Agente IA</a></li>
         <li><a href="#galeria">Galería</a></li>
         <li><a href="#webs">Páginas Web</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
@@ -170,6 +171,16 @@
       <div class="hero-cta">
         <a class="btn-fill terminal" href="#servicios">&gt;_ VER SERVICIOS</a>
         <a class="btn-line terminal" href="#contacto">&gt;_ CONTÁCTANOS</a>
+      </div>
+
+      <div class="hero-ai-badges">
+        <span class="hai-badge">Claude AI</span>
+        <span class="hai-sep">·</span>
+        <span class="hai-badge">Computer Use</span>
+        <span class="hai-sep">·</span>
+        <span class="hai-badge">MCP</span>
+        <span class="hai-sep">·</span>
+        <span class="hai-badge">Ollama offline</span>
       </div>
 
       <div class="hero-stats">
@@ -578,6 +589,16 @@
           <span class="at-dl">⬇ Multiplataforma</span>
         </a>
 
+        <a class="app-tile app-tile-agent reveal" href="#agente">
+          <div class="at-head">
+            <span class="at-icon">🤖</span>
+            <span class="at-badge at-agent">⭐ Agente Maestro</span>
+          </div>
+          <h4 class="at-name">DeepCore Agent</h4>
+          <p class="at-desc">Controla todos los programas DeepCore y software externo con IA autónoma</p>
+          <span class="at-dl">⬇ Windows · macOS · Linux</span>
+        </a>
+
         <a class="app-tile app-tile-custom reveal" href="https://wa.me/593986225038?text=Hola, necesito un software a medida" target="_blank">
           <div class="at-head">
             <span class="at-icon">🔧</span>
@@ -918,6 +939,258 @@
       <div class="wp-footer reveal">
         <p>¿No encuentras el estilo que buscas? <strong>Lo hacemos a tu medida.</strong></p>
         <a class="btn-fill" href="https://wa.me/593986225038?text=Hola, quiero una página web a medida" target="_blank">Cotizar mi página web →</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       DEEPCORE AGENT
+  ══════════════════════════════════════════════ -->
+  <section class="section agent-section" id="agente">
+    <div class="container">
+
+      <div class="section-head reveal" style="text-align:center;margin-bottom:24px">
+        <span class="agent-badge-new">Nuevo · Powered by Claude AI (Anthropic)</span>
+        <h2 class="section-h">DeepCore Agent — <em>El que controla todo.</em></h2>
+        <p class="section-p">Un agente de inteligencia artificial que opera todos tus programas DeepCore, controla software externo como Excel o Chrome, y automatiza tareas completas. Solo dile qué hacer.</p>
+      </div>
+
+      <!-- MOCKUP ANIMADO -->
+      <div class="agent-mockup-wrap reveal">
+        <div class="agent-mockup">
+          <div class="agent-mockup-bar">
+            <span class="amk-dot" style="background:#ff5f57"></span>
+            <span class="amk-dot" style="background:#febc2e"></span>
+            <span class="amk-dot" style="background:#28c840"></span>
+            <span class="amk-title">DeepCore Agent · Claude AI</span>
+            <span class="amk-status"><span class="amk-pulse"></span>Activo</span>
+          </div>
+          <div class="agent-mockup-body" id="agentMockup">
+            <div class="amk-step amk-step-active" data-type="task">
+              <span class="amk-icon">💬</span>
+              <span class="amk-text">"Tarea: Genera reporte de ventas y envíalo por WhatsApp"</span>
+            </div>
+            <div class="amk-step" data-type="think">
+              <span class="amk-icon">💭</span>
+              <span class="amk-text">"Pensando plan de acción..."</span>
+            </div>
+            <div class="amk-step" data-type="action">
+              <span class="amk-icon">🖥️</span>
+              <span class="amk-text">"Abriendo Inventario Pro → leyendo ventas..."</span>
+            </div>
+            <div class="amk-step" data-type="data">
+              <span class="amk-icon">📊</span>
+              <span class="amk-text">"Ventas del día: $8,430 · 47 productos vendidos"</span>
+            </div>
+            <div class="amk-step" data-type="action">
+              <span class="amk-icon">🔧</span>
+              <span class="amk-text">"Conectando WhatsApp via MCP..."</span>
+            </div>
+            <div class="amk-step" data-type="done">
+              <span class="amk-icon">✅</span>
+              <span class="amk-text">"Reporte enviado. Tarea completada."</span>
+            </div>
+          </div>
+          <div class="agent-mockup-footer">
+            <div class="amk-progress-track">
+              <div class="amk-progress-bar" id="agentProgress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 CAPACIDADES -->
+      <div class="agent-caps-grid">
+        <div class="agent-cap-card reveal">
+          <div class="agent-cap-icon">🏗️</div>
+          <h3 class="agent-cap-title">CONSTRUYE</h3>
+          <p class="agent-cap-desc">Describe cualquier programa en español y el agente lo construye desde cero. Sin código.</p>
+        </div>
+        <div class="agent-cap-card reveal">
+          <div class="agent-cap-icon">🎮</div>
+          <h3 class="agent-cap-title">CONTROLA</h3>
+          <p class="agent-cap-desc">Opera Excel, Word, Chrome y cualquier software como lo haría un humano. Via Computer Use + pyautogui.</p>
+        </div>
+        <div class="agent-cap-card reveal">
+          <div class="agent-cap-icon">⚙️</div>
+          <h3 class="agent-cap-title">AUTOMATIZA</h3>
+          <p class="agent-cap-desc">Tareas programadas que se ejecutan solas. Reportes, notificaciones, actualizaciones — sin que estés presente.</p>
+        </div>
+      </div>
+
+      <!-- CÓMO FUNCIONA -->
+      <div class="agent-how-wrap reveal">
+        <div class="agent-how-head">
+          <p class="eyebrow">— Paso a paso</p>
+          <h3 class="agent-how-title">Cómo funciona</h3>
+        </div>
+        <div class="agent-steps">
+          <div class="agent-step">
+            <div class="agent-step-num">01</div>
+            <div class="agent-step-body">
+              <h4>Descarga DeepCore Agent</h4>
+              <p>Incluido en tu licencia de $5/mes. Un solo instalador para todo.</p>
+            </div>
+          </div>
+          <div class="agent-step">
+            <div class="agent-step-num">02</div>
+            <div class="agent-step-body">
+              <h4>Escribe o habla</h4>
+              <p>Dile qué necesitas en español natural. Sin comandos, sin tecnicismos.</p>
+            </div>
+          </div>
+          <div class="agent-step">
+            <div class="agent-step-num">03</div>
+            <div class="agent-step-body">
+              <h4>El agente ve tu pantalla</h4>
+              <p>Claude AI analiza el contexto y planifica la solución más eficiente.</p>
+            </div>
+          </div>
+          <div class="agent-step">
+            <div class="agent-step-num">04</div>
+            <div class="agent-step-body">
+              <h4>Actúa en tu computadora</h4>
+              <p>Abre programas, lee datos, escribe, envía — todo sin que toques nada.</p>
+            </div>
+          </div>
+          <div class="agent-step">
+            <div class="agent-step-num">05</div>
+            <div class="agent-step-body">
+              <h4>Conecta tus servicios</h4>
+              <p>WhatsApp, Gmail, Google Sheets via MCP. Todo integrado y listo.</p>
+            </div>
+          </div>
+          <div class="agent-step">
+            <div class="agent-step-num">06</div>
+            <div class="agent-step-body">
+              <h4>Tú supervisas</h4>
+              <p>Panel en tiempo real. Aprueba acciones importantes con un clic.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTEGRACIONES -->
+      <div class="agent-integrations-wrap reveal">
+        <p class="eyebrow" style="text-align:center;margin-bottom:20px">— Integraciones</p>
+        <div class="agent-integrations">
+          <span class="agent-int-badge">📊 Excel</span>
+          <span class="agent-int-badge">📝 Word</span>
+          <span class="agent-int-badge">🌐 Chrome</span>
+          <span class="agent-int-badge">📧 Gmail</span>
+          <span class="agent-int-badge">💬 WhatsApp</span>
+          <span class="agent-int-badge">📋 Google Sheets</span>
+          <span class="agent-int-badge">💼 Slack</span>
+          <span class="agent-int-deepcore">🔥 Todos los programas DeepCore</span>
+          <span class="agent-int-badge agent-int-more">+ Cualquier app con interfaz visual</span>
+        </div>
+      </div>
+
+      <!-- COMPATIBILIDAD -->
+      <div class="agent-compat reveal">
+        <span class="agent-compat-item">🪟 Windows 10/11</span>
+        <span class="agent-compat-sep">·</span>
+        <span class="agent-compat-item">🍎 macOS 12+</span>
+        <span class="agent-compat-sep">·</span>
+        <span class="agent-compat-item">🐧 Linux</span>
+        <span class="agent-compat-note">Sin instalaciones adicionales — todo incluido en el .exe</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       ACTIVAR IA (ANTHROPIC)
+  ══════════════════════════════════════════════ -->
+  <section class="section activar-ia-section" id="activar-ia">
+    <div class="container">
+
+      <div class="section-head reveal" style="text-align:center;margin-bottom:48px">
+        <p class="eyebrow">— Inteligencia artificial completa</p>
+        <h2 class="section-h">Activa la inteligencia <em>artificial completa.</em></h2>
+        <p class="section-p">DeepCore usa Claude AI de Anthropic — el motor de IA más avanzado del mundo. Tú controlas tu API key, tus datos, tu privacidad.</p>
+      </div>
+
+      <!-- 4 PASOS SIMPLES -->
+      <div class="ia-steps-box reveal">
+        <div class="ia-steps-head">
+          <span class="ia-steps-icon">🔑</span>
+          <h3>Cómo activar en 4 pasos simples</h3>
+        </div>
+        <div class="ia-steps-list">
+          <div class="ia-step-row">
+            <span class="ia-step-num">1</span>
+            <div class="ia-step-content">
+              <strong>Ve a platform.anthropic.com → crea tu cuenta gratis</strong>
+              <span>Registro gratuito en menos de 2 minutos</span>
+            </div>
+          </div>
+          <div class="ia-step-row">
+            <span class="ia-step-num">2</span>
+            <div class="ia-step-content">
+              <strong>En "API Keys" genera tu clave personal</strong>
+              <span>Gratis para empezar — créditos incluidos al registrarse</span>
+            </div>
+          </div>
+          <div class="ia-step-row">
+            <span class="ia-step-num">3</span>
+            <div class="ia-step-content">
+              <strong>Abre cualquier programa DeepCore → Configuración → pega tu clave</strong>
+              <span>Un solo campo, una sola vez. Se sincroniza en todos los programas.</span>
+            </div>
+          </div>
+          <div class="ia-step-row">
+            <span class="ia-step-num">4</span>
+            <div class="ia-step-content">
+              <strong>IA avanzada activada al instante en todos tus programas</strong>
+              <span>Agente autónomo, Computer Use y análisis avanzado desbloqueados.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOS PLANES ANTHROPIC -->
+      <div class="ia-plans-grid reveal">
+        <div class="ia-plan-card">
+          <div class="ia-plan-badge">Personal</div>
+          <div class="ia-plan-price">desde $0 <span>/ $20 mes</span></div>
+          <div class="ia-plan-name">Plan Personal · Anthropic</div>
+          <ul class="ia-plan-features">
+            <li>✅ Para uso personal y negocios pequeños</li>
+            <li>✅ Claude AI completo en todos los programas DeepCore</li>
+            <li>✅ Ideal con licencia DeepCore de $5/mes</li>
+            <li>✅ Créditos gratis al registrarse</li>
+          </ul>
+          <div class="ia-plan-total">Total: ~$25/mes · IA de nivel empresarial completo</div>
+        </div>
+        <div class="ia-plan-card ia-plan-card-pro">
+          <div class="ia-plan-badge ia-plan-badge-pro">Empresarial</div>
+          <div class="ia-plan-price">$100 <span>/ mes</span></div>
+          <div class="ia-plan-name">Anthropic Teams</div>
+          <ul class="ia-plan-features">
+            <li>✅ Para empresas medianas y grandes</li>
+            <li>✅ Múltiples usuarios con IA simultánea</li>
+            <li>✅ Mayor límite de uso mensual</li>
+            <li>✅ Ideal con licencia DeepCore empresarial</li>
+          </ul>
+          <div class="ia-plan-total">Máximo rendimiento para equipos completos</div>
+        </div>
+      </div>
+
+      <!-- NOTA IMPORTANTE -->
+      <div class="ia-note-box reveal">
+        <span class="ia-note-icon">💡</span>
+        <p><strong>DeepCore sin API key funciona en modo básico con IA local (offline).</strong> La API key de Anthropic desbloquea la inteligencia completa: agente autónomo, Computer Use, análisis avanzado y más.</p>
+      </div>
+
+      <!-- TRUST BADGE -->
+      <div class="ia-trust-badge reveal">
+        <span>Powered by Anthropic</span>
+        <span class="ia-trust-sep">·</span>
+        <span>Claude AI</span>
+        <span class="ia-trust-sep">·</span>
+        <span>Tus datos nunca salen de tu computadora</span>
       </div>
 
     </div>
