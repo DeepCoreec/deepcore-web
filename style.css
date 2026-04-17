@@ -30,11 +30,14 @@
   --weight-black: 900;
 
   /* Motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-  --dur-fast: 0.3s;
-  --dur-base: 0.65s;
-  --dur-slow: 1s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);      /* expo ease-out — Emil Kowalski */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);           /* for exits */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);/* subtle overshoot */
+  --ease-hover: cubic-bezier(0.25, 0, 0, 1);       /* snappy hover */
+  --dur-instant: 0.1s;   /* focus rings, indicators */
+  --dur-fast: 0.18s;     /* hover interactions */
+  --dur-base: 0.35s;     /* scroll reveals, panels */
+  --dur-slow: 0.55s;     /* complex multi-part reveals */
 }
 
 html { scroll-behavior: auto; font-size: 18px; overflow-x: hidden; }
@@ -142,13 +145,15 @@ body {
   text-decoration: none; padding: 9px 20px;
   border-radius: 6px; font-size: 0.82rem;
   font-weight: 600; letter-spacing: 0.5px;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: background var(--dur-fast) var(--ease-hover),
+              transform var(--dur-fast) var(--ease-hover),
+              box-shadow var(--dur-fast) var(--ease-hover);
   white-space: nowrap;
 }
 .nav-cta:hover {
   background: var(--red2);
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(255,0,34,0.35);
+  box-shadow: 0 6px 20px rgba(255,0,34,0.3);
 }
 
 .hamburger {
@@ -229,18 +234,20 @@ body {
   padding: 13px 28px; border-radius: 8px;
   font-size: 0.88rem; font-weight: 600;
   letter-spacing: 0.3px; cursor: pointer;
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: background var(--dur-fast) var(--ease-hover),
+              transform var(--dur-fast) var(--ease-hover),
+              box-shadow var(--dur-fast) var(--ease-hover);
 }
 .btn-fill:hover {
   background: var(--red2);
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(255,0,34,0.4);
+  box-shadow: 0 10px 28px rgba(255,0,34,0.35);
 }
 .btn-fill.white {
   background: var(--white); color: var(--bg);
 }
 .btn-fill.white:hover {
-  background: var(--off); box-shadow: 0 12px 32px rgba(255,255,255,0.15);
+  background: var(--off); box-shadow: 0 10px 28px rgba(255,255,255,0.12);
 }
 .btn-fill.full { width: 100%; justify-content: center; }
 
@@ -250,7 +257,9 @@ body {
   text-decoration: none; border: 1px solid var(--border2);
   padding: 13px 28px; border-radius: 8px;
   font-size: 0.88rem; font-weight: 500; cursor: pointer;
-  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  transition: border-color var(--dur-fast) var(--ease-hover),
+              color var(--dur-fast) var(--ease-hover),
+              transform var(--dur-fast) var(--ease-hover);
 }
 .btn-line:hover {
   border-color: var(--subtle); color: var(--white);
@@ -364,7 +373,7 @@ body {
   padding: 52px 44px;
   position: relative; overflow: hidden;
   cursor: default;
-  transition: background 0.3s;
+  transition: background var(--dur-fast) var(--ease-hover);
   min-width: 0;
   word-break: break-word;
 }
@@ -392,7 +401,7 @@ body {
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 24px; color: var(--red);
-  transition: background 0.3s, border-color 0.3s;
+  transition: background var(--dur-fast) var(--ease-hover), border-color var(--dur-fast) var(--ease-hover);
 }
 .svc-card:hover .svc-icon {
   background: rgba(255,0,34,0.12);
@@ -421,7 +430,7 @@ body {
   font-size: 0.75rem; color: #9a9db8;
   border: 1px solid rgba(255,255,255,0.12);
   padding: 5px 14px; border-radius: 100px;
-  transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.18s var(--ease-hover), color 0.18s var(--ease-hover);
 }
 .svc-card:hover .svc-chips span {
   border-color: rgba(255,0,34,0.25); color: var(--off);
@@ -430,7 +439,7 @@ body {
 .svc-arrow {
   position: absolute; top: 36px; right: 36px;
   font-size: 1.2rem; color: var(--subtle);
-  transition: color 0.3s, transform 0.3s;
+  transition: color 0.18s var(--ease-hover), transform 0.18s var(--ease-hover);
 }
 .svc-card:hover .svc-arrow { color: var(--red); transform: translate(3px,-3px); }
 
@@ -666,7 +675,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px; padding: 36px 32px;
   position: relative; overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover), box-shadow 0.2s var(--ease-hover);
   cursor: default;
 }
 .prod-card::after {
@@ -1270,10 +1279,14 @@ body {
 
 /* ── REVEAL ── */
 .reveal {
-  opacity: 0; transform: translateY(18px);
-  transition: opacity 0.38s ease-out, transform 0.38s ease-out;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  will-change: opacity, transform;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; will-change: auto; }
+}
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
@@ -1353,7 +1366,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 4px 20px rgba(37,211,102,0.4);
   text-decoration: none;
-  transition: all 0.3s;
+  transition: background var(--dur-fast) var(--ease-hover), border-color var(--dur-fast) var(--ease-hover), color var(--dur-fast) var(--ease-hover);
   animation: wa-bounce 3s ease-in-out infinite;
 }
 .wa-float:hover {
@@ -1391,7 +1404,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 16px; padding: 32px 28px;
   position: relative; overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover);
 }
 .paso-card::before {
   content: ''; position: absolute;
@@ -1469,7 +1482,7 @@ body {
 .testi-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 16px; padding: 32px;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover);
   position: relative; overflow: hidden;
 }
 .testi-card::before {
@@ -1535,7 +1548,7 @@ body {
   display: flex; align-items: center; justify-content: center;
   box-shadow: 0 0 16px rgba(255,0,34,0.4);
   opacity: 0; transform: translateY(12px);
-  transition: opacity 0.3s, transform 0.3s;
+  transition: opacity 0.2s var(--ease-hover), transform 0.2s var(--ease-hover);
   pointer-events: none;
   z-index: 990;
 }
@@ -1649,7 +1662,7 @@ body.has-banner .navbar { top: 40px; }
   border-radius: 16px;
   padding: 36px 28px;
   text-align: center;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover);
 }
 .garantia-card:hover {
   border-color: var(--red);
@@ -1697,7 +1710,7 @@ body.has-banner .navbar { top: 40px; }
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover);
 }
 .gallery-card:hover {
   border-color: var(--red);
@@ -1977,7 +1990,7 @@ body.has-banner .navbar { top: 40px; }
   border: 1px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
-  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  transition: transform 0.2s var(--ease-hover), border-color 0.2s var(--ease-hover), box-shadow 0.2s var(--ease-hover);
 }
 .showcase-card:hover {
   transform: translateY(-6px);
@@ -2151,7 +2164,7 @@ body.has-banner .navbar { top: 40px; }
   display: flex;
   flex-direction: column;
   gap: 16px;
-  transition: transform 0.3s, border-color 0.3s;
+  transition: transform 0.2s var(--ease-hover), border-color 0.2s var(--ease-hover);
 }
 .test-card:hover {
   transform: translateY(-4px);
@@ -2232,7 +2245,7 @@ body.has-banner .navbar { top: 40px; }
   position: relative;
   z-index: 1;
   margin-top: 4px;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background var(--dur-fast) var(--ease-hover), border-color var(--dur-fast) var(--ease-hover);
 }
 .rm-done .rm-dot   { background: #10B981; border-color: #10B981; box-shadow: 0 0 12px #10B98166; }
 .rm-next .rm-dot   { background: #F59E0B; border-color: #F59E0B; box-shadow: 0 0 12px #F59E0B66; animation: pulse-dot 2s ease-in-out infinite; }
@@ -2738,18 +2751,19 @@ footer {
 /* ── SKILL: ui-distinctive-frontend — Animaciones staggered ── */
 .fade-up {
   opacity: 0;
-  transform: translateY(32px);
+  transform: translateY(20px);
   transition: opacity var(--dur-base) var(--ease-out),
               transform var(--dur-base) var(--ease-out);
+  will-change: opacity, transform;
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
-.fade-up.delay-1 { transition-delay: 0.1s; }
-.fade-up.delay-2 { transition-delay: 0.2s; }
-.fade-up.delay-3 { transition-delay: 0.35s; }
-.fade-up.delay-4 { transition-delay: 0.5s; }
+.fade-up.delay-1 { transition-delay: 0.06s; }
+.fade-up.delay-2 { transition-delay: 0.12s; }
+.fade-up.delay-3 { transition-delay: 0.18s; }
+.fade-up.delay-4 { transition-delay: 0.24s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up { opacity: 1; transform: none; transition: none; }
+  .fade-up { opacity: 1; transform: none; transition: none; will-change: auto; }
 }
 
 /* ── SCRAMBLE TEXT SECTION ── */
@@ -2852,12 +2866,15 @@ footer {
   border: 1px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: border-color 0.2s var(--ease-hover),
+              transform 0.2s var(--ease-hover),
+              box-shadow 0.2s var(--ease-hover);
+  will-change: transform;
 }
 .wp-card:hover {
   border-color: var(--border2);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(255,0,34,0.08);
+  box-shadow: 0 20px 50px rgba(255,0,34,0.07);
 }
 
 /* Browser mockup */
@@ -3119,14 +3136,15 @@ footer {
 .amk-step {
   display: flex; align-items: flex-start; gap: 12px;
   padding: 10px 14px; border-radius: 8px;
-  opacity: 0; transform: translateX(-8px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
+  opacity: 0; transform: translateY(6px);
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+  will-change: opacity, transform;
   background: rgba(255,255,255,0.02);
   border: 1px solid rgba(255,255,255,0.04);
   pointer-events: none;
 }
 .amk-step.amk-step-active {
-  opacity: 1; transform: translateX(0);
+  opacity: 1; transform: translateY(0);
 }
 .amk-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
 .amk-text { font-size: 0.82rem; line-height: 1.5; }
@@ -3152,7 +3170,7 @@ footer {
 .amk-progress-bar {
   height: 100%; width: 0%; border-radius: 2px;
   background: linear-gradient(90deg, #8B5CF6, #3B82F6);
-  transition: width 0.35s ease;
+  transition: width 0.4s var(--ease-out);
 }
 
 /* 3 capacidades */
@@ -3163,7 +3181,7 @@ footer {
 .agent-cap-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 12px; padding: 32px 28px; text-align: center;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: border-color 0.2s var(--ease-hover), transform 0.2s var(--ease-hover), box-shadow 0.2s var(--ease-hover);
 }
 .agent-cap-card:hover {
   border-color: rgba(139,92,246,0.35);
@@ -3279,7 +3297,7 @@ footer {
 .ia-plan-card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 14px; padding: 32px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: border-color 0.2s var(--ease-hover), box-shadow 0.2s var(--ease-hover);
 }
 .ia-plan-card:hover {
   border-color: var(--border2); box-shadow: 0 8px 32px rgba(0,0,0,0.3);

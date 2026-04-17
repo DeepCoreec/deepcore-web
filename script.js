@@ -226,15 +226,16 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ── REVEAL SCROLL ──
+// ── REVEAL SCROLL — Emil Kowalski: ease-out, 300-400ms, no blocking ──
 const observer = new IntersectionObserver(entries => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 35);
+      // Stagger max 40ms per item — Emil: keep stagger under 50ms
+      setTimeout(() => e.target.classList.add('visible'), i * 40);
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -338,38 +339,51 @@ document.querySelectorAll('.fade-up').forEach(el => {
   }, { threshold: 0.15 }).observe(el);
 });
 
-// ── AGENT MOCKUP ANIMATION ──────────────────────────────────────────────────
+// ── AGENT MOCKUP ANIMATION — ease-out entrances, 300ms, no layout thrash ──
 (function() {
   const steps = document.querySelectorAll('#agentMockup .amk-step');
   const progressBar = document.getElementById('agentProgress');
   if (!steps.length || !progressBar) return;
 
+  // Respect prefers-reduced-motion
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   let current = 0;
-  const total = steps.length;
+  const total  = steps.length;
+  // Step interval: 1800ms gives enough read time between reveals
+  const STEP_MS = 1800;
 
   function showStep(idx) {
     steps.forEach((s, i) => {
+      // Deactivate previous — ease-in for exit (faster than entrance)
       s.classList.toggle('amk-step-active', i === idx);
     });
+    // Smooth progress — uses CSS var(--ease-out) via transition
     progressBar.style.width = ((idx + 1) / total * 100) + '%';
   }
 
-  // Reinicia suavemente al completar el ciclo
   function tick() {
     current = (current + 1) % total;
     if (current === 0) {
+      // Reset progress bar without animation, then re-enable
       progressBar.style.transition = 'none';
       progressBar.style.width = '0%';
-      // Pequeño delay para que el reset se vea antes de la transición
-      setTimeout(() => {
-        progressBar.style.transition = 'width 0.35s ease';
+      // One rAF ensures the no-transition reset is painted before restore
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        progressBar.style.transition = '';
         showStep(0);
-      }, 80);
+      }));
     } else {
       showStep(current);
     }
   }
 
-  showStep(0);
-  setInterval(tick, 1500);
+  if (reduced) {
+    // Show all steps at once for reduced-motion users
+    steps.forEach(s => s.classList.add('amk-step-active'));
+    progressBar.style.width = '100%';
+  } else {
+    showStep(0);
+    setInterval(tick, STEP_MS);
+  }
 })();
