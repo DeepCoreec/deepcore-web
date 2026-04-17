@@ -2839,9 +2839,12 @@ footer {
 
 .wp-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
   margin-bottom: 48px;
+}
+@media (max-width: 1024px) {
+  .wp-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 .wp-card {
@@ -2988,10 +2991,17 @@ footer {
   padding: 4px 12px; border-radius: 100px; margin-bottom: 12px;
   letter-spacing: 0.5px; text-transform: uppercase;
 }
-.wp-badge-dark  { background: rgba(255,0,34,0.1);  color: var(--red);   border: 1px solid rgba(255,0,34,0.2); }
-.wp-badge-light { background: rgba(100,100,255,0.1); color: #818cf8; border: 1px solid rgba(100,100,255,0.2); }
-.wp-badge-bold  { background: rgba(255,214,10,0.1);  color: #FFD60A; border: 1px solid rgba(255,214,10,0.2); }
-.wp-badge-green { background: rgba(16,185,129,0.1);  color: #10B981; border: 1px solid rgba(16,185,129,0.2); }
+.wp-badge-dark    { background: rgba(255,0,34,0.1);    color: var(--red); border: 1px solid rgba(255,0,34,0.2); }
+.wp-badge-light   { background: rgba(100,100,255,0.1); color: #818cf8;  border: 1px solid rgba(100,100,255,0.2); }
+.wp-badge-bold    { background: rgba(255,214,10,0.1);  color: #FFD60A;  border: 1px solid rgba(255,214,10,0.2); }
+.wp-badge-green   { background: rgba(16,185,129,0.1);  color: #10B981;  border: 1px solid rgba(16,185,129,0.2); }
+/* New design system badges */
+.wp-badge-stripe  { background: rgba(99,91,255,0.12);  color: #635BFF;  border: 1px solid rgba(99,91,255,0.3); }
+.wp-badge-apple   { background: rgba(0,113,227,0.1);   color: #0071E3;  border: 1px solid rgba(0,113,227,0.25); }
+.wp-badge-spotify { background: rgba(29,185,84,0.12);  color: #1DB954;  border: 1px solid rgba(29,185,84,0.3); }
+.wp-badge-vercel  { background: rgba(255,255,255,0.07);color: #e5e5e5;  border: 1px solid rgba(255,255,255,0.18); }
+.wp-badge-figma   { background: rgba(124,58,237,0.12); color: #7C3AED;  border: 1px solid rgba(124,58,237,0.3); }
+.wp-badge-linear  { background: rgba(94,106,210,0.12); color: #5E6AD2;  border: 1px solid rgba(94,106,210,0.3); }
 
 .wp-info h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 8px; }
 .wp-info p  { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 14px; }
