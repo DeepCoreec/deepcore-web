@@ -3617,6 +3617,13 @@ footer {
   .anthropic-link, .anthropic-link:hover, .anthropic-link:active { transform: none; }
 }
 
+/* em naranja Claude solo en sección #activar-ia */
+.activar-ia-section .section-h em {
+  background: none;
+  -webkit-text-fill-color: #c96442;
+  color: #c96442;
+}
+
 /* =============================================
    #activar-ia — SVG Logo Background v4
    ============================================= */
