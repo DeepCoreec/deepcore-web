@@ -3618,139 +3618,21 @@ footer {
 }
 
 /* =============================================
-   #activar-ia — Claude/Anthropic Background v2
+   #activar-ia — Canvas Background v3
    ============================================= */
 
 .activar-ia-section {
   position: relative;
   overflow: hidden;
-  /* Radial gradient: warm dark centre → near-black edges */
-  background: radial-gradient(ellipse 80% 70% at 62% 50%, #1a0a00 0%, #0d0710 55%, #0a0a0f 100%);
+  background: #0a0a0f;
 }
 
-/* Grid lines — 60px, 3% opacity */
-.activar-ia-section::before {
-  content: '';
+#aia-canvas {
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(rgba(201, 100, 66, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 100, 66, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-/* Background container */
-.aia-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-/* Orange glow orb behind the main asterisk */
-.aia-glow {
-  position: absolute;
-  right: -60px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 560px;
-  height: 560px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 100, 66, 0.15) 0%, transparent 70%);
-  filter: blur(30px);
-}
-
-/* ── Main asterisk: 8 petals, 500px, opacity 0.06, right, 30s CW ── */
-.aia-star {
-  position: absolute;
-  right: -100px;
-  top: 50%;
-  width: 500px;
-  height: 500px;
-  opacity: 0.06;
-  animation: aia-spin 30s linear infinite;
-}
-
-/* ── Second asterisk: 200px, opacity 0.04, bottom-left, 20s CCW ── */
-.aia-star-2 {
-  position: absolute;
-  left: -50px;
-  bottom: -50px;
-  width: 200px;
-  height: 200px;
-  opacity: 0.04;
-  animation: aia-spin-rev 20s linear infinite;
-}
-
-@keyframes aia-spin {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to   { transform: translateY(-50%) rotate(360deg); }
-}
-
-@keyframes aia-spin-rev {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
-}
-
-/* Floating blurred particles — warm Claude palette */
-.aia-particle {
-  position: absolute;
-  border-radius: 50%;
-  animation: aia-float var(--aia-dur, 7s) ease-in-out infinite alternate;
-}
-
-.aia-p1 {
-  width: 130px; height: 130px;
-  top: 8%; left: 4%;
-  box-shadow: 0 0 70px 35px rgba(201, 100, 66, 0.09);
-  --aia-dur: 6s;
-}
-.aia-p2 {
-  width: 80px; height: 80px;
-  top: 62%; left: 10%;
-  box-shadow: 0 0 45px 22px rgba(180, 70, 30, 0.07);
-  --aia-dur: 8.5s;
-  animation-delay: -2s;
-}
-.aia-p3 {
-  width: 55px; height: 55px;
-  top: 28%; left: 32%;
-  box-shadow: 0 0 28px 14px rgba(201, 100, 66, 0.06);
-  --aia-dur: 7.2s;
-  animation-delay: -1s;
-}
-.aia-p4 {
-  width: 100px; height: 100px;
-  top: 78%; left: 58%;
-  box-shadow: 0 0 55px 28px rgba(190, 80, 40, 0.08);
-  --aia-dur: 9s;
-  animation-delay: -3.5s;
-}
-.aia-p5 {
-  width: 65px; height: 65px;
-  top: 12%; left: 70%;
-  box-shadow: 0 0 32px 16px rgba(201, 100, 66, 0.07);
-  --aia-dur: 6.8s;
-  animation-delay: -0.5s;
-}
-.aia-p6 {
-  width: 85px; height: 85px;
-  top: 48%; left: 86%;
-  box-shadow: 0 0 42px 21px rgba(160, 60, 20, 0.06);
-  --aia-dur: 10s;
-  animation-delay: -4s;
-}
-
-@keyframes aia-float {
-  from { transform: translateY(0) scale(1); }
-  to   { transform: translateY(-22px) scale(1.12); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .aia-star, .aia-star-2 { animation: none; transform: translateY(-50%); }
-  .aia-star-2            { transform: none; }
-  .aia-particle          { animation: none; }
+  display: block;
 }
