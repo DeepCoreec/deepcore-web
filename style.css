@@ -3618,21 +3618,69 @@ footer {
 }
 
 /* =============================================
-   #activar-ia — Canvas Background v3
+   #activar-ia — SVG Logo Background v4
    ============================================= */
 
 .activar-ia-section {
   position: relative;
   overflow: hidden;
-  background: #0a0a0f;
+  background-color: #0a0a0f;
+  background-image: radial-gradient(circle at 1px 1px, #ffffff07 1px, transparent 0);
+  background-size: 44px 44px;
 }
 
-#aia-canvas {
+/* Orange glow: right side */
+.aia-glow {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,100,66,0.094) 0%, transparent 70%);
   pointer-events: none;
-  display: block;
+  z-index: 0;
+}
+
+/* Base for all three logos */
+.aia-logo {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Logo principal — right, centred, 380px, 30s CW */
+.aia-l1 {
+  right: -90px;
+  top: 50%;
+  margin-top: -190px;
+  opacity: 0.10;
+  animation: aia-spin   30s linear infinite;
+  transform-origin: 190px 190px;
+}
+
+/* Logo secundario — bottom-left, 180px, 20s CCW */
+.aia-l2 {
+  left: -50px;
+  bottom: -50px;
+  opacity: 0.05;
+  animation: aia-spin-r 20s linear infinite;
+  transform-origin: 90px 90px;
+}
+
+/* Logo terciario — centre-top, 100px, 45s CW */
+.aia-l3 {
+  left: 38%;
+  top: -35px;
+  opacity: 0.04;
+  animation: aia-spin   45s linear infinite;
+  transform-origin: 50px 50px;
+}
+
+@keyframes aia-spin   { to { transform: rotate( 360deg); } }
+@keyframes aia-spin-r { to { transform: rotate(-360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .aia-l1, .aia-l2, .aia-l3 { animation: none; }
 }
