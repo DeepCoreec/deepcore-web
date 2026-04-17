@@ -3629,16 +3629,15 @@ footer {
   background-size: 44px 44px;
 }
 
-/* Orange glow: right side */
+/* Orange glow: anchored to heading area (not 50% of full section) */
 .aia-glow {
   position: absolute;
-  right: 8%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 420px;
-  height: 420px;
+  right: 5%;
+  top: -30px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,100,66,0.094) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(201,100,66,0.13) 0%, transparent 68%);
   pointer-events: none;
   z-index: 0;
 }
@@ -3650,26 +3649,25 @@ footer {
   z-index: 0;
 }
 
-/* Logo principal — right, centred, 380px, 30s CW */
+/* Logo principal — right, fixed to heading area */
 .aia-l1 {
   right: -90px;
-  top: 50%;
-  margin-top: -190px;
+  top: 10px;            /* visual centre ~200px from section top */
   opacity: 0.10;
   animation: aia-spin   30s linear infinite;
   transform-origin: 190px 190px;
 }
 
-/* Logo secundario — bottom-left, 180px, 20s CCW */
+/* Logo secundario — bottom-left of heading area */
 .aia-l2 {
   left: -50px;
-  bottom: -50px;
+  top: 220px;           /* lower-left of visible heading block */
   opacity: 0.05;
   animation: aia-spin-r 20s linear infinite;
   transform-origin: 90px 90px;
 }
 
-/* Logo terciario — centre-top, 100px, 45s CW */
+/* Logo terciario — top-centre, partially clipped */
 .aia-l3 {
   left: 38%;
   top: -35px;
