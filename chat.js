@@ -67,14 +67,41 @@ window.alissonVozActiva = localStorage.getItem('alissonVoz') !== 'off';
 async function hablarAlisson(texto) {
   if (!window.alissonVozActiva) return;
   window.speechSynthesis.cancel();
-  const SERVIDOR = 'https://alisson-voz-server-production.up.railway.app/tts';
+
+  // Nivel 1: Servidor local (voz real de tu novia)
   try {
-    const resp = await fetch(SERVIDOR, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({texto: texto}),
-      signal: AbortSignal.timeout(15000)
+    const ping = await fetch('http://localhost:8001/ping', {
+      signal: AbortSignal.timeout(800)
     });
+    if (ping.ok) {
+      const resp = await fetch('http://localhost:8001/tts', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({texto: texto}),
+        signal: AbortSignal.timeout(20000)
+      });
+      if (resp.ok) {
+        const blob = await resp.blob();
+        const url = URL.createObjectURL(blob);
+        const player = new Audio(url);
+        player.onended = () => URL.revokeObjectURL(url);
+        await player.play();
+        return;
+      }
+    }
+  } catch(e) {}
+
+  // Nivel 2: Railway (ElviraNeural siempre disponible)
+  try {
+    const resp = await fetch(
+      'https://alisson-voz-server-production.up.railway.app/tts',
+      {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({texto: texto}),
+        signal: AbortSignal.timeout(15000)
+      }
+    );
     if (resp.ok) {
       const blob = await resp.blob();
       const url = URL.createObjectURL(blob);
@@ -85,7 +112,7 @@ async function hablarAlisson(texto) {
     }
   } catch(e) {}
 
-  // Fallback Edge Neural TTS
+  // Nivel 3: Navegador local (fallback final)
   const u = new SpeechSynthesisUtterance(texto);
   u.lang = 'es-ES';
   u.rate = 0.92;
@@ -96,7 +123,6 @@ async function hablarAlisson(texto) {
     v => v.name.includes('Elvira'),
     v => v.name.includes('Neural') && v.lang.startsWith('es'),
     v => v.lang === 'es-ES',
-    v => v.lang.startsWith('es'),
   ];
   for (const fn of prioridad) {
     const voz = voces.find(fn);
@@ -104,6 +130,24 @@ async function hablarAlisson(texto) {
   }
   window.speechSynthesis.speak(u);
 }
+
+async function actualizarEstadoVoz() {
+  const btn = document.getElementById('btn-toggle-voz');
+  if (!btn) return;
+  try {
+    const r = await fetch('http://localhost:8001/ping', {
+      signal: AbortSignal.timeout(800)
+    });
+    if (r.ok) {
+      btn.title = 'Voz clonada de Alisson (PC local)';
+      btn.style.color = '#00ff88';
+      return;
+    }
+  } catch(e) {}
+  btn.title = 'ElviraNeural (Railway)';
+  btn.style.color = '#e94560';
+}
+setTimeout(actualizarEstadoVoz, 1500);
 
 function toggleVozAlisson() {
   window.alissonVozActiva = !window.alissonVozActiva;
