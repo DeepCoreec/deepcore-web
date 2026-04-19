@@ -61,6 +61,38 @@ Respuestas cortas, máximo 5 líneas. Usa emojis ocasionalmente.`;
 // Historial de conversación para contexto
 let conversationHistory = [];
 
+// ── VOZ ALISSON ──
+window.alissonVozActiva = localStorage.getItem('alissonVoz') !== 'off';
+
+function hablarAlisson(texto) {
+  if (!window.alissonVozActiva) return;
+  if (!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(texto);
+  utterance.lang = 'es-ES';
+  utterance.rate = 1.0;
+  const setVoz = () => {
+    const voces = speechSynthesis.getVoices();
+    const vozES = voces.find(v => v.lang.startsWith('es'));
+    if (vozES) utterance.voice = vozES;
+    speechSynthesis.speak(utterance);
+  };
+  if (speechSynthesis.getVoices().length) setVoz();
+  else speechSynthesis.addEventListener('voiceschanged', setVoz, { once: true });
+}
+
+function toggleVozAlisson() {
+  window.alissonVozActiva = !window.alissonVozActiva;
+  localStorage.setItem('alissonVoz', window.alissonVozActiva ? 'on' : 'off');
+  const tog = document.getElementById('toggle-voz');
+  if (tog) {
+    tog.textContent = window.alissonVozActiva ? '🔊 Voz: ON' : '🔇 Voz: OFF';
+    tog.style.color = window.alissonVozActiva ? '#e94560' : '#888';
+  }
+  const btn = document.getElementById('dcVozBtn');
+  if (btn) btn.style.opacity = window.alissonVozActiva ? '1' : '0.4';
+}
+
 // ── BASE DE CONOCIMIENTO ──
 const DC_KB = [
   {
@@ -451,6 +483,8 @@ function buildWidget() {
           <span class="dc-header-name"><b>Deep</b><span style="color:#FF0022">Core</span> · Alisson IA</span>
           <span class="dc-header-status"><span class="dc-online-dot"></span> En línea · Respuesta inmediata</span>
         </div>
+        <div id="toggle-voz" onclick="toggleVozAlisson()"
+          style="cursor:pointer;font-size:13px;color:#e94560;user-select:none;padding:4px 8px;white-space:nowrap">🔊 Voz: ON</div>
         <button class="dc-close-btn" onclick="toggleChat()">
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -471,6 +505,11 @@ function buildWidget() {
       </div>
     </div>`;
   document.body.appendChild(widget);
+  const tog = document.getElementById('toggle-voz');
+  if (tog) {
+    tog.textContent = window.alissonVozActiva ? '🔊 Voz: ON' : '🔇 Voz: OFF';
+    tog.style.color = window.alissonVozActiva ? '#e94560' : '#888';
+  }
 }
 
 let chatOpen = false, firstOpen = true;
@@ -531,6 +570,8 @@ function addBotMessage(text, options = []) {
     removeTyping();
     appendBotBubble(text);
     if (options.length) showOptions(options);
+    const plainText = text.replace(/\*\*(.*?)\*\*/g, '$1').replace(/\n/g, ' ').replace(/[•→✅🔧💻📦🎮📺🖥️⏱️💰🔩🟢🟡🔴]/g, '').trim();
+    hablarAlisson(plainText);
   }, delay);
 }
 
@@ -674,6 +715,7 @@ async function askClaude(text) {
     document.getElementById('dcMessages').appendChild(msg);
     scrollBottom();
     showOptions(['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
+    hablarAlisson(reply.replace(/\n/g, ' ').trim());
   } catch (e) {
     removeTyping();
     addBotMessage(DC_FALLBACKS[Math.floor(Math.random() * DC_FALLBACKS.length)], ['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
