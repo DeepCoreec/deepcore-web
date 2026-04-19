@@ -64,21 +64,45 @@ let conversationHistory = [];
 // ── VOZ ALISSON ──
 window.alissonVozActiva = localStorage.getItem('alissonVoz') !== 'off';
 
-function hablarAlisson(texto) {
+async function hablarAlisson(texto) {
   if (!window.alissonVozActiva) return;
-  if (!window.speechSynthesis) return;
-  speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(texto);
-  utterance.lang = 'es-ES';
-  utterance.rate = 1.0;
-  const setVoz = () => {
-    const voces = speechSynthesis.getVoices();
-    const vozES = voces.find(v => v.lang.startsWith('es'));
-    if (vozES) utterance.voice = vozES;
-    speechSynthesis.speak(utterance);
-  };
-  if (speechSynthesis.getVoices().length) setVoz();
-  else speechSynthesis.addEventListener('voiceschanged', setVoz, { once: true });
+  window.speechSynthesis.cancel();
+  const SERVIDOR = 'https://alisson-voz-server-production.up.railway.app/tts';
+  try {
+    const resp = await fetch(SERVIDOR, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({texto: texto}),
+      signal: AbortSignal.timeout(15000)
+    });
+    if (resp.ok) {
+      const blob = await resp.blob();
+      const url = URL.createObjectURL(blob);
+      const player = new Audio(url);
+      player.onended = () => URL.revokeObjectURL(url);
+      await player.play();
+      return;
+    }
+  } catch(e) {}
+
+  // Fallback Edge Neural TTS
+  const u = new SpeechSynthesisUtterance(texto);
+  u.lang = 'es-ES';
+  u.rate = 0.92;
+  u.pitch = 1.05;
+  const voces = window.speechSynthesis.getVoices();
+  const prioridad = [
+    v => v.name.includes('Monica'),
+    v => v.name.includes('Elvira'),
+    v => v.name.includes('Neural') && v.lang.startsWith('es'),
+    v => v.lang === 'es-ES',
+    v => v.lang.startsWith('es'),
+  ];
+  for (const fn of prioridad) {
+    const voz = voces.find(fn);
+    if (voz) { u.voice = voz; break; }
+  }
+  window.speechSynthesis.speak(u);
 }
 
 function toggleVozAlisson() {
