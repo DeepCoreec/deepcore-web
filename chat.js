@@ -99,7 +99,7 @@ async function hablarAlisson(texto) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({texto: texto}),
-        signal: AbortSignal.timeout(15000)
+        signal: AbortSignal.timeout(30000)
       }
     );
     if (resp.ok) {
