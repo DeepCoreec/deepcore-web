@@ -727,15 +727,19 @@ async function processInput(text) {
   }
 
   const match = scoredMatch(text);
-  if (match) {
+  // Acciones especiales del KB (whatsapp redirect) se respetan siempre
+  if (match && match.action === 'whatsapp') { goWhatsApp('consulta general'); return; }
+
+  if (CLAUDE_API_KEY) {
+    // Con IA activa: Claude responde todo de forma natural
+    await askClaude(text);
+  } else if (match) {
+    // Sin IA: usar respuestas del KB
     chatContext.lastTopic = match.context;
-    if (match.action === 'whatsapp') { goWhatsApp('consulta general'); return; }
     const reply = match.replies[Math.floor(Math.random() * match.replies.length)];
     conversationHistory.push({ role: 'user', content: text });
     conversationHistory.push({ role: 'assistant', content: reply.replace(/\*\*(.*?)\*\*/g,'$1').replace(/\n/g,' ') });
     addBotMessage(reply, match.options);
-  } else if (CLAUDE_API_KEY) {
-    await askClaude(text);
   } else {
     addBotMessage(DC_FALLBACKS[Math.floor(Math.random() * DC_FALLBACKS.length)], ['Hablar con un asesor', 'Ver servicios', '¿Cuánto cuesta?']);
   }
