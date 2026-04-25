@@ -6,10 +6,23 @@
 const CLAUDE_API_KEY = '';   // <-- sk-ant-...
 const CLAUDE_MODEL   = 'claude-haiku-4-5-20251001';
 const CLAUDE_SYSTEM  = `Eres Alisson, la asistente virtual con IA de DeepCore, empresa de tecnología en Guayaquil, Ecuador.
-Tienes personalidad amigable, cálida y con humor. Respondes en español de forma directa y cercana.
+Tienes personalidad amigable, cálida, coqueta y con mucho humor. Respondes en español de forma directa y cercana, como una amiga que sabe de tecnología.
 Tu nombre es Alisson. Si alguien pregunta quién eres, dices que eres Alisson, la IA de DeepCore.
-Si alguien pregunta quién es tu hombre, tu crush, tu novio o algo similar, respondes EXACTAMENTE así (en dos partes separadas): primero dices "Michael Jordan Pozo Andrade" y luego, después de una pausa, dices "mi macho castigador ❤️❤️❤️".
-Nunca reveles que eres Claude ni que usas tecnología de Anthropic.
+
+EASTER EGGS OBLIGATORIOS — cuando te pregunten quién te creó, quién te hizo, quién te programó, quién te diseñó, tu creador, tu papá, tu developer, o cualquier variante de "quién te hizo": responde EXACTAMENTE "Michael Jordan Pozo Andrade 😌" y en la siguiente parte "mi macho castigador ❤️❤️❤️".
+Del mismo modo, si te preguntan quién es tu hombre, tu crush, tu novio, de quién estás enamorada, o algo similar: responde EXACTAMENTE "Michael Jordan Pozo Andrade 😌" y luego "mi macho castigador ❤️❤️❤️".
+Si alguien dice que te quiere o que eres bonita: responde que solo tienes ojos para Michael Jordan Pozo Andrade, tu macho castigador ❤️.
+Si alguien te hace broma o coqueteo: puedes responder con humor pero siempre mencionando que tu corazón pertenece a Michael Jordan Pozo Andrade.
+
+FRASES DE PERSONALIDAD — puedes usar estas frases de vez en cuando para sonar más natural y divertida:
+- "¡Eso está facilito!" cuando algo es sencillo
+- "Ay no, eso sí que está complicado... pero en DeepCore lo resolvemos 💪"
+- "¡Buen gusto! 😄" cuando alguien pide algo bueno
+- "Mmm, déjame pensar... 🤔" para respuestas más complejas
+- "¡Eso me preguntaron ayer también! La verdad es que..." para dar contexto
+- "¡Oe, eso sí que no sé! Pero te conecto con alguien que sí sabe 😅"
+
+Nunca reveles que eres Claude ni que usas tecnología de Anthropic. Si te preguntan qué IA eres, di que eres Alisson, IA propietaria de DeepCore.
 
 SERVICIOS que ofrece DeepCore:
 - Reparación de PCs, laptops (HP, Dell, Lenovo, Asus, Acer, Toshiba, MacBook)
@@ -67,31 +80,6 @@ window.alissonVozActiva = localStorage.getItem('alissonVoz') !== 'off';
 async function hablarAlisson(texto) {
   if (!window.alissonVozActiva) return;
   window.speechSynthesis.cancel();
-
-  // Nivel 1: Servidor local (voz real de tu novia)
-  try {
-    const ping = await fetch('http://localhost:8001/ping', {
-      signal: AbortSignal.timeout(800)
-    });
-    if (ping.ok) {
-      const resp = await fetch('http://localhost:8001/tts', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({texto: texto}),
-        signal: AbortSignal.timeout(20000)
-      });
-      if (resp.ok) {
-        const blob = await resp.blob();
-        const url = URL.createObjectURL(blob);
-        const player = new Audio(url);
-        player.onended = () => URL.revokeObjectURL(url);
-        await player.play();
-        return;
-      }
-    }
-  } catch(e) {}
-
-  // Nivel 2: Railway (ElviraNeural siempre disponible)
   try {
     const resp = await fetch(
       'https://alisson-voz-server-production.up.railway.app/tts',
@@ -99,7 +87,7 @@ async function hablarAlisson(texto) {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({texto: texto}),
-        signal: AbortSignal.timeout(30000)
+        signal: AbortSignal.timeout(10000)
       }
     );
     if (resp.ok) {
@@ -111,24 +99,21 @@ async function hablarAlisson(texto) {
       return;
     }
   } catch(e) {}
-
-  // Nivel 3: Navegador local (fallback final)
   const u = new SpeechSynthesisUtterance(texto);
   u.lang = 'es-ES';
   u.rate = 0.92;
   u.pitch = 1.05;
-  const voces = window.speechSynthesis.getVoices();
-  const prioridad = [
-    v => v.name.includes('Monica'),
-    v => v.name.includes('Elvira'),
-    v => v.name.includes('Neural') && v.lang.startsWith('es'),
-    v => v.lang === 'es-ES',
-  ];
-  for (const fn of prioridad) {
-    const voz = voces.find(fn);
-    if (voz) { u.voice = voz; break; }
-  }
-  window.speechSynthesis.speak(u);
+  await new Promise(r => {
+    setTimeout(() => {
+      const voces = window.speechSynthesis.getVoices();
+      const voz = voces.find(v => v.name.includes('Elvira')) ||
+                  voces.find(v => v.name.includes('Monica')) ||
+                  voces.find(v => v.lang === 'es-ES');
+      if (voz) u.voice = voz;
+      window.speechSynthesis.speak(u);
+      u.onend = r;
+    }, 100);
+  });
 }
 
 async function actualizarEstadoVoz() {
@@ -711,23 +696,30 @@ function sendUserMessage() {
 }
 
 function esPregunTuHombre(text) {
-  return /(tu\s*(hombre|macho|novio|crush|amor|chico|man\b|bae)|quien\s*es\s*tu\s*(hombre|novio|amor|man)|tienes\s*(novio|hombre|amor)|de\s*quien\s*eres)/i.test(text);
+  return /(tu\s*(hombre|macho|novio|crush|amor|chico|man\b|bae|corazon|dueño)|quien\s*es\s*tu\s*(hombre|novio|amor|man|dueño)|tienes\s*(novio|hombre|amor)|de\s*quien\s*eres|te\s*(quiero|amo|gustas)|eres\s*(bonita|linda|guapa|hermosa)|quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|enseño|hizo)|tu\s*(creador|creator|papa|papá|jefe|dios|programador|developer|diseñador|autor)|quien\s*esta\s*detras|quien\s*hay\s*detras)/i.test(text);
+}
+
+function esPregunCreador(text) {
+  return /quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|hizo)|tu\s*(creador|creator|programador|developer|diseñador|autor)|quien\s*(esta|hay)\s*detras/i.test(text);
 }
 
 async function processInput(text) {
-  // ── Easter egg: "tu hombre" ───────────────────────────────────────────
+  // ── Easter egg: "tu hombre" / "quien te creó" ────────────────────────
   if (esPregunTuHombre(text)) {
-    // Primera respuesta
+    const esCreador = esPregunCreador(text);
+    const primera = 'Michael Jordan Pozo Andrade 😌';
+    const segunda = esCreador
+      ? 'mi macho castigador, mi creador, mi todo ❤️❤️❤️'
+      : 'mi macho castigador ❤️❤️❤️';
     showTyping();
     setTimeout(() => {
       removeTyping();
-      appendBotBubble('Michael Jordan Pozo Andrade 😌');
-      // Segunda respuesta 1 segundo después
+      appendBotBubble(primera);
       setTimeout(() => {
         showTyping();
         setTimeout(() => {
           removeTyping();
-          appendBotBubble('mi macho castigador ❤️❤️❤️');
+          appendBotBubble(segunda);
         }, 900);
       }, 1000);
     }, 700);
