@@ -701,6 +701,11 @@ async function processInput(text) {
     };
     const opciones = respuestas[tipo];
     const [primera, segunda] = opciones[Math.floor(Math.random() * opciones.length)];
+    // Guardar en historial para que Claude tenga contexto si el usuario sigue el coqueteo
+    conversationHistory.push({ role: 'user', content: text });
+    conversationHistory.push({ role: 'assistant', content: `${primera} ${segunda}` });
+    if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
+
     showTyping();
     setTimeout(() => {
       removeTyping();
