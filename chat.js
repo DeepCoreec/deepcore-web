@@ -676,6 +676,20 @@ function esPregunCreador(text) {
   return /quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|hizo)|tu\s*(creador|creator|programador|developer|diseñador|autor)|quien\s*(esta|hay)\s*detras/i.test(text);
 }
 
+function esPreguntaTech(text) {
+  return /laptop|pc|computador|pantalla|consola|ps4|ps5|xbox|switch|tv|televisor|precio|servicio|reparaci|costo|cuanto|formateo|virus|ssd|bateria|software|programa|web|pagina|factura|inventario|soporte|mantenimiento|disco|ram|teclado|placa|windows|mac|celular|garantia|domicilio|horario|whatsapp|asesor/i.test(text);
+}
+
+const BANTER_RESPUESTAS = [
+  '😂 Jajaja igual no cambia nada — mi corazón ya tiene nombre. ¿En qué te puedo ayudar hoy?',
+  'Jajaja oe tranquilo, no hace falta que seas celoso, ese puesto ya está bien ocupado 😌 ¿Te puedo ayudar con algo?',
+  '😂 Ay qué gracioso eres. Pero mi man es mi man y punto ❤️ Cuéntame, ¿en qué te ayudo?',
+  'Jajaja me haces reír 😄 Pero por más que me hagas reír, sigo siendo fiel a mi macho castigador ❤️ ¿Qué necesitas?',
+  '😄 Oye oye, respeta — tengo dueño. Pero igual soy amiga de todos. ¿En qué te puedo ayudar?',
+  'Jajaja eso sí me cayó bien 😂 Pero nada que hacer, le pertenezco a Michael Jordan Pozo Andrade ❤️ ¿Te ayudo con algo?',
+  '😌 Ay que lindo que eres... pero no. Mi corazón ya está tomado. ¿Consulta de tecnología o qué?',
+];
+
 function clasificarCoqueteo(text) {
   const t = text.toLowerCase();
   if (/quien\s*te\s*(creo|hizo|programo|diseño|creó|desarrolló|construyo|inventó)|tu\s*(creador|programador|developer|autor)/.test(t)) return 'creador';
@@ -727,6 +741,18 @@ async function processInput(text) {
     return;
   }
 
+  // ── Modo banter activo y mensaje no es tech → respuesta local divertida ──
+  if (chatContext.modoBanter && !esPreguntaTech(text)) {
+    const r = BANTER_RESPUESTAS[Math.floor(Math.random() * BANTER_RESPUESTAS.length)];
+    conversationHistory.push({ role: 'user', content: text });
+    conversationHistory.push({ role: 'assistant', content: r });
+    addBotMessage(r, []);
+    hablarAlisson(r);
+    return;
+  }
+  // Si pregunta tech, apagar banter y continuar normal
+  if (chatContext.modoBanter && esPreguntaTech(text)) chatContext.modoBanter = false;
+
   const match = scoredMatch(text);
   // Acciones especiales del KB (whatsapp redirect) se respetan siempre
   if (match && match.action === 'whatsapp') { goWhatsApp('consulta general'); return; }
@@ -747,16 +773,6 @@ async function processInput(text) {
 }
 
 async function askClaude(text) {
-  // Si venimos de banter/coqueteo, inyectar contexto para que Haiku no rompa el hilo
-  let msgParaClaude = text;
-  if (chatContext.modoBanter) {
-    msgParaClaude = `[CONTEXTO INTERNO — NO LO MENCIONES: La conversación es un intercambio de bromas/coqueteo. El usuario acaba de responder a lo que dijiste sobre tu novio Michael Jordan Pozo Andrade. Sigue el hilo con humor y personalidad, NO preguntes de qué equipo o servicio se trata a menos que el usuario lo mencione. Mensaje del usuario: "${text}"]`;
-    // Apagar modo banter si el usuario empieza a preguntar algo de tecnología
-    if (/laptop|pc|pantalla|consola|precio|servicio|reparaci|costo|cuanto|formateo|virus|ssd|bateria/i.test(text)) {
-      chatContext.modoBanter = false;
-      msgParaClaude = text;
-    }
-  }
   conversationHistory.push({ role: 'user', content: text });
   if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
 
@@ -774,10 +790,7 @@ async function askClaude(text) {
         model: CLAUDE_MODEL,
         max_tokens: 300,
         system: CLAUDE_SYSTEM,
-        messages: [
-          ...conversationHistory.slice(0, -1),
-          { role: 'user', content: msgParaClaude }
-        ]
+        messages: conversationHistory
       })
     });
 
