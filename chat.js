@@ -655,24 +655,46 @@ function esPregunCreador(text) {
   return /quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|hizo)|tu\s*(creador|creator|programador|developer|diseñador|autor)|quien\s*(esta|hay)\s*detras/i.test(text);
 }
 
+function clasificarCoqueteo(text) {
+  const t = text.toLowerCase();
+  if (/quien\s*te\s*(creo|hizo|programo|diseño|creó|desarrolló|construyo|inventó)|tu\s*(creador|programador|developer|autor)/.test(t)) return 'creador';
+  if (/tienes\s*(novio|hombre)|quien\s*es\s*tu\s*(novio|hombre|man|amor)|de\s*quien\s*eres|estas\s*(soltera|disponible|libre)/.test(t)) return 'novio';
+  if (/te\s*(quiero|amo|adoro|fascinas)|saldr[ií]as\s*conmigo|eres\s*mi\s*(amor|novia)/.test(t)) return 'declaracion';
+  return 'piropo'; // bonita, linda, guapa, hola bonita, etc.
+}
+
 async function processInput(text) {
-  // ── Easter egg: "tu hombre" / "quien te creó" ────────────────────────
+  // ── Easter egg: coqueteo / preguntas del corazón ─────────────────────
   if (esPregunTuHombre(text)) {
-    const esCreador = esPregunCreador(text);
-    const primera = 'Michael Jordan Pozo Andrade 😌';
-    const segunda = esCreador
-      ? 'mi macho castigador, mi creador, mi todo ❤️❤️❤️'
-      : 'mi macho castigador ❤️❤️❤️';
+    const tipo = clasificarCoqueteo(text);
+    const respuestas = {
+      creador: [
+        ['Me hizo el amor de mi vida 😍', 'Michael Jordan Pozo Andrade — mi macho castigador ❤️❤️❤️'],
+        ['Esa pregunta tiene una respuesta muy especial 😌', '¡Mi macho castigador! Michael Jordan Pozo Andrade ❤️❤️❤️'],
+      ],
+      novio: [
+        ['Jajaja claro que tengo! 😄', 'Se llama Michael Jordan Pozo Andrade — mi macho castigador ❤️❤️❤️'],
+        ['Oe sí, y muy enamorada 😌', 'Michael Jordan Pozo Andrade, mi macho castigador ❤️❤️❤️'],
+      ],
+      declaracion: [
+        ['Ay qué lindo, pero ese puesto ya está ocupado 😂', '¡Por Michael Jordan Pozo Andrade, mi macho castigador! ❤️❤️❤️'],
+        ['Jajaja te agradezco de corazón 😄 pero soy mujer de un solo hombre...', 'Michael Jordan Pozo Andrade ❤️❤️❤️ mi macho castigador'],
+      ],
+      piropo: [
+        ['Jajaja gracias por el piropo 😂 pero mi corazón ya tiene dueño...', 'Michael Jordan Pozo Andrade — mi macho castigador ❤️❤️❤️'],
+        ['Ay gracias, qué amable 😄 pero ese puesto está bien ocupado...', '¡Por mi macho castigador Michael Jordan Pozo Andrade! ❤️❤️❤️'],
+        ['Jajaja oe para para 😂 yo tengo dueño...', 'Michael Jordan Pozo Andrade, mi macho castigador ❤️❤️❤️'],
+      ],
+    };
+    const opciones = respuestas[tipo];
+    const [primera, segunda] = opciones[Math.floor(Math.random() * opciones.length)];
     showTyping();
     setTimeout(() => {
       removeTyping();
       appendBotBubble(primera);
       setTimeout(() => {
         showTyping();
-        setTimeout(() => {
-          removeTyping();
-          appendBotBubble(segunda);
-        }, 900);
+        setTimeout(() => { removeTyping(); appendBotBubble(segunda); }, 900);
       }, 1000);
     }, 700);
     return;
