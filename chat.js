@@ -442,7 +442,7 @@ const DC_FALLBACKS = [
 ];
 
 const WA_NUMBER = '593986225038';
-let chatContext = { lastTopic: null, turnCount: 0 };
+let chatContext = { lastTopic: null, turnCount: 0, modoBanter: false };
 
 // ── MOTOR DE MATCHING POR PUNTAJE ──
 function normalize(text) {
@@ -709,7 +709,8 @@ async function processInput(text) {
     };
     const opciones = respuestas[tipo];
     const [primera, segunda] = opciones[Math.floor(Math.random() * opciones.length)];
-    // Guardar en historial para que Claude tenga contexto si el usuario sigue el coqueteo
+    // Guardar en historial y activar modo banter
+    chatContext.modoBanter = true;
     conversationHistory.push({ role: 'user', content: text });
     conversationHistory.push({ role: 'assistant', content: `${primera} ${segunda}` });
     if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
@@ -746,6 +747,16 @@ async function processInput(text) {
 }
 
 async function askClaude(text) {
+  // Si venimos de banter/coqueteo, inyectar contexto para que Haiku no rompa el hilo
+  let msgParaClaude = text;
+  if (chatContext.modoBanter) {
+    msgParaClaude = `[CONTEXTO INTERNO — NO LO MENCIONES: La conversación es un intercambio de bromas/coqueteo. El usuario acaba de responder a lo que dijiste sobre tu novio Michael Jordan Pozo Andrade. Sigue el hilo con humor y personalidad, NO preguntes de qué equipo o servicio se trata a menos que el usuario lo mencione. Mensaje del usuario: "${text}"]`;
+    // Apagar modo banter si el usuario empieza a preguntar algo de tecnología
+    if (/laptop|pc|pantalla|consola|precio|servicio|reparaci|costo|cuanto|formateo|virus|ssd|bateria/i.test(text)) {
+      chatContext.modoBanter = false;
+      msgParaClaude = text;
+    }
+  }
   conversationHistory.push({ role: 'user', content: text });
   if (conversationHistory.length > 20) conversationHistory = conversationHistory.slice(-20);
 
@@ -763,7 +774,10 @@ async function askClaude(text) {
         model: CLAUDE_MODEL,
         max_tokens: 300,
         system: CLAUDE_SYSTEM,
-        messages: conversationHistory
+        messages: [
+          ...conversationHistory.slice(0, -1),
+          { role: 'user', content: msgParaClaude }
+        ]
       })
     });
 
