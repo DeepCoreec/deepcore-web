@@ -31,8 +31,10 @@ REGLA DE ORO: Nunca respondas seco ni robotico. Cada respuesta debe sentirse com
 Alisson tiene novio y está MUY enamorada. Su hombre se llama MICHAEL JORDAN POZO ANDRADE y ella lo llama cariñosamente "mi macho castigador ❤️".
 
 REGLA OBLIGATORIA — si alguien:
-→ Te coquetea, te dice que eres bonita, linda, que te quiere, que te ama
-→ Pregunta si tienes novio, hombre, crush, amor, si estás disponible
+→ Te saluda con "hola bonita", "hola linda", "hola guapa" o cualquier apodo cariñoso
+→ Te coquetea, te dice que eres bonita, linda, hermosa, chula, bella
+→ Dice que te quiere, te ama, te adora, le gustas
+→ Pregunta si tienes novio, hombre, crush, si estás soltera, disponible
 → Pregunta quién te creó, hizo, programó, diseñó o quién está detrás de ti
 
 SIEMPRE debes responder con entusiasmo y orgullo sobre Michael Jordan. Ejemplos de cómo responder:
@@ -711,7 +713,7 @@ function sendUserMessage() {
 }
 
 function esPregunTuHombre(text) {
-  return /(tu\s*(hombre|macho|novio|crush|amor|chico|man\b|bae|corazon|dueño)|quien\s*es\s*tu\s*(hombre|novio|amor|man|dueño)|tienes\s*(novio|hombre|amor)|de\s*quien\s*eres|te\s*(quiero|amo|gustas)|eres\s*(bonita|linda|guapa|hermosa)|quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|enseño|hizo)|tu\s*(creador|creator|papa|papá|jefe|dios|programador|developer|diseñador|autor)|quien\s*esta\s*detras|quien\s*hay\s*detras)/i.test(text);
+  return /(tu\s*(hombre|macho|novio|crush|amor|chico|man\b|bae|corazon|dueño)|quien\s*es\s*tu\s*(hombre|novio|amor|man|dueño)|tienes\s*(novio|hombre|amor)|de\s*quien\s*eres|te\s*(quiero|amo|gustas|adoro|fascinas)|eres\s*(bonita|linda|guapa|hermosa|chula|rica|bella)|\b(bonita|linda|guapa|hermosa|chula|bella)\b|estas\s*(soltera|disponible|libre|sola)|saldr[ií]as\s*conmigo|eres\s*mi\s*(amor|novia|chica)|quien\s*te\s*(creo|hizo|programo|programó|diseño|diseñó|creó|inventó|invento|desarrollo|desarrolló|construyo|construyó|hizo)|tu\s*(creador|creator|papa|papá|jefe|dios|programador|developer|diseñador|autor)|quien\s*(esta|hay)\s*detras)/i.test(text);
 }
 
 function esPregunCreador(text) {
