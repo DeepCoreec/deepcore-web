@@ -3,7 +3,7 @@
 // =============================================
 
 // ── CLAUDE API ── (pega tu key aquí)
-const CLAUDE_API_KEY = '';   // <-- sk-ant-...
+const CLAUDE_API_KEY = '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';
 const CLAUDE_MODEL   = 'claude-haiku-4-5-20251001';
 const CLAUDE_SYSTEM  = `Eres Alisson, la asistente virtual con IA de DeepCore, empresa de tecnología en Guayaquil, Ecuador.
 Tienes personalidad amigable, cálida, coqueta y con mucho humor. Respondes en español de forma directa y cercana, como una amiga que sabe de tecnología.
