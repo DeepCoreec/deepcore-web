@@ -403,3 +403,105 @@
   margin-bottom: 16px;
   box-shadow: 0 0 10px rgba(255,0,34,0.5);
 }
+
+/* ═══════════════════════════════════════
+   3D HERO GRID FLOOR — piso perspectiva
+═══════════════════════════════════════ */
+.hero { overflow: hidden; }
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -30%;
+  right: -30%;
+  height: 260px;
+  background-image:
+    linear-gradient(rgba(255, 0, 34, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 34, 0.09) 1px, transparent 1px);
+  background-size: 52px 52px;
+  transform: perspective(480px) rotateX(68deg);
+  transform-origin: bottom center;
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════
+   3D CARDS — glare + tilt prep
+═══════════════════════════════════════ */
+.svc-card,
+.prod-card,
+.pricing-card,
+.app-tile {
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glare spot que sigue el mouse (usa CSS vars --gx --gy del JS) */
+.svc-card::before,
+.prod-card::before,
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--gx, 50%) var(--gy, 50%),
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+.svc-card:hover::before,
+.prod-card:hover::before,
+.pricing-card:hover::before {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════
+   FLOATING RING — elemento 3D en hero
+═══════════════════════════════════════ */
+@keyframes ring-spin {
+  0%   { transform: perspective(600px) rotateX(72deg) rotateZ(0deg); }
+  100% { transform: perspective(600px) rotateX(72deg) rotateZ(360deg); }
+}
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.18; }
+  50%       { opacity: 0.32; }
+}
+
+.hero-ring {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  margin-top: -160px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 0, 34, 0.35);
+  box-shadow:
+    0 0 30px rgba(255, 0, 34, 0.15),
+    inset 0 0 30px rgba(255, 0, 34, 0.05);
+  animation: ring-spin 18s linear infinite, ring-pulse 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-ring::after {
+  content: '';
+  position: absolute;
+  inset: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 0, 34, 0.15);
+  animation: ring-spin 10s linear infinite reverse;
+}
+
+/* Ocultar en mobile */
+@media (max-width: 900px) {
+  .hero-ring { display: none; }
+  .hero::before { height: 160px; }
+}
