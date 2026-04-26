@@ -77,7 +77,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700;900&family=Syne:wght@700;800;900&family=Inter:wght@200;300;400;500&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <!-- Security headers via meta -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <!-- Security headers via meta -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="X-Frame-Options" content="DENY" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
@@ -85,7 +86,7 @@
   <link rel="stylesheet" href="style.css?v=15" />
   <link rel="stylesheet" href="chat.css" />
   <link rel="stylesheet" href="tecnico.css" />
-  <link rel="stylesheet" href="enhancements.css?v=1" />
+  <link rel="stylesheet" href="enhancements.css?v=2" />
 </head>
 <body>
 
@@ -161,6 +162,33 @@
     <div class="hero-orb hero-orb-2"></div>
     <div class="hero-orb hero-orb-3"></div>
     <div class="hero-ring"></div>
+
+    <!-- Floating data chip (desktop only) -->
+    <div class="hero-data-chip">
+      <div class="hdc-card">
+        <div class="hdc-title">Sistema en vivo</div>
+        <div class="hdc-stat">
+          <span class="hdc-label">Clientes activos</span>
+          <span class="hdc-value green" data-count="30" data-suffix="+">0+</span>
+        </div>
+        <div class="hdc-stat">
+          <span class="hdc-label">Programas</span>
+          <span class="hdc-value blue" data-count="8" data-suffix="">0</span>
+        </div>
+        <div class="hdc-stat">
+          <span class="hdc-label">Uptime</span>
+          <span class="hdc-value green">99.9%</span>
+        </div>
+        <div class="hdc-stat">
+          <span class="hdc-label">Plan base</span>
+          <span class="hdc-value red">$5/mes</span>
+        </div>
+        <div class="hdc-badge">
+          <span class="hdc-dot-live"></span>
+          Servidor operativo
+        </div>
+      </div>
+    </div>
 
     <div class="hero-inner">
       <div class="hero-pill">
@@ -2439,6 +2467,7 @@ saludar(usuario)</pre>
   </button>
 
   <script src="script.js"></script>
+  <script src="scene3d.js"></script>
   <script src="animations3d.js"></script>
   <script src="chat.js?v=3"></script>
   <script src="tecnico.js"></script>

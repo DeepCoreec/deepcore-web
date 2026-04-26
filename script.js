@@ -43,16 +43,18 @@ document.querySelectorAll('a, button, .svc-card, .prod-card, .cinfo').forEach(el
 });
 
 // ── CANVAS HERO — Red neuronal avanzada ──
+// Three.js (scene3d.js) takes over when available — 2D canvas is fallback
 const canvas = document.getElementById('heroCanvas');
-const ctx = canvas.getContext('2d');
+const ctx = typeof THREE === 'undefined' ? canvas.getContext('2d') : null;
 let W, H, nodes = [], pulses = [];
 
 function resizeCanvas() {
+  if (!ctx) return;
   W = canvas.width  = window.innerWidth;
   H = canvas.height = window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener('resize', () => { resizeCanvas(); initNodes(); });
+window.addEventListener('resize', () => { resizeCanvas(); if (ctx) initNodes(); });
 
 // Paleta: rojo profundo + blanco tenue — sobre fondo negro DeepCore
 const C_NODE      = [255, 0, 34];
@@ -144,6 +146,7 @@ class DataPulse {
 }
 
 function initNodes() {
+  if (!ctx) return;
   const count = Math.min(Math.floor((W * H) / 11000), 150);
   nodes = Array.from({ length: count }, () => new Node());
   pulses = [];
@@ -152,7 +155,7 @@ initNodes();
 
 // Generar pulsos periódicamente
 setInterval(() => {
-  if (pulses.length > 25) return;
+  if (!ctx || pulses.length > 25) return;
   const maxDist = 200;
   const a = nodes[Math.floor(Math.random() * nodes.length)];
   const candidates = nodes.filter(b => b !== a && Math.hypot(a.x-b.x, a.y-b.y) < maxDist);
@@ -163,6 +166,7 @@ setInterval(() => {
 }, 180);
 
 function animCanvas() {
+  if (!ctx) return;
   // Fade trail — fondo con alpha bajo para efecto de estela
   ctx.fillStyle = 'rgba(5,5,8,0.18)';
   ctx.fillRect(0, 0, W, H);
@@ -196,7 +200,7 @@ function animCanvas() {
 
   requestAnimationFrame(animCanvas);
 }
-animCanvas();
+if (ctx) animCanvas();
 
 // ── NAVBAR SCROLL ──
 const navbar = document.getElementById('navbar');
