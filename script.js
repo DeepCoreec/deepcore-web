@@ -207,9 +207,13 @@ window.addEventListener('scroll', () => {
 // ── MOBILE MENU ──
 function toggleMenu() {
   document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('active');
 }
 document.querySelectorAll('.nav-links a').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  });
 });
 
 // Mobile nav open style
