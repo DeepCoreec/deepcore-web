@@ -1,0 +1,357 @@
+/* ================================================================
+   DeepCore — Section Thematic Backgrounds
+   Each section gets a visual that matches its topic
+   ================================================================ */
+
+/* ── Shared: all section wrappers need relative + overflow hidden ── */
+.about-section,
+.prod-section,
+.showcase-section,
+.testimonios-section,
+.agent-section,
+.activar-ia-section,
+.roadmap-section,
+.ecuador-section,
+.gratis-section,
+.web-portfolio-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Canvas bg elements injected by section-bg.js ── */
+.sec-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.section > .container,
+.section > .container ~ *,
+.about-section > .container,
+.prod-section > .container,
+.agent-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ================================================================
+   1. SERVICIOS — Trazas PCB (animated via JS canvas)
+      see section-bg.js: initPCB()
+   ================================================================ */
+#servicios {
+  position: relative;
+  overflow: hidden;
+}
+
+/* ================================================================
+   2. NOSOTROS — Cuadrícula isométrica tech
+   ================================================================ */
+.about-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,0,34,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,34,0.028) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 20px 20px, 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+.about-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 40%, rgba(255,0,34,0.055) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 70%, rgba(80,20,255,0.035) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  animation: nosotros-aurora 10s ease-in-out infinite alternate;
+}
+@keyframes nosotros-aurora {
+  from { opacity: 0.6; transform: scale(1); }
+  to   { opacity: 1.0; transform: scale(1.04); }
+}
+
+/* ================================================================
+   3. PRODUCTOS — Hexagonal dot grid (licencias / seguridad)
+   ================================================================ */
+.prod-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,0,34,0.09) 1.2px, transparent 1.2px),
+    radial-gradient(circle, rgba(255,0,34,0.05) 1.2px, transparent 1.2px);
+  background-size: 42px 73px, 42px 73px;
+  background-position: 0 0, 21px 36.5px;
+  pointer-events: none;
+  z-index: 0;
+  animation: hex-breathe 5s ease-in-out infinite alternate;
+}
+@keyframes hex-breathe {
+  from { opacity: 0.5; }
+  to   { opacity: 1.0; }
+}
+.prod-section::after {
+  content: '';
+  position: absolute;
+  top: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,0,34,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: prod-glow 7s ease-in-out infinite alternate;
+}
+@keyframes prod-glow {
+  from { transform: translateX(-50%) scale(0.9); opacity: 0.5; }
+  to   { transform: translateX(-50%) scale(1.1); opacity: 1.0; }
+}
+
+/* ================================================================
+   4. GALERÍA — ver section-bg.js: initCodeRain()
+   ================================================================ */
+.showcase-section {
+  position: relative;
+}
+
+/* ================================================================
+   5. TESTIMONIOS — Campo estelar CSS + sparkle JS
+   ================================================================ */
+.testimonios-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.30) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,0,34,0.40) 1px, transparent 1px);
+  background-size:
+    180px 180px,
+    90px  90px,
+    260px 260px;
+  background-position:
+    13px 17px,
+    45px 80px,
+    90px 40px;
+  pointer-events: none;
+  z-index: 0;
+  animation: stars-twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes stars-twinkle {
+  0%   { opacity: 0.4; }
+  50%  { opacity: 0.7; }
+  100% { opacity: 0.5; }
+}
+.testimonios-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(255,0,34,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 30% at 50% 100%, rgba(255,0,34,0.03) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   6. AGENTE IA — ondas cerebrales (canvas via JS)
+   ================================================================ */
+.agent-section {
+  background: linear-gradient(180deg, var(--bg) 0%, #08041A 50%, var(--bg) 100%);
+}
+.agent-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 50%, rgba(120,40,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 30%, rgba(255,0,34,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   7. ACTIVAR IA — espiral de datos / partículas (canvas via JS)
+   ================================================================ */
+.activar-ia-section {
+  background: radial-gradient(ellipse 100% 60% at 50% 50%, rgba(8,4,26,1) 0%, var(--bg) 100%);
+}
+
+/* ================================================================
+   8. ROADMAP — Anillos orbitales en espacio
+   ================================================================ */
+.roadmap-section::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(900px, 120vw);
+  height: min(900px, 120vw);
+  border-radius: 50%;
+  border: 1px solid rgba(255,0,34,0.06);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbit-ring-spin 30s linear infinite;
+  box-shadow:
+    0 0 0 1px rgba(255,0,34,0.03),
+    0 0 0 80px rgba(255,0,34,0.015),
+    0 0 0 180px rgba(255,0,34,0.01),
+    0 0 0 300px rgba(80,0,255,0.008);
+}
+@keyframes orbit-ring-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.roadmap-section::after {
+  content: '';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(500px, 80vw);
+  height: min(500px, 80vw);
+  border-radius: 50%;
+  border: 1px dashed rgba(255,0,34,0.08);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbit-ring-spin 18s linear infinite reverse;
+}
+
+/* Orbiting dot on the roadmap ring */
+.roadmap-section .rm-orbit-dot {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 6px; height: 6px;
+  margin: -3px 0 0 -3px;
+  background: rgba(255,0,34,0.7);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,0,34,0.5);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbit-dot 20s linear infinite;
+  transform-origin: 0 0;
+}
+@keyframes orbit-dot {
+  from { transform: rotate(0deg) translateX(min(450px, 60vw)); }
+  to   { transform: rotate(360deg) translateX(min(450px, 60vw)); }
+}
+
+/* ================================================================
+   9. ECUADOR — Topografía / mapa puntual
+   ================================================================ */
+.ecuador-section {
+  position: relative;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(5,5,12,1) 50%, var(--bg) 100%);
+}
+.ecuador-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 26px,
+      rgba(255,0,34,0.025) 26px, rgba(255,0,34,0.025) 27px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 26px,
+      rgba(255,255,255,0.012) 26px, rgba(255,255,255,0.012) 27px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+.ecuador-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #FFD100 30%, #0072C6 50%, #FF0022 70%, transparent);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   10. GRATIS — Destellos y partículas
+   ================================================================ */
+.gratis-section {
+  position: relative;
+}
+.gratis-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 50%, rgba(255,0,34,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: gratis-pulse 4s ease-in-out infinite alternate;
+}
+@keyframes gratis-pulse {
+  from { opacity: 0.5; transform: scale(0.95); }
+  to   { opacity: 1.0; transform: scale(1.05); }
+}
+
+/* ================================================================
+   11. WEB PORTFOLIO — Browser frame repeating pattern
+   ================================================================ */
+.web-portfolio-section {
+  position: relative;
+}
+.web-portfolio-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 30% at 50% 0%, rgba(255,0,34,0.04) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 20% at 50% 100%, rgba(255,0,34,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ================================================================
+   ORBITING DOT ELEMENT — inyectado por JS en roadmap
+   ================================================================ */
+.roadmap-section { overflow: visible !important; }
+
+/* ================================================================
+   SECTION GLOW SEPARATOR — línea de acento rojo entre secciones
+   ================================================================ */
+.section-glow-sep {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,0,34,0.2) 30%, rgba(255,0,34,0.2) 70%, transparent);
+  position: relative;
+}
+.section-glow-sep::after {
+  content: '';
+  position: absolute;
+  top: -3px; left: 50%; transform: translateX(-50%);
+  width: 80px; height: 7px;
+  background: rgba(255,0,34,0.4);
+  filter: blur(8px);
+  border-radius: 50%;
+}
+
+/* ================================================================
+   MOBILE — simplify heavy effects
+   ================================================================ */
+@media (max-width: 768px) {
+  .about-section::before,
+  .prod-section::before,
+  .testimonios-section::before,
+  .ecuador-section::before { opacity: 0.5; }
+
+  .roadmap-section::before,
+  .roadmap-section::after { display: none; }
+}
