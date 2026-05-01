@@ -818,9 +818,218 @@
 }
 
 /* ══════════════════════════════════════════════
+   SERVICE CARDS — SVG visual illustrations
+══════════════════════════════════════════════ */
+.svc-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  opacity: 1;
+  filter: brightness(3) drop-shadow(0 0 8px rgba(255,0,34,0.3));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.svc-card:hover .svc-visual {
+  filter: brightness(4) drop-shadow(0 0 16px rgba(255,0,34,0.55));
+  transform: scale(1.05);
+}
+.svc-large .svc-visual svg { width: 110px; height: 72px; }
+
+/* ══════════════════════════════════════════════
+   ACTIVAR-IA — Floating Claude chat mockup
+══════════════════════════════════════════════ */
+.aia-chat-mockup {
+  position: absolute;
+  right: max(20px, calc(50% - 720px + 24px));
+  top: 50%;
+  transform: translateY(-42%);
+  width: 300px;
+  background: rgba(8,4,20,0.82);
+  border: 1px solid rgba(201,100,66,0.22);
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(201,100,66,0.08),
+    0 24px 60px rgba(0,0,0,0.55),
+    0 0 60px rgba(201,100,66,0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  overflow: hidden;
+  z-index: 2;
+  animation: aia-chat-float 5s ease-in-out infinite alternate;
+}
+@keyframes aia-chat-float {
+  from { transform: translateY(-42%); }
+  to   { transform: translateY(-46%); }
+}
+
+.aia-chat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid rgba(201,100,66,0.12);
+  background: rgba(201,100,66,0.06);
+}
+.aia-chat-avatar {
+  width: 32px; height: 32px;
+  background: rgba(201,100,66,0.15);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(201,100,66,0.3);
+}
+.aia-chat-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.02em;
+}
+.aia-chat-name span { color: rgba(201,100,66,0.9); }
+.aia-chat-status {
+  margin-left: auto;
+  font-size: 10px;
+  color: rgba(0,220,100,0.8);
+  letter-spacing: 0.02em;
+}
+
+.aia-chat-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 180px;
+}
+
+.aia-msg {
+  display: flex;
+  flex-direction: column;
+  max-width: 82%;
+}
+.aia-msg-user {
+  align-self: flex-end;
+}
+.aia-msg-ai {
+  align-self: flex-start;
+}
+.aia-msg-user span {
+  background: rgba(255,0,34,0.18);
+  border: 1px solid rgba(255,0,34,0.2);
+  color: rgba(255,255,255,0.85);
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 10px 10px 2px 10px;
+  line-height: 1.4;
+}
+.aia-msg-ai .aia-msg-text {
+  background: rgba(201,100,66,0.1);
+  border: 1px solid rgba(201,100,66,0.18);
+  color: rgba(255,255,255,0.78);
+  font-size: 11px;
+  padding: 6px 10px;
+  border-radius: 10px 10px 10px 2px;
+  line-height: 1.45;
+  display: block;
+}
+.aia-msg-ai .aia-msg-text strong { color: rgba(255,180,100,0.95); }
+.aia-msg-ai .aia-msg-text em { color: rgba(201,100,66,0.9); font-style: normal; }
+
+/* Typing indicator */
+.aia-msg-typing {
+  display: flex;
+  gap: 4px;
+  padding: 8px 10px;
+  background: rgba(201,100,66,0.08);
+  border: 1px solid rgba(201,100,66,0.15);
+  border-radius: 10px 10px 10px 2px;
+  width: fit-content;
+  margin-bottom: 6px;
+}
+.aia-dot {
+  width: 5px; height: 5px;
+  background: rgba(201,100,66,0.7);
+  border-radius: 50%;
+  animation: aia-bounce 1.2s ease-in-out infinite;
+}
+.aia-dot:nth-child(2) { animation-delay: 0.2s; }
+.aia-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes aia-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50%       { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Blinking cursor on partial message */
+.aia-msg-partial { position: relative; }
+.aia-cursor {
+  color: rgba(201,100,66,0.8);
+  font-size: 11px;
+  animation: aia-blink 1s step-end infinite;
+  margin-left: 1px;
+}
+@keyframes aia-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+.aia-chat-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.aia-chat-input {
+  flex: 1;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+.aia-chat-send {
+  width: 24px; height: 24px;
+  background: rgba(201,100,66,0.8);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Claude logo watermarks — increase visibility */
+.aia-logo { opacity: 0.12; }
+.aia-l1 { opacity: 0.09; }
+
+/* ══════════════════════════════════════════════
    MOBILE — hide heavy decorations
 ══════════════════════════════════════════════ */
 @media (max-width: 768px) {
   .hdc-card { display: none !important; }
   .section:nth-child(odd)::before { display: none; }
+  .aia-chat-mockup { display: none; }
+  .svc-visual { opacity: 0.5; }
+}
+
+/* On wide screens: reserve right space so chat doesn't overlap text */
+@media (min-width: 1101px) {
+  .activar-ia-section .container {
+    padding-right: 340px;
+  }
+  .aia-chat-mockup {
+    right: max(16px, calc(50% - 640px));
+  }
+}
+
+@media (max-width: 1100px) {
+  .activar-ia-section .container {
+    padding-right: inherit;
+  }
+  .aia-chat-mockup {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 32px;
+    animation: none;
+  }
 }

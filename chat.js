@@ -2,9 +2,9 @@
 // DeepCore Chat — Alisson Web v3.0
 // =============================================
 
-// ── CLAUDE API ── llamadas van al proxy seguro en Netlify Functions
-// La API key vive en variables de entorno de Netlify, nunca en el frontend
-const CHAT_PROXY_URL = '/.netlify/functions/chat';
+// ── CLAUDE API ── llamadas van al proxy seguro en Railway (alisson-voz-server)
+// La API key vive en variables de entorno de Railway, nunca en el frontend
+const CHAT_PROXY_URL = 'https://alisson-voz-server-production.up.railway.app/chat';
 
 // Historial de conversación para contexto
 let conversationHistory = [];

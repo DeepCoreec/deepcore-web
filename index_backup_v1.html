@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepCore — Reparación de PCs, Laptops y Consolas en Guayaquil</title>
+  <meta name="description" content="DeepCore Guayaquil — Reparación de laptops, PCs, consolas y TV. Desarrollo de software y páginas web desde $79. Atención rápida y garantizada. ¡Contáctanos!"/>
+  <meta name="keywords" content="reparación laptops Guayaquil, reparación PC Guayaquil, reparación consolas Guayaquil, reparación PS4 Guayaquil, reparación TV Guayaquil, páginas web Guayaquil, desarrollo software Guayaquil, soporte técnico Guayaquil, DeepCore"/>
+  <meta name="author" content="DeepCore"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://deepcoreec.github.io/deepcore-web/"/>
+
+  <!-- Open Graph (vista previa en redes sociales) -->
+  <meta property="og:title" content="DeepCore — Tecnología sin límites · Guayaquil"/>
+  <meta property="og:description" content="Reparamos laptops, PCs, consolas y TVs. Creamos páginas web desde $79. Soporte técnico en Guayaquil, Ecuador."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://deepcoreec.github.io/deepcore-web/"/>
+  <meta property="og:locale" content="es_EC"/>
+
+  <!-- WhatsApp / Twitter preview -->
+  <meta name="twitter:card" content="summary"/>
+  <meta name="twitter:title" content="DeepCore Guayaquil — Reparación y Software"/>
+  <meta name="twitter:description" content="Reparamos tu equipo y creamos tu página web. Desde $79. Guayaquil, Ecuador."/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+
+  <!-- Schema LocalBusiness (SEO Google) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "DeepCore",
+    "description": "Empresa de tecnología en Guayaquil. Reparación de PCs, laptops, consolas y TVs. Desarrollo de software y páginas web.",
+    "url": "https://deepcoreec.github.io/deepcore-web",
+    "telephone": "+593986225038",
+    "email": "deepcoreec@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Guayaquil",
+      "addressRegion": "Guayas",
+      "addressCountry": "EC"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -2.1894,
+      "longitude": -79.8891
+    },
+    "openingHours": "Mo-Sa 09:00-19:00",
+    "sameAs": [
+      "https://www.instagram.com/deepcoreec/",
+      "https://www.facebook.com/profile.php?id=61577433271167"
+    ],
+    "priceRange": "$$",
+    "image": "https://deepcoreec.github.io/deepcore-web/favicon.svg"
+  }
+  </script>
+
+  <!-- Google Analytics GA4 — reemplaza G-XXXXXXXXXX con tu ID real -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&family=Orbitron:wght@700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <link rel="stylesheet" href="chat.css" />
+  <link rel="stylesheet" href="tecnico.css" />
+</head>
+<body>
+
+  <!-- PROMO BANNER -->
+  <div class="promo-banner" id="promoBanner">
+    <span class="promo-banner-text">
+      🔥 Esta semana: <strong>Limpieza desde $10</strong> · Diagnóstico siempre <strong>GRATIS</strong> ·
+      <a href="https://wa.me/593986225038?text=Hola, vi la oferta en la web" target="_blank">Reservar ahora →</a>
+    </span>
+    <button class="promo-banner-close" onclick="closeBanner()" title="Cerrar">✕</button>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#inicio">
+        <div class="logo-hex">
+          <svg class="logo-svg" width="38" height="38" viewBox="0 0 40 40">
+            <!-- Nodos conectados estilo red neuronal -->
+            <line x1="20" y1="8"  x2="8"  y2="20" stroke="#FF0022" stroke-width="1.2" opacity="0.6"/>
+            <line x1="20" y1="8"  x2="32" y2="20" stroke="#FF0022" stroke-width="1.2" opacity="0.6"/>
+            <line x1="8"  y1="20" x2="20" y2="32" stroke="#FF0022" stroke-width="1.2" opacity="0.6"/>
+            <line x1="32" y1="20" x2="20" y2="32" stroke="#FF0022" stroke-width="1.2" opacity="0.6"/>
+            <line x1="8"  y1="20" x2="32" y2="20" stroke="#FF0022" stroke-width="0.8" opacity="0.3"/>
+            <line x1="20" y1="8"  x2="20" y2="32" stroke="#FF0022" stroke-width="0.8" opacity="0.3"/>
+            <!-- Nodos -->
+            <circle cx="20" cy="8"  r="2.5" fill="#FF0022"/>
+            <circle cx="8"  cy="20" r="2"   fill="#FF0022" opacity="0.7"/>
+            <circle cx="32" cy="20" r="2"   fill="#FF0022" opacity="0.7"/>
+            <circle cx="20" cy="32" r="2"   fill="#FF0022" opacity="0.7"/>
+            <!-- Nodo central -->
+            <circle cx="20" cy="20" r="3.5" fill="#FF0022"/>
+            <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.9"/>
+          </svg>
+        </div>
+        <span><span class="logo-deep">Deep</span><span class="logo-core">Core</span></span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#galeria">Galería</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#ecuador">🇪🇨 Ecuador</a></li>
+        <li><a href="#gratis">Gratis</a></li>
+        <li><a href="#proceso">Proceso</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+
+      <a class="nav-cta" href="https://wa.me/593986225038" target="_blank">
+        <span>Contáctanos</span>
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="hero-inner">
+      <div class="hero-pill">
+        <span class="pill-dot"></span>
+        Guayaquil, Ecuador · Empresa Registrada
+      </div>
+
+      <h1 class="hero-heading">
+        <span class="line-wrap"><span class="line-text">Tecnología</span></span>
+        <span class="line-wrap"><span class="line-text grad">sin límites.</span></span>
+      </h1>
+
+      <p class="hero-body">
+        Reparamos equipos, construimos software y hacemos crecer negocios.<br>
+        Una empresa. Todo el ecosistema tecnológico.
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn-fill terminal" href="#servicios">&gt;_ VER SERVICIOS</a>
+        <a class="btn-line terminal" href="#contacto">&gt;_ CONTÁCTANOS</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-v">100%</span><span class="hstat-l">Garantía</span></div>
+        <div class="hstat-sep"></div>
+        <div class="hstat"><span class="hstat-v">24/7</span><span class="hstat-l">Disponible</span></div>
+        <div class="hstat-sep"></div>
+        <div class="hstat"><span class="hstat-v">6+</span><span class="hstat-l">Servicios</span></div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>Reparación PC</span><span class="sep">—</span>
+      <span>Software a Medida</span><span class="sep">—</span>
+      <span>Consolas</span><span class="sep">—</span>
+      <span>Smart TV</span><span class="sep">—</span>
+      <span>Soporte Remoto</span><span class="sep">—</span>
+      <span>Mantenimiento</span><span class="sep">—</span>
+      <span>Go Deeper</span><span class="sep">—</span>
+      <span>Reparación PC</span><span class="sep">—</span>
+      <span>Software a Medida</span><span class="sep">—</span>
+      <span>Consolas</span><span class="sep">—</span>
+      <span>Smart TV</span><span class="sep">—</span>
+      <span>Soporte Remoto</span><span class="sep">—</span>
+      <span>Mantenimiento</span><span class="sep">—</span>
+      <span>Go Deeper</span><span class="sep">—</span>
+    </div>
+  </div>
+
+  <!-- CONTADORES ANIMADOS -->
+  <div class="counters-section">
+    <div class="container">
+      <div class="counters-grid">
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="500">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Equipos Reparados</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="300">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Clientes Satisfechos</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="3">0</span>
+            <span class="counter-suffix">+</span>
+          </div>
+          <span class="counter-label">Años de Experiencia</span>
+        </div>
+        <div class="counter-item reveal">
+          <div class="counter-val-row">
+            <span class="counter-num" data-target="100">0</span>
+            <span class="counter-suffix">%</span>
+          </div>
+          <span class="counter-label">Clientes Recomiendan</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICIOS -->
+  <section class="section" id="servicios">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Lo que hacemos</p>
+        <h2 class="section-h">Nuestros <em>Servicios</em></h2>
+        <p class="section-p">Cubrimos todo el ecosistema tecnológico con calidad garantizada y precios honestos.</p>
+      </div>
+
+      <div class="svc-grid">
+
+        <div class="svc-card svc-large reveal">
+          <div class="svc-number">01</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+          </div>
+          <h3>Reparación de PCs & Laptops</h3>
+          <p>Diagnóstico completo, cambio de componentes, limpieza interna y optimización de rendimiento. Tu equipo como nuevo.</p>
+          <div class="svc-chips">
+            <span>Pantallas</span><span>SSD / RAM</span><span>Placa madre</span><span>Windows / Linux</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-number">02</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3>Desarrollo de Software</h3>
+          <p>Sistemas a medida, paneles web y automatización para tu empresa.</p>
+          <div class="svc-chips">
+            <span>Web Apps</span><span>Cloud</span><span>APIs</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-number">03</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Consolas de Video</h3>
+          <p>PlayStation, Xbox, Nintendo Switch. Lectores, hardware y todo tipo de fallas.</p>
+          <div class="svc-chips">
+            <span>PS4 / PS5</span><span>Xbox</span><span>Switch</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-number">04</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <rect x="2" y="7" width="20" height="15" rx="2"/><path d="M17 2l-5 5-5-5"/>
+            </svg>
+          </div>
+          <h3>Reparación de TV</h3>
+          <p>Smart TVs y LED/LCD de todas las marcas. Imagen, sonido y tarjetas internas.</p>
+          <div class="svc-chips">
+            <span>Smart TV</span><span>LED/LCD</span><span>Todas las marcas</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-number">05</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+          </div>
+          <h3>Mantenimiento Preventivo</h3>
+          <p>Limpieza profunda, pasta térmica, drivers y optimización completa del sistema.</p>
+          <div class="svc-chips">
+            <span>Limpieza</span><span>Optimización</span><span>Drivers</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+        <div class="svc-card reveal">
+          <div class="svc-number">06</div>
+          <div class="svc-icon">
+            <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>Soporte Técnico Remoto</h3>
+          <p>Virus, configuraciones y problemas de software sin salir de casa u oficina.</p>
+          <div class="svc-chips">
+            <span>Antivirus</span><span>Configuración</span><span>Backup</span>
+          </div>
+          <div class="svc-arrow">↗</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="section about-section" id="nosotros">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-left reveal">
+          <p class="eyebrow">— Quiénes somos</p>
+          <h2 class="section-h">Tecnología<br>con <em>propósito.</em></h2>
+          <p class="about-body">DeepCore nació en Guayaquil con una misión clara: ofrecer soluciones tecnológicas reales para personas y empresas reales.</p>
+          <p class="about-body">No somos una corporación fría. Somos un equipo apasionado por la tecnología que entiende tus problemas porque los hemos vivido.</p>
+          <a class="btn-fill" href="#contacto" style="margin-top:32px;display:inline-flex;align-items:center;gap:10px">
+            Trabaja con nosotros
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="about-right reveal">
+          <div class="about-card">
+            <div class="about-card-top">
+              <div class="about-logo-big">DC</div>
+              <div class="about-badge">Guayaquil · Ecuador</div>
+            </div>
+            <div class="about-metrics">
+              <div class="metric">
+                <span class="metric-v">100%</span>
+                <span class="metric-l">Compromiso en cada trabajo</span>
+              </div>
+              <div class="metric">
+                <span class="metric-v">24/7</span>
+                <span class="metric-l">Disponibilidad de soporte</span>
+              </div>
+              <div class="metric">
+                <span class="metric-v">RUC</span>
+                <span class="metric-l">Empresa legalmente registrada</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="values-stack">
+            <div class="vrow">
+              <span class="vn">01</span>
+              <div><strong>Calidad</strong><p>Cada trabajo se entrega con garantía total.</p></div>
+            </div>
+            <div class="vrow">
+              <span class="vn">02</span>
+              <div><strong>Honestidad</strong><p>Precios justos y diagnóstico transparente.</p></div>
+            </div>
+            <div class="vrow">
+              <span class="vn">03</span>
+              <div><strong>Innovación</strong><p>Siempre la mejor solución, no la más fácil.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS -->
+  <section class="section prod-section" id="productos">
+    <div class="container">
+
+      <div class="prod-header reveal">
+        <div>
+          <p class="eyebrow">— Software & Licencias</p>
+          <h2 class="section-h">Una licencia. <em>Todo incluido.</em></h2>
+          <p class="section-p">Con una sola suscripción de $5/mes accedes a todos los programas de DeepCore. Descárgalos, instálalos y actívalos con tu clave.</p>
+        </div>
+        <div class="prod-header-badge">
+          <span class="coming-pill">🔑 Desde $5/mes</span>
+        </div>
+      </div>
+
+      <!-- LICENCIA UNIVERSAL -->
+      <div class="prod-featured reveal" id="licencia">
+        <div class="pf-glow"></div>
+        <div class="pf-header">
+          <span class="prod-badge live">🟢 Disponible ahora</span>
+          <span class="prod-icon">🔐</span>
+          <h3>Licencia DeepCore — Acceso Total</h3>
+          <p>Una sola clave activa <strong>todos los programas</strong> de DeepCore. Paga una vez y usa todo el catálogo durante el período elegido.</p>
+        </div>
+        <ul class="prod-features pf-features">
+          <li>✅ Acceso a todos los programas del catálogo</li>
+          <li>✅ Clave de activación por email automáticamente</li>
+          <li>✅ Nuevos programas incluidos sin costo extra</li>
+          <li>✅ Soporte por WhatsApp y email</li>
+          <li>✅ Actualizaciones incluidas</li>
+          <li>✅ Sin contratos — cancela cuando quieras</li>
+        </ul>
+        <div class="pf-plans">
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Mensual $5')">
+            <span class="pf-plan-name">Mensual</span>
+            <span class="pf-plan-price">$5</span>
+            <span class="pf-plan-note">/ mes</span>
+          </a>
+          <a class="pf-plan pf-plan-pop" href="#metodos-pago" onclick="selectPlan('Trimestral $14')">
+            <span class="pf-pop-badge">Más popular</span>
+            <span class="pf-plan-name">Trimestral</span>
+            <span class="pf-plan-price">$14</span>
+            <span class="pf-plan-note">/ 3 meses</span>
+          </a>
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Semestral $27')">
+            <span class="pf-plan-name">Semestral</span>
+            <span class="pf-plan-price">$27</span>
+            <span class="pf-plan-note">/ 6 meses</span>
+          </a>
+          <a class="pf-plan" href="#metodos-pago" onclick="selectPlan('Anual $50')">
+            <span class="pf-plan-name">Anual</span>
+            <span class="pf-plan-price">$50</span>
+            <span class="pf-plan-note">/ año — 2 meses gratis</span>
+          </a>
+        </div>
+        <p class="pf-note">Elige tu método de pago preferido abajo 👇</p>
+
+        <!-- MÉTODOS DE PAGO -->
+        <div class="pay-methods" id="metodos-pago">
+        <div class="pay-selected-plan" id="plan-seleccionado" style="display:none">
+          Plan seleccionado: <strong id="plan-nombre"></strong>
+        </div>
+          <!-- PayPal / Tarjeta -->
+          <div class="pay-method">
+            <div class="pay-method-icon">💳</div>
+            <div class="pay-method-info">
+              <strong>PayPal o Tarjeta de crédito/débito</strong>
+              <span>Visa, Mastercard, American Express — sin necesitar cuenta PayPal</span>
+            </div>
+            <div class="pay-method-btns">
+              <a id="btn-paypal" href="https://www.paypal.com/paypalme/DeepCoreec/5" target="_blank" class="pay-btn pay-btn-pop">Pagar con PayPal / Tarjeta</a>
+            </div>
+          </div>
+
+          <!-- Transferencia bancaria -->
+          <div class="pay-method">
+            <div class="pay-method-icon">🏦</div>
+            <div class="pay-method-info">
+              <strong>Transferencia Bancaria</strong>
+              <span>Banco de Guayaquil &nbsp;·&nbsp; Cuenta de ahorros &nbsp;·&nbsp; N° <strong>0048029235</strong> &nbsp;·&nbsp; Michael Pozo</span>
+            </div>
+            <div class="pay-method-btns">
+              <a id="btn-transferencia" href="https://wa.me/593986225038?text=Hola, realicé una transferencia por el Plan Mensual $5. Mi email es:" target="_blank" class="pay-btn">Confirmar por WhatsApp</a>
+            </div>
+          </div>
+
+          <!-- WhatsApp directo -->
+          <div class="pay-method">
+            <div class="pay-method-icon">💬</div>
+            <div class="pay-method-info">
+              <strong>Coordinar por WhatsApp</strong>
+              <span>Cualquier duda o método alternativo — te atendemos directamente</span>
+            </div>
+            <div class="pay-method-btns">
+              <a id="btn-whatsapp" href="https://wa.me/593986225038?text=Hola, quiero comprar el Plan Mensual $5 de DeepCore" target="_blank" class="pay-btn">Escribir al WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <script>
+        var _planes = {
+          'Mensual $5':     {monto:'5',  texto:'Mensual $5'},
+          'Trimestral $14': {monto:'14', texto:'Trimestral $14'},
+          'Semestral $27':  {monto:'27', texto:'Semestral $27'},
+          'Anual $50':      {monto:'50', texto:'Anual $50'},
+        };
+        function selectPlan(plan) {
+          var p = _planes[plan]; if (!p) return;
+          var el = document.getElementById('plan-nombre');
+          var banner = document.getElementById('plan-seleccionado');
+          if (el) el.textContent = plan;
+          if (banner) banner.style.display = 'block';
+          var bp = document.getElementById('btn-paypal');
+          var bt = document.getElementById('btn-transferencia');
+          var bw = document.getElementById('btn-whatsapp');
+          if (bp) bp.href = 'https://www.paypal.com/paypalme/DeepCoreec/' + p.monto;
+          if (bt) bt.href = 'https://wa.me/593986225038?text=Hola,%20realicé%20una%20transferencia%20por%20el%20Plan%20' + encodeURIComponent(p.texto) + '.%20Mi%20email%20es:';
+          if (bw) bw.href = 'https://wa.me/593986225038?text=Hola,%20quiero%20comprar%20el%20Plan%20' + encodeURIComponent(p.texto) + '%20de%20DeepCore';
+        }
+        </script>
+
+        <p class="pf-note" style="margin-top:16px">✅ Al confirmar tu pago te enviamos la clave de activación por email en minutos.</p>
+      </div>
+
+      <!-- PROGRAMAS DISPONIBLES -->
+      <div class="prod-header reveal" style="margin-top:40px; margin-bottom:20px;">
+        <div>
+          <p class="eyebrow">— Programas incluidos</p>
+          <h2 class="section-h" style="font-size:22px">¿Qué puedes usar con tu licencia?</h2>
+        </div>
+      </div>
+
+      <!-- APP GRID — compact tiles -->
+      <div class="app-grid">
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-inventario-pro/releases/latest/download/DeepCoreInventarioPro-Setup.exe" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">📦</span>
+            <span class="at-badge at-avail">Disponible</span>
+          </div>
+          <h4 class="at-name">Inventario Pro</h4>
+          <p class="at-desc">Stock, ventas y reparaciones con IA integrada</p>
+          <span class="at-dl">⬇ Windows · macOS · Linux</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-hr-pro/releases/latest/download/DeepCoreHRPro-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">👥</span>
+            <span class="at-badge at-avail">Disponible</span>
+          </div>
+          <h4 class="at-name">HR Pro</h4>
+          <p class="at-desc">RRHH, nómina multi-país y asistencia</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-contabilidad-pro/releases/latest/download/DeepCore-Contabilidad-Pro-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">📊</span>
+            <span class="at-badge at-avail">Disponible</span>
+          </div>
+          <h4 class="at-name">Contabilidad Pro</h4>
+          <p class="at-desc">Contabilidad empresarial NIIF multi-país</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-voiceai/releases/latest/download/DeepCoreVoiceAI-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🌐</span>
+            <span class="at-badge at-avail">Disponible</span>
+          </div>
+          <h4 class="at-name">Traductor en Tiempo Real</h4>
+          <p class="at-desc">Traduce tu voz al instante con IA</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-pos/releases/latest/download/DeepCorePOS-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🛒</span>
+            <span class="at-badge at-ecuador">Ecuador</span>
+          </div>
+          <h4 class="at-name">POS</h4>
+          <p class="at-desc">Punto de venta táctil con tickets y reportes</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-facturacion-sri/releases/latest/download/DeepCoreFacturacionSRI-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🧾</span>
+            <span class="at-badge at-ecuador">Ecuador</span>
+          </div>
+          <h4 class="at-name">Facturación SRI</h4>
+          <p class="at-desc">Facturas electrónicas válidas ante el SRI</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-remotelan/releases/latest/download/DeepCoreRemoteLAN-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🖥️</span>
+            <span class="at-badge at-ecuador">Ecuador</span>
+          </div>
+          <h4 class="at-name">RemoteLAN</h4>
+          <p class="at-desc">Control remoto de PCs en red local</p>
+          <span class="at-dl">⬇ Windows</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-lang/releases/latest/download/deepcore-lang.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">⚡</span>
+            <span class="at-badge at-avail">Disponible</span>
+          </div>
+          <h4 class="at-name">DeepCore Lang</h4>
+          <p class="at-desc">Lenguaje de programación hecho en Ecuador</p>
+          <span class="at-dl">⬇ Multiplataforma</span>
+        </a>
+
+        <a class="app-tile app-tile-custom reveal" href="https://wa.me/593986225038?text=Hola, necesito un software a medida" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🔧</span>
+            <span class="at-badge at-custom">A Medida</span>
+          </div>
+          <h4 class="at-name">Software a Medida</h4>
+          <p class="at-desc">Tu idea, construida por nosotros desde cero</p>
+          <span class="at-dl at-dl-wa">💬 Cotizar por WhatsApp</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       GALERÍA DE PROGRAMAS
+  ══════════════════════════════════════════════ -->
+  <section class="section showcase-section" id="galeria">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:56px">
+        <p class="eyebrow">— Vista previa del software</p>
+        <h2 class="section-h">Diseñado para <em>impresionar.</em></h2>
+        <p class="section-p">Cada programa construido con la misma atención al detalle. Oscuro, rápido, con IA.</p>
+      </div>
+
+      <div class="showcase-grid">
+
+        <!-- Inventario Pro -->
+        <div class="showcase-card reveal" style="--sc-color:#0099CC">
+          <div class="sc-mockup">
+            <div class="sc-titlebar">
+              <span class="sc-dot" style="background:#ff5f57"></span>
+              <span class="sc-dot" style="background:#febc2e"></span>
+              <span class="sc-dot" style="background:#28c840"></span>
+              <span class="sc-title">DeepCore Inventario Pro</span>
+            </div>
+            <div class="sc-sidebar">
+              <div class="sc-nav-item sc-nav-active">📦 Inventario</div>
+              <div class="sc-nav-item">💵 Ventas</div>
+              <div class="sc-nav-item">🔧 Reparaciones</div>
+              <div class="sc-nav-item">📊 Reportes</div>
+              <div class="sc-nav-item">🤖 Aria IA</div>
+            </div>
+            <div class="sc-content">
+              <div class="sc-stat-row">
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#0099CC">1,284</span><span class="sc-stat-l">Productos</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#10B981">$8,430</span><span class="sc-stat-l">Ventas hoy</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#F59E0B">23</span><span class="sc-stat-l">Reparaciones</span></div>
+              </div>
+              <div class="sc-table-head">
+                <span>Producto</span><span>Stock</span><span>Precio</span><span>Estado</span>
+              </div>
+              <div class="sc-table-row"><span>Laptop HP 15"</span><span>12</span><span>$649</span><span class="sc-badge-ok">OK</span></div>
+              <div class="sc-table-row"><span>Mouse Logitech</span><span>3</span><span>$25</span><span class="sc-badge-warn">Bajo</span></div>
+              <div class="sc-table-row"><span>Teclado Mecánico</span><span>8</span><span>$89</span><span class="sc-badge-ok">OK</span></div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <span class="sc-tag" style="color:#0099CC;border-color:#0099CC44;background:#0099CC11">📦 Inventario Pro</span>
+            <h3>Control total de tu negocio</h3>
+            <p>Gestiona productos, ventas, reparaciones y reportes desde una sola pantalla con IA integrada.</p>
+          </div>
+        </div>
+
+        <!-- HR Pro -->
+        <div class="showcase-card reveal" style="--sc-color:#8B5CF6">
+          <div class="sc-mockup">
+            <div class="sc-titlebar">
+              <span class="sc-dot" style="background:#ff5f57"></span>
+              <span class="sc-dot" style="background:#febc2e"></span>
+              <span class="sc-dot" style="background:#28c840"></span>
+              <span class="sc-title">DeepCore HR Pro</span>
+            </div>
+            <div class="sc-sidebar">
+              <div class="sc-nav-item sc-nav-active">👥 Empleados</div>
+              <div class="sc-nav-item">📅 Asistencia</div>
+              <div class="sc-nav-item">💰 Nómina</div>
+              <div class="sc-nav-item">📋 Permisos</div>
+              <div class="sc-nav-item">🤖 Alisson</div>
+            </div>
+            <div class="sc-content">
+              <div class="sc-stat-row">
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#8B5CF6">48</span><span class="sc-stat-l">Empleados</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#10B981">96%</span><span class="sc-stat-l">Asistencia</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#F59E0B">$24k</span><span class="sc-stat-l">Nómina</span></div>
+              </div>
+              <div class="sc-table-head">
+                <span>Empleado</span><span>Cargo</span><span>Asistencia</span><span>Estado</span>
+              </div>
+              <div class="sc-table-row"><span>Ana García</span><span>Gerente</span><span>100%</span><span class="sc-badge-ok">Activo</span></div>
+              <div class="sc-table-row"><span>Luis Mora</span><span>Ventas</span><span>92%</span><span class="sc-badge-ok">Activo</span></div>
+              <div class="sc-table-row"><span>Sofía Ruiz</span><span>Soporte</span><span>88%</span><span class="sc-badge-warn">Permiso</span></div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <span class="sc-tag" style="color:#8B5CF6;border-color:#8B5CF644;background:#8B5CF611">👥 HR Pro</span>
+            <h3>Recursos humanos con IA</h3>
+            <p>Nómina automática para 11 países, control de asistencia y tu asistente Alisson siempre disponible.</p>
+          </div>
+        </div>
+
+        <!-- Contabilidad Pro -->
+        <div class="showcase-card reveal" style="--sc-color:#10B981">
+          <div class="sc-mockup">
+            <div class="sc-titlebar">
+              <span class="sc-dot" style="background:#ff5f57"></span>
+              <span class="sc-dot" style="background:#febc2e"></span>
+              <span class="sc-dot" style="background:#28c840"></span>
+              <span class="sc-title">DeepCore Contabilidad Pro</span>
+            </div>
+            <div class="sc-sidebar">
+              <div class="sc-nav-item sc-nav-active">📊 Dashboard</div>
+              <div class="sc-nav-item">📝 Asientos</div>
+              <div class="sc-nav-item">🧾 Facturas</div>
+              <div class="sc-nav-item">📈 Balances</div>
+              <div class="sc-nav-item">🤖 Alisson</div>
+            </div>
+            <div class="sc-content">
+              <div class="sc-stat-row">
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#10B981">$42k</span><span class="sc-stat-l">Ingresos</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#EF4444">$18k</span><span class="sc-stat-l">Egresos</span></div>
+                <div class="sc-stat"><span class="sc-stat-v" style="color:#F59E0B">$24k</span><span class="sc-stat-l">Utilidad</span></div>
+              </div>
+              <div class="sc-table-head">
+                <span>Cuenta</span><span>Debe</span><span>Haber</span><span>Saldo</span>
+              </div>
+              <div class="sc-table-row"><span>Caja</span><span>$5,200</span><span>$1,100</span><span class="sc-badge-ok">$4,100</span></div>
+              <div class="sc-table-row"><span>Ventas</span><span>—</span><span>$9,800</span><span class="sc-badge-ok">$9,800</span></div>
+              <div class="sc-table-row"><span>Gastos</span><span>$3,400</span><span>—</span><span class="sc-badge-warn">$3,400</span></div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <span class="sc-tag" style="color:#10B981;border-color:#10B98144;background:#10B98111">📊 Contabilidad Pro</span>
+            <h3>Contabilidad empresarial inteligente</h3>
+            <p>NIIF automático, balances en tiempo real y reportes PDF/Excel. Soporta Ecuador, Colombia, México y más.</p>
+          </div>
+        </div>
+
+        <!-- DeepCore Lang -->
+        <div class="showcase-card reveal" style="--sc-color:#22C55E">
+          <div class="sc-mockup">
+            <div class="sc-titlebar">
+              <span class="sc-dot" style="background:#ff5f57"></span>
+              <span class="sc-dot" style="background:#febc2e"></span>
+              <span class="sc-dot" style="background:#28c840"></span>
+              <span class="sc-title">DeepCore Lang — REPL</span>
+            </div>
+            <div class="sc-terminal">
+              <div class="sc-term-line"><span class="sc-prompt">dc&gt;</span> <span class="sc-kw">fn</span> saludar(nombre: <span class="sc-type">Text</span>):</div>
+              <div class="sc-term-line sc-indent"><span class="sc-ai">ai.say</span>(<span class="sc-str">"¡Hola, {nombre}!"</span>)</div>
+              <div class="sc-term-line"><span class="sc-prompt">dc&gt;</span> saludar(<span class="sc-str">"Ecuador"</span>)</div>
+              <div class="sc-term-line sc-output">🤖 Aria: ¡Hola, Ecuador!</div>
+              <div class="sc-term-line"><span class="sc-prompt">dc&gt;</span> <span class="sc-kw">let</span> nums: <span class="sc-type">List</span> = [1,2,3,4,5]</div>
+              <div class="sc-term-line"><span class="sc-prompt">dc&gt;</span> <span class="sc-ai">ai.say</span>(sumar(nums))</div>
+              <div class="sc-term-line sc-output">🤖 Aria: 15</div>
+              <div class="sc-term-line sc-cursor-line"><span class="sc-prompt">dc&gt;</span> <span class="sc-blink">▌</span></div>
+            </div>
+          </div>
+          <div class="sc-info">
+            <span class="sc-tag" style="color:#22C55E;border-color:#22C55E44;background:#22C55E11">⚡ DeepCore Lang — GRATIS</span>
+            <h3>Programa con IA nativa en español</h3>
+            <p>El lenguaje de programación con Aria integrada. Sintaxis simple, REPL interactivo y compilador a Python.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       TESTIMONIOS
+  ══════════════════════════════════════════════ -->
+  <section class="section testimonios-section" id="testimonios">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:56px">
+        <p class="eyebrow">— Lo que dicen nuestros clientes</p>
+        <h2 class="section-h">Resultados <em>reales.</em></h2>
+      </div>
+
+      <div class="testimonios-grid">
+
+        <div class="test-card reveal">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"Llevaba años buscando un sistema de inventario que no fuera complicado. DeepCore Inventario Pro lo tiene todo — y el chatbot con IA es increíble."</p>
+          <div class="test-author">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#0099CC,#005f99)">CM</div>
+            <div>
+              <strong>Carlos M.</strong>
+              <span>Dueño de tienda de electrónica · Guayaquil</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"Me repararon la laptop en menos de 2 horas y el precio fue justo. Además me instalaron el software de inventario que ahora uso a diario. 100% recomendados."</p>
+          <div class="test-author">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#10B981,#059669)">SR</div>
+            <div>
+              <strong>Sofía R.</strong>
+              <span>Emprendedora · Guayaquil</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"HR Pro nos ahorró horas de trabajo en nómina cada mes. La integración con el biométrico y los reportes PDF son exactamente lo que necesitábamos."</p>
+          <div class="test-author">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#8B5CF6,#6d28d9)">JP</div>
+            <div>
+              <strong>Jorge P.</strong>
+              <span>Gerente de RRHH · Empresa manufacturera</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="test-card reveal">
+          <div class="test-stars">★★★★★</div>
+          <p class="test-body">"DeepCore Lang es perfecto para enseñar programación a mis alumnos. La sintaxis en español hace que los conceptos sean mucho más fáciles de entender."</p>
+          <div class="test-author">
+            <div class="test-avatar" style="background:linear-gradient(135deg,#22C55E,#15803d)">ML</div>
+            <div>
+              <strong>María L.</strong>
+              <span>Docente de informática · Colegio en Quito</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       ROADMAP
+  ══════════════════════════════════════════════ -->
+  <section class="section roadmap-section" id="roadmap">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:56px">
+        <p class="eyebrow">— Lo que viene</p>
+        <h2 class="section-h">El futuro de <em>DeepCore.</em></h2>
+        <p class="section-p">Siempre construyendo. Los nuevos programas se incluyen automáticamente en tu licencia.</p>
+      </div>
+
+      <div class="roadmap-track">
+
+        <div class="rm-item rm-done reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-done">✅ Lanzado</span>
+            <h4>Inventario Pro</h4>
+            <p>Sistema completo de inventario, ventas y reparaciones con IA.</p>
+            <span class="rm-date">Disponible ahora</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-done reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-done">✅ Lanzado</span>
+            <h4>HR Pro</h4>
+            <p>Nómina automática y recursos humanos para 11 países.</p>
+            <span class="rm-date">Disponible ahora</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-done reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-done">✅ Lanzado</span>
+            <h4>Contabilidad Pro</h4>
+            <p>Contabilidad NIIF con asistente IA para Latinoamérica.</p>
+            <span class="rm-date">Disponible ahora</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-done reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-done">✅ Lanzado</span>
+            <h4>DeepCore Lang</h4>
+            <p>Lenguaje de programación con IA nativa en español. 100% gratis.</p>
+            <span class="rm-date">Disponible ahora</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-next reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-next">🔄 En desarrollo</span>
+            <h4>Nexus Pro</h4>
+            <p>Suite empresarial todo-en-uno: CRM, ERP, inventario y facturación en una sola plataforma.</p>
+            <span class="rm-date">Q2 2026</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-soon reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-soon">⏳ Próximamente</span>
+            <h4>Traductor en Tiempo Real</h4>
+            <p>Traduce tu voz al instante con voz clonada. Habla en español, sé escuchado en cualquier idioma.</p>
+            <span class="rm-date">Q3 2026</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-soon reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-soon">⏳ Próximamente</span>
+            <h4>RemoteLAN Pro</h4>
+            <p>Control remoto de PCs en tu red local sin internet. Monitoreo en tiempo real con IA.</p>
+            <span class="rm-date">Q3 2026</span>
+          </div>
+        </div>
+
+        <div class="rm-item rm-future reveal">
+          <div class="rm-dot"></div>
+          <div class="rm-card">
+            <span class="rm-badge rm-badge-future">🚀 Futuro</span>
+            <h4>DeepCore Cloud</h4>
+            <p>Todos tus programas sincronizados en la nube. Acceso desde cualquier dispositivo del mundo.</p>
+            <span class="rm-date">2027</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ECUADOR SECTION -->
+  <section class="section ecuador-section" id="ecuador">
+    <div class="container">
+      <div class="ecuador-header reveal">
+        <div class="ecuador-flag">
+          <span class="flag-y"></span><span class="flag-b"></span><span class="flag-r"></span>
+        </div>
+        <div>
+          <p class="eyebrow">— Diseñado para Ecuador</p>
+          <h2 class="section-h">Software hecho para el mercado ecuatoriano</h2>
+          <p class="ecuador-sub">Programas creados con las leyes, impuestos y necesidades específicas de Ecuador. Disponibles para descarga inmediata.</p>
+        </div>
+      </div>
+
+      <div class="app-grid ecuador-app-grid">
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-pos/releases/latest/download/DeepCorePOS-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🛒</span>
+            <span class="at-badge at-ecuador">🇪🇨 Ecuador</span>
+          </div>
+          <h4 class="at-name">POS</h4>
+          <p class="at-desc">Caja registradora táctil, tickets térmicos y reportes de cierre</p>
+          <span class="at-dl">⬇ Windows — Disponible</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-facturacion-sri/releases/latest/download/DeepCoreFacturacionSRI-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🧾</span>
+            <span class="at-badge at-ecuador">🇪🇨 Ecuador</span>
+          </div>
+          <h4 class="at-name">Facturación SRI</h4>
+          <p class="at-desc">Facturas electrónicas, retenciones y firma digital SRI</p>
+          <span class="at-dl">⬇ Windows — Disponible</span>
+        </a>
+
+        <a class="app-tile reveal" href="https://github.com/DeepCoreec/deepcore-remotelan/releases/latest/download/DeepCoreRemoteLAN-Windows.zip" target="_blank">
+          <div class="at-head">
+            <span class="at-icon">🖥️</span>
+            <span class="at-badge at-ecuador">🇪🇨 Ecuador</span>
+          </div>
+          <h4 class="at-name">RemoteLAN</h4>
+          <p class="at-desc">Control remoto y soporte técnico en red local sin internet</p>
+          <span class="at-dl">⬇ Windows — Disponible</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GRATIS — DeepCore Lang -->
+  <section class="section gratis-section" id="gratis">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center;margin-bottom:48px">
+        <p class="eyebrow">— Código abierto · Sin costo</p>
+        <h2 class="section-h">Gratis, <em>para siempre.</em></h2>
+        <p class="section-p">Herramientas que DeepCore regala a la comunidad. Sin licencia, sin registro, sin truco.</p>
+      </div>
+
+      <div class="gratis-grid">
+
+        <!-- DeepCore Lang -->
+        <div class="gratis-card reveal">
+          <div class="gratis-card-top">
+            <div class="gratis-icon-wrap">
+              <span style="font-size:2.4rem">⚡</span>
+            </div>
+            <div>
+              <span class="prod-badge" style="background:#22C55E22;color:#22C55E;border-color:#22C55E55;margin-bottom:6px;display:inline-block">100% Gratis</span>
+              <h3 style="margin:0;font-size:1.4rem">DeepCore Lang</h3>
+              <p style="margin:4px 0 0;color:#94a3b8;font-size:.85rem">Lenguaje de programación con IA nativa</p>
+            </div>
+          </div>
+
+          <p style="color:#cbd5e1;line-height:1.6;margin:18px 0">Un lenguaje de programación diseñado para que cualquier persona pueda crear apps con IA integrada. Sintaxis simple en español, asistente Aria incluido, y voz bidireccional nativa.</p>
+
+          <!-- Code demo -->
+          <div class="gratis-code">
+            <div class="code-topbar">
+              <span class="code-dot" style="background:#ff5f57"></span>
+              <span class="code-dot" style="background:#febc2e"></span>
+              <span class="code-dot" style="background:#28c840"></span>
+              <span style="margin-left:8px;color:#64748b;font-size:.75rem">hola.dc</span>
+            </div>
+            <pre class="code-body"><span class="dc-comment">// Tu primer programa DeepCore Lang</span>
+<span class="dc-kw">fn</span> <span class="dc-fn">saludar</span>(nombre: <span class="dc-type">Text</span>):
+    ai.say(<span class="dc-str">"¡Hola, {nombre}! Soy Aria 🤖"</span>)
+
+<span class="dc-kw">let</span> usuario: <span class="dc-type">Text</span> = ai.ask(<span class="dc-str">"¿Cómo te llamas?"</span>)
+saludar(usuario)</pre>
+          </div>
+
+          <ul class="prod-features" style="margin:20px 0">
+            <li>IA Aria integrada (Claude API)</li>
+            <li>Voz bidireccional nativa (TTS + STT)</li>
+            <li>Sintaxis en español inspirada en Python</li>
+            <li>REPL interactivo + compilador a Python</li>
+            <li>Extensión VS Code incluida</li>
+            <li>Creado en Guayaquil, Ecuador 🇪🇨</li>
+          </ul>
+
+          <div class="gratis-actions">
+            <a class="gratis-btn-primary" href="https://github.com/DeepCoreec/deepcore-lang/releases/latest/download/deepcore-lang.zip" target="_blank">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+              Descargar gratis
+            </a>
+            <a class="gratis-btn-secondary" href="https://github.com/DeepCoreec/deepcore-lang" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              Ver en GitHub
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ANUNCIO PÁGINAS WEB -->
+  <section class="web-promo reveal">
+    <div class="container">
+      <div class="wp-inner">
+        <div class="wp-glow"></div>
+        <div class="wp-left">
+          <span class="wp-tag">🔥 Oferta especial · Guayaquil</span>
+          <h2>¿Tu negocio no tiene<br>página web todavía?</h2>
+          <p>El 70% de los clientes busca en internet antes de comprar. Si no apareces, no existes. Nosotros te ponemos en el mapa.</p>
+          <div class="wp-features">
+            <div class="wp-feat"><span>✓</span> Diseño profesional y moderno</div>
+            <div class="wp-feat"><span>✓</span> Adaptada a celular y computadora</div>
+            <div class="wp-feat"><span>✓</span> Entrega en 5 a 7 días</div>
+            <div class="wp-feat"><span>✓</span> Dominio y hosting incluido el 1er año</div>
+            <div class="wp-feat"><span>✓</span> Chat de WhatsApp integrado</div>
+          </div>
+          <a class="btn-fill" href="https://wa.me/593986225038?text=Hola, me interesa una página web para mi negocio" target="_blank">
+            Quiero mi página web
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="wp-right">
+          <div class="wp-price-card">
+            <span class="wp-price-label">Páginas web desde</span>
+            <div class="wp-price-main">
+              <span class="wp-currency">$</span>
+              <span class="wp-amount">79</span>
+            </div>
+            <span class="wp-price-sub">pago único · sin mensualidades</span>
+            <div class="wp-divider"></div>
+            <div class="wp-plans">
+              <div class="wp-plan">
+                <div class="wp-plan">
+                  <div class="wp-plan-top">
+                    <span class="wp-plan-name">Básica</span>
+                    <span class="wp-plan-price">$79 – $120</span>
+                  </div>
+                  <p>Landing page, hasta 3 secciones, formulario de contacto</p>
+                </div>
+                <div class="wp-plan featured-plan">
+                  <div class="wp-plan-top">
+                    <span class="wp-plan-name">Profesional</span>
+                    <span class="wp-plan-price">$150 – $250</span>
+                  </div>
+                  <p>Diseño premium, múltiples páginas, chat, galería y más</p>
+                </div>
+                <div class="wp-plan">
+                  <div class="wp-plan-top">
+                    <span class="wp-plan-name">Empresarial</span>
+                    <span class="wp-plan-price">$300+</span>
+                  </div>
+                  <p>Sistema completo, tienda online, panel de administración</p>
+                </div>
+            </div>
+            <span class="wp-note">* Precios en dólares. Consulta gratuita sin compromiso.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CÓMO TRABAJAMOS -->
+  <section class="section proceso-section" id="proceso">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Nuestro proceso</p>
+        <h2 class="section-h">Simple, rápido y <em>transparente.</em></h2>
+        <p class="section-p">Sin complicaciones. Así trabajamos en DeepCore.</p>
+      </div>
+      <div class="proceso-grid">
+        <div class="paso-card reveal">
+          <div class="paso-num">01</div>
+          <div class="paso-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3>Nos contactas</h3>
+          <p>Escríbenos por WhatsApp o llena el formulario. Cuéntanos qué necesitas — sin compromisos.</p>
+        </div>
+        <div class="paso-arrow reveal">→</div>
+        <div class="paso-card reveal">
+          <div class="paso-num">02</div>
+          <div class="paso-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.5" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <h3>Diagnóstico gratis</h3>
+          <p>Revisamos tu equipo o proyecto sin costo. Te damos un presupuesto honesto y sin sorpresas.</p>
+        </div>
+        <div class="paso-arrow reveal">→</div>
+        <div class="paso-card reveal">
+          <div class="paso-num">03</div>
+          <div class="paso-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.5" viewBox="0 0 24 24">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <h3>Trabajamos</h3>
+          <p>Ejecutamos la reparación o desarrollo con calidad y en el tiempo acordado. Te informamos el avance.</p>
+        </div>
+        <div class="paso-arrow reveal">→</div>
+        <div class="paso-card reveal">
+          <div class="paso-num">04</div>
+          <div class="paso-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.5" viewBox="0 0 24 24">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Entrega + Garantía</h3>
+          <p>Te entregamos el trabajo terminado con garantía incluida. Si algo falla, lo resolvemos sin costo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN GARANTÍA -->
+  <section class="garantia-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Nuestro compromiso</p>
+        <h2 class="section-h">Tu tranquilidad es <em>nuestra prioridad.</em></h2>
+        <p class="section-p">Trabajamos con transparencia y responsabilidad en cada servicio.</p>
+      </div>
+      <div class="garantia-grid">
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <span class="garantia-big">30 días</span>
+          <h3>Garantía en Reparaciones</h3>
+          <p>Todas las reparaciones físicas tienen 30 días de garantía. Si el mismo problema regresa, lo resolvemos sin costo adicional.</p>
+        </div>
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+          </div>
+          <span class="garantia-big">Gratis</span>
+          <h3>Diagnóstico Sin Costo</h3>
+          <p>Revisamos tu equipo sin cobrar. Solo pagas si decides proceder con la reparación. Sin sorpresas ni compromisos ocultos.</p>
+        </div>
+        <div class="garantia-card reveal">
+          <div class="garantia-icon">
+            <svg width="28" height="28" fill="none" stroke="#FF0022" stroke-width="1.8" viewBox="0 0 24 24">
+              <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            </svg>
+          </div>
+          <span class="garantia-big">Honesto</span>
+          <h3>Presupuesto Transparente</h3>
+          <p>Te decimos exactamente cuánto va a costar antes de empezar. Precio justo, sin cargos adicionales ni letra pequeña.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="faq-layout">
+        <div class="faq-left reveal">
+          <p class="eyebrow">— Preguntas frecuentes</p>
+          <h2 class="section-h">Resolvemos tus <em>dudas.</em></h2>
+          <p class="section-p">Si no encuentras lo que buscas, escríbenos directamente.</p>
+          <a class="btn-fill" href="https://wa.me/593986225038" target="_blank" style="margin-top:28px;display:inline-flex;align-items:center;gap:10px">
+            Hacer una pregunta
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="faq-right reveal">
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Cuánto cuesta reparar mi laptop?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Depende de la falla. Una limpieza parte desde $15, el cambio de pantalla desde $35, reemplazo de disco/RAM desde $20 más el componente. El diagnóstico es <strong>siempre gratuito</strong>.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Tienen garantía en las reparaciones?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Sí. Todas las reparaciones físicas tienen <strong>30 días de garantía</strong>. Si el mismo problema regresa dentro de ese período, lo revisamos sin costo adicional.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Cuánto tiempo demora una reparación?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Limpieza y optimización: <strong>mismo día</strong>. Cambio de componentes: <strong>1-2 horas</strong>. Reparaciones complejas de placa o consolas: <strong>1 a 5 días</strong>. Te avisamos el tiempo exacto al recibir el equipo.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Pueden crear una página web para mi negocio?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Sí. Creamos páginas web profesionales desde <strong>$79</strong> pago único, sin mensualidades. Incluye diseño, dominio y hosting el primer año. Entrega en 5 a 7 días.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Hacen servicio a domicilio?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Sí, en Guayaquil. Podemos pasar a recoger tu equipo o atenderte en sitio. Para software también ofrecemos <strong>soporte remoto</strong> sin que salgas de casa.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Qué formas de pago aceptan?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Aceptamos <strong>efectivo, transferencia bancaria y pago móvil</strong>. Para trabajos mayores se solicita un adelanto del 50% al inicio.</div>
+          </div>
+          <div class="faq-item" onclick="toggleFaq(this)">
+            <div class="faq-q"><span>¿Reparan celulares?</span><span class="faq-icon">+</span></div>
+            <div class="faq-a">Por ahora nos especializamos en PCs, laptops, consolas y TVs. La <strong>reparación de celulares estará disponible próximamente</strong>. ¡Síguenos para enterarte cuando lancemos!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="section testimonios-section" id="testimonios">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Lo que dicen nuestros clientes</p>
+        <h2 class="section-h">Resultados que <em>hablan.</em></h2>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Llevé mi laptop que no encendía, la diagnosticaron gratis y en 2 horas estaba lista. Precio justo y muy profesionales."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">CM</div>
+            <div><strong>Carlos M.</strong><span>Guayaquil</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Me hicieron la página web de mi negocio en menos de una semana. Quedó increíble y muy barata comparado con otras empresas."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">LR</div>
+            <div><strong>Laura R.</strong><span>Dueña de negocio</span></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Repararon mi PS5 que tenía falla de lectura. Garantía incluida y todo quedó perfecto. Los recomiendo al 100%."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AV</div>
+            <div><strong>Andrés V.</strong><span>Guayaquil</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="testi-note reveal">* Próximamente reseñas verificadas de clientes reales. ¿Ya trabajaste con nosotros? <a href="https://wa.me/593986225038?text=Quiero dejar una reseña de DeepCore" target="_blank">Déjanos tu opinión →</a></p>
+    </div>
+  </section>
+
+  <!-- GALERÍA DE TRABAJOS -->
+  <section class="gallery-section" id="trabajos">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Nuestros trabajos</p>
+        <h2 class="section-h">Lo que hacemos <em>habla por sí solo.</em></h2>
+        <p class="section-p">Casos reales de equipos y proyectos que pasaron por nuestras manos.</p>
+      </div>
+      <!-- Las tarjetas se generan automáticamente desde gallery-data.js -->
+      <div class="gallery-grid" id="galleryGrid"></div>
+      <p class="gallery-note reveal">¿Trabajaste con nosotros? <a href="https://wa.me/593986225038?text=Hola, quiero compartir una foto de mi reparación" target="_blank">Envíanos tu foto antes/después →</a></p>
+    </div>
+  </section>
+
+  <!-- BAND CTA -->
+  <div class="band-cta">
+    <div class="band-inner">
+      <p class="band-text">¿Tienes un equipo dañado o un proyecto en mente?</p>
+      <a class="btn-fill white" href="https://wa.me/593986225038" target="_blank">
+        Escríbenos ahora
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- CALCULADORA DE PRESUPUESTO -->
+  <section class="calc-section" id="calculadora">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">— Estima tu servicio</p>
+        <h2 class="section-h">Calculadora de <em>Presupuesto.</em></h2>
+        <p class="section-p">Selecciona el servicio y obtén un rango estimado de precio al instante.</p>
+      </div>
+      <div class="calc-wrapper reveal">
+        <div class="calc-form-grid">
+          <div class="calc-group">
+            <label>Tipo de servicio</label>
+            <select id="calcServicio" onchange="calcularPresupuesto()">
+              <option value="">— Selecciona un servicio —</option>
+              <option value="limpieza">Limpieza y mantenimiento</option>
+              <option value="pantalla">Cambio de pantalla (laptop)</option>
+              <option value="ssd">Cambio de SSD / RAM</option>
+              <option value="placa">Reparación placa madre</option>
+              <option value="consola_menor">Reparación consola (menor)</option>
+              <option value="consola_mayor">Reparación consola (mayor / placa)</option>
+              <option value="tv">Reparación Smart TV</option>
+              <option value="web_basica">Página web básica</option>
+              <option value="web_pro">Página web profesional</option>
+              <option value="software">Software a medida</option>
+              <option value="soporte">Soporte técnico remoto</option>
+            </select>
+          </div>
+          <div class="calc-group">
+            <label>Urgencia</label>
+            <select id="calcUrgencia" onchange="calcularPresupuesto()">
+              <option value="normal">Normal (mismo día o siguiente)</option>
+              <option value="express">Express (en horas)</option>
+            </select>
+          </div>
+        </div>
+        <div class="calc-result" id="calcResult">
+          <span class="calc-price" id="calcPrice">—</span>
+          <span class="calc-price-label" id="calcLabel">Selecciona un servicio para ver el estimado</span>
+          <span class="calc-note" id="calcNote"></span>
+        </div>
+        <div class="calc-actions">
+          <a class="btn-fill" id="calcCta" href="https://wa.me/593986225038" target="_blank">
+            Solicitar presupuesto exacto
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="section" id="contacto">
+    <div class="container">
+      <div class="contact-layout">
+
+        <div class="contact-left reveal">
+          <p class="eyebrow">— Contáctanos</p>
+          <h2 class="section-h">Hablemos.</h2>
+          <p class="section-p">Respondemos rápido. Sin rodeos.</p>
+
+          <div class="cinfo-list">
+            <a class="cinfo" href="https://wa.me/593986225038" target="_blank">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">WhatsApp</span><span class="cinfo-val">+593 986 225 038</span></div>
+              <span class="cinfo-arr">↗</span>
+            </a>
+            <a class="cinfo" href="mailto:deepcoreec@gmail.com">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">Email</span><span class="cinfo-val">deepcoreec@gmail.com</span></div>
+              <span class="cinfo-arr">↗</span>
+            </a>
+            <div class="cinfo">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">Ubicación</span><span class="cinfo-val">Guayaquil, Ecuador</span></div>
+            </div>
+            <div class="cinfo">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">Horario</span><span class="cinfo-val">Lun – Sáb · 9:00 – 19:00</span></div>
+            </div>
+            <a class="cinfo" href="https://www.instagram.com/deepcoreec/" target="_blank">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">Instagram</span><span class="cinfo-val">@deepcoreec</span></div>
+              <span class="cinfo-arr">↗</span>
+            </a>
+            <a class="cinfo" href="https://www.facebook.com/profile.php?id=61577433271167" target="_blank">
+              <div class="cinfo-icon">
+                <svg width="18" height="18" fill="none" stroke="#FF0022" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </div>
+              <div><span class="cinfo-label">Facebook</span><span class="cinfo-val">DeepCore</span></div>
+              <span class="cinfo-arr">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-right reveal">
+          <form class="cform" onsubmit="enviarFormulario(event)">
+            <div class="cform-row">
+              <div class="cform-group">
+                <label>Nombre</label>
+                <input type="text" id="nombre" placeholder="Tu nombre" required />
+              </div>
+              <div class="cform-group">
+                <label>Correo</label>
+                <input type="email" id="email" placeholder="tucorreo@email.com" required />
+              </div>
+            </div>
+            <div class="cform-group">
+              <label>Servicio</label>
+              <select id="servicio">
+                <option value="">Selecciona un servicio</option>
+                <option>Reparación de PC / Laptop</option>
+                <option>Reparación de Consola</option>
+                <option>Reparación de TV</option>
+                <option>Desarrollo de Software</option>
+                <option>Mantenimiento Preventivo</option>
+                <option>Soporte Técnico Remoto</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="cform-group">
+              <label>Mensaje</label>
+              <textarea id="mensaje" rows="5" placeholder="Cuéntanos tu problema o proyecto..." required></textarea>
+            </div>
+            <button type="submit" class="btn-fill full">
+              Enviar por WhatsApp
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="nav-logo" href="#inicio">
+            <div class="logo-hex">
+              <svg width="30" height="30" viewBox="0 0 40 40">
+                <defs>
+                  <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FF4466"/>
+                    <stop offset="100%" stop-color="#CC0018"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="20,1 36,10 36,30 20,39 4,30 4,10" fill="none" stroke="url(#lg2)" stroke-width="1.5"/>
+                <polygon points="20,7 31,13.5 31,26.5 20,33 9,26.5 9,13.5" fill="none" stroke="#FF0022" stroke-width="1" opacity="0.4" transform="rotate(30,20,20)"/>
+                <circle cx="20" cy="20" r="3.5" fill="#FF0022"/>
+                <circle cx="20" cy="20" r="1.5" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
+            <span><span class="logo-deep">Deep</span><span class="logo-core">Core</span></span>
+          </a>
+          <p class="footer-tag">Go Deeper</p>
+        </div>
+        <nav class="footer-nav">
+          <a href="#servicios">Servicios</a>
+          <a href="#nosotros">Nosotros</a>
+          <a href="#contacto">Contacto</a>
+          <a href="mailto:deepcoreec@gmail.com">Email</a>
+          <a href="https://www.instagram.com/deepcoreec/" target="_blank">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61577433271167" target="_blank">Facebook</a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 DeepCore · Guayaquil, Ecuador</span>
+        <span>deepcoreec@gmail.com</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÓN WHATSAPP FLOTANTE -->
+  <a class="wa-float" href="https://wa.me/593986225038?text=Hola%20DeepCore!%20Vengo%20de%20su%20página%20web." target="_blank" title="Escríbenos por WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span class="wa-tooltip">¡Escríbenos!</span>
+  </a>
+
+  <!-- BOTÓN SCROLL TO TOP -->
+  <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">
+    <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+      <polyline points="18 15 12 9 6 15"/>
+    </svg>
+  </button>
+
+  <script src="script.js"></script>
+  <script src="chat.js?v=3"></script>
+  <script src="tecnico.js"></script>
+  <script src="gallery-data.js"></script>
+  <script>
+    // Mostrar/ocultar scroll-to-top
+    window.addEventListener('scroll', () => {
+      document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+    });
+
+    // ── GALERÍA DINÁMICA ──
+    (function() {
+      const grid = document.getElementById('galleryGrid');
+      if (!grid || typeof GALLERY_ITEMS === 'undefined') return;
+      GALLERY_ITEMS.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card reveal';
+        const fotoHtml = item.foto
+          ? `<img src="${item.foto}" alt="${item.comentario}" loading="lazy" />`
+          : `<div class="gallery-placeholder">
+               <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+               <span>Foto próximamente</span>
+             </div>`;
+        card.innerHTML = `<div class="gallery-photo">${fotoHtml}</div>
+          <p class="gallery-caption">${item.comentario}</p>`;
+        grid.appendChild(card);
+      });
+      if (window._revealObserver) {
+        grid.querySelectorAll('.reveal').forEach(el => window._revealObserver.observe(el));
+      }
+    })();
+
+    // ── PROMO BANNER ──
+    (function() {
+      const banner = document.getElementById('promoBanner');
+      if (localStorage.getItem('dc_banner_dismissed') === '1') {
+        banner.style.display = 'none';
+      } else {
+        document.body.classList.add('has-banner');
+        // Offset navbar scroll padding
+        document.documentElement.style.scrollPaddingTop = '100px';
+      }
+    })();
+    function closeBanner() {
+      const banner = document.getElementById('promoBanner');
+      banner.style.display = 'none';
+      document.body.classList.remove('has-banner');
+      localStorage.setItem('dc_banner_dismissed', '1');
+    }
+
+    // ── CONTADORES ANIMADOS ──
+    function animateCounter(el, target, duration) {
+      let start = 0;
+      const step = Math.ceil(target / (duration / 16));
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = start.toLocaleString();
+      }, 16);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          animateCounter(el, target, 1800);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.counter-num[data-target]').forEach(el => counterObserver.observe(el));
+
+    // ── CALCULADORA ──
+    const calcData = {
+      limpieza:       { rango: '$10 – $25',  label: 'Limpieza y mantenimiento',      nota: 'Incluye limpieza interna, pasta térmica y optimización.' },
+      pantalla:       { rango: '$30 – $75',  label: 'Cambio de pantalla (laptop)',    nota: 'Varía según modelo y disponibilidad del repuesto.' },
+      ssd:            { rango: '$15 – $60',  label: 'Cambio de SSD / RAM',            nota: 'Solo mano de obra. El componente se cotiza aparte.' },
+      placa:          { rango: 'desde $60',  label: 'Reparación placa madre',         nota: 'Diagnóstico previo necesario. Varía según la falla.' },
+      consola_menor:  { rango: '$15 – $40',  label: 'Reparación consola (menor)',     nota: 'Limpieza, pasta térmica, HDMI, botones.' },
+      consola_mayor:  { rango: '$45 – $90',  label: 'Reparación consola (mayor)',     nota: 'Fallas de placa, APU, lector óptico.' },
+      tv:             { rango: '$30 – $80',  label: 'Reparación Smart TV',            nota: 'Depende del componente afectado (fuente, T-CON, panel).' },
+      web_basica:     { rango: '$79 – $120', label: 'Página web básica',              nota: 'Landing page, hasta 3 secciones, dominio y hosting 1er año.' },
+      web_pro:        { rango: '$150 – $250',label: 'Página web profesional',         nota: 'Diseño premium, múltiples páginas, galería, chat.' },
+      software:       { rango: 'desde $300', label: 'Software a medida',              nota: 'Cotización personalizada según requerimientos.' },
+      soporte:        { rango: '$10 – $30',  label: 'Soporte técnico remoto',         nota: 'Por sesión. Sin desplazamiento necesario.' },
+    };
+    function calcularPresupuesto() {
+      const servicio  = document.getElementById('calcServicio').value;
+      const urgencia  = document.getElementById('calcUrgencia').value;
+      const priceEl   = document.getElementById('calcPrice');
+      const labelEl   = document.getElementById('calcLabel');
+      const noteEl    = document.getElementById('calcNote');
+      const ctaEl     = document.getElementById('calcCta');
+
+      if (!servicio) {
+        priceEl.textContent = '—';
+        labelEl.textContent = 'Selecciona un servicio para ver el estimado';
+        noteEl.textContent  = '';
+        return;
+      }
+      const d = calcData[servicio];
+      priceEl.textContent = d.rango + (urgencia === 'express' ? ' + $5' : '');
+      labelEl.textContent = d.label;
+      noteEl.textContent  = d.nota + (urgencia === 'express' ? ' · Servicio express incluye recargo de $5.' : '');
+      const msg = encodeURIComponent('Hola DeepCore! Me interesa: ' + d.label + '. ¿Pueden darme un presupuesto exacto?');
+      ctaEl.href = 'https://wa.me/593986225038?text=' + msg;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:800px;overflow:hidden;font-family:'Inter',sans-serif;background:#fff;color:#111}
+/* Top bar */
+.topbar{background:#111;color:#fff;text-align:center;padding:8px;font-size:.72rem;letter-spacing:.5px}
+.topbar span{color:#fbbf24}
+/* Navbar */
+nav{display:flex;align-items:center;justify-content:space-between;padding:16px 60px;border-bottom:1px solid #efefef}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:1.3rem;letter-spacing:-1px;color:#111}
+.logo span{color:#ef4444}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:#555;font-size:.82rem;text-decoration:none;font-weight:400}
+.nav-right{display:flex;align-items:center;gap:16px}
+.cart-btn{background:#111;color:#fff;padding:8px 18px;border-radius:6px;font-size:.78rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:6px}
+.cart-count{background:#ef4444;color:#fff;width:16px;height:16px;border-radius:50%;font-size:.6rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+/* Hero */
+.hero{display:grid;grid-template-columns:1fr 1.4fr;height:calc(800px - 87px)}
+/* Left */
+.hero-left{padding:50px 60px;display:flex;flex-direction:column;justify-content:center;background:#f9f9f9;border-right:1px solid #efefef}
+.sale-tag{display:inline-flex;align-items:center;gap:6px;background:#fef3c7;border:1px solid #fde68a;padding:4px 12px;border-radius:4px;font-size:.7rem;color:#b45309;font-weight:600;margin-bottom:20px;text-transform:uppercase;letter-spacing:.5px}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:3.2rem;line-height:.92;letter-spacing:-2px;color:#111;margin-bottom:16px}
+h1 em{font-style:normal;color:#ef4444}
+.desc{font-size:.88rem;color:#666;line-height:1.7;margin-bottom:24px;max-width:360px}
+/* Price */
+.price-block{display:flex;align-items:baseline;gap:12px;margin-bottom:24px}
+.price-now{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:900;color:#111}
+.price-old{font-size:1.1rem;color:#999;text-decoration:line-through}
+.price-save{background:#dcfce7;color:#15803d;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:4px}
+/* CTA buttons */
+.btns{display:flex;gap:10px;margin-bottom:20px}
+.btn-buy{background:#111;color:#fff;padding:13px 28px;border-radius:6px;font-weight:700;font-size:.85rem;text-decoration:none;flex:1;text-align:center}
+.btn-cart{border:1px solid #ddd;color:#111;padding:13px 24px;border-radius:6px;font-size:.85rem;text-decoration:none;font-weight:500}
+/* Trust badges */
+.trust-row{display:flex;gap:16px}
+.trust-badge{display:flex;align-items:center;gap:5px;font-size:.68rem;color:#666}
+.trust-badge span{font-size:.9rem}
+/* Right: product grid */
+.hero-right{padding:24px 30px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px;background:#fff}
+.prod-card{border:1px solid #efefef;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.prod-img{flex:1;display:flex;align-items:center;justify-content:center;font-size:3rem;background:#f5f5f5;padding:20px}
+.prod-img.c1{background:linear-gradient(135deg,#fce7f3,#fef3c7)}
+.prod-img.c2{background:linear-gradient(135deg,#dbeafe,#ede9fe)}
+.prod-img.c3{background:linear-gradient(135deg,#dcfce7,#d1fae5)}
+.prod-img.c4{background:linear-gradient(135deg,#fef3c7,#fee2e2)}
+.prod-info{padding:12px 14px;border-top:1px solid #f0f0f0}
+.prod-name{font-family:'Space Grotesk',sans-serif;font-size:.8rem;font-weight:700;color:#111;margin-bottom:2px}
+.prod-price{font-size:.75rem;color:#ef4444;font-weight:600}
+.prod-old{font-size:.65rem;color:#aaa;text-decoration:line-through;margin-left:4px}
+.prod-badge{position:absolute;top:10px;right:10px;background:#ef4444;color:#fff;font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:4px}
+.prod-badge.new-badge{background:#111}
+/* Stars row */
+.stars-row{display:flex;align-items:center;gap:4px;margin-top:2px}
+.stars-row .s{color:#fbbf24;font-size:.65rem}
+.stars-row .cnt{font-size:.6rem;color:#999}
+</style>
+</head>
+<body>
+<div class="topbar">🔥 OFERTA FLASH: <span>40% OFF</span> en toda la tienda — Termina en 04:22:18 · Envío gratis sobre $50</div>
+<nav>
+  <div class="logo">Nova<span>Shop</span></div>
+  <div class="nav-links">
+    <a href="#">Novedades</a><a href="#">Categorías</a><a href="#">Ofertas</a><a href="#">Marcas</a>
+  </div>
+  <div class="nav-right">
+    <a href="#" style="font-size:.82rem;color:#555;text-decoration:none">🔍 Buscar</a>
+    <a href="#" style="font-size:.82rem;color:#555;text-decoration:none">👤 Cuenta</a>
+    <a class="cart-btn" href="#">🛒 Carrito <span class="cart-count">3</span></a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-left">
+    <div class="sale-tag">⚡ Oferta del día</div>
+    <h1>Tecnología<br>al mejor<br><em>precio.</em></h1>
+    <p class="desc">Los mejores gadgets y accesorios tech con garantía oficial. Envío en 24h a todo el Ecuador.</p>
+    <div class="price-block">
+      <span class="price-now">$89.99</span>
+      <span class="price-old">$149.99</span>
+      <span class="price-save">Ahorras 40%</span>
+    </div>
+    <div class="btns">
+      <a class="btn-buy" href="#">Comprar ahora</a>
+      <a class="btn-cart" href="#">+ Carrito</a>
+    </div>
+    <div class="trust-row">
+      <div class="trust-badge"><span>🚚</span> Envío 24h</div>
+      <div class="trust-badge"><span>🔒</span> Pago seguro</div>
+      <div class="trust-badge"><span>↩️</span> 30 días devolución</div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="prod-card">
+      <div class="prod-badge">-35%</div>
+      <div class="prod-img c1">🎧</div>
+      <div class="prod-info">
+        <div class="prod-name">AirPods Pro Max</div>
+        <div>
+          <span class="prod-price">$129<span class="prod-old">$199</span></span>
+        </div>
+        <div class="stars-row"><span class="s">★★★★★</span><span class="cnt">(248)</span></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-badge new-badge">NUEVO</div>
+      <div class="prod-img c2">⌚</div>
+      <div class="prod-info">
+        <div class="prod-name">SmartWatch Pro X</div>
+        <div><span class="prod-price">$89<span class="prod-old">$149</span></span></div>
+        <div class="stars-row"><span class="s">★★★★☆</span><span class="cnt">(132)</span></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-badge" style="background:#7c3aed">HOT</div>
+      <div class="prod-img c3">💻</div>
+      <div class="prod-info">
+        <div class="prod-name">Laptop UltraSlim 14"</div>
+        <div><span class="prod-price">$549<span class="prod-old">$799</span></span></div>
+        <div class="stars-row"><span class="s">★★★★★</span><span class="cnt">(89)</span></div>
+      </div>
+    </div>
+    <div class="prod-card">
+      <div class="prod-img c4">📱</div>
+      <div class="prod-info">
+        <div class="prod-name">Tablet Creator 11"</div>
+        <div><span class="prod-price">$219<span class="prod-old">$299</span></span></div>
+        <div class="stars-row"><span class="s">★★★★☆</span><span class="cnt">(67)</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

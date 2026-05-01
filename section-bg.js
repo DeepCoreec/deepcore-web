@@ -166,20 +166,20 @@
     const c = mkCanvas(section);
     const ctx = c.getContext('2d');
     let W, H, cols, drops = [];
-    const CHARS = 'ABCDEF0123456789{}[]<>/\\|_-=+*';
+    const CHARS = 'ABCDEF0123456789{}[]<>/\\|_-=+*#@!?$%';
     const anim = { running: false };
 
     function buildRain() {
       W = c.width  = section.offsetWidth;
       H = c.height = section.offsetHeight;
-      const fontSize = isMobile ? 10 : 13;
+      const fontSize = isMobile ? 12 : 15;
       cols = Math.floor(W / fontSize);
       drops = Array.from({ length: cols }, () => ({
         y: Math.random() * H / fontSize,
-        speed: 0.3 + Math.random() * 0.4,
-        alpha: 0.02 + Math.random() * 0.04
+        speed: 0.4 + Math.random() * 0.6,
+        alpha: 0.18 + Math.random() * 0.22
       }));
-      ctx.font = `${fontSize}px 'Courier New', monospace`;
+      ctx.font = `bold ${fontSize}px 'Courier New', monospace`;
     }
     buildRain();
     window.addEventListener('resize', buildRain);
@@ -189,30 +189,38 @@
       if (!anim.running) { requestAnimationFrame(drawFrame); return; }
       frame++;
 
-      // Fade trail
-      ctx.fillStyle = 'rgba(5,5,8,0.06)';
+      // Fade trail — lighter so characters persist longer
+      ctx.fillStyle = 'rgba(5,5,8,0.025)';
       ctx.fillRect(0, 0, W, H);
 
-      const fontSize = isMobile ? 10 : 13;
+      const fontSize = isMobile ? 12 : 15;
 
       for (let i = 0; i < drops.length; i++) {
-        if (frame % 3 !== i % 3) continue; // stagger updates
+        if (frame % 2 !== i % 2) continue; // stagger updates
         const d = drops[i];
         const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
+
+        // Column body — red glow chars
         ctx.fillStyle = `rgba(255,0,34,${d.alpha})`;
         ctx.fillText(ch, i * fontSize, d.y * fontSize);
 
-        // Occasional bright head
-        if (Math.random() < 0.003) {
-          ctx.fillStyle = `rgba(255,150,150,${d.alpha * 3})`;
+        // Bright white/pink head on leading character
+        if (Math.random() < 0.25) {
+          ctx.fillStyle = `rgba(255,180,180,${Math.min(d.alpha * 2.5, 0.9)})`;
+          ctx.fillText(ch, i * fontSize, d.y * fontSize);
+        }
+
+        // Extra glow on hub columns
+        if (i % 7 === 0 && Math.random() < 0.12) {
+          ctx.fillStyle = `rgba(255,80,80,${d.alpha * 1.8})`;
           ctx.fillText(ch, i * fontSize, d.y * fontSize);
         }
 
         d.y += d.speed;
         if (d.y * fontSize > H) {
           d.y = 0;
-          d.alpha = 0.02 + Math.random() * 0.05;
-          d.speed = 0.25 + Math.random() * 0.5;
+          d.alpha = 0.16 + Math.random() * 0.25;
+          d.speed = 0.3 + Math.random() * 0.7;
         }
       }
       requestAnimationFrame(drawFrame);
@@ -316,96 +324,139 @@
 
 
   // ══════════════════════════════════════════════════════════════════════════
-  // 4. #activar-ia — Spiral Data Particles
-  //    Particles orbit in DNA-like double helix
+  // 4. #activar-ia — Claude Sunburst + Particle Streams
+  //    Mimics Claude's logo rays with orbiting data particles
   // ══════════════════════════════════════════════════════════════════════════
-  function initDNAParticles() {
+  function initClaudeCanvas() {
     const section = document.querySelector('.activar-ia-section');
     if (!section) return;
     const c = mkCanvas(section);
     const ctx = c.getContext('2d');
     let W, H, frame = 0;
     const anim = { running: false };
-    const COUNT = isMobile ? 30 : 60;
 
-    // Particles ride a double-helix path
-    const particles = Array.from({ length: COUNT }, (_, i) => ({
-      t:      (i / COUNT) * Math.PI * 2,  // position on helix
-      strand: i % 2,                       // 0 or 1 (two strands)
-      speed:  0.006 + Math.random() * 0.004,
-      size:   1 + Math.random() * 2,
-      alpha:  0.3 + Math.random() * 0.5
-    }));
+    // Particle streams flowing outward from center
+    const STREAM_COUNT = isMobile ? 40 : 90;
+    const RAY_COUNT    = 13; // Claude logo has ~13 rays
 
-    function buildDNA() {
+    let streams = [];
+    function buildCanvas() {
       W = c.width  = section.offsetWidth;
       H = c.height = section.offsetHeight;
+      streams = Array.from({ length: STREAM_COUNT }, (_, i) => ({
+        angle: Math.random() * Math.PI * 2,
+        r:     Math.random() * Math.min(W, H) * 0.38,
+        speed: (0.004 + Math.random() * 0.006) * (Math.random() < 0.5 ? 1 : -1),
+        rSpeed: 0.3 + Math.random() * 0.8,
+        size:  1 + Math.random() * 2.5,
+        alpha: 0.25 + Math.random() * 0.55,
+        hue:   Math.random() < 0.7 ? 0 : 28, // red or warm orange (Claude brand)
+        trail: []
+      }));
     }
-    buildDNA();
-    window.addEventListener('resize', buildDNA);
+    buildCanvas();
+    window.addEventListener('resize', buildCanvas);
 
     function drawFrame() {
       if (!anim.running) { requestAnimationFrame(drawFrame); return; }
       frame++;
-      ctx.clearRect(0, 0, W, H);
 
-      const cx = W * 0.5;
-      const radius = Math.min(W, H) * 0.3;
-      const loops  = 2.5;
+      // Soft fade trail
+      ctx.fillStyle = 'rgba(8,4,26,0.055)';
+      ctx.fillRect(0, 0, W, H);
 
-      // Draw connecting rungs
-      for (let i = 0; i < COUNT; i += 2) {
-        const p1 = particles[i];
-        const p2 = particles[i + 1];
-        if (!p2) continue;
-        const x1 = cx + Math.cos(p1.t * loops) * radius * 0.6;
-        const y1 = H * 0.1 + (H * 0.8) * ((p1.t % (Math.PI * 2)) / (Math.PI * 2));
-        const x2 = cx + Math.cos(p2.t * loops + Math.PI) * radius * 0.6;
-        const y2 = H * 0.1 + (H * 0.8) * ((p2.t % (Math.PI * 2)) / (Math.PI * 2));
+      const cx = W * 0.72; // shift center toward right — left side for text
+      const cy = H * 0.5;
+      const maxR = Math.min(W, H) * 0.38;
+      const t = frame * 0.012;
 
-        ctx.strokeStyle = `rgba(255,0,34,0.06)`;
-        ctx.lineWidth = 0.6;
+      // ── Claude sunburst rays ──────────────────────────────────────────────
+      for (let r = 0; r < RAY_COUNT; r++) {
+        const rayAngle = (r / RAY_COUNT) * Math.PI * 2 + t * 0.15;
+        const rayLen   = maxR * (0.55 + 0.12 * Math.sin(t * 0.7 + r));
+        const x2 = cx + Math.cos(rayAngle) * rayLen;
+        const y2 = cy + Math.sin(rayAngle) * rayLen;
+
+        const rayGrad = ctx.createLinearGradient(cx, cy, x2, y2);
+        const alpha = 0.10 + 0.06 * Math.sin(t + r * 0.8);
+        rayGrad.addColorStop(0,   `rgba(201,100,66,${alpha * 2.2})`);
+        rayGrad.addColorStop(0.4, `rgba(255,60,34,${alpha * 1.3})`);
+        rayGrad.addColorStop(1,   'rgba(255,0,34,0)');
+
         ctx.beginPath();
-        ctx.moveTo(x1, y1);
+        ctx.moveTo(cx, cy);
         ctx.lineTo(x2, y2);
+        ctx.strokeStyle = rayGrad;
+        ctx.lineWidth = 1.8 + 1.2 * Math.sin(t * 0.5 + r * 0.4);
         ctx.stroke();
       }
 
-      // Draw particles
-      for (const p of particles) {
-        p.t += p.speed;
-        const offset = p.strand === 0 ? 0 : Math.PI;
-        const x = cx + Math.cos(p.t * loops + offset) * radius * 0.6;
-        const y = H * 0.1 + (H * 0.8) * ((p.t % (Math.PI * 2)) / (Math.PI * 2));
-        const depth = 0.5 + 0.5 * Math.sin(p.t * loops + offset);
+      // ── Orbiting rings ────────────────────────────────────────────────────
+      [0.28, 0.48, 0.72].forEach((frac, ri) => {
+        const rr    = maxR * frac;
+        const alpha = 0.06 + 0.03 * Math.sin(t * 0.4 + ri);
+        ctx.beginPath();
+        ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(201,100,66,${alpha})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      });
 
-        const alpha = p.alpha * depth;
-        const size  = p.size  * depth;
+      // ── Streaming particles ────────────────────────────────────────────────
+      for (const s of streams) {
+        s.angle += s.speed;
+        s.r += s.rSpeed * 0.15;
+        if (s.r > maxR + 20) { s.r = 8 + Math.random() * 12; s.alpha = 0.25 + Math.random() * 0.55; }
+        if (s.r < 0) { s.r = maxR * 0.2 + Math.random() * maxR * 0.1; }
 
-        // Glow
-        const g = ctx.createRadialGradient(x, y, 0, x, y, size * 5);
-        g.addColorStop(0, `rgba(255,0,34,${alpha * 0.6})`);
-        g.addColorStop(1, 'rgba(255,0,34,0)');
+        const x = cx + Math.cos(s.angle) * s.r;
+        const y = cy + Math.sin(s.angle) * s.r;
+        const depthAlpha = s.alpha * (0.4 + 0.6 * (s.r / maxR));
+
+        // Glow halo
+        const g = ctx.createRadialGradient(x, y, 0, x, y, s.size * 5);
+        g.addColorStop(0, `hsla(${s.hue},100%,58%,${depthAlpha * 0.7})`);
+        g.addColorStop(1, 'rgba(0,0,0,0)');
         ctx.fillStyle = g;
         ctx.beginPath();
-        ctx.arc(x, y, size * 5, 0, Math.PI * 2);
+        ctx.arc(x, y, s.size * 5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Core dot
-        ctx.fillStyle = `rgba(255,${Math.floor(30 * depth)},${Math.floor(34 * depth)},${alpha})`;
+        // Core
+        ctx.fillStyle = `hsla(${s.hue},100%,68%,${depthAlpha})`;
         ctx.beginPath();
-        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.arc(x, y, s.size, 0, Math.PI * 2);
         ctx.fill();
-
-        // Wrap: reset to top when particle falls below bottom
-        if (p.t > Math.PI * 2 * 10) p.t -= Math.PI * 2;
       }
+
+      // ── Central glow orb ──────────────────────────────────────────────────
+      const orbR   = 28 + 6 * Math.sin(t * 0.6);
+      const orbPulse = 0.45 + 0.2 * Math.sin(t * 0.8);
+      const gg = ctx.createRadialGradient(cx, cy, 0, cx, cy, orbR * 5);
+      gg.addColorStop(0,   `rgba(255,120,60,${orbPulse})`);
+      gg.addColorStop(0.3, `rgba(201,100,66,${orbPulse * 0.5})`);
+      gg.addColorStop(0.7, `rgba(255,0,34,${orbPulse * 0.15})`);
+      gg.addColorStop(1,   'rgba(0,0,0,0)');
+      ctx.fillStyle = gg;
+      ctx.beginPath();
+      ctx.arc(cx, cy, orbR * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bright core
+      const cc = ctx.createRadialGradient(cx, cy, 0, cx, cy, orbR);
+      cc.addColorStop(0,   `rgba(255,220,180,${orbPulse * 1.1})`);
+      cc.addColorStop(0.5, `rgba(255,100,50,${orbPulse * 0.8})`);
+      cc.addColorStop(1,   `rgba(201,100,66,0)`);
+      ctx.fillStyle = cc;
+      ctx.beginPath();
+      ctx.arc(cx, cy, orbR, 0, Math.PI * 2);
+      ctx.fill();
 
       requestAnimationFrame(drawFrame);
     }
 
     observeSection(section, () => {
-      c.style.opacity = '0.85';
+      c.style.opacity = '1';
       anim.running = true;
       drawFrame();
     });
@@ -766,7 +817,7 @@
     initPCB();          // servicios  — circuit board
     initCodeRain();     // galeria    — matrix code
     initBrainWaves();   // agente     — EEG waves
-    initDNAParticles(); // activar-ia — DNA helix
+    initClaudeCanvas(); // activar-ia — Claude sunburst
     initStarField();    // testimonios— shooting stars
     initRoadmap();      // roadmap    — constellation
     initSparkles();     // gratis     — sparkles

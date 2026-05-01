@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700;900&family=Inter:wght@200;400&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1280px;height:800px;overflow:hidden;font-family:'Inter',sans-serif;background:#04040a;color:#eef;}
+/* Orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.o1{width:500px;height:500px;background:radial-gradient(circle,rgba(255,0,34,.18),transparent 70%);top:-150px;left:-100px}
+.o2{width:400px;height:400px;background:radial-gradient(circle,rgba(120,0,255,.12),transparent 70%);bottom:-100px;right:-80px}
+/* Dot grid */
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0}
+/* Navbar */
+nav{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;border-bottom:1px solid rgba(255,255,255,.07)}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:1.2rem;letter-spacing:2px;color:#fff}
+.logo span{color:#FF0022}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:rgba(255,255,255,.45);font-size:.82rem;text-decoration:none;font-weight:300}
+.nav-cta{background:#FF0022;color:#fff;padding:9px 22px;border-radius:6px;font-size:.82rem;font-weight:700;text-decoration:none}
+/* Hero */
+.hero{position:relative;z-index:1;padding:80px 60px 60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,0,34,.3);background:rgba(255,0,34,.06);padding:6px 16px;border-radius:100px;font-size:.72rem;color:#FF0022;margin-bottom:28px}
+.pill-dot{width:6px;height:6px;border-radius:50%;background:#FF0022;box-shadow:0 0 8px #FF0022}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:900;font-size:4rem;line-height:.95;letter-spacing:-3px;color:#fff;margin-bottom:20px}
+h1 em{font-style:normal;background:linear-gradient(135deg,#FF0022,#ff6a8a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub{font-size:1rem;color:rgba(255,255,255,.4);font-weight:200;line-height:1.7;margin-bottom:32px;max-width:440px}
+.btns{display:flex;gap:12px}
+.btn-p{background:#FF0022;color:#fff;padding:13px 28px;border-radius:8px;font-weight:700;font-size:.85rem;text-decoration:none}
+.btn-s{border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7);padding:13px 28px;border-radius:8px;font-size:.85rem;text-decoration:none}
+/* Stats */
+.stats{display:flex;gap:32px;margin-top:40px}
+.stat-val{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,#FF0022,#ff6a8a);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:.7rem;color:rgba(255,255,255,.3)}
+/* Right panel */
+.hero-right{position:relative}
+.glass-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;backdrop-filter:blur(20px)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.card-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,0,34,.15);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.card-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.9rem}
+.card-sub{font-size:.72rem;color:rgba(255,255,255,.35)}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.metric-row:last-child{border:none}
+.m-label{font-size:.75rem;color:rgba(255,255,255,.4)}
+.m-val{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;color:#fff}
+.m-badge{font-size:.65rem;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,.15);color:#10B981}
+.mini-chart{display:flex;gap:3px;align-items:flex-end;height:30px;margin-top:12px}
+.bar{width:12px;border-radius:2px 2px 0 0;background:rgba(255,0,34,.3)}
+.bar.active{background:#FF0022}
+/* Services mini */
+.svc-mini{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.svc-item{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px 12px}
+.svc-icon2{font-size:1rem;margin-bottom:4px}
+.svc-n{font-size:.72rem;font-weight:600;color:#fff}
+.svc-p{font-size:.65rem;color:rgba(255,255,255,.3)}
+</style>
+</head>
+<body>
+<div class="orb o1"></div>
+<div class="orb o2"></div>
+<nav>
+  <div class="logo">Deep<span>Core</span></div>
+  <div class="nav-links">
+    <a href="#">Servicios</a><a href="#">Productos</a><a href="#">Nosotros</a><a href="#">Contacto</a>
+  </div>
+  <a class="nav-cta" href="#">Contáctanos ↗</a>
+</nav>
+<div class="hero">
+  <div>
+    <div class="pill"><span class="pill-dot"></span> Guayaquil, Ecuador · Empresa Registrada</div>
+    <h1>Tecnología<br><em>sin límites.</em></h1>
+    <p class="sub">Reparamos equipos, construimos software y hacemos crecer negocios. Una empresa. Todo el ecosistema tecnológico.</p>
+    <div class="btns">
+      <a class="btn-p" href="#">Ver Servicios</a>
+      <a class="btn-s" href="#">Contáctanos</a>
+    </div>
+    <div class="stats">
+      <div><div class="stat-val">500+</div><div class="stat-lbl">Equipos Reparados</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+      <div><div class="stat-val">300+</div><div class="stat-lbl">Clientes</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.08)"></div>
+      <div><div class="stat-val">3+</div><div class="stat-lbl">Años</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="glass-card">
+      <div class="card-header">
+        <div class="card-icon">📊</div>
+        <div><div class="card-title">Dashboard en vivo</div><div class="card-sub">Actualizado hace 2 min</div></div>
+      </div>
+      <div class="metric-row"><span class="m-label">Reparaciones hoy</span><div style="display:flex;gap:8px;align-items:center"><span class="m-val">24</span><span class="m-badge">+12%</span></div></div>
+      <div class="metric-row"><span class="m-label">Clientes atendidos</span><div style="display:flex;gap:8px;align-items:center"><span class="m-val">48</span><span class="m-badge">+8%</span></div></div>
+      <div class="metric-row"><span class="m-label">Ingresos del mes</span><div style="display:flex;gap:8px;align-items:center"><span class="m-val">$4,280</span><span class="m-badge">+23%</span></div></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:40%"></div><div class="bar" style="height:60%"></div><div class="bar active" style="height:80%"></div><div class="bar" style="height:50%"></div><div class="bar active" style="height:100%"></div><div class="bar" style="height:70%"></div><div class="bar active" style="height:90%"></div>
+      </div>
+    </div>
+    <div class="svc-mini">
+      <div class="svc-item"><div class="svc-icon2">💻</div><div class="svc-n">Reparación PC</div><div class="svc-p">Desde $15</div></div>
+      <div class="svc-item"><div class="svc-icon2">🎮</div><div class="svc-n">Consolas</div><div class="svc-p">PS4/PS5/Xbox</div></div>
+      <div class="svc-item"><div class="svc-icon2">🌐</div><div class="svc-n">Páginas Web</div><div class="svc-p">Desde $79</div></div>
+      <div class="svc-item"><div class="svc-icon2">🔒</div><div class="svc-n">Soporte Remoto</div><div class="svc-p">24/7</div></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
