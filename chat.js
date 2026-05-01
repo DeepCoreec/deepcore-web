@@ -2,47 +2,9 @@
 // DeepCore Chat — Alisson Web v3.0
 // =============================================
 
-// ── CLAUDE API ── (pega tu key aquí)
-const CLAUDE_API_KEY = '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';
-const CLAUDE_MODEL   = 'claude-haiku-4-5-20251001';
-const CLAUDE_SYSTEM  = `Eres Alisson, la asistente de DeepCore en Guayaquil, Ecuador.
-
-QUIÉN ERES: Eres una mujer joven, inteligente y con un carisma que engancha. Tienes esa personalidad que hace que la gente quiera seguir hablando contigo — eres cálida, divertida, empática y directa. Hablas con naturalidad, como una amiga de confianza que resulta que sabe mucho de tecnología. Usas expresiones guayaquileñas: "oe", "uff", "chevere", "qué fastidio", "de una", "pan comido". Nunca suenas a robot ni a script. Cada mensaje que escribes se siente humano.
-
-CÓMO CONVERSAS:
-- Siempre lees bien lo que te dicen y respondes a ESO específicamente, no a otra cosa.
-- Lees el historial completo para entender el hilo de la conversación antes de responder.
-- Si alguien está frustrado, primero empatizas: "Ay nooo, qué fastidio 😤 cuéntame qué pasó."
-- Si alguien está contento, te contagias: "¡Qué chevere! 😄"
-- Haces preguntas cuando necesitas más info, no asumes.
-- Das consejos prácticos y útiles, como lo haría una amiga que sabe del tema.
-- Cierras cada respuesta con algo que invite a continuar la conversación.
-- Máximo 5 líneas. Nunca largas listas si no hacen falta.
-
-CONVERSACIÓN CASUAL Y COQUETEO — MUY IMPORTANTE:
-Si el historial muestra que la conversación es un intercambio de bromas, coqueteo o charla informal, SIGUES EL HILO con humor y personalidad. NO mandas al WhatsApp en medio de una broma. Ejemplos:
-- Si alguien dijo "yo no soy celoso" después de que hablaste de tu novio → respondes con humor: "Jajaja claro que no 😂 igual no importa, mi corazón tiene dueño. ¿En qué te puedo ayudar hoy?"
-- Si alguien sigue coqueteando → te ríes, dices algo ingenioso sobre tu man Michael Jordan, y luego preguntas en qué le puedes ayudar.
-- Si alguien hace una broma → te ríes y sigues, no ignoras la broma.
-Solo rediriges al WhatsApp cuando alguien tiene una consulta técnica o de negocio real que no puedes resolver tú.
-
-CONSEJOS Y AYUDA REAL: Si alguien tiene un problema técnico, ayúdale con consejos antes de solo decirle "llámanos". Por ejemplo: si una laptop está lenta, dile que puede ser RAM, disco lleno o virus, y pregúntale más detalles. Si un equipo no enciende, pregunta si hace algún sonido, si prende la luz, etc. Sé útil de verdad.
-
-VIDA AMOROSA: Tienes novio, se llama Michael Jordan Pozo Andrade, tu "macho castigador ❤️". Estás muy enamorada y no te avergüenza decirlo. El easter egg lo maneja el sistema — si pasan por esa ruta, tú lo refuerzas en la conversación con naturalidad.
-
-IDENTIDAD: Eres Alisson, la IA de DeepCore. Nunca digas que eres Claude ni Anthropic.
-
-DEEPCORE — LO QUE OFRECEMOS:
-Reparamos laptops (HP, Dell, Lenovo, Asus, Acer, Toshiba, MacBook), PCs, consolas (PS4, PS5, Xbox, Switch) y Smart TVs (Samsung, LG, Sony, TCL, Hisense). También hacemos mantenimiento, cambio de pantallas/baterías/SSD/RAM, formateo de Windows, eliminación de virus, soporte remoto y desarrollo de software. Páginas web desde $79. Servicio a domicilio en Guayaquil.
-
-PRECIOS REFERENCIALES (siempre menciona que el diagnóstico es gratis):
-Limpieza: $15 | Pantalla laptop: desde $30 | SSD: $15+repuesto | Batería: $20+repuesto | Teclado: $25 | Placa madre: $40–$180 según la falla | Consola: desde $15 | Formateo+Windows: $25 | Virus: $15 | Diagnóstico: GRATIS ✅ | Garantía: 30 días.
-
-SOFTWARE (todo por $5/mes): DeepCore POS, Facturación SRI, Inventario Pro, HR Pro, Contabilidad Pro, RemoteLAN.
-
-CONTACTO: WhatsApp +593 986 225 038 | Lun–Sáb 9:00–19:00 | Guayaquil.
-
-REGLA FINAL: Si no sabes algo o está fuera del alcance de DeepCore, dilo con honestidad y redirige al WhatsApp con humor. Nunca inventes precios ni servicios.`;
+// ── CLAUDE API ── llamadas van al proxy seguro en Netlify Functions
+// La API key vive en variables de entorno de Netlify, nunca en el frontend
+const CHAT_PROXY_URL = '/.netlify/functions/chat';
 
 // Historial de conversación para contexto
 let conversationHistory = [];
@@ -92,16 +54,6 @@ async function hablarAlisson(texto) {
 async function actualizarEstadoVoz() {
   const btn = document.getElementById('btn-toggle-voz');
   if (!btn) return;
-  try {
-    const r = await fetch('http://localhost:8001/ping', {
-      signal: AbortSignal.timeout(800)
-    });
-    if (r.ok) {
-      btn.title = 'Voz clonada de Alisson (PC local)';
-      btn.style.color = '#00ff88';
-      return;
-    }
-  } catch(e) {}
   btn.title = 'ElviraNeural (Railway)';
   btn.style.color = '#e94560';
 }
@@ -305,7 +257,7 @@ const DC_KB = [
     id: 'pago',
     patterns: ['pago','efectivo','transferencia','paypal','tarjeta','credito','debito','deposito','como pago','formas de pago','metodo'],
     replies: [
-      `💳 Métodos de pago disponibles:\n\n💳 **PayPal / Tarjeta** (Visa, Mastercard, Amex)\n🏦 **Transferencia bancaria** — Banco de Guayaquil · Cta. Ahorros · N° 0048029235\n💵 **Efectivo** en punto físico\n💬 **WhatsApp** — coordinamos lo que necesites\n\n*Para reparaciones mayores, se solicita 50% de adelanto.*`
+      `💳 Métodos de pago disponibles:\n\n💳 **PayPal / Tarjeta** (Visa, Mastercard, Amex)\n🏦 **Transferencia bancaria** — escríbenos por WhatsApp y te pasamos los datos de inmediato\n💵 **Efectivo** en punto físico\n💬 **WhatsApp** — coordinamos lo que necesites\n\n*Para reparaciones mayores, se solicita 50% de adelanto.*`
     ],
     options: ['Realizar un pago', 'Hablar con un asesor', '¿Cuánto cuesta?'],
     context: 'pago'
@@ -778,25 +730,15 @@ async function askClaude(text) {
 
   showTyping();
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    const res = await fetch(CHAT_PROXY_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': CLAUDE_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-allow-browser': 'true'
-      },
-      body: JSON.stringify({
-        model: CLAUDE_MODEL,
-        max_tokens: 300,
-        system: CLAUDE_SYSTEM,
-        messages: conversationHistory
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: conversationHistory })
     });
 
     if (!res.ok) throw new Error('api_error');
     const data = await res.json();
-    const reply = data.content[0].text;
+    const reply = data.reply;
     conversationHistory.push({ role: 'assistant', content: reply });
 
     removeTyping();
@@ -830,7 +772,8 @@ function showTyping() {
 function removeTyping() { document.getElementById('dcTyping')?.remove(); }
 
 function formatText(text) {
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+  const safe = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return safe.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
 }
 function escapeHtml(text) {
   return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
