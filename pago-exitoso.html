@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Pago exitoso! — DeepCore</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0F172A;color:#F8FAFC;font-family:'Segoe UI',system-ui,sans-serif;
+         min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{background:#1E293B;border:1px solid #22C55E;border-radius:20px;max-width:480px;
+          width:100%;text-align:center;overflow:hidden}
+    .top{background:#22C55E;height:5px}
+    .body{padding:40px 36px}
+    .icon{font-size:56px;margin-bottom:16px}
+    h1{font-size:26px;font-weight:800;color:#F8FAFC;margin-bottom:8px}
+    p{font-size:15px;color:#94A3B8;line-height:1.6;margin-bottom:6px}
+    .steps{background:#0F172A;border-radius:12px;padding:20px;margin:24px 0;text-align:left}
+    .step{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px;font-size:14px;color:#94A3B8}
+    .step:last-child{margin:0}
+    .step-n{background:#22C55E;color:#000;width:22px;height:22px;border-radius:50%;
+            font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .btn{display:inline-block;margin-top:20px;padding:13px 32px;background:#22C55E;
+         color:#000;border-radius:10px;font-weight:800;font-size:14px;text-decoration:none;transition:.15s}
+    .btn:hover{background:#14B8A6}
+    .wa{display:inline-block;margin-top:10px;padding:11px 24px;background:transparent;
+        border:1px solid #334155;color:#94A3B8;border-radius:10px;font-size:13px;text-decoration:none;transition:.15s}
+    .wa:hover{border-color:#25D366;color:#25D366}
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="top"></div>
+  <div class="body">
+    <div class="icon">✅</div>
+    <h1>¡Pago confirmado!</h1>
+    <p>Gracias por tu compra. Tu licencia DeepCore está siendo procesada.</p>
+    <p style="color:#22C55E;font-size:14px;font-weight:600">Revisa tu email — llegará en menos de 1 minuto.</p>
+
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><span>Revisa tu <strong style="color:#F8FAFC">bandeja de entrada</strong> y la carpeta de <strong style="color:#F8FAFC">spam</strong></span></div>
+      <div class="step"><div class="step-n">2</div><span>Copia la clave del email (formato XXXX-XXXX-XXXX-XXXX)</span></div>
+      <div class="step"><div class="step-n">3</div><span>Abre el programa y <strong style="color:#F8FAFC">pega la clave</strong> en la ventana de activación</span></div>
+    </div>
+
+    <a class="btn" href="index.html">← Volver al inicio</a><br>
+    <a class="wa" href="https://wa.me/593986225038?text=Hice+mi+pago+y+necesito+ayuda+con+la+activación" target="_blank">
+      💬 ¿Necesitas ayuda? WhatsApp
+    </a>
+  </div>
+</div>
+</body>
+</html>

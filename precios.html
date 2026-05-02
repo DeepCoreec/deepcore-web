@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Precios — DeepCore Software Ecuador</title>
+  <meta name="description" content="Planes y precios de DeepCore: CRM, Inventario, Facturación SRI, HR Pro y más. Desde $5/mes. Pago con tarjeta. Licencia instantánea."/>
+  <link rel="canonical" href="https://deepcore.ec/precios.html"/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --base:#0F172A;--mantle:#0B1120;--surface:#1E293B;--surface1:#334155;
+      --text:#F8FAFC;--sub:#94A3B8;--muted:#64748B;--blue:#3B82F6;
+      --green:#22C55E;--teal:#14B8A6;--red:#EF4444;--amber:#F59E0B;
+      --border:#334155;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--base);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+    /* NAV */
+    nav{background:var(--mantle);border-bottom:1px solid var(--border);
+        padding:14px 28px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100}
+    .nav-badge{background:var(--blue);color:var(--base);font-weight:800;font-size:13px;
+               padding:5px 12px;border-radius:7px;text-decoration:none}
+    .nav-brand{font-size:16px;font-weight:700;color:var(--text)}
+    nav a.back{margin-left:auto;font-size:13px;color:var(--sub);text-decoration:none;
+               padding:7px 16px;border:1px solid var(--border);border-radius:8px;transition:.15s}
+    nav a.back:hover{border-color:var(--blue);color:var(--blue)}
+
+    /* HERO */
+    .hero{text-align:center;padding:64px 20px 40px}
+    .hero-tag{display:inline-block;background:#052e16;color:var(--green);font-size:12px;
+              font-weight:700;padding:5px 14px;border-radius:20px;letter-spacing:.06em;margin-bottom:20px}
+    .hero h1{font-size:clamp(28px,5vw,48px);font-weight:800;line-height:1.15;
+             background:linear-gradient(135deg,#F8FAFC,#94A3B8);-webkit-background-clip:text;
+             -webkit-text-fill-color:transparent;margin-bottom:14px}
+    .hero p{font-size:16px;color:var(--sub);max-width:520px;margin:0 auto 10px}
+    .hero small{font-size:13px;color:var(--muted)}
+
+    /* TABS — plan selector */
+    .plan-tabs{display:flex;justify-content:center;gap:8px;padding:0 20px 32px;flex-wrap:wrap}
+    .plan-tab{background:var(--surface);border:1px solid var(--border);color:var(--sub);
+              padding:10px 22px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;
+              transition:.15s;position:relative}
+    .plan-tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    .plan-tab .save{position:absolute;top:-8px;right:-6px;background:var(--green);color:#000;
+                    font-size:10px;font-weight:800;padding:2px 7px;border-radius:10px;display:none}
+    .plan-tab.active .save{display:block}
+
+    /* GRID */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+          gap:18px;max-width:1100px;margin:0 auto;padding:0 20px 60px}
+
+    /* CARDS */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
+          overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+    .card:hover{border-color:var(--blue);transform:translateY(-2px)}
+    .card.featured{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+    .card-top{height:4px}
+    .card-body{padding:22px 22px 18px;flex:1}
+    .card-icon{font-size:28px;margin-bottom:10px}
+    .card-name{font-size:18px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .card-desc{font-size:13px;color:var(--sub);line-height:1.5;margin-bottom:14px}
+    .card-features{list-style:none;margin-bottom:18px}
+    .card-features li{font-size:12px;color:var(--sub);padding:3px 0;display:flex;gap:8px}
+    .card-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+    .card-price{font-size:32px;font-weight:800;color:var(--text)}
+    .card-price sup{font-size:16px;font-weight:600;vertical-align:super;color:var(--sub)}
+    .card-price .period{font-size:13px;color:var(--muted);font-weight:400}
+    .card-price .original{font-size:13px;color:var(--muted);text-decoration:line-through;margin-left:8px}
+    .card-footer{padding:0 22px 22px}
+    .btn-comprar{width:100%;padding:13px;background:var(--green);color:#000;border:none;
+                 border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s}
+    .btn-comprar:hover{background:var(--teal)}
+    .btn-comprar.secondary{background:var(--surface1);color:var(--text)}
+    .btn-comprar.secondary:hover{background:#475569}
+    .badge-pop{display:inline-block;background:#052e16;color:var(--green);font-size:11px;
+               font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:10px}
+
+    /* SUITE */
+    .suite-section{max-width:700px;margin:0 auto 60px;padding:0 20px}
+    .suite-card{background:linear-gradient(135deg,#0B2240,#0F172A);border:1px solid var(--blue);
+                border-radius:20px;padding:32px;text-align:center;position:relative;overflow:hidden}
+    .suite-card::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;
+                        background:radial-gradient(circle,#3B82F620,transparent);border-radius:50%}
+    .suite-badge{display:inline-block;background:#1e3a8a;color:var(--blue);font-size:11px;
+                 font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px}
+    .suite-card h2{font-size:26px;font-weight:800;color:var(--text);margin-bottom:8px}
+    .suite-card p{color:var(--sub);font-size:14px;margin-bottom:20px}
+    .suite-progs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:24px}
+    .suite-prog{background:var(--surface);border:1px solid var(--border);color:var(--sub);
+                font-size:12px;padding:4px 12px;border-radius:20px}
+    .suite-price{font-size:42px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .suite-price sup{font-size:20px;vertical-align:super;color:var(--sub)}
+    .suite-price .period{font-size:15px;color:var(--muted);font-weight:400}
+    .suite-price .was{font-size:15px;color:var(--muted);text-decoration:line-through;margin-left:8px}
+    .btn-suite{display:inline-block;padding:14px 40px;background:var(--blue);color:#fff;border:none;
+               border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;transition:.15s;margin-top:16px}
+    .btn-suite:hover{background:#2563eb}
+
+    /* MODAL */
+    .overlay{position:fixed;inset:0;background:#00000088;z-index:200;display:none;
+             align-items:center;justify-content:center;padding:20px}
+    .overlay.open{display:flex}
+    .modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;
+           width:100%;max-width:420px;overflow:hidden;animation:pop .2s ease}
+    @keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+    .modal-top{height:4px;background:var(--green)}
+    .modal-body{padding:28px}
+    .modal-title{font-size:19px;font-weight:800;color:var(--text);margin-bottom:4px}
+    .modal-sub{font-size:13px;color:var(--sub);margin-bottom:22px}
+    .modal-plan{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}
+    .plan-pill{flex:1;min-width:80px;padding:10px 8px;background:var(--base);border:1px solid var(--border);
+               border-radius:9px;cursor:pointer;text-align:center;transition:.15s}
+    .plan-pill.active{border-color:var(--green);background:#052e16}
+    .plan-pill .plan-meses{font-size:13px;font-weight:700;color:var(--text)}
+    .plan-pill .plan-precio{font-size:12px;color:var(--sub);margin-top:2px}
+    .plan-pill .plan-ahorro{font-size:10px;color:var(--green);font-weight:700}
+    label.field-label{display:block;font-size:11px;font-weight:700;color:var(--muted);
+                      text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;margin-top:14px}
+    input.field{width:100%;background:var(--base);border:1px solid var(--border);color:var(--text);
+                padding:10px 14px;border-radius:9px;font-size:14px;outline:none;transition:.15s}
+    input.field:focus{border-color:var(--blue)}
+    .modal-actions{display:flex;gap:10px;margin-top:20px}
+    .btn-pagar{flex:1;padding:13px;background:var(--green);color:#000;border:none;
+               border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s}
+    .btn-pagar:hover{background:var(--teal)}
+    .btn-pagar:disabled{opacity:.5;cursor:not-allowed}
+    .btn-cancel-modal{padding:13px 18px;background:transparent;border:1px solid var(--border);
+                      color:var(--sub);border-radius:10px;cursor:pointer;font-size:14px;transition:.15s}
+    .btn-cancel-modal:hover{border-color:var(--red);color:var(--red)}
+    .modal-total{font-size:13px;color:var(--sub);margin-top:12px;text-align:center}
+    .modal-total strong{color:var(--green)}
+    .modal-msg{font-size:13px;color:var(--red);margin-top:8px;min-height:16px}
+
+    /* GARANTIA */
+    .garantia{text-align:center;padding:20px;color:var(--muted);font-size:13px;
+              border-top:1px solid var(--border);max-width:600px;margin:0 auto 40px}
+    .garantia strong{color:var(--sub)}
+
+    /* FAQ */
+    .faq{max-width:680px;margin:0 auto 60px;padding:0 20px}
+    .faq h2{font-size:20px;font-weight:800;color:var(--text);margin-bottom:20px;text-align:center}
+    .faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+    .faq-q{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+    .faq-a{font-size:13px;color:var(--sub);line-height:1.6}
+
+    @media(max-width:600px){
+      .hero{padding:40px 16px 28px}
+      .grid{padding:0 14px 40px}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-badge" href="index.html">DC</a>
+  <span class="nav-brand">DeepCore Software</span>
+  <a class="back" href="index.html">← Inicio</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">PLANES Y PRECIOS</div>
+  <h1>Software empresarial<br>desde $5 al mes</h1>
+  <p>Licencia digital · activación instantánea · pago seguro con tarjeta</p>
+  <small>Sin contratos. Cancela cuando quieras. Soporte por WhatsApp incluido.</small>
+</div>
+
+<!-- Plan tabs -->
+<div class="plan-tabs">
+  <div class="plan-tab active" data-meses="1" onclick="setMeses(1)">
+    Mensual
+  </div>
+  <div class="plan-tab" data-meses="3" onclick="setMeses(3)">
+    3 meses
+    <span class="save">-13%</span>
+  </div>
+  <div class="plan-tab" data-meses="6" onclick="setMeses(6)">
+    6 meses
+    <span class="save">-20%</span>
+  </div>
+  <div class="plan-tab" data-meses="12" onclick="setMeses(12)">
+    Anual
+    <span class="save">-25%</span>
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="grid" id="grid"></div>
+
+<!-- Suite Completa -->
+<div class="suite-section">
+  <div class="suite-card">
+    <div class="suite-badge">MEJOR VALOR</div>
+    <h2>Suite Completa</h2>
+    <p>Los 8 programas DeepCore en una sola licencia anual. Todo lo que tu negocio necesita.</p>
+    <div class="suite-progs" id="suiteProgs"></div>
+    <div class="suite-price">
+      <sup>$</sup>99<span class="period">/año</span>
+      <span class="was">$540</span>
+    </div>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px">Ahorra $441 vs mensual × 8</div>
+    <button class="btn-suite" onclick="abrirModal('Suite Completa',12)">Comprar Suite Completa →</button>
+  </div>
+</div>
+
+<!-- Garantia -->
+<div class="garantia">
+  🔒 <strong>Pago 100% seguro</strong> procesado por Stripe &nbsp;·&nbsp;
+  📧 <strong>Licencia al instante</strong> por email &nbsp;·&nbsp;
+  💬 <strong>Soporte</strong> por WhatsApp +593 986 225 038
+</div>
+
+<!-- FAQ -->
+<div class="faq">
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq-item">
+    <div class="faq-q">¿Cómo recibo mi licencia?</div>
+    <div class="faq-a">Al confirmar el pago, la clave se envía automáticamente a tu email en menos de 1 minuto. Abre el programa, ingresa la clave y listo.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿En cuántas computadoras puedo usar la licencia?</div>
+    <div class="faq-a">Cada licencia es para 1 computadora. Si necesitas más equipos, adquiere licencias adicionales o escríbenos para planes multi-equipo.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Qué pasa cuando vence mi licencia?</div>
+    <div class="faq-a">El programa te avisará con 7 días de anticipación. Puedes renovar comprando una nueva licencia desde esta página.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Aceptan transferencia bancaria?</div>
+    <div class="faq-a">Por el momento aceptamos tarjetas Visa, MasterCard y American Express. Para pago por transferencia escríbenos al WhatsApp.</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">¿Tienen plan de prueba gratis?</div>
+    <div class="faq-a">Sí. Escríbenos al WhatsApp y te enviamos una licencia de prueba de 7 días sin costo ni tarjeta.</div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)cerrarModal()">
+  <div class="modal">
+    <div class="modal-top" id="modalTop"></div>
+    <div class="modal-body">
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-sub" id="modalSub"></div>
+
+      <div class="modal-plan" id="modalPlan"></div>
+
+      <label class="field-label">Tu nombre</label>
+      <input class="field" id="mNombre" type="text" placeholder="Nombre o empresa" autocomplete="name"/>
+
+      <label class="field-label">Email *</label>
+      <input class="field" id="mEmail" type="email" placeholder="correo@ejemplo.com" autocomplete="email"/>
+
+      <div class="modal-total" id="modalTotal"></div>
+      <div class="modal-msg" id="modalMsg"></div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
+        <button class="btn-pagar" id="btnPagar" onclick="pagar()">Pagar con tarjeta →</button>
+      </div>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
+        🔒 Pago seguro con Stripe · No guardamos datos de tu tarjeta
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = 'https://web-production-258cb.up.railway.app';
+
+const PROGRAMAS = [
+  { nombre:'CRM Pro',          desc:'Gestión de clientes, pipeline de ventas y agente IA',
+    color:'#10B981', icon:'🤝',
+    features:['Contactos y empresas ilimitados','Pipeline visual Kanban','Agente IA integrado','Exportar Excel y PDF'] },
+  { nombre:'HR Pro',           desc:'Recursos humanos, nómina multi-país y asistencia',
+    color:'#8B5CF6', icon:'👥',
+    features:['Nómina automática 11 países','Control de asistencia','Contratos y documentos','Reportes IESS Ecuador'] },
+  { nombre:'Inventario Pro',   desc:'Control de stock, compras y ventas con IA',
+    color:'#F59E0B', icon:'📦',
+    features:['Stock en tiempo real','Alertas de reorden','Proveedores y compras','Agente IA con consultas'] },
+  { nombre:'Contabilidad Pro', desc:'Contabilidad, balance y NIIF para pymes',
+    color:'#3B82F6', icon:'📊',
+    features:['Plan de cuentas NIIF','Libro diario y mayor','Balance general','Declaraciones SRI'] },
+  { nombre:'POS',              desc:'Punto de venta rápido con caja y reportes',
+    color:'#EC4899', icon:'🛒',
+    features:['Venta rápida con teclado','Múltiples métodos de pago','Cierre de caja diario','Reportes de ventas'] },
+  { nombre:'Facturación SRI',  desc:'Facturación electrónica oficial Ecuador',
+    color:'#EF4444', icon:'🧾',
+    features:['Firma electrónica SRI','RIDE automático','Notas de crédito/débito','Retenciones y complementos'] },
+  { nombre:'RemoteLAN',        desc:'Control remoto de PCs en tu red sin internet',
+    color:'#06B6D4', icon:'🖥️',
+    features:['Sin internet requerido','Escritorio remoto fluido','Transferencia de archivos','Multi-PC simultáneo'] },
+  { nombre:'Agenda Pro',       desc:'Citas y turnos para clínicas, salones y servicios',
+    color:'#22C55E', icon:'📅',
+    features:['Calendario semanal visual','Gestión de clientes','Servicios y profesionales','Oficina IA integrada'] },
+];
+
+const PRECIOS_USD = {1:5, 3:13, 6:24, 12:45};
+const PRECIOS_ORIG = {1:5, 3:15, 6:30, 12:60};
+
+let mesesActual = 1;
+let modalProg   = '';
+let modalMeses  = 1;
+
+function setMeses(m){
+  mesesActual = m;
+  document.querySelectorAll('.plan-tab').forEach(t=>{
+    t.classList.toggle('active', parseInt(t.dataset.meses)===m);
+  });
+  renderGrid();
+}
+
+function renderGrid(){
+  const g = document.getElementById('grid');
+  g.innerHTML = PROGRAMAS.map((p,i) => {
+    const precio = PRECIOS_USD[mesesActual];
+    const orig   = PRECIOS_ORIG[mesesActual];
+    const ahorro = orig > precio ? `<span class="original">$${orig}</span>` : '';
+    const pop    = i < 2 ? '<div class="badge-pop">Popular</div>' : '';
+    const feat   = p.features.map(f=>`<li>${f}</li>`).join('');
+    return `<div class="card${i<2?' featured':''}">
+      <div class="card-top" style="background:${p.color}"></div>
+      <div class="card-body">
+        ${pop}
+        <div class="card-icon">${p.icon}</div>
+        <div class="card-name">${p.nombre}</div>
+        <div class="card-desc">${p.desc}</div>
+        <ul class="card-features">${feat}</ul>
+        <div class="card-price">
+          <sup>$</sup>${precio}<span class="period">/mes</span>${ahorro}
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn-comprar" onclick="abrirModal('${p.nombre}',${mesesActual})" style="background:${p.color}">
+          Comprar ${p.nombre}
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Suite progs
+  const sp = document.getElementById('suiteProgs');
+  if(sp) sp.innerHTML = PROGRAMAS.map(p=>`<span class="suite-prog">${p.icon} ${p.nombre}</span>`).join('');
+}
+
+function abrirModal(prog, meses){
+  modalProg  = prog;
+  modalMeses = meses;
+  const isSuite = prog === 'Suite Completa';
+  const p = PROGRAMAS.find(x=>x.nombre===prog);
+  const color = p ? p.color : '#3B82F6';
+
+  document.getElementById('modalTop').style.background = color;
+  document.getElementById('modalTitle').textContent = `Comprar DeepCore ${prog}`;
+  document.getElementById('modalSub').textContent = 'Licencia digital · activación por email';
+  document.getElementById('modalMsg').textContent = '';
+  document.getElementById('mNombre').value = '';
+  document.getElementById('mEmail').value  = '';
+
+  if(isSuite){
+    document.getElementById('modalPlan').innerHTML = '';
+    actualizarTotal();
+  } else {
+    renderPlanPills(prog);
+  }
+  document.getElementById('overlay').classList.add('open');
+  document.getElementById('mNombre').focus();
+}
+
+function renderPlanPills(prog){
+  const opts = [
+    {m:1,  label:'1 mes',    precio:5,  ahorro:''},
+    {m:3,  label:'3 meses',  precio:13, ahorro:'-13%'},
+    {m:6,  label:'6 meses',  precio:24, ahorro:'-20%'},
+    {m:12, label:'12 meses', precio:45, ahorro:'-25%'},
+  ];
+  document.getElementById('modalPlan').innerHTML = opts.map(o=>`
+    <div class="plan-pill${o.m===modalMeses?' active':''}" onclick="selPlan(${o.m})">
+      <div class="plan-meses">${o.label}</div>
+      <div class="plan-precio">$${o.precio}</div>
+      ${o.ahorro?`<div class="plan-ahorro">${o.ahorro}</div>`:''}
+    </div>`).join('');
+  actualizarTotal();
+}
+
+function selPlan(m){
+  modalMeses = m;
+  document.querySelectorAll('.plan-pill').forEach(p=>{
+    p.classList.toggle('active', parseInt(p.getAttribute('onclick').match(/\d+/)[0])===m);
+  });
+  actualizarTotal();
+}
+
+function actualizarTotal(){
+  const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+  document.getElementById('modalTotal').innerHTML =
+    `Total a pagar: <strong>$${precio} USD</strong>`;
+}
+
+function cerrarModal(){
+  document.getElementById('overlay').classList.remove('open');
+}
+
+async function pagar(){
+  const nombre = document.getElementById('mNombre').value.trim();
+  const email  = document.getElementById('mEmail').value.trim();
+  const msg    = document.getElementById('modalMsg');
+  const btn    = document.getElementById('btnPagar');
+
+  if(!email || !email.includes('@')){
+    msg.textContent = 'Ingresa un email válido para recibir tu licencia.';
+    document.getElementById('mEmail').focus();
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Redirigiendo a Stripe...';
+  msg.textContent = '';
+
+  const fd = new FormData();
+  fd.append('programa', modalProg);
+  fd.append('meses',    modalMeses);
+  fd.append('nombre',   nombre);
+  fd.append('email',    email);
+
+  try{
+    const r = await fetch(`${API}/api/pago/crear`, {method:'POST', body:fd});
+    if(!r.ok) throw new Error('Error del servidor');
+    const d = await r.json();
+    window.location.href = d.url;
+  } catch(e){
+    msg.textContent = 'Error al conectar. Intenta de nuevo o escríbenos al WhatsApp.';
+    btn.disabled = false;
+    btn.textContent = 'Pagar con tarjeta →';
+  }
+}
+
+document.addEventListener('keydown', e => { if(e.key==='Escape') cerrarModal(); });
+renderGrid();
+</script>
+</body>
+</html>
