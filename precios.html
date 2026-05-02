@@ -123,9 +123,9 @@
                 padding:10px 14px;border-radius:9px;font-size:14px;outline:none;transition:.15s}
     input.field:focus{border-color:var(--blue)}
     .modal-actions{display:flex;gap:10px;margin-top:20px}
-    .btn-pagar{flex:1;padding:13px;background:var(--green);color:#000;border:none;
-               border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s}
-    .btn-pagar:hover{background:var(--teal)}
+    .btn-pagar{flex:1;padding:13px;background:#0070ba;color:#fff;border:none;
+               border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-pagar:hover{background:#005ea6}
     .btn-pagar:disabled{opacity:.5;cursor:not-allowed}
     .btn-cancel-modal{padding:13px 18px;background:transparent;border:1px solid var(--border);
                       color:var(--sub);border-radius:10px;cursor:pointer;font-size:14px;transition:.15s}
@@ -207,7 +207,7 @@
 
 <!-- Garantia -->
 <div class="garantia">
-  🔒 <strong>Pago 100% seguro</strong> procesado por Stripe &nbsp;·&nbsp;
+  🔒 <strong>Pago 100% seguro</strong> procesado por PayPal &nbsp;·&nbsp;
   📧 <strong>Licencia al instante</strong> por email &nbsp;·&nbsp;
   💬 <strong>Soporte</strong> por WhatsApp +593 986 225 038
 </div>
@@ -228,8 +228,8 @@
     <div class="faq-a">El programa te avisará con 7 días de anticipación. Puedes renovar comprando una nueva licencia desde esta página.</div>
   </div>
   <div class="faq-item">
-    <div class="faq-q">¿Aceptan transferencia bancaria?</div>
-    <div class="faq-a">Por el momento aceptamos tarjetas Visa, MasterCard y American Express. Para pago por transferencia escríbenos al WhatsApp.</div>
+    <div class="faq-q">¿Qué métodos de pago aceptan?</div>
+    <div class="faq-a">Pagamos a través de PayPal — aceptan tarjetas Visa, MasterCard, American Express y saldo PayPal. Para pago por transferencia bancaria escríbenos al WhatsApp.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">¿Tienen plan de prueba gratis?</div>
@@ -258,10 +258,13 @@
 
       <div class="modal-actions">
         <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
-        <button class="btn-pagar" id="btnPagar" onclick="pagar()">Pagar con tarjeta →</button>
+        <button class="btn-pagar" id="btnPagar" onclick="pagar()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
+          Pagar con PayPal
+        </button>
       </div>
       <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
-        🔒 Pago seguro con Stripe · No guardamos datos de tu tarjeta
+        🔒 Pago seguro con PayPal · No guardamos datos de tu tarjeta
       </p>
     </div>
   </div>
@@ -416,7 +419,7 @@ async function pagar(){
   }
 
   btn.disabled = true;
-  btn.textContent = 'Redirigiendo a Stripe...';
+  btn.innerHTML = '⏳ Redirigiendo a PayPal...';
   msg.textContent = '';
 
   const fd = new FormData();
