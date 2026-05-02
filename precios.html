@@ -176,49 +176,71 @@
 </nav>
 
 <div class="hero">
-  <div class="hero-tag">PLANES Y PRECIOS</div>
-  <h1>Software empresarial<br>desde $5 al mes</h1>
-  <p>Licencia digital · activación instantánea · pago seguro con tarjeta</p>
-  <small>Sin contratos. Cancela cuando quieras. Soporte por WhatsApp incluido.</small>
+  <div class="hero-tag">UN SOLO PRECIO — TODO INCLUIDO</div>
+  <h1>8 programas empresariales<br>con IA por <span style="-webkit-text-fill-color:#22C55E">$5/mes</span></h1>
+  <p>Una sola licencia activa todos los programas DeepCore. Trae tu propia API key de IA.</p>
+  <small>Sin contratos · Activación instantánea · Soporte WhatsApp · Cancela cuando quieras</small>
 </div>
 
 <!-- Plan tabs -->
 <div class="plan-tabs">
   <div class="plan-tab active" data-meses="1" onclick="setMeses(1)">
-    Mensual
+    Mensual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$5</span>
   </div>
   <div class="plan-tab" data-meses="3" onclick="setMeses(3)">
-    3 meses
-    <span class="save">-13%</span>
-  </div>
-  <div class="plan-tab" data-meses="6" onclick="setMeses(6)">
-    6 meses
+    3 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$12</span>
     <span class="save">-20%</span>
   </div>
+  <div class="plan-tab" data-meses="6" onclick="setMeses(6)">
+    6 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$22</span>
+    <span class="save">-27%</span>
+  </div>
   <div class="plan-tab" data-meses="12" onclick="setMeses(12)">
-    Anual
-    <span class="save">-25%</span>
+    Anual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$39</span>
+    <span class="save">-35%</span>
   </div>
 </div>
 
-<!-- Cards -->
-<div class="grid" id="grid"></div>
-
-<!-- Suite Completa -->
-<div class="suite-section">
-  <div class="suite-card">
-    <div class="suite-badge">MEJOR VALOR</div>
-    <h2>Suite Completa</h2>
-    <p>Los 8 programas DeepCore en una sola licencia anual. Todo lo que tu negocio necesita.</p>
-    <div class="suite-progs" id="suiteProgs"></div>
-    <div class="suite-price">
-      <sup>$</sup>99<span class="period">/año</span>
-      <span class="was">$540</span>
+<!-- Hero card — único plan -->
+<div style="max-width:680px;margin:0 auto 40px;padding:0 20px">
+  <div class="suite-card" style="text-align:left">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+      <div>
+        <div class="suite-badge">TODO INCLUIDO</div>
+        <h2 style="margin-top:8px">Suite DeepCore Completa</h2>
+        <p style="margin-top:4px">Los 8 programas + IA en cada uno. Una sola clave activa todo.</p>
+      </div>
+      <div style="margin-left:auto;text-align:center">
+        <div class="suite-price" id="precioDisplay"><sup>$</sup>5<span class="period">/mes</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px" id="ahorroDisplay"></div>
+      </div>
     </div>
-    <div style="font-size:13px;color:var(--muted);margin-top:4px">Ahorra $441 vs mensual × 8</div>
-    <button class="btn-suite" onclick="abrirModal('Suite Completa',12)">Comprar Suite Completa →</button>
+
+    <div class="suite-progs" id="suiteProgs"></div>
+
+    <div style="background:#0F172A;border-radius:12px;padding:16px;margin:20px 0;display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> IA en todos los programas</div>
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> 1 clave activa todo</div>
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> Actualizaciones incluidas</div>
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> Soporte por WhatsApp</div>
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> API key de IA: la tuya</div>
+      <div style="font-size:13px;color:#94A3B8"><span style="color:#22C55E;font-weight:700">✓</span> Sin contratos ni permanencia</div>
+    </div>
+
+    <button class="btn-suite" style="width:100%;font-size:16px;padding:16px" onclick="abrirModal('Suite Completa', mesesActual)">
+      Comprar ahora — <span id="btnPrecioTexto">$5/mes</span> →
+    </button>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px">
+      La IA usa Claude Haiku (~$1–2/mes con tu API key de <a href="https://console.anthropic.com" target="_blank" style="color:var(--blue)">Anthropic</a>)
+    </p>
   </div>
 </div>
+
+<!-- Programas incluidos -->
+<div style="text-align:center;padding:0 20px 16px">
+  <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;margin-bottom:16px">LOS 8 PROGRAMAS INCLUIDOS</div>
+</div>
+<div class="grid" id="grid"></div>
 
 <!-- Garantia -->
 <div class="garantia">
@@ -359,74 +381,72 @@ const PROGRAMAS = [
     features:['Calendario semanal visual','Gestión de clientes','Servicios y profesionales','Oficina IA integrada'] },
 ];
 
-const PRECIOS_USD = {1:5, 3:13, 6:24, 12:45};
+// Un solo plan — Suite Completa. El precio varía solo por duración.
+const PRECIOS_USD  = {1:5, 3:12, 6:22, 12:39};
 const PRECIOS_ORIG = {1:5, 3:15, 6:30, 12:60};
+const PERIODOS     = {1:'mes', 3:'3 meses', 6:'6 meses', 12:'año'};
 
 let mesesActual = 1;
-let modalProg   = '';
+let modalProg   = 'Suite Completa';
 let modalMeses  = 1;
 
 function setMeses(m){
   mesesActual = m;
+  modalMeses  = m;
   document.querySelectorAll('.plan-tab').forEach(t=>{
     t.classList.toggle('active', parseInt(t.dataset.meses)===m);
   });
+  // Actualizar precio en el hero
+  const precio = PRECIOS_USD[m];
+  const periodo = PERIODOS[m];
+  const orig    = PRECIOS_ORIG[m];
+  const ahorro  = orig > precio ? `Ahorras $${orig - precio} vs mensual` : '';
+  const pd = document.getElementById('precioDisplay');
+  if(pd) pd.innerHTML = `<sup>$</sup>${precio}<span class="period">/${periodo}</span>`;
+  const ad = document.getElementById('ahorroDisplay');
+  if(ad) ad.textContent = ahorro;
+  const bt = document.getElementById('btnPrecioTexto');
+  if(bt) bt.textContent = `$${precio}/${periodo}`;
   renderGrid();
 }
 
 function renderGrid(){
   const g = document.getElementById('grid');
+  // Mostrar cada programa como card informativo (sin botón de compra individual)
   g.innerHTML = PROGRAMAS.map((p,i) => {
-    const precio = PRECIOS_USD[mesesActual];
-    const orig   = PRECIOS_ORIG[mesesActual];
-    const ahorro = orig > precio ? `<span class="original">$${orig}</span>` : '';
-    const pop    = i < 2 ? '<div class="badge-pop">Popular</div>' : '';
-    const feat   = p.features.map(f=>`<li>${f}</li>`).join('');
-    return `<div class="card${i<2?' featured':''}">
+    const feat = p.features.map(f=>`<li>${f}</li>`).join('');
+    return `<div class="card">
       <div class="card-top" style="background:${p.color}"></div>
       <div class="card-body">
-        ${pop}
         <div class="card-icon">${p.icon}</div>
         <div class="card-name">${p.nombre}</div>
         <div class="card-desc">${p.desc}</div>
         <ul class="card-features">${feat}</ul>
-        <div class="card-price">
-          <sup>$</sup>${precio}<span class="period">/mes</span>${ahorro}
+        <div style="display:flex;align-items:center;gap:8px;margin-top:10px">
+          <span style="font-size:11px;background:#052e16;color:#22C55E;padding:3px 10px;border-radius:20px;font-weight:700">Incluido</span>
+          <span style="font-size:11px;color:var(--muted)">IA integrada</span>
         </div>
-      </div>
-      <div class="card-footer">
-        <button class="btn-comprar" onclick="abrirModal('${p.nombre}',${mesesActual})" style="background:${p.color}">
-          Comprar ${p.nombre}
-        </button>
       </div>
     </div>`;
   }).join('');
 
-  // Suite progs
+  // Suite progs badges
   const sp = document.getElementById('suiteProgs');
   if(sp) sp.innerHTML = PROGRAMAS.map(p=>`<span class="suite-prog">${p.icon} ${p.nombre}</span>`).join('');
 }
 
 function abrirModal(prog, meses){
-  modalProg  = prog;
-  modalMeses = meses;
-  const isSuite = prog === 'Suite Completa';
-  const p = PROGRAMAS.find(x=>x.nombre===prog);
-  const color = p ? p.color : '#3B82F6';
+  modalProg  = 'Suite Completa';
+  modalMeses = meses || mesesActual;
 
-  document.getElementById('modalTop').style.background = color;
-  document.getElementById('modalTitle').textContent = `Comprar DeepCore ${prog}`;
-  document.getElementById('modalSub').textContent = 'Licencia digital · activación por email';
+  document.getElementById('modalTop').style.background = '#22C55E';
+  document.getElementById('modalTitle').textContent = 'Comprar Suite DeepCore Completa';
+  document.getElementById('modalSub').textContent = '8 programas + IA · licencia digital · activación por email';
   document.getElementById('modalMsg').textContent = '';
   document.getElementById('mNombre').value = '';
   document.getElementById('mEmail').value  = '';
 
-  if(isSuite){
-    document.getElementById('modalPlan').innerHTML = '';
-    actualizarTotal();
-  } else {
-    renderPlanPills(prog);
-  }
+  renderPlanPills('Suite Completa');
   document.getElementById('overlay').classList.add('open');
   document.getElementById('mNombre').focus();
 }
@@ -434,9 +454,9 @@ function abrirModal(prog, meses){
 function renderPlanPills(prog){
   const opts = [
     {m:1,  label:'1 mes',    precio:5,  ahorro:''},
-    {m:3,  label:'3 meses',  precio:13, ahorro:'-13%'},
-    {m:6,  label:'6 meses',  precio:24, ahorro:'-20%'},
-    {m:12, label:'12 meses', precio:45, ahorro:'-25%'},
+    {m:3,  label:'3 meses',  precio:12, ahorro:'-20%'},
+    {m:6,  label:'6 meses',  precio:22, ahorro:'-27%'},
+    {m:12, label:'12 meses', precio:39, ahorro:'-35%'},
   ];
   document.getElementById('modalPlan').innerHTML = opts.map(o=>`
     <div class="plan-pill${o.m===modalMeses?' active':''}" onclick="selPlan(${o.m})">
@@ -456,9 +476,9 @@ function selPlan(m){
 }
 
 function actualizarTotal(){
-  const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+  const precio = PRECIOS_USD[modalMeses] || 5;
   document.getElementById('modalTotal').innerHTML =
-    `Total a pagar: <strong>$${precio} USD</strong>`;
+    `Total a pagar: <strong>$${precio} USD</strong> · Suite completa (8 programas)`;
 }
 
 let cardFields     = null;
