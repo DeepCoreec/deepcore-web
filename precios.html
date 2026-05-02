@@ -104,7 +104,7 @@
              align-items:center;justify-content:center;padding:20px}
     .overlay.open{display:flex}
     .modal{background:var(--surface);border:1px solid var(--border);border-radius:18px;
-           width:100%;max-width:420px;overflow:hidden;animation:pop .2s ease}
+           width:100%;max-width:440px;overflow:hidden;animation:pop .2s ease;max-height:95vh;overflow-y:auto}
     @keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
     .modal-top{height:4px;background:var(--green)}
     .modal-body{padding:28px}
@@ -123,16 +123,31 @@
                 padding:10px 14px;border-radius:9px;font-size:14px;outline:none;transition:.15s}
     input.field:focus{border-color:var(--blue)}
     .modal-actions{display:flex;gap:10px;margin-top:20px}
-    .btn-pagar{flex:1;padding:13px;background:#0070ba;color:#fff;border:none;
-               border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
-    .btn-pagar:hover{background:#005ea6}
+    .btn-pagar{flex:1;padding:13px;background:var(--green);color:#000;border:none;
+               border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s;
+               display:flex;align-items:center;justify-content:center;gap:8px}
+    .btn-pagar:hover{background:var(--teal)}
     .btn-pagar:disabled{opacity:.5;cursor:not-allowed}
+    .btn-continuar{flex:1;padding:13px;background:var(--blue);color:#fff;border:none;
+                   border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;transition:.15s}
+    .btn-continuar:hover{background:#2563eb}
+    .btn-continuar:disabled{opacity:.5;cursor:not-allowed}
     .btn-cancel-modal{padding:13px 18px;background:transparent;border:1px solid var(--border);
                       color:var(--sub);border-radius:10px;cursor:pointer;font-size:14px;transition:.15s}
     .btn-cancel-modal:hover{border-color:var(--red);color:var(--red)}
     .modal-total{font-size:13px;color:var(--sub);margin-top:12px;text-align:center}
     .modal-total strong{color:var(--green)}
     .modal-msg{font-size:13px;color:var(--red);margin-top:8px;min-height:16px}
+    /* Card fields */
+    .card-field-wrap{background:var(--base);border:1px solid var(--border);border-radius:9px;
+                     height:44px;overflow:hidden;transition:.15s;margin-top:2px}
+    .card-field-wrap iframe{width:100%!important;height:100%!important}
+    .card-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:0}
+    .step2-resumen{background:var(--base);border:1px solid var(--border);border-radius:9px;
+                   padding:10px 14px;margin-bottom:18px;font-size:13px;color:var(--sub)}
+    .step2-resumen strong{color:var(--text)}
+    .btn-back{background:transparent;border:none;color:var(--blue);cursor:pointer;
+              font-size:13px;padding:0;margin-bottom:16px;text-decoration:underline}
 
     /* GARANTIA */
     .garantia{text-align:center;padding:20px;color:var(--muted);font-size:13px;
@@ -242,34 +257,78 @@
   <div class="modal">
     <div class="modal-top" id="modalTop"></div>
     <div class="modal-body">
-      <div class="modal-title" id="modalTitle"></div>
-      <div class="modal-sub" id="modalSub"></div>
 
-      <div class="modal-plan" id="modalPlan"></div>
+      <!-- PASO 1: Datos personales -->
+      <div id="step1">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-sub" id="modalSub"></div>
+        <div class="modal-plan" id="modalPlan"></div>
 
-      <label class="field-label">Tu nombre</label>
-      <input class="field" id="mNombre" type="text" placeholder="Nombre o empresa" autocomplete="name"/>
+        <label class="field-label">Tu nombre</label>
+        <input class="field" id="mNombre" type="text" placeholder="Nombre o empresa" autocomplete="name"/>
 
-      <label class="field-label">Email *</label>
-      <input class="field" id="mEmail" type="email" placeholder="correo@ejemplo.com" autocomplete="email"/>
+        <label class="field-label">Email *</label>
+        <input class="field" id="mEmail" type="email" placeholder="correo@ejemplo.com" autocomplete="email"/>
 
-      <div class="modal-total" id="modalTotal"></div>
-      <div class="modal-msg" id="modalMsg"></div>
+        <div class="modal-total" id="modalTotal"></div>
+        <div class="modal-msg" id="modalMsg"></div>
 
-      <div class="modal-actions">
-        <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
-        <button class="btn-pagar" id="btnPagar" onclick="pagar()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944.901C5.026.382 5.474 0 5.998 0h7.46c2.57 0 4.578.543 5.69 1.81 1.01 1.15 1.304 2.42 1.012 4.287-.023.143-.047.288-.077.437-.983 5.05-4.349 6.797-8.647 6.797h-2.19c-.524 0-.968.382-1.05.9l-1.12 7.106zm14.146-14.42a3.35 3.35 0 0 0-.607-.541c-.013.076-.026.175-.041.254-.93 4.778-4.005 7.201-9.138 7.201h-2.19a.563.563 0 0 0-.556.479l-1.187 7.527h-.506l-.24 1.516a.56.56 0 0 0 .554.647h3.882c.46 0 .85-.334.922-.788.06-.26.76-4.852.816-5.09a.932.932 0 0 1 .923-.788h.58c3.76 0 6.705-1.528 7.565-5.946.36-1.847.174-3.388-.777-4.471z"/></svg>
-          Pagar con PayPal
-        </button>
+        <div class="modal-actions">
+          <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
+          <button class="btn-continuar" id="btnContinuar" onclick="irAlPago()">
+            Continuar al pago →
+          </button>
+        </div>
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
+          🔒 Pago seguro con PayPal · Visa · Mastercard · Amex
+        </p>
       </div>
-      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
-        🔒 Pago seguro con PayPal · No guardamos datos de tu tarjeta
-      </p>
+
+      <!-- PASO 2: Formulario de tarjeta -->
+      <div id="step2" style="display:none">
+        <button class="btn-back" onclick="volverStep1()">← Cambiar datos</button>
+        <div class="step2-resumen" id="step2Resumen"></div>
+
+        <label class="field-label">Número de tarjeta</label>
+        <div class="card-field-wrap" id="card-number-field"></div>
+
+        <div class="card-row">
+          <div>
+            <label class="field-label">Vencimiento</label>
+            <div class="card-field-wrap" id="card-expiry-field"></div>
+          </div>
+          <div>
+            <label class="field-label">CVV</label>
+            <div class="card-field-wrap" id="card-cvv-field"></div>
+          </div>
+        </div>
+
+        <label class="field-label">Nombre en tarjeta</label>
+        <div class="card-field-wrap" id="card-name-field"></div>
+
+        <div class="modal-msg" id="cardMsg" style="margin-top:10px"></div>
+
+        <button class="btn-pagar" id="btnPagar" onclick="pagar()" style="width:100%;margin-top:18px">
+          Pagar con tarjeta
+        </button>
+
+        <!-- Fallback PayPal redirect -->
+        <div id="paypalFallback" style="display:none;margin-top:10px">
+          <button class="btn-continuar" style="width:100%" onclick="pagarPayPal()">
+            Pagar con PayPal →
+          </button>
+        </div>
+
+        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">
+          🔒 Pago cifrado SSL · No guardamos datos de tu tarjeta
+        </p>
+      </div>
+
     </div>
   </div>
 </div>
 
+<script src="https://www.paypal.com/sdk/js?client-id=BAAdHcONZ-SCnia8AvUgMDDaE5rohejQUueeYmeQQh0gBygWfOYGomhkLruEYB4RowXgOeEw1SbL2_ljxs&currency=USD&components=card-fields&intent=capture" data-page-type="checkout"></script>
 <script>
 const API = 'https://web-production-258cb.up.railway.app';
 
@@ -402,25 +461,42 @@ function actualizarTotal(){
     `Total a pagar: <strong>$${precio} USD</strong>`;
 }
 
+let cardFields     = null;
+let pendingOrderId = null;
+let pendingApproveUrl = null;
+
 function cerrarModal(){
   document.getElementById('overlay').classList.remove('open');
+  document.getElementById('step1').style.display = 'block';
+  document.getElementById('step2').style.display = 'none';
+  if(cardFields){ try{ cardFields.close(); }catch(e){} cardFields = null; }
+  pendingOrderId = null;
+  pendingApproveUrl = null;
 }
 
-async function pagar(){
+function volverStep1(){
+  document.getElementById('step2').style.display = 'none';
+  document.getElementById('step1').style.display = 'block';
+  const btn = document.getElementById('btnContinuar');
+  btn.disabled = false;
+  btn.textContent = 'Continuar al pago →';
+}
+
+async function irAlPago(){
   const nombre = document.getElementById('mNombre').value.trim();
   const email  = document.getElementById('mEmail').value.trim();
   const msg    = document.getElementById('modalMsg');
-  const btn    = document.getElementById('btnPagar');
 
   if(!email || !email.includes('@')){
     msg.textContent = 'Ingresa un email válido para recibir tu licencia.';
     document.getElementById('mEmail').focus();
     return;
   }
-
-  btn.disabled = true;
-  btn.innerHTML = '⏳ Redirigiendo a PayPal...';
   msg.textContent = '';
+
+  const btn = document.getElementById('btnContinuar');
+  btn.disabled = true;
+  btn.textContent = '⏳ Preparando...';
 
   const fd = new FormData();
   fd.append('programa', modalProg);
@@ -430,14 +506,134 @@ async function pagar(){
 
   try{
     const r = await fetch(`${API}/api/pago/crear`, {method:'POST', body:fd});
-    if(!r.ok) throw new Error('Error del servidor');
+    if(!r.ok) throw new Error('Error servidor');
     const d = await r.json();
-    window.location.href = d.url;
+    pendingOrderId    = d.order_id;
+    pendingApproveUrl = d.url;
+
+    // Mostrar paso 2
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('step2').style.display = 'block';
+
+    const precio = modalProg === 'Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+    document.getElementById('btnPagar').textContent = `Pagar $${precio} USD`;
+
+    const p = PROGRAMAS.find(x=>x.nombre===modalProg);
+    document.getElementById('step2Resumen').innerHTML =
+      `<strong>DeepCore ${modalProg}</strong> &nbsp;·&nbsp; ${modalMeses} mes(es) &nbsp;·&nbsp; ${email}`;
+
+    await iniciarCardFields(nombre);
+
   } catch(e){
-    msg.textContent = 'Error al conectar. Intenta de nuevo o escríbenos al WhatsApp.';
+    msg.textContent = 'Error al conectar. Intenta de nuevo.';
     btn.disabled = false;
-    btn.textContent = 'Pagar con tarjeta →';
+    btn.textContent = 'Continuar al pago →';
   }
+}
+
+async function iniciarCardFields(nombre){
+  if(cardFields){ try{ cardFields.close(); }catch(e){} cardFields = null; }
+
+  // Limpiar contenedores
+  ['card-number-field','card-expiry-field','card-cvv-field','card-name-field'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = '';
+  });
+
+  const cardStyle = {
+    input: {
+      'font-size': '14px',
+      'font-family': "'Segoe UI', system-ui, sans-serif",
+      color: '#F8FAFC',
+    },
+    ':focus':{color:'#F8FAFC'},
+    '.invalid':{color:'#EF4444'},
+  };
+
+  const eligible = typeof paypal !== 'undefined' && paypal.CardFields && paypal.CardFields.isEligible && paypal.CardFields.isEligible();
+
+  if(!eligible){
+    // Fallback: mostrar botón PayPal redirect
+    document.getElementById('btnPagar').style.display = 'none';
+    document.getElementById('paypalFallback').style.display = 'block';
+    ['card-number-field','card-expiry-field','card-cvv-field','card-name-field'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el){ el.style.display='none'; }
+    });
+    document.querySelectorAll('.card-row, label.field-label').forEach(el=>{
+      if(el.closest && el.closest('#step2')) el.style.display='none';
+    });
+    return;
+  }
+
+  cardFields = paypal.CardFields({
+    createOrder: () => pendingOrderId,
+
+    onApprove: async (data) => {
+      const btn = document.getElementById('btnPagar');
+      btn.disabled = true;
+      btn.textContent = '⏳ Confirmando pago...';
+
+      const fd = new FormData();
+      fd.append('order_id', data.orderID);
+      fd.append('prog',     modalProg);
+      fd.append('m',        modalMeses);
+      fd.append('n',        document.getElementById('mNombre').value.trim());
+      fd.append('e',        document.getElementById('mEmail').value.trim());
+
+      try{
+        const cap = await fetch(`${API}/api/pago/capturar`, {method:'POST', body:fd});
+        if(cap.ok){
+          window.location.href = 'pago-exitoso.html';
+        } else {
+          throw new Error('Error captura');
+        }
+      } catch(err){
+        document.getElementById('cardMsg').textContent = 'Error al confirmar pago. Contacta soporte por WhatsApp.';
+        btn.disabled = false;
+        const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+        btn.textContent = `Pagar $${precio} USD`;
+      }
+    },
+
+    onError: (err) => {
+      document.getElementById('cardMsg').textContent = 'Error en el pago. Verifica los datos de tu tarjeta.';
+      const btn = document.getElementById('btnPagar');
+      btn.disabled = false;
+      const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+      btn.textContent = `Pagar $${precio} USD`;
+    }
+  });
+
+  try{
+    cardFields.NumberField({placeholder:'0000 0000 0000 0000', style: cardStyle}).render('#card-number-field');
+    cardFields.ExpiryField({placeholder:'MM / AA', style: cardStyle}).render('#card-expiry-field');
+    cardFields.CVVField({placeholder:'CVV', style: cardStyle}).render('#card-cvv-field');
+    cardFields.NameField({placeholder:'Nombre como aparece en la tarjeta', value: nombre, style: cardStyle}).render('#card-name-field');
+  } catch(e){
+    document.getElementById('cardMsg').textContent = 'No se pudo cargar el formulario de tarjeta.';
+    document.getElementById('paypalFallback').style.display = 'block';
+  }
+}
+
+async function pagar(){
+  if(!cardFields){ pagarPayPal(); return; }
+  const btn = document.getElementById('btnPagar');
+  btn.disabled = true;
+  btn.textContent = '⏳ Procesando...';
+  document.getElementById('cardMsg').textContent = '';
+  try{
+    await cardFields.submit({ billingAddress:{ countryCode:'EC' } });
+  } catch(e){
+    btn.disabled = false;
+    const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
+    btn.textContent = `Pagar $${precio} USD`;
+    document.getElementById('cardMsg').textContent = 'Datos incorrectos. Verifica número, vencimiento y CVV.';
+  }
+}
+
+function pagarPayPal(){
+  if(pendingApproveUrl) window.location.href = pendingApproveUrl;
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape') cerrarModal(); });
