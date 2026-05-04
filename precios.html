@@ -177,7 +177,7 @@
 
 <div class="hero">
   <div class="hero-tag">UN SOLO PRECIO — TODO INCLUIDO</div>
-  <h1>8 programas empresariales<br>con IA por <span style="-webkit-text-fill-color:#22C55E">$5/mes</span></h1>
+  <h1>8 programas empresariales<br>con IA por <span style="-webkit-text-fill-color:#22C55E">$7/mes</span></h1>
   <p>Una sola licencia activa todos los programas DeepCore. Trae tu propia API key de IA.</p>
   <small>Sin contratos · Activación instantánea · Soporte WhatsApp · Cancela cuando quieras</small>
 </div>
@@ -185,19 +185,19 @@
 <!-- Plan tabs -->
 <div class="plan-tabs">
   <div class="plan-tab active" data-meses="1" onclick="setMeses(1)">
-    Mensual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$5</span>
+    Mensual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$7</span>
   </div>
   <div class="plan-tab" data-meses="3" onclick="setMeses(3)">
-    3 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$12</span>
-    <span class="save">-20%</span>
+    3 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$18</span>
+    <span class="save">-14%</span>
   </div>
   <div class="plan-tab" data-meses="6" onclick="setMeses(6)">
-    6 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$22</span>
-    <span class="save">-27%</span>
+    6 meses<br><span style="font-size:11px;font-weight:800;color:#22C55E">$33</span>
+    <span class="save">-21%</span>
   </div>
   <div class="plan-tab" data-meses="12" onclick="setMeses(12)">
-    Anual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$39</span>
-    <span class="save">-35%</span>
+    Anual<br><span style="font-size:11px;font-weight:800;color:#22C55E">$59</span>
+    <span class="save">-30%</span>
   </div>
 </div>
 
@@ -228,7 +228,7 @@
     </div>
 
     <button class="btn-suite" style="width:100%;font-size:16px;padding:16px" onclick="abrirModal('Suite Completa', mesesActual)">
-      Comprar ahora — <span id="btnPrecioTexto">$5/mes</span> →
+      Comprar ahora — <span id="btnPrecioTexto">$7/mes</span> →
     </button>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:10px">
       La IA usa Claude Haiku (~$1–2/mes con tu API key de <a href="https://console.anthropic.com" target="_blank" style="color:var(--blue)">Anthropic</a>)
@@ -244,7 +244,7 @@
 
 <!-- Garantia -->
 <div class="garantia">
-  🔒 <strong>Pago 100% seguro</strong> procesado por PayPal &nbsp;·&nbsp;
+  🔒 <strong>Pago 100% seguro</strong> con PayPhone (Produbanco) &nbsp;·&nbsp;
   📧 <strong>Licencia al instante</strong> por email &nbsp;·&nbsp;
   💬 <strong>Soporte</strong> por WhatsApp +593 986 225 038
 </div>
@@ -266,7 +266,7 @@
   </div>
   <div class="faq-item">
     <div class="faq-q">¿Qué métodos de pago aceptan?</div>
-    <div class="faq-a">Pagamos a través de PayPal — aceptan tarjetas Visa, MasterCard, American Express y saldo PayPal. Para pago por transferencia bancaria escríbenos al WhatsApp.</div>
+    <div class="faq-a">Procesamos pagos con PayPhone (plataforma ecuatoriana respaldada por Produbanco). Acepta tarjetas Visa, MasterCard y Amex de crédito y débito de cualquier banco de Ecuador. Para transferencia bancaria escríbenos al WhatsApp.</div>
   </div>
   <div class="faq-item">
     <div class="faq-q">¿Tienen plan de prueba gratis?</div>
@@ -298,51 +298,11 @@
         <div class="modal-actions">
           <button class="btn-cancel-modal" onclick="cerrarModal()">Cancelar</button>
           <button class="btn-continuar" id="btnContinuar" onclick="irAlPago()">
-            Continuar al pago →
+            Ir a pagar →
           </button>
         </div>
         <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:12px">
-          🔒 Pago seguro con PayPal · Visa · Mastercard · Amex
-        </p>
-      </div>
-
-      <!-- PASO 2: Formulario de tarjeta -->
-      <div id="step2" style="display:none">
-        <button class="btn-back" onclick="volverStep1()">← Cambiar datos</button>
-        <div class="step2-resumen" id="step2Resumen"></div>
-
-        <label class="field-label">Número de tarjeta</label>
-        <div class="card-field-wrap" id="card-number-field"></div>
-
-        <div class="card-row">
-          <div>
-            <label class="field-label">Vencimiento</label>
-            <div class="card-field-wrap" id="card-expiry-field"></div>
-          </div>
-          <div>
-            <label class="field-label">CVV</label>
-            <div class="card-field-wrap" id="card-cvv-field"></div>
-          </div>
-        </div>
-
-        <label class="field-label">Nombre en tarjeta</label>
-        <div class="card-field-wrap" id="card-name-field"></div>
-
-        <div class="modal-msg" id="cardMsg" style="margin-top:10px"></div>
-
-        <button class="btn-pagar" id="btnPagar" onclick="pagar()" style="width:100%;margin-top:18px">
-          Pagar con tarjeta
-        </button>
-
-        <!-- Fallback PayPal redirect -->
-        <div id="paypalFallback" style="display:none;margin-top:10px">
-          <button class="btn-continuar" style="width:100%" onclick="pagarPayPal()">
-            Pagar con PayPal →
-          </button>
-        </div>
-
-        <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:10px">
-          🔒 Pago cifrado SSL · No guardamos datos de tu tarjeta
+          🔒 Pago seguro con PayPhone · Visa · Mastercard · Amex · Débito Ecuador
         </p>
       </div>
 
@@ -350,7 +310,6 @@
   </div>
 </div>
 
-<script src="https://www.paypal.com/sdk/js?client-id=BAAdHcONZ-SCnia8AvUgMDDaE5rohejQUueeYmeQQh0gBygWfOYGomhkLruEYB4RowXgOeEw1SbL2_ljxs&currency=USD&components=card-fields&intent=capture" data-page-type="checkout"></script>
 <script>
 const API = 'https://alisson-voz-server-production.up.railway.app';
 
@@ -382,8 +341,8 @@ const PROGRAMAS = [
 ];
 
 // Un solo plan — Suite Completa. El precio varía solo por duración.
-const PRECIOS_USD  = {1:5, 3:12, 6:22, 12:39};
-const PRECIOS_ORIG = {1:5, 3:15, 6:30, 12:60};
+const PRECIOS_USD  = {1:7, 3:18, 6:33, 12:59};
+const PRECIOS_ORIG = {1:7, 3:21, 6:42, 12:84};
 const PERIODOS     = {1:'mes', 3:'3 meses', 6:'6 meses', 12:'año'};
 
 let mesesActual = 1;
@@ -453,10 +412,10 @@ function abrirModal(prog, meses){
 
 function renderPlanPills(prog){
   const opts = [
-    {m:1,  label:'1 mes',    precio:5,  ahorro:''},
-    {m:3,  label:'3 meses',  precio:12, ahorro:'-20%'},
-    {m:6,  label:'6 meses',  precio:22, ahorro:'-27%'},
-    {m:12, label:'12 meses', precio:39, ahorro:'-35%'},
+    {m:1,  label:'1 mes',    precio:7,  ahorro:''},
+    {m:3,  label:'3 meses',  precio:18, ahorro:'-14%'},
+    {m:6,  label:'6 meses',  precio:33, ahorro:'-21%'},
+    {m:12, label:'12 meses', precio:59, ahorro:'-30%'},
   ];
   document.getElementById('modalPlan').innerHTML = opts.map(o=>`
     <div class="plan-pill${o.m===modalMeses?' active':''}" onclick="selPlan(${o.m})">
@@ -481,25 +440,12 @@ function actualizarTotal(){
     `Total a pagar: <strong>$${precio} USD</strong> · Suite completa (8 programas)`;
 }
 
-let cardFields     = null;
-let pendingOrderId = null;
-let pendingApproveUrl = null;
-
 function cerrarModal(){
   document.getElementById('overlay').classList.remove('open');
-  document.getElementById('step1').style.display = 'block';
-  document.getElementById('step2').style.display = 'none';
-  if(cardFields){ try{ cardFields.close(); }catch(e){} cardFields = null; }
-  pendingOrderId = null;
-  pendingApproveUrl = null;
-}
-
-function volverStep1(){
-  document.getElementById('step2').style.display = 'none';
-  document.getElementById('step1').style.display = 'block';
   const btn = document.getElementById('btnContinuar');
   btn.disabled = false;
-  btn.textContent = 'Continuar al pago →';
+  btn.textContent = 'Ir a pagar →';
+  document.getElementById('modalMsg').textContent = '';
 }
 
 async function irAlPago(){
@@ -516,10 +462,10 @@ async function irAlPago(){
 
   const btn = document.getElementById('btnContinuar');
   btn.disabled = true;
-  btn.textContent = '⏳ Preparando...';
+  btn.textContent = '⏳ Preparando pago...';
 
   const fd = new FormData();
-  fd.append('programa', modalProg);
+  fd.append('programa', 'Suite Completa');
   fd.append('meses',    modalMeses);
   fd.append('nombre',   nombre);
   fd.append('email',    email);
@@ -528,132 +474,12 @@ async function irAlPago(){
     const r = await fetch(`${API}/api/pago/crear`, {method:'POST', body:fd});
     if(!r.ok) throw new Error('Error servidor');
     const d = await r.json();
-    pendingOrderId    = d.order_id;
-    pendingApproveUrl = d.url;
-
-    // Mostrar paso 2
-    document.getElementById('step1').style.display = 'none';
-    document.getElementById('step2').style.display = 'block';
-
-    const precio = modalProg === 'Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
-    document.getElementById('btnPagar').textContent = `Pagar $${precio} USD`;
-
-    const p = PROGRAMAS.find(x=>x.nombre===modalProg);
-    document.getElementById('step2Resumen').innerHTML =
-      `<strong>DeepCore ${modalProg}</strong> &nbsp;·&nbsp; ${modalMeses} mes(es) &nbsp;·&nbsp; ${email}`;
-
-    await iniciarCardFields(nombre);
-
+    window.location.href = d.url;
   } catch(e){
     msg.textContent = 'Error al conectar. Intenta de nuevo.';
     btn.disabled = false;
-    btn.textContent = 'Continuar al pago →';
+    btn.textContent = 'Ir a pagar →';
   }
-}
-
-async function iniciarCardFields(nombre){
-  if(cardFields){ try{ cardFields.close(); }catch(e){} cardFields = null; }
-
-  // Limpiar contenedores
-  ['card-number-field','card-expiry-field','card-cvv-field','card-name-field'].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.innerHTML = '';
-  });
-
-  const cardStyle = {
-    input: {
-      'font-size': '14px',
-      'font-family': "'Segoe UI', system-ui, sans-serif",
-      color: '#F8FAFC',
-    },
-    ':focus':{color:'#F8FAFC'},
-    '.invalid':{color:'#EF4444'},
-  };
-
-  const eligible = typeof paypal !== 'undefined' && paypal.CardFields && paypal.CardFields.isEligible && paypal.CardFields.isEligible();
-
-  if(!eligible){
-    // Fallback: mostrar botón PayPal redirect
-    document.getElementById('btnPagar').style.display = 'none';
-    document.getElementById('paypalFallback').style.display = 'block';
-    ['card-number-field','card-expiry-field','card-cvv-field','card-name-field'].forEach(id=>{
-      const el = document.getElementById(id);
-      if(el){ el.style.display='none'; }
-    });
-    document.querySelectorAll('.card-row, label.field-label').forEach(el=>{
-      if(el.closest && el.closest('#step2')) el.style.display='none';
-    });
-    return;
-  }
-
-  cardFields = paypal.CardFields({
-    createOrder: () => pendingOrderId,
-
-    onApprove: async (data) => {
-      const btn = document.getElementById('btnPagar');
-      btn.disabled = true;
-      btn.textContent = '⏳ Confirmando pago...';
-
-      const fd = new FormData();
-      fd.append('order_id', data.orderID);
-      fd.append('prog',     modalProg);
-      fd.append('m',        modalMeses);
-      fd.append('n',        document.getElementById('mNombre').value.trim());
-      fd.append('e',        document.getElementById('mEmail').value.trim());
-
-      try{
-        const cap = await fetch(`${API}/api/pago/capturar`, {method:'POST', body:fd});
-        if(cap.ok){
-          window.location.href = 'pago-exitoso.html';
-        } else {
-          throw new Error('Error captura');
-        }
-      } catch(err){
-        document.getElementById('cardMsg').textContent = 'Error al confirmar pago. Contacta soporte por WhatsApp.';
-        btn.disabled = false;
-        const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
-        btn.textContent = `Pagar $${precio} USD`;
-      }
-    },
-
-    onError: (err) => {
-      document.getElementById('cardMsg').textContent = 'Error en el pago. Verifica los datos de tu tarjeta.';
-      const btn = document.getElementById('btnPagar');
-      btn.disabled = false;
-      const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
-      btn.textContent = `Pagar $${precio} USD`;
-    }
-  });
-
-  try{
-    cardFields.NumberField({placeholder:'0000 0000 0000 0000', style: cardStyle}).render('#card-number-field');
-    cardFields.ExpiryField({placeholder:'MM / AA', style: cardStyle}).render('#card-expiry-field');
-    cardFields.CVVField({placeholder:'CVV', style: cardStyle}).render('#card-cvv-field');
-    cardFields.NameField({placeholder:'Nombre como aparece en la tarjeta', value: nombre, style: cardStyle}).render('#card-name-field');
-  } catch(e){
-    document.getElementById('cardMsg').textContent = 'No se pudo cargar el formulario de tarjeta.';
-    document.getElementById('paypalFallback').style.display = 'block';
-  }
-}
-
-async function pagar(){
-  if(!cardFields){ pagarPayPal(); return; }
-  const btn = document.getElementById('btnPagar');
-  btn.disabled = true;
-  btn.textContent = '⏳ Procesando...';
-  document.getElementById('cardMsg').textContent = '';
-  try{
-    await cardFields.submit({ billingAddress:{ countryCode:'EC' } });
-  } catch(e){
-    btn.disabled = false;
-    const precio = modalProg==='Suite Completa' ? 99 : PRECIOS_USD[modalMeses];
-    btn.textContent = `Pagar $${precio} USD`;
-    document.getElementById('cardMsg').textContent = 'Datos incorrectos. Verifica número, vencimiento y CVV.';
-  }
-}
-
-function pagarPayPal(){
-  if(pendingApproveUrl) window.location.href = pendingApproveUrl;
 }
 
 document.addEventListener('keydown', e => { if(e.key==='Escape') cerrarModal(); });
