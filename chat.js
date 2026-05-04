@@ -10,12 +10,17 @@ const CLAUDE_API_KEY = true; // Modo Claude activo — la key real vive en Railw
 // Historial de conversación para contexto
 let conversationHistory = [];
 
+// ── Control de audio activo (evita dos voces al mismo tiempo) ──
+let _audioActual = null;
+
 // ── VOZ ALISSON ──
 window.alissonVozActiva = localStorage.getItem('alissonVoz') !== 'off';
 
 async function hablarAlisson(texto) {
   if (!window.alissonVozActiva) return;
+  // Detener cualquier audio activo antes de iniciar uno nuevo
   window.speechSynthesis.cancel();
+  if (_audioActual) { _audioActual.pause(); _audioActual = null; }
   try {
     const resp = await fetch(
       'https://alisson-voz-server-production.up.railway.app/tts',
@@ -29,9 +34,9 @@ async function hablarAlisson(texto) {
     if (resp.ok) {
       const blob = await resp.blob();
       const url = URL.createObjectURL(blob);
-      const player = new Audio(url);
-      player.onended = () => URL.revokeObjectURL(url);
-      await player.play();
+      _audioActual = new Audio(url);
+      _audioActual.onended = () => { URL.revokeObjectURL(url); _audioActual = null; };
+      await _audioActual.play();
       return;
     }
   } catch(e) {}
@@ -700,7 +705,6 @@ async function processInput(text) {
     conversationHistory.push({ role: 'user', content: text });
     conversationHistory.push({ role: 'assistant', content: r });
     addBotMessage(r, []);
-    hablarAlisson(r);
     return;
   }
   // Si pregunta tech, apagar banter y continuar normal
