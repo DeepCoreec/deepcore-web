@@ -5,6 +5,7 @@
 // ── CLAUDE API ── llamadas van al proxy seguro en Railway (alisson-voz-server)
 // La API key vive en variables de entorno de Railway, nunca en el frontend
 const CHAT_PROXY_URL = 'https://alisson-voz-server-production.up.railway.app/chat';
+const CLAUDE_API_KEY = true; // Modo Claude activo — la key real vive en Railway
 
 // Historial de conversación para contexto
 let conversationHistory = [];
