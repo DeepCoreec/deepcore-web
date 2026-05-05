@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pago confirmado — DeepCore</title>
+  <link rel="icon" href="assets/favicon.ico" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 48px 40px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+      text-align: center;
+    }
+
+    .check-wrap {
+      width: 72px; height: 72px;
+      background: #14532d;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      animation: pop .4s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+
+    .err-wrap {
+      width: 72px; height: 72px;
+      background: #450a0a;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    h1 { font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+    h1.ok  { color: #22c55e; }
+    h1.err { color: #ef4444; }
+
+    .msg { font-size: 15px; color: #94a3b8; line-height: 1.6; margin-bottom: 8px; }
+    .email-hint { font-size: 13px; color: #64748b; margin-bottom: 32px; }
+
+    .detail-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .detail-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; }
+    .detail-row:last-child { margin-bottom: 0; }
+    .detail-row .lbl { color: #64748b; }
+    .detail-row .val { color: #f8fafc; font-weight: 600; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #e8002a; color: #fff;
+      border: none; border-radius: 12px;
+      padding: 14px 32px; font-size: 15px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: background .15s;
+    }
+    .btn-primary:hover { background: #c0001f; }
+
+    .btn-secondary {
+      display: inline-block;
+      margin-top: 14px; color: #64748b; font-size: 13px;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { color: #94a3b8; }
+
+    .loader {
+      width: 48px; height: 48px;
+      border: 4px solid #334155;
+      border-top-color: #e8002a;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #estado-verificando, #estado-ok, #estado-err { display: none; }
+
+    @media (max-width: 480px) {
+      .card { padding: 36px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Verificando -->
+  <div id="estado-verificando">
+    <div class="loader"></div>
+    <h1 style="font-size:20px;color:#94a3b8;">Verificando pago...</h1>
+    <p class="msg" style="margin-top:8px;">Espera un momento mientras confirmamos tu transacción.</p>
+  </div>
+
+  <!-- Éxito -->
+  <div id="estado-ok">
+    <div class="check-wrap">
+      <svg width="36" height="36" fill="none" stroke="#22c55e" stroke-width="2.5" viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h1 class="ok">¡Pago exitoso!</h1>
+    <p class="msg">Tu licencia DeepCore ha sido activada correctamente.</p>
+    <p class="email-hint" id="txt-email">Revisa tu correo: te enviamos la clave de activación y las instrucciones de descarga.</p>
+
+    <div class="detail-box" id="detail-box" style="display:none">
+      <div class="detail-row">
+        <span class="lbl">Plan</span>
+        <span class="val" id="det-plan">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Monto</span>
+        <span class="val" id="det-monto">—</span>
+      </div>
+      <div class="detail-row">
+        <span class="lbl">Referencia</span>
+        <span class="val" id="det-ref">—</span>
+      </div>
+    </div>
+
+    <a href="index.html#productos" class="btn-primary">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+      </svg>
+      Descargar mis programas
+    </a>
+    <a href="https://wa.me/593986225038" target="_blank" class="btn-secondary">¿Problemas? Escríbenos por WhatsApp</a>
+  </div>
+
+  <!-- Error -->
+  <div id="estado-err">
+    <div class="err-wrap">
+      <svg width="36" height="36" fill="none" stroke="#ef4444" stroke-width="2.5" viewBox="0 0 24 24">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </div>
+    <h1 class="err">Pago no completado</h1>
+    <p class="msg" id="err-msg">El pago no pudo ser verificado. Si realizaste el pago y ves este mensaje, contáctanos por WhatsApp.</p>
+    <a href="pago.html" class="btn-primary" style="background:#334155;margin-top:24px;">
+      Intentar de nuevo
+    </a>
+    <br>
+    <a href="https://wa.me/593986225038?text=Hola%20DeepCore!%20Tuve%20un%20problema%20al%20pagar%20mi%20licencia." target="_blank" class="btn-secondary">Contactar soporte →</a>
+  </div>
+
+</div>
+
+<script>
+  const API = 'https://alisson-voz-server-production.up.railway.app';
+  const PLANES = { 1: 'Mensual', 3: 'Trimestral', 6: 'Semestral', 12: 'Anual' };
+
+  function show(id) {
+    ['estado-verificando','estado-ok','estado-err'].forEach(s => {
+      document.getElementById(s).style.display = s === id ? 'block' : 'none';
+    });
+  }
+
+  async function verificar() {
+    const params = new URLSearchParams(window.location.search);
+    const clientTransactionId = params.get('clientTransactionId');
+    const id                  = params.get('id');
+
+    if (!clientTransactionId && !id) {
+      show('estado-err');
+      document.getElementById('err-msg').textContent = 'No se encontraron parámetros de transacción.';
+      return;
+    }
+
+    show('estado-verificando');
+
+    try {
+      const url = new URL(`${API}/api/pago/payphone/ok`);
+      if (clientTransactionId) url.searchParams.set('clientTransactionId', clientTransactionId);
+      if (id)                  url.searchParams.set('id', id);
+
+      const res = await fetch(url.toString());
+      const d   = await res.json();
+
+      if (res.ok && d.ok) {
+        show('estado-ok');
+
+        if (d.email) {
+          document.getElementById('txt-email').textContent =
+            `Revisá tu correo (${d.email}): te enviamos la clave de activación.`;
+        }
+
+        if (d.plan || d.monto) {
+          const box = document.getElementById('detail-box');
+          box.style.display = 'block';
+          if (d.plan)  document.getElementById('det-plan').textContent  = PLANES[d.plan] || d.plan;
+          if (d.monto) document.getElementById('det-monto').textContent = `$${d.monto}`;
+          if (d.ref)   document.getElementById('det-ref').textContent   = d.ref;
+        }
+      } else {
+        show('estado-err');
+        if (d.detail) document.getElementById('err-msg').textContent = d.detail;
+      }
+    } catch (_) {
+      show('estado-err');
+    }
+  }
+
+  verificar();
+</script>
+</body>
+</html>
