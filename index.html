@@ -131,15 +131,13 @@
       </a>
 
       <ul class="nav-links" id="navLinks">
+        <li><a href="#como-funciona">Cómo funciona</a></li>
+        <li><a href="#productos">Plataforma</a></li>
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#productos">Productos</a></li>
         <li><a href="#agente">Agente IA</a></li>
         <li><a href="#galeria">Galería</a></li>
-        <li><a href="#webs">Páginas Web</a></li>
         <li><a href="#roadmap">Roadmap</a></li>
         <li><a href="#ecuador">🇪🇨 Ecuador</a></li>
-        <li><a href="#gratis">Gratis</a></li>
-        <li><a href="#proceso">Proceso</a></li>
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -362,6 +360,171 @@
     </div>
   </section>
 
+  <!-- CÓMO FUNCIONA + DASHBOARD DEMO -->
+  <section style="padding:80px 0 72px;background:linear-gradient(180deg,#0a0f1e 0%,#080d18 100%);overflow:hidden" id="como-funciona">
+    <style>
+      .dc-steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:860px;margin:0 auto 72px;position:relative}
+      .dc-steps-grid::before{content:'';position:absolute;top:34px;left:calc(33% + 20px);right:calc(33% + 20px);height:1px;background:linear-gradient(90deg,rgba(255,0,34,0.35),rgba(255,0,34,0.35));pointer-events:none}
+      .dc-step{text-align:center;padding:32px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px}
+      .dc-step.active{background:rgba(255,0,34,0.04);border-color:rgba(255,0,34,0.2)}
+      .dc-step-n{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:20px;font-weight:900}
+      .dc-dash-wrap{position:relative;max-width:980px;margin:0 auto}
+      .dc-dash{background:#080d18;border:1px solid rgba(255,255,255,0.1);border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.65)}
+      .dc-chrome{background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.07);padding:11px 20px;display:flex;align-items:center;gap:10px}
+      .dc-dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+      .dc-app{display:flex;height:400px}
+      .dc-sidebar{width:176px;background:#050a14;border-right:1px solid rgba(255,255,255,0.05);flex-shrink:0;padding:14px 0;display:flex;flex-direction:column}
+      .dc-mod{padding:6px 8px;margin:1px 8px;display:flex;align-items:center;gap:8px;border-radius:7px;cursor:default}
+      .dc-mod.on{background:rgba(255,0,34,0.1);border:1px solid rgba(255,0,34,0.2)}
+      .dc-main{flex:1;overflow:hidden;display:flex;flex-direction:column}
+      .dc-topbar{background:#0b1120;border-bottom:1px solid rgba(255,255,255,0.06);padding:9px 18px;display:flex;align-items:center;justify-content:space-between}
+      .dc-body{flex:1;padding:14px 18px;overflow:hidden}
+      .dc-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+      .dc-kpi{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:9px;padding:11px}
+      .dc-kpi.ia{background:rgba(192,132,252,0.06);border-color:rgba(192,132,252,0.15)}
+      .dc-bottom{display:grid;grid-template-columns:1fr 260px;gap:10px;height:198px}
+      .dc-table{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:9px;overflow:hidden}
+      .dc-chat{background:rgba(255,255,255,0.02);border:1px solid rgba(192,132,252,0.12);border-radius:9px;display:flex;flex-direction:column;overflow:hidden}
+      .dc-statusbar{background:#050a14;border-top:1px solid rgba(255,255,255,0.05);padding:5px 18px;display:flex;align-items:center;justify-content:space-between}
+      .dc-demo-badge{position:absolute;top:16px;right:-6px;background:rgba(255,0,34,0.9);color:#fff;font-size:10px;font-weight:700;padding:3px 12px;border-radius:4px;letter-spacing:0.5px}
+      @media(max-width:700px){.dc-steps-grid{grid-template-columns:1fr;}.dc-steps-grid::before{display:none}.dc-dash-wrap{overflow-x:auto}.dc-dash{min-width:640px}}
+    </style>
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:56px">
+        <p class="eyebrow" style="margin-bottom:8px">— Simple por diseño</p>
+        <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;color:#fff;margin-bottom:12px">Empieza a automatizar <em style="color:#FF0022;font-style:normal">en 3 pasos</em></h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.9rem;max-width:480px;margin:0 auto">Sin servidores. Sin configuraciones complejas. Sin contratos de permanencia.</p>
+      </div>
+
+      <div class="dc-steps-grid reveal">
+        <div class="dc-step">
+          <div class="dc-step-n" style="background:rgba(255,0,34,0.08);border:1px solid rgba(255,0,34,0.25);color:#FF0022">1</div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">Suscríbete</h4>
+          <p style="font-size:0.83rem;color:rgba(255,255,255,0.45);line-height:1.5">$7/mes — acceso completo a todos los módulos de la plataforma DeepCore</p>
+        </div>
+        <div class="dc-step active">
+          <div class="dc-step-n" style="background:rgba(255,0,34,0.12);border:1px solid rgba(255,0,34,0.4);color:#FF0022">2</div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">Conecta tu IA</h4>
+          <p style="font-size:0.83rem;color:rgba(255,255,255,0.45);line-height:1.5">Pega tu API Key de Claude, OpenAI, Gemini, DeepSeek u otro proveedor. Gratis con Ollama local.</p>
+        </div>
+        <div class="dc-step">
+          <div class="dc-step-n" style="background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.25);color:#22C55E">3</div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">Automatiza</h4>
+          <p style="font-size:0.83rem;color:rgba(255,255,255,0.45);line-height:1.5">Tus herramientas ya tienen IA integrada. CRM, Inventario, RRHH, Seguridad — listas desde el primer día.</p>
+        </div>
+      </div>
+
+      <!-- Dashboard Demo Visual -->
+      <div class="dc-dash-wrap reveal">
+        <div style="position:absolute;inset:-2px;background:linear-gradient(135deg,rgba(255,0,34,0.12),transparent 50%,rgba(34,197,94,0.06));border-radius:18px;pointer-events:none"></div>
+        <div class="dc-dash">
+          <!-- Chrome bar -->
+          <div class="dc-chrome">
+            <span class="dc-dot" style="background:#ff5f57"></span>
+            <span class="dc-dot" style="background:#febc2e"></span>
+            <span class="dc-dot" style="background:#28c840"></span>
+            <span style="flex:1;text-align:center;font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.5px">DeepCore Workspace</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.18)">v1.4.0</span>
+          </div>
+          <!-- App -->
+          <div class="dc-app">
+            <!-- Sidebar -->
+            <div class="dc-sidebar">
+              <div style="padding:0 10px;margin-bottom:16px">
+                <div style="display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(255,255,255,0.04);border-radius:8px">
+                  <div style="width:22px;height:22px;background:#FF0022;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;color:#fff;flex-shrink:0">DC</div>
+                  <span style="font-size:12px;font-weight:700;color:#fff">DeepCore</span>
+                </div>
+              </div>
+              <span style="font-size:9px;font-weight:700;color:rgba(255,255,255,0.22);letter-spacing:0.8px;text-transform:uppercase;padding:0 16px;margin-bottom:4px">Módulos</span>
+              <div class="dc-mod on"><span style="font-size:12px">🤝</span><span style="font-size:11px;font-weight:600;color:#fff">CRM Pro</span></div>
+              <div class="dc-mod"><span style="font-size:12px">📦</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">Inventario</span></div>
+              <div class="dc-mod"><span style="font-size:12px">👥</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">RRHH</span></div>
+              <div class="dc-mod"><span style="font-size:12px">📊</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">Contabilidad</span></div>
+              <div class="dc-mod"><span style="font-size:12px">🛡</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">Sentinel</span></div>
+              <div class="dc-mod"><span style="font-size:12px">🧾</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">Facturación</span></div>
+              <div class="dc-mod"><span style="font-size:12px">🖥</span><span style="font-size:11px;color:rgba(255,255,255,0.45)">RemoteLAN</span></div>
+              <div style="margin-top:auto;padding:8px 10px;border-top:1px solid rgba(255,255,255,0.05)">
+                <div style="display:flex;align-items:center;gap:6px">
+                  <span style="width:7px;height:7px;background:#22C55E;border-radius:50%;box-shadow:0 0 5px #22C55E;flex-shrink:0"></span>
+                  <span style="font-size:10px;color:rgba(255,255,255,0.35)">Claude · activo</span>
+                </div>
+              </div>
+            </div>
+            <!-- Main -->
+            <div class="dc-main">
+              <div class="dc-topbar">
+                <div>
+                  <span style="font-size:13px;font-weight:700;color:#fff">CRM Pro</span>
+                  <span style="font-size:10px;color:rgba(255,255,255,0.3);margin-left:8px">Panel principal</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <span style="font-size:10px;color:rgba(255,255,255,0.25)">Aria IA</span>
+                  <div style="width:26px;height:26px;background:rgba(192,132,252,0.15);border:1px solid rgba(192,132,252,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#C084FC">A</div>
+                </div>
+              </div>
+              <div class="dc-body">
+                <!-- KPIs -->
+                <div class="dc-kpis">
+                  <div class="dc-kpi"><div style="font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:rgba(255,255,255,0.3);margin-bottom:5px">Contactos</div><div style="font-size:20px;font-weight:700;color:#fff">1,284</div><div style="font-size:9px;color:#22C55E;margin-top:2px">+12 hoy</div></div>
+                  <div class="dc-kpi"><div style="font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:rgba(255,255,255,0.3);margin-bottom:5px">Pipeline</div><div style="font-size:20px;font-weight:700;color:#fff">48</div><div style="font-size:9px;color:#F59E0B;margin-top:2px">8 en cierre</div></div>
+                  <div class="dc-kpi"><div style="font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:rgba(255,255,255,0.3);margin-bottom:5px">Ingresos</div><div style="font-size:20px;font-weight:700;color:#fff">$34K</div><div style="font-size:9px;color:#22C55E;margin-top:2px">+23% mes</div></div>
+                  <div class="dc-kpi ia"><div style="font-size:8px;text-transform:uppercase;letter-spacing:0.5px;color:rgba(192,132,252,0.5);margin-bottom:5px">Aria IA</div><div style="font-size:20px;font-weight:700;color:#C084FC">Activa</div><div style="font-size:9px;color:rgba(192,132,252,0.6);margin-top:2px">Claude · GPT-4o</div></div>
+                </div>
+                <!-- Bottom -->
+                <div class="dc-bottom">
+                  <div class="dc-table">
+                    <div style="padding:9px 13px;border-bottom:1px solid rgba(255,255,255,0.06);font-size:10px;font-weight:600;color:rgba(255,255,255,0.5)">Contactos recientes</div>
+                    <div style="padding:7px 13px;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center">
+                      <div><div style="font-size:10px;color:#fff;font-weight:500">Empresa ABC S.A.</div><div style="font-size:9px;color:rgba(255,255,255,0.3)">contacto@empresa.com</div></div>
+                      <span style="font-size:8px;padding:2px 7px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:4px;color:#22C55E">Cliente</span>
+                    </div>
+                    <div style="padding:7px 13px;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center">
+                      <div><div style="font-size:10px;color:#fff;font-weight:500">Distribuidora XYZ</div><div style="font-size:9px;color:rgba(255,255,255,0.3)">ventas@xyz.com.ec</div></div>
+                      <span style="font-size:8px;padding:2px 7px;background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);border-radius:4px;color:#F59E0B">Prospecto</span>
+                    </div>
+                    <div style="padding:7px 13px;display:flex;justify-content:space-between;align-items:center">
+                      <div><div style="font-size:10px;color:#fff;font-weight:500">Ferretería La Central</div><div style="font-size:9px;color:rgba(255,255,255,0.3)">central@gmail.com</div></div>
+                      <span style="font-size:8px;padding:2px 7px;background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2);border-radius:4px;color:#60A5FA">Lead</span>
+                    </div>
+                    <div style="padding:7px 13px;display:flex;justify-content:space-between;align-items:center">
+                      <div><div style="font-size:10px;color:#fff;font-weight:500">TechStore Guayaquil</div><div style="font-size:9px;color:rgba(255,255,255,0.3)">info@techstore.ec</div></div>
+                      <span style="font-size:8px;padding:2px 7px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:4px;color:#22C55E">Cliente</span>
+                    </div>
+                  </div>
+                  <!-- AI Chat -->
+                  <div class="dc-chat">
+                    <div style="padding:9px 13px;border-bottom:1px solid rgba(192,132,252,0.1);display:flex;align-items:center;gap:7px">
+                      <div style="width:18px;height:18px;background:#C084FC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff">A</div>
+                      <span style="font-size:11px;font-weight:600;color:rgba(192,132,252,0.9)">Aria IA</span>
+                      <span style="margin-left:auto;font-size:9px;color:rgba(255,255,255,0.2)">Claude</span>
+                    </div>
+                    <div style="flex:1;padding:10px 12px;display:flex;flex-direction:column;gap:7px;overflow:hidden">
+                      <div style="background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 10px"><p style="font-size:9px;color:rgba(255,255,255,0.55)">¿Cuántos clientes repitieron este mes?</p></div>
+                      <div style="background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.15);border-radius:7px;padding:7px 10px"><p style="font-size:9px;color:rgba(255,255,255,0.75);line-height:1.5"><strong style="color:#C084FC">127 clientes</strong> repitieron en mayo. El 68% están en Guayaquil. ¿Genero el reporte PDF?</p></div>
+                      <div style="background:rgba(255,255,255,0.04);border-radius:7px;padding:7px 10px"><p style="font-size:9px;color:rgba(255,255,255,0.55)">Sí, genera el PDF con los datos</p></div>
+                    </div>
+                    <div style="padding:7px 10px;border-top:1px solid rgba(192,132,252,0.1)"><div style="background:rgba(255,255,255,0.04);border-radius:5px;padding:5px 10px;font-size:9px;color:rgba(255,255,255,0.2)">Pregunta algo a Aria...</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Status bar -->
+          <div class="dc-statusbar">
+            <div style="display:flex;align-items:center;gap:14px">
+              <div style="display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;background:#22C55E;border-radius:50%;box-shadow:0 0 4px #22C55E"></span><span style="font-size:9px;color:rgba(255,255,255,0.3)">Licencia activa</span></div>
+              <div style="display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;background:#C084FC;border-radius:50%"></span><span style="font-size:9px;color:rgba(255,255,255,0.3)">Claude conectado</span></div>
+              <div style="display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;background:#60A5FA;border-radius:50%"></span><span style="font-size:9px;color:rgba(255,255,255,0.3)">Servidor OK</span></div>
+            </div>
+            <span style="font-size:9px;color:rgba(255,255,255,0.18)">DeepCore Workspace v1.4.0</span>
+          </div>
+        </div>
+        <div class="dc-demo-badge">DEMO VISUAL</div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTADORES ANIMADOS -->
   <div class="counters-section">
     <div class="container">
@@ -397,6 +560,63 @@
       </div>
     </div>
   </div>
+
+  <!-- CASOS DE USO REALES -->
+  <section style="padding:80px 0;background:linear-gradient(180deg,#080d18 0%,#0a0f1e 100%)">
+    <style>
+      .dc-use-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+      .dc-use-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:24px 22px;transition:.2s}
+      .dc-use-card:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.12);transform:translateY(-2px)}
+      .dc-use-tag{font-size:9px;font-weight:700;letter-spacing:0.7px;text-transform:uppercase;padding:3px 10px;border-radius:20px;display:inline-block;margin-bottom:14px}
+      @media(max-width:768px){.dc-use-grid{grid-template-columns:repeat(2,1fr)}}
+      @media(max-width:500px){.dc-use-grid{grid-template-columns:1fr}}
+    </style>
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:52px">
+        <p class="eyebrow" style="margin-bottom:8px">— Resultados reales, no demos</p>
+        <h2 style="font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;color:#fff;margin-bottom:12px">Lo que hacen nuestros <em style="color:#FF0022;font-style:normal">usuarios cada día</em></h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.9rem;max-width:520px;margin:0 auto">Casos de uso reales en empresas ecuatorianas. Tu IA, nuestras herramientas.</p>
+      </div>
+      <div class="dc-use-grid reveal">
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(192,132,252,0.1);color:#C084FC;border:1px solid rgba(192,132,252,0.2)">CRM Pro</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Genera contratos automáticamente."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">El agente Aria rellena y genera contratos PDF desde los datos del cliente en segundos. Sin copiar ni pegar.</p>
+        </div>
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(96,165,250,0.1);color:#60A5FA;border:1px solid rgba(96,165,250,0.2)">Inventario</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Alerta de stock bajo antes de que falte."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">La IA monitorea el inventario y notifica qué reponer antes de que el producto se acabe en tienda.</p>
+        </div>
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(34,197,94,0.1);color:#22C55E;border:1px solid rgba(34,197,94,0.2)">HR Pro</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Calcula la nómina en un clic."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">Horas trabajadas, descuentos IESS, décimos y fondos de reserva. Nómina completa generada automáticamente.</p>
+        </div>
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(245,158,11,0.1);color:#F59E0B;border:1px solid rgba(245,158,11,0.2)">Facturación SRI</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Factura electrónica en 3 segundos."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">Emite facturas electrónicas válidas para el SRI automáticamente desde el punto de venta sin formularios largos.</p>
+        </div>
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(239,68,68,0.1);color:#EF4444;border:1px solid rgba(239,68,68,0.2)">Sentinel</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Detecta amenazas en tiempo real."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">Monitoreo de procesos, conexiones y archivos sospechosos. El agente IA actúa antes de que el ataque ocurra.</p>
+        </div>
+        <div class="dc-use-card">
+          <span class="dc-use-tag" style="background:rgba(45,212,191,0.1);color:#2DD4BF;border:1px solid rgba(45,212,191,0.2)">RemoteLAN</span>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:8px">"Soporte remoto sin salir de la oficina."</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.6">Conecta a cualquier equipo de tu red local, transfiere archivos y resuelve problemas técnicos a distancia.</p>
+        </div>
+      </div>
+      <div class="reveal" style="text-align:center;margin-top:40px">
+        <a href="#productos" class="btn-fill" style="display:inline-flex;align-items:center;gap:10px;font-size:14px">
+          Ver todos los módulos
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- SERVICIOS -->
   <section class="section" id="servicios">
@@ -1067,6 +1287,107 @@
           </div>
         </div>
         <p style="margin-top:20px;font-size:0.85rem;color:rgba(255,255,255,0.35)">¿Problemas? <a href="https://wa.me/593986225038?text=Hola, necesito ayuda para activar mi licencia DeepCore" target="_blank" style="color:rgba(255,0,34,0.7)">Escríbenos por WhatsApp →</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SISTEMA DE CONFIANZA / ESTADO EN VIVO -->
+  <section style="padding:72px 0;background:linear-gradient(180deg,#08080e 0%,#0a0f1e 100%)">
+    <style>
+      .dc-trust-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:40px}
+      .dc-status-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:22px}
+      .dc-status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+      .dc-changelog{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:24px}
+      .dc-log-item{display:flex;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+      .dc-log-item:last-child{border-bottom:none}
+      .dc-roadmap{background:rgba(255,0,34,0.03);border:1px solid rgba(255,0,34,0.12);border-radius:14px;padding:24px}
+      @media(max-width:768px){.dc-trust-grid{grid-template-columns:1fr}.dc-trust-bottom{grid-template-columns:1fr !important}}
+    </style>
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:48px">
+        <p class="eyebrow" style="margin-bottom:8px">— Transparencia total</p>
+        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:10px">Plataforma <em style="color:#22C55E;font-style:normal">viva y en evolución</em></h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.9rem;max-width:480px;margin:0 auto">Puedes ver en tiempo real el estado del sistema, las últimas actualizaciones y lo que viene.</p>
+      </div>
+
+      <!-- Status cards -->
+      <div class="dc-trust-grid reveal">
+        <div class="dc-status-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <span class="dc-status-dot" style="background:#22C55E;box-shadow:0 0 6px #22C55E"></span>
+            <span style="font-size:12px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:0.5px">Operativo</span>
+          </div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Servidor de licencias</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.4)">Validación de licencias activa 24/7. Uptime 99.9% en los últimos 30 días.</p>
+          <div style="margin-top:14px;font-size:22px;font-weight:800;color:#22C55E">99.9%<span style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.3);margin-left:6px">uptime</span></div>
+        </div>
+        <div class="dc-status-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <span class="dc-status-dot" style="background:#22C55E;box-shadow:0 0 6px #22C55E"></span>
+            <span style="font-size:12px;font-weight:700;color:#22C55E;text-transform:uppercase;letter-spacing:0.5px">Disponibles</span>
+          </div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Descargas activas</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.4)">Todos los programas disponibles en GitHub Releases. Instalación directa en Windows.</p>
+          <div style="margin-top:14px;font-size:22px;font-weight:800;color:#60A5FA">8<span style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.3);margin-left:6px">programas</span></div>
+        </div>
+        <div class="dc-status-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+            <span class="dc-status-dot" style="background:#C084FC"></span>
+            <span style="font-size:12px;font-weight:700;color:#C084FC;text-transform:uppercase;letter-spacing:0.5px">Integradas</span>
+          </div>
+          <h4 style="font-size:1rem;font-weight:700;color:#fff;margin-bottom:6px">Integraciones IA</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.4)">Claude, OpenAI, Gemini, DeepSeek, Groq, Mistral, Grok, Kimi, Ollama — en todos los módulos.</p>
+          <div style="margin-top:14px;font-size:22px;font-weight:800;color:#C084FC">9<span style="font-size:12px;font-weight:400;color:rgba(255,255,255,0.3);margin-left:6px">proveedores</span></div>
+        </div>
+      </div>
+
+      <!-- Changelog + Roadmap -->
+      <div class="reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="dc-trust-bottom">
+        <div class="dc-changelog">
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:16px">Changelog reciente</h4>
+          <div class="dc-log-item">
+            <span style="font-size:10px;font-weight:700;color:#22C55E;padding:2px 8px;background:rgba(34,197,94,0.1);border-radius:4px;flex-shrink:0;margin-top:1px">v1.4.0</span>
+            <div><div style="font-size:12px;font-weight:600;color:#fff">8 proveedores IA integrados</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px">DeepSeek, Groq, Mistral, Grok añadidos · Mayo 2026</div></div>
+          </div>
+          <div class="dc-log-item">
+            <span style="font-size:10px;font-weight:700;color:#60A5FA;padding:2px 8px;background:rgba(96,165,250,0.1);border-radius:4px;flex-shrink:0;margin-top:1px">v1.3.0</span>
+            <div><div style="font-size:12px;font-weight:600;color:#fff">Kimi (Moonshot AI) integrado</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px">Soporte multi-contexto largo · Mayo 2026</div></div>
+          </div>
+          <div class="dc-log-item">
+            <span style="font-size:10px;font-weight:700;color:#F59E0B;padding:2px 8px;background:rgba(245,158,11,0.1);border-radius:4px;flex-shrink:0;margin-top:1px">v1.2.0</span>
+            <div><div style="font-size:12px;font-weight:600;color:#fff">DeepCore Sentinel lanzado</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px">Ciberseguridad empresarial con IA · Mayo 2026</div></div>
+          </div>
+          <div class="dc-log-item">
+            <span style="font-size:10px;font-weight:700;color:#C084FC;padding:2px 8px;background:rgba(192,132,252,0.1);border-radius:4px;flex-shrink:0;margin-top:1px">v1.1.0</span>
+            <div><div style="font-size:12px;font-weight:600;color:#fff">Agente IA Aria en todos los módulos</div><div style="font-size:10px;color:rgba(255,255,255,0.35);margin-top:2px">Claude + OpenAI + Gemini + Ollama · Abril 2026</div></div>
+          </div>
+        </div>
+        <div class="dc-roadmap">
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px">Próximamente</h4>
+          <p style="font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:16px">Lo que viene en DeepCore</p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
+              <span style="font-size:14px">🌐</span>
+              <div><div style="font-size:11px;font-weight:600;color:#fff">App Web — DeepCore Cloud</div><div style="font-size:10px;color:rgba(255,255,255,0.3)">Accede desde cualquier navegador</div></div>
+              <span style="margin-left:auto;font-size:9px;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;color:rgba(255,255,255,0.35)">Q3 2026</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
+              <span style="font-size:14px">🍎</span>
+              <div><div style="font-size:11px;font-weight:600;color:#fff">macOS + Linux</div><div style="font-size:10px;color:rgba(255,255,255,0.3)">Versiones multiplataforma nativas</div></div>
+              <span style="margin-left:auto;font-size:9px;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;color:rgba(255,255,255,0.35)">Q4 2026</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
+              <span style="font-size:14px">🔗</span>
+              <div><div style="font-size:11px;font-weight:600;color:#fff">Webhooks & Automatizaciones</div><div style="font-size:10px;color:rgba(255,255,255,0.3)">Conecta con Zapier, Make y APIs propias</div></div>
+              <span style="margin-left:auto;font-size:9px;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;color:rgba(255,255,255,0.35)">Q1 2027</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px">
+              <span style="font-size:14px">📱</span>
+              <div><div style="font-size:11px;font-weight:600;color:#fff">App móvil iOS + Android</div><div style="font-size:10px;color:rgba(255,255,255,0.3)">Gestiona tu empresa desde el celular</div></div>
+              <span style="margin-left:auto;font-size:9px;padding:2px 8px;background:rgba(255,255,255,0.06);border-radius:4px;color:rgba(255,255,255,0.35)">2027</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2495,6 +2816,47 @@ saludar(usuario)</pre>
           <h3>Presupuesto Transparente</h3>
           <p>Te decimos exactamente cuánto va a costar antes de empezar. Precio justo, sin cargos adicionales ni letra pequeña.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMUNIDAD + ESCALABILIDAD -->
+  <section style="padding:72px 0;background:linear-gradient(180deg,#080d18 0%,#08080e 100%)">
+    <div class="container">
+      <div class="reveal" style="text-align:center;margin-bottom:52px">
+        <p class="eyebrow" style="margin-bottom:8px">— No estás solo</p>
+        <h2 style="font-size:clamp(1.4rem,3vw,2rem);font-weight:800;color:#fff;margin-bottom:10px">Forma parte de la <em style="color:#FF0022;font-style:normal">comunidad DeepCore</em></h2>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.9rem;max-width:480px;margin:0 auto">Usuarios, tips, actualizaciones y soporte directo. Todos en el mismo canal.</p>
+      </div>
+      <div class="reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:860px;margin:0 auto 40px">
+        <a href="https://wa.me/593986225038?text=Hola DeepCore, quiero unirme a la comunidad" target="_blank" rel="noopener" style="text-decoration:none;background:rgba(37,211,102,0.06);border:1px solid rgba(37,211,102,0.2);border-radius:14px;padding:28px 22px;text-align:center;transition:.2s;display:block" onmouseover="this.style.background='rgba(37,211,102,0.1)'" onmouseout="this.style.background='rgba(37,211,102,0.06)'">
+          <div style="width:48px;height:48px;background:rgba(37,211,102,0.1);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px">💬</div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:6px">WhatsApp</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.5">Soporte directo, novedades y comunidad de usuarios DeepCore</p>
+          <span style="display:inline-block;margin-top:14px;font-size:11px;font-weight:700;color:#25D366">Unirme al canal →</span>
+        </a>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:14px;padding:28px 22px;text-align:center">
+          <div style="width:48px;height:48px;background:rgba(255,255,255,0.05);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px">🗺</div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:6px">Roadmap público</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.5">Ve qué estamos construyendo. Vota por las funciones que necesitas.</p>
+          <span style="display:inline-block;margin-top:14px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.3)">Próximamente</span>
+        </div>
+        <a href="https://wa.me/593986225038?text=Hola DeepCore, tengo una sugerencia o feedback para la plataforma" target="_blank" rel="noopener" style="text-decoration:none;background:rgba(255,0,34,0.04);border:1px solid rgba(255,0,34,0.15);border-radius:14px;padding:28px 22px;text-align:center;transition:.2s;display:block" onmouseover="this.style.background='rgba(255,0,34,0.08)'" onmouseout="this.style.background='rgba(255,0,34,0.04)'">
+          <div style="width:48px;height:48px;background:rgba(255,0,34,0.08);border-radius:12px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px">🧪</div>
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:6px">Da tu feedback</h4>
+          <p style="font-size:0.82rem;color:rgba(255,255,255,0.45);line-height:1.5">¿Qué módulo te falta? ¿Qué mejorarías? Tu opinión construye DeepCore.</p>
+          <span style="display:inline-block;margin-top:14px;font-size:11px;font-weight:700;color:rgba(255,0,34,0.7)">Enviar sugerencia →</span>
+        </a>
+      </div>
+      <div class="reveal" style="max-width:700px;margin:0 auto;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.07);border-radius:14px;padding:28px 32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+        <div style="flex:1;min-width:200px">
+          <h4 style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:6px">DeepCore crece contigo</h4>
+          <p style="font-size:0.84rem;color:rgba(255,255,255,0.45);line-height:1.5">Cada actualización llega automáticamente a tu licencia activa. Sin costos extra, sin reinstalaciones.</p>
+        </div>
+        <a href="pago.html" class="btn-fill" style="flex-shrink:0;display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:12px 28px">
+          Comenzar $7/mes
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </div>
   </section>
