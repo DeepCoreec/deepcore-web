@@ -245,7 +245,7 @@ const DC_KB = [
     id: 'productos',
     patterns: ['producto','licencia','deepcore pos','deepcore hr','inventario pro','contabilidad','remotelan','programa empresarial','catalogo software','todos los programas'],
     replies: [
-      `📦 **Productos DeepCore — Licencia $5/mes:**\n\nCon una sola licencia accedes a **todo el catálogo**:\n\n🛒 **POS** — Punto de venta para tiendas y negocios\n🧾 **Facturación SRI** — Facturas electrónicas Ecuador\n📦 **Inventario Pro** — Gestión de stock y ventas\n👥 **HR Pro** — RRHH y nómina multi-país\n📊 **Contabilidad Pro** — NIIF, asientos, balances\n🖥️ **RemoteLAN** — Control remoto en red local\n\n→ **Mensual $5 · Trimestral $14 · Anual $50**\n\n*Todos incluyen IA integrada y actualizaciones automáticas.*`
+      `📦 **Productos DeepCore — Licencia $7/mes:**\n\nCon una sola licencia accedes a **todo el catálogo**:\n\n🛒 **POS** — Punto de venta para tiendas y negocios\n🧾 **Facturación SRI** — Facturas electrónicas Ecuador\n📦 **Inventario Pro** — Gestión de stock y ventas\n👥 **HR Pro** — RRHH y nómina multi-país\n📊 **Contabilidad Pro** — NIIF, asientos, balances\n🖥️ **RemoteLAN** — Control remoto en red local\n🛡 **Sentinel** — Ciberseguridad empresarial\n🤝 **CRM Pro** — Clientes, pipeline de ventas\n\n→ **Mensual $7 · Trimestral $18 · Semestral $33 · Anual $59**\n\n*Todos incluyen IA integrada (Claude, OpenAI, Gemini, DeepSeek y más) y actualizaciones automáticas.*`
     ],
     options: ['Ver planes', '¿Cómo activo mi licencia?', 'Solicitar demo', 'Hablar con un asesor'],
     context: 'productos'

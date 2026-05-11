@@ -246,6 +246,7 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+window._revealObserver = observer;
 
 // ── FAQ ──
 function toggleFaq(item) {
@@ -292,7 +293,7 @@ function enviarFormulario(e) {
 
 // ── GSAP — Animaciones staggered ─────────────────────────────────────────────
 if (typeof gsap !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger, TextPlugin);
+  gsap.registerPlugin(ScrollTrigger);
 
   // Hero entrance staggered
   gsap.from('.hero-pill',    { opacity: 0, y: 20, duration: 0.7, delay: 0.2, ease: 'power3.out' });
