@@ -1,1319 +1,920 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DeepCore — Software Empresarial con IA · Ecuador</title>
   <meta name="description" content="Suite de software empresarial con IA integrada para pymes en Ecuador. CRM, Inventario, RRHH, Contabilidad, POS y más. Desde $7/mes."/>
-  <meta name="keywords" content="software empresarial Ecuador, CRM Ecuador, RRHH software, inventario, contabilidad NIIF, facturación SRI, inteligencia artificial, DeepCore, pymes Guayaquil"/>
-  <meta name="author" content="DeepCore"/>
   <meta name="robots" content="index, follow, noai, noimageai"/>
   <meta name="GPTBot" content="nofollow"/>
-  <meta name="anthropic-ai" content="nofollow"/>
   <link rel="canonical" href="https://deepcoreec.github.io/deepcore-web/"/>
   <meta property="og:title" content="DeepCore — Software Empresarial con IA · Ecuador"/>
   <meta property="og:description" content="CRM, RRHH, Inventario, Contabilidad y más. Agente IA integrado. Desde $7/mes."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://deepcoreec.github.io/deepcore-web/"/>
-  <meta name="twitter:card" content="summary"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"DeepCore Suite Empresarial","applicationCategory":"BusinessApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"7","priceCurrency":"USD"},"url":"https://deepcoreec.github.io/deepcore-web","publisher":{"@type":"Organization","name":"DeepCore","telephone":"+593986225038","email":"deepcoreec@gmail.com"}}
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"DeepCore Suite Empresarial","applicationCategory":"BusinessApplication","operatingSystem":"Windows","offers":{"@type":"Offer","price":"7","priceCurrency":"USD"},"url":"https://deepcoreec.github.io/deepcore-web","publisher":{"@type":"Organization","name":"DeepCore","telephone":"+593986225038","email":"deepcoreec@gmail.com"}}</script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&family=Orbitron:wght@700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;900&family=DM+Sans:wght@300;400;500;700&family=Orbitron:wght@700;900&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="chat.css"/>
 
 <style>
-/* ═══════════════════════════════════════
-   RESET & TOKENS
-═══════════════════════════════════════ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+/* ════════════════════════════════════════
+   TOKENS — COLORES ORIGINALES DEEPCORE
+════════════════════════════════════════ */
 :root {
-  --bg:        #06090f;
-  --bg2:       #0b1120;
-  --surface:   rgba(11,17,32,0.7);
-  --glass:     rgba(255,255,255,0.04);
-  --border:    rgba(255,255,255,0.07);
-  --border-h:  rgba(16,185,129,0.35);
-  --green:     #10B981;
-  --green-l:   #34D399;
-  --green-d:   #059669;
-  --text:      #e2e8f0;
-  --muted:     rgba(255,255,255,0.42);
-  --r:         16px;
-  --shadow-g:  0 0 40px rgba(16,185,129,0.12);
+  --bg:         #080d18;
+  --bg2:        #0a0f1e;
+  --bg3:        #0f172a;
+  --surface:    rgba(10,15,30,0.75);
+  --border:     rgba(255,255,255,0.06);
+  --border-h:   rgba(16,185,129,0.4);
+
+  /* Paleta original DeepCore */
+  --green:      #10B981;
+  --green-l:    #34D399;
+  --green-d:    #059669;
+  --green-xl:   #6EE7B7;
+  --red:        #FF0022;
+  --amber:      #F59E0B;
+  --mauve:      #C084FC;
+  --blue:       #38BDF8;
+  --wa:         #25D366;
+
+  --text:       #e2e8f0;
+  --muted:      rgba(226,232,240,0.42);
+  --r:          14px;
 }
 
-html { scroll-behavior: smooth; }
+*, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+html { scroll-behavior: smooth; color-scheme: dark; }
+
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
 }
 
-/* ═══════════════════════════════════════
-   SCROLLBAR
-═══════════════════════════════════════ */
-::-webkit-scrollbar { width: 5px; }
+h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; }
+
+::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(16,185,129,0.25); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(16,185,129,0.45); }
+::-webkit-scrollbar-thumb { background: rgba(16,185,129,0.3); border-radius: 2px; }
 
-/* ═══════════════════════════════════════
-   BACKGROUND — ORBS + GRID ANIMADOS
-═══════════════════════════════════════ */
-.bg-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
+/* ════════════════════════════════════════
+   FONDO GLOBAL — ORBS + GRID + SCANLINES
+════════════════════════════════════════ */
+.bg-canvas {
+  position: fixed; inset: 0;
+  z-index: 0; pointer-events: none; overflow: hidden;
 }
-
-/* Orb 1 — verde principal */
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.55;
+}
 .orb-1 {
-  position: absolute;
-  width: 700px; height: 700px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(16,185,129,0.10) 0%, transparent 70%);
-  top: -200px; left: -150px;
-  animation: drift1 25s ease-in-out infinite alternate;
-  filter: blur(40px);
+  width: 900px; height: 700px;
+  background: radial-gradient(ellipse, rgba(16,185,129,0.12) 0%, transparent 65%);
+  top: -250px; left: -200px;
+  animation: orb-move1 28s ease-in-out infinite alternate;
 }
-/* Orb 2 — azul */
 .orb-2 {
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
-  bottom: -100px; right: -100px;
-  animation: drift2 30s ease-in-out infinite alternate;
-  filter: blur(50px);
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(15,23,42,0.9) 0%, rgba(59,130,246,0.06) 60%, transparent 80%);
+  bottom: -150px; right: -150px;
+  animation: orb-move2 35s ease-in-out infinite alternate;
 }
-/* Orb 3 — violeta */
 .orb-3 {
-  position: absolute;
   width: 400px; height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(139,92,246,0.06) 0%, transparent 70%);
-  top: 50%; left: 60%;
-  animation: drift3 20s ease-in-out infinite alternate;
-  filter: blur(60px);
+  background: radial-gradient(ellipse, rgba(192,132,252,0.05) 0%, transparent 70%);
+  top: 40%; left: 55%;
+  animation: orb-move3 22s ease-in-out infinite alternate;
+}
+@keyframes orb-move1 {
+  0%   { transform: translate(0,0); }
+  50%  { transform: translate(80px, 50px) scale(1.06); }
+  100% { transform: translate(30px, -40px) scale(0.96); }
+}
+@keyframes orb-move2 {
+  0%   { transform: translate(0,0); }
+  100% { transform: translate(-60px, -50px) scale(1.08); }
+}
+@keyframes orb-move3 {
+  0%   { transform: translate(0,0) scale(1); }
+  100% { transform: translate(-50px, 60px) scale(1.2); }
 }
 
-@keyframes drift1 {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(60px, 40px) scale(1.08); }
-  100% { transform: translate(20px, -30px) scale(0.95); }
-}
-@keyframes drift2 {
-  0%   { transform: translate(0, 0) scale(1); }
-  50%  { transform: translate(-50px, -40px) scale(1.1); }
-  100% { transform: translate(30px, 20px) scale(0.92); }
-}
-@keyframes drift3 {
-  0%   { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(-40px, 50px) scale(1.15); }
-}
-
-/* Grid tech */
+/* Grid técnico */
 .bg-grid {
-  position: absolute;
-  inset: 0;
+  position: absolute; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 56px 56px;
+    linear-gradient(rgba(16,185,129,0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16,185,129,0.028) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+/* Scanlines */
+.bg-scan {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 4px
+  );
+  pointer-events: none;
+}
+/* Viñeta perimetral */
+.bg-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 90% 90% at 50% 50%, transparent 60%, rgba(8,13,24,0.7) 100%);
 }
 
-/* ═══════════════════════════════════════
-   HUB — MENÚ PRINCIPAL
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════
+   HUB
+════════════════════════════════════════ */
 #hub {
-  position: relative;
-  z-index: 1;
+  position: relative; z-index: 1;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  transition: opacity 0.3s ease;
+  display: flex; flex-direction: column;
+  transition: opacity 0.28s ease;
 }
 #hub.hidden {
-  opacity: 0;
-  pointer-events: none;
-  position: fixed;
-  top: 0; left: 0; width: 100%;
+  opacity: 0; pointer-events: none;
+  position: fixed; top:0; left:0; width:100%;
 }
 
-/* ── Header ── */
+/* — Barra de estado superior — */
+.hub-statusbar {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 8px 24px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(8,13,24,0.8);
+  backdrop-filter: blur(10px);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.8px;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.hub-statusbar .dot {
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse-dot 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-dot {
+  0%,100% { opacity:1; box-shadow: 0 0 6px var(--green); }
+  50%      { opacity:0.5; box-shadow: 0 0 14px var(--green); }
+}
+.hub-statusbar .sep { color: rgba(255,255,255,0.15); }
+
+/* — Header — */
 .hub-header {
   text-align: center;
-  padding: 60px 24px 44px;
+  padding: 56px 24px 48px;
   position: relative;
 }
 
-/* Línea decorativa animada */
-.hub-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  width: 80px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--green), transparent);
-  animation: line-pulse 3s ease-in-out infinite;
-}
-@keyframes line-pulse {
-  0%, 100% { opacity: 0.4; width: 60px; }
-  50%       { opacity: 1;   width: 120px; }
-}
-
-/* Logo */
 .hub-logo {
   font-family: 'Orbitron', monospace;
-  font-size: clamp(28px, 6vw, 46px);
+  font-size: clamp(30px, 6vw, 52px);
   font-weight: 900;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   text-transform: uppercase;
-  background: linear-gradient(135deg, #10B981 0%, #34D399 50%, #6EE7B7 100%);
+  background: linear-gradient(135deg, #10B981 0%, #34D399 45%, #6EE7B7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 30px rgba(16,185,129,0.35));
+  filter: drop-shadow(0 0 40px rgba(16,185,129,0.4));
+  margin-bottom: 10px;
 }
 
-/* Tagline */
 .hub-tagline {
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 13px;
   color: var(--muted);
-  margin-top: 10px;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
   font-weight: 400;
 }
 
-/* Badge de estado */
-.hub-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(16,185,129,0.06);
-  border: 1px solid rgba(16,185,129,0.18);
-  border-radius: 40px;
-  padding: 7px 18px;
-  font-size: 12px;
-  color: var(--green-l);
-  margin-top: 20px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  backdrop-filter: blur(8px);
+/* Stats row */
+.hub-stats {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0;
+  margin-top: 32px;
 }
-.hub-badge-dot {
-  width: 7px; height: 7px;
-  background: var(--green);
-  border-radius: 50%;
-  box-shadow: 0 0 6px var(--green);
-  animation: pulse-dot 2.2s ease-in-out infinite;
+.hub-stat {
+  text-align: center;
+  padding: 0 28px;
 }
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; box-shadow: 0 0 6px var(--green); }
-  50%       { transform: scale(0.75); opacity: 0.6; box-shadow: 0 0 12px var(--green); }
+.hub-stat-v {
+  display: block;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 900;
+  color: var(--green);
+}
+.hub-stat-l {
+  display: block;
+  font-size: 10px; font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.hub-stat-sep {
+  width: 1px; height: 36px;
+  background: var(--border);
 }
 
-/* ── Grid de cards ── */
+/* — Grid — */
 .hub-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  max-width: 960px;
+  gap: 16px;
+  max-width: 980px;
   width: 100%;
-  margin: 44px auto 0;
+  margin: 40px auto 0;
   padding: 0 28px 100px;
 }
 
-/* ── Card ── */
+/* — Card — */
 .hub-card {
   position: relative;
-  background: var(--surface);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(145deg, rgba(15,23,42,0.85) 0%, rgba(10,15,30,0.7) 100%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 28px 24px 22px;
+  padding: 26px 22px 20px;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
+  display: flex; flex-direction: column; gap: 10px;
   overflow: hidden;
-  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  text-decoration: none;
-  color: inherit;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  outline: none;
 }
 
-/* Barra de color superior */
+/* Barra de acento superior */
 .hub-card::before {
   content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
+  position: absolute; top:0; left:0; right:0; height:2px;
   background: var(--c-accent, var(--green));
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
 }
-/* Glow de fondo en hover */
+/* Glow radial interno */
 .hub-card::after {
   content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--c-glow, rgba(16,185,129,0.07)) 0%, transparent 70%);
+  position: absolute; inset:0;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, var(--c-glow, rgba(16,185,129,0.07)) 0%, transparent 70%);
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.28s ease;
   pointer-events: none;
 }
 
-.hub-card:hover {
+.hub-card:hover, .hub-card:focus-visible {
   transform: translateY(-5px);
-  border-color: var(--c-border, rgba(16,185,129,0.3));
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--c-shadow, 0 0 30px rgba(16,185,129,0.08));
+  border-color: var(--c-border-h, rgba(16,185,129,0.28));
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--c-shadow, 0 0 0 transparent);
 }
-.hub-card:hover::before { opacity: 1; }
-.hub-card:hover::after  { opacity: 1; }
+.hub-card:hover::before, .hub-card:focus-visible::before { transform: scaleX(1); }
+.hub-card:hover::after,  .hub-card:focus-visible::after  { opacity: 1; }
 .hub-card:active { transform: translateY(-2px); }
 
-/* Icono */
-.hc-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  background: var(--c-icon-bg, rgba(16,185,129,0.08));
-  border: 1px solid var(--c-icon-border, rgba(16,185,129,0.15));
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  transition: transform 0.2s;
+/* Número de sección */
+.hc-num {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px; font-weight: 700;
+  color: var(--c-accent, var(--green));
+  letter-spacing: 2px;
+  opacity: 0.6;
+  margin-bottom: 2px;
 }
-.hub-card:hover .hc-icon { transform: scale(1.08); }
+
+/* Icono SVG */
+.hc-icon {
+  width: 46px; height: 46px;
+  border-radius: 11px;
+  background: var(--c-icon-bg, rgba(16,185,129,0.07));
+  border: 1px solid var(--c-icon-bd, rgba(16,185,129,0.13));
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-accent, var(--green));
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.hub-card:hover .hc-icon { transform: scale(1.1); }
 
 .hc-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: #f1f5f9;
-  letter-spacing: -0.2px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px; font-weight: 700;
+  color: #f1f5f9; letter-spacing: -0.2px;
 }
 .hc-desc {
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 1.58;
-  flex: 1;
+  font-size: 13px; color: var(--muted);
+  line-height: 1.6; flex: 1;
 }
 .hc-cta {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--c-cta, var(--green));
-  letter-spacing: 0.3px;
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-weight: 700;
+  color: var(--c-accent, var(--green));
+  letter-spacing: 1px; text-transform: uppercase;
   margin-top: 4px;
 }
-.hc-cta svg { transition: transform 0.2s; flex-shrink: 0; }
-.hub-card:hover .hc-cta svg { transform: translateX(5px); }
+.hc-cta svg { transition: transform 0.2s; }
+.hub-card:hover .hc-cta svg { transform: translateX(4px); }
 
-/* ── Footer del hub ── */
+/* — Footer — */
 .hub-footer {
   text-align: center;
-  padding: 18px 24px 28px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.2);
+  padding: 16px 24px 24px;
+  font-size: 11px; color: rgba(255,255,255,0.2);
   border-top: 1px solid var(--border);
-  margin-top: auto;
   letter-spacing: 0.3px;
+  margin-top: auto;
 }
-.hub-footer a { color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.hub-footer a { color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
 .hub-footer a:hover { color: var(--green); }
 
-/* ═══════════════════════════════════════
+/* ════════════════════════════════════════
    SECTION PAGES
-═══════════════════════════════════════ */
+════════════════════════════════════════ */
 .sec-page {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  position: fixed; top:0; left:0;
+  width:100%; height:100%;
   background: var(--bg);
-  overflow-y: auto;
-  overflow-x: hidden;
-  transform: translateX(105%);
-  transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto; overflow-x: hidden;
+  transform: translateX(106%);
+  transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
   z-index: 200;
   visibility: hidden;
 }
-.sec-page.active {
-  transform: translateX(0);
-  visibility: visible;
-}
+.sec-page.active { transform: translateX(0); visibility: visible; }
 
-/* Topbar pegajosa */
 .sec-topbar {
-  position: sticky;
-  top: 0; z-index: 10;
-  background: rgba(6,9,15,0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  position: sticky; top:0; z-index: 10;
+  background: rgba(8,13,24,0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--border);
-  padding: 14px 28px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  padding: 13px 28px;
+  display: flex; align-items: center; gap: 14px;
 }
-
 .back-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+  display: inline-flex; align-items: center; gap: 7px;
   background: rgba(16,185,129,0.07);
   border: 1px solid rgba(16,185,129,0.18);
   color: var(--green);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s;
-  white-space: nowrap;
-  letter-spacing: 0.2px;
+  padding: 8px 16px; border-radius: 8px;
+  font-size: 12px; font-weight: 700;
+  cursor: pointer; font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.18s; white-space: nowrap; letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 .back-btn:hover {
   background: rgba(16,185,129,0.14);
-  border-color: rgba(16,185,129,0.35);
-  box-shadow: 0 0 16px rgba(16,185,129,0.1);
+  border-color: rgba(16,185,129,0.36);
+  box-shadow: 0 0 20px rgba(16,185,129,0.12);
+}
+.sec-topbar-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.5); letter-spacing: 0.5px;
 }
 
-.sec-topbar-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(255,255,255,0.65);
-  letter-spacing: 0.5px;
-}
-
-/* Fondo animado también en las secciones */
-.sec-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.sec-bg .orb-s {
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(16,185,129,0.06) 0%, transparent 70%);
-  top: -100px; right: -100px;
-  animation: drift1 20s ease-in-out infinite alternate;
-  filter: blur(60px);
-}
-.sec-bg .grid-s {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-  background-size: 56px 56px;
-}
-
-/* Contenido de cada sección */
+/* Contenido */
 .sec-content {
-  position: relative;
-  z-index: 1;
-  max-width: 940px;
-  margin: 0 auto;
+  position: relative; z-index: 1;
+  max-width: 940px; margin: 0 auto;
   padding: 48px 28px 130px;
 }
 
-/* ── Encabezado de sección ── */
+/* Head de sección */
 .sec-head { margin-bottom: 40px; }
-
 .sec-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--green); letter-spacing: 3.5px;
+  text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
 }
 .sec-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 20px; height: 1px;
-  background: var(--green);
+  content: ''; display: inline-block;
+  width: 24px; height: 1px; background: var(--green);
 }
-
 .sec-h {
-  font-size: clamp(26px, 4.5vw, 42px);
-  font-weight: 900;
-  color: #f8fafc;
-  line-height: 1.12;
-  letter-spacing: -1px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(26px,4.5vw,42px);
+  font-weight: 900; color: #f8fafc;
+  line-height: 1.1; letter-spacing: -1px;
 }
 .sec-h em {
   font-style: normal;
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-l) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: linear-gradient(135deg, var(--green), var(--green-l));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-
 .sec-p {
-  font-size: 15px;
-  color: var(--muted);
-  line-height: 1.7;
-  max-width: 580px;
-  margin-top: 14px;
-  font-weight: 400;
+  font-size: 15px; color: var(--muted);
+  line-height: 1.7; max-width: 580px; margin-top: 14px;
 }
-
-/* Divisor */
 .sec-divider {
-  width: 40px; height: 2px;
+  width: 48px; height: 2px;
   background: linear-gradient(90deg, var(--green), transparent);
-  border-radius: 2px;
-  margin: 36px 0;
+  border-radius: 2px; margin: 36px 0;
 }
 
-/* ═══════════════════════════════════════
-   COMPONENTES COMPARTIDOS
-═══════════════════════════════════════ */
-
-/* ── Glass card base ── */
-.glass-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-}
-
-/* ── Botones ── */
+/* ════════════════════════════════════════
+   BOTONES
+════════════════════════════════════════ */
 .btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--green) 0%, var(--green-d) 100%);
-  color: #000;
-  padding: 13px 28px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: all 0.22s;
-  letter-spacing: 0.2px;
-  box-shadow: 0 4px 20px rgba(16,185,129,0.25);
+  display: inline-flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, var(--green), var(--green-d));
+  color: #000; padding: 13px 28px; border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 800;
+  text-decoration: none; cursor: pointer;
+  transition: all 0.2s; letter-spacing: 0.2px;
+  box-shadow: 0 4px 20px rgba(16,185,129,0.28);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(16,185,129,0.4);
-  filter: brightness(1.1);
+  box-shadow: 0 8px 32px rgba(16,185,129,0.45); filter: brightness(1.08);
 }
 .btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--green);
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--green);
   border: 1px solid rgba(16,185,129,0.3);
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition: all 0.22s;
+  padding: 12px 24px; border-radius: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px; font-weight: 700;
+  text-decoration: none; cursor: pointer; transition: all 0.2s;
 }
-.btn-secondary:hover {
-  background: rgba(16,185,129,0.08);
-  border-color: rgba(16,185,129,0.5);
-  box-shadow: 0 0 20px rgba(16,185,129,0.1);
-}
-.btn-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
+.btn-secondary:hover { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.5); }
+.btn-group { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 
-/* ── Info box ── */
+/* Info box */
 .info-box {
   background: rgba(16,185,129,0.04);
-  border: 1px solid rgba(16,185,129,0.12);
-  border-radius: 12px;
-  padding: 16px 20px;
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
-  line-height: 1.65;
-  margin: 24px 0;
+  border: 1px solid rgba(16,185,129,0.11);
+  border-radius: 12px; padding: 16px 20px;
+  font-size: 13px; color: rgba(255,255,255,0.58);
+  line-height: 1.65; margin: 22px 0;
 }
 .info-box strong { color: var(--green-l); }
 .info-box a { color: var(--green); text-decoration: none; }
 .info-box a:hover { text-decoration: underline; }
 
-/* ═══════════════════════════════════════
-   SECCIÓN PROGRAMAS
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════
+   PROGRAMAS
+════════════════════════════════════════ */
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(230px,1fr));
+  gap: 13px;
 }
-
 .app-card {
-  background: rgba(11,17,32,0.65);
+  background: linear-gradient(145deg, rgba(15,23,42,0.8), rgba(10,15,30,0.65));
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  transition: all 0.22s;
-  position: relative;
-  overflow: hidden;
+  border-radius: var(--r); padding: 20px;
+  display: flex; flex-direction: column; gap: 9px;
+  transition: all 0.22s; position: relative; overflow: hidden;
 }
 .app-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(16,185,129,0.4), transparent);
-  opacity: 0;
-  transition: opacity 0.2s;
+  content: ''; position: absolute;
+  top:0; left:0; right:0; height:1px;
+  background: linear-gradient(90deg, transparent, rgba(16,185,129,0.5), transparent);
+  opacity: 0; transition: opacity 0.2s;
 }
-.app-card:hover {
-  border-color: rgba(16,185,129,0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(16,185,129,0.05);
-}
-.app-card:hover::before { opacity: 1; }
-
-.app-card-head {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-}
+.app-card:hover { border-color: rgba(16,185,129,0.22); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,0.35); }
+.app-card:hover::before { opacity:1; }
+.app-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
 .app-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: rgba(16,185,129,0.07);
-  border: 1px solid rgba(16,185,129,0.12);
+  width: 38px; height: 38px; border-radius: 9px;
+  background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.12);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
+  color: var(--green); flex-shrink: 0;
 }
-
 .app-badge {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  white-space: nowrap;
+  font-size: 9px; font-weight: 700; padding: 2px 8px;
+  border-radius: 20px; letter-spacing: 0.8px; text-transform: uppercase; white-space: nowrap;
 }
-.badge-avail { background: rgba(16,185,129,0.10); color: var(--green);  border: 1px solid rgba(16,185,129,0.18); }
-.badge-ec    { background: rgba(245,158,11,0.08);  color: #F59E0B;       border: 1px solid rgba(245,158,11,0.18); }
-.badge-soon  { background: rgba(255,255,255,0.04); color: #475569;       border: 1px solid rgba(255,255,255,0.07); }
-.badge-agent { background: rgba(192,132,252,0.10); color: #C084FC;       border: 1px solid rgba(192,132,252,0.18); }
-
-.app-name { font-size: 14px; font-weight: 700; color: #f1f5f9; }
-.app-desc { font-size: 12px; color: var(--muted); line-height: 1.5; flex: 1; }
-
+.badge-avail { background: rgba(16,185,129,0.09); color: var(--green);  border: 1px solid rgba(16,185,129,0.18); }
+.badge-ec    { background: rgba(245,158,11,0.08);  color: var(--amber);  border: 1px solid rgba(245,158,11,0.18); }
+.badge-soon  { background: rgba(255,255,255,0.03); color: #475569;       border: 1px solid rgba(255,255,255,0.07); }
+.badge-dev   { background: rgba(192,132,252,0.09); color: var(--mauve);  border: 1px solid rgba(192,132,252,0.18); }
+.app-name { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:#f1f5f9; }
+.app-desc { font-size:12px; color:var(--muted); line-height:1.5; flex:1; }
 .app-dl {
-  display: block;
-  width: 100%;
-  text-align: center;
-  background: rgba(16,185,129,0.08);
-  border: 1px solid rgba(16,185,129,0.2);
-  color: var(--green);
-  padding: 9px 12px;
-  border-radius: 9px;
-  font-size: 11px;
-  font-weight: 700;
-  text-decoration: none;
-  margin-top: 4px;
-  transition: all 0.18s;
-  letter-spacing: 0.3px;
+  display:block; width:100%; text-align:center;
+  background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.18);
+  color: var(--green); padding: 8px 12px; border-radius: 8px;
+  font-size: 11px; font-weight: 700;
+  text-decoration: none; margin-top: 4px;
+  transition: all 0.18s; letter-spacing: 0.3px; cursor: pointer;
 }
-.app-dl:hover {
-  background: rgba(16,185,129,0.15);
-  border-color: rgba(16,185,129,0.4);
-  box-shadow: 0 0 14px rgba(16,185,129,0.12);
-}
-.app-dl.disabled {
-  opacity: 0.3;
-  pointer-events: none;
-  background: transparent;
-  color: #475569;
-  border-color: rgba(255,255,255,0.06);
-}
-.app-dl-wa {
-  background: rgba(37,211,102,0.07);
-  border-color: rgba(37,211,102,0.2);
-  color: #25D366;
-}
-.app-dl-wa:hover {
-  background: rgba(37,211,102,0.14);
-  border-color: rgba(37,211,102,0.4);
-}
-
-/* card custom link */
+.app-dl:hover { background: rgba(16,185,129,0.14); border-color: rgba(16,185,129,0.4); box-shadow: 0 0 14px rgba(16,185,129,0.1); }
+.app-dl.disabled { opacity:0.28; pointer-events:none; background:transparent; color:#475569; border-color:rgba(255,255,255,0.05); }
+.app-dl-wa { background: rgba(37,211,102,0.07); border-color: rgba(37,211,102,0.2); color: var(--wa); }
+.app-dl-wa:hover { background: rgba(37,211,102,0.14); border-color: rgba(37,211,102,0.4); }
 .app-card-link {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  text-decoration: none;
-  color: inherit;
-  transition: all 0.22s;
+  display:flex; flex-direction:column; gap:9px;
+  background: linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  border: 1px solid var(--border); border-radius:var(--r); padding:20px;
+  text-decoration:none; color:inherit; transition:all 0.22s; cursor:pointer;
 }
-.app-card-link:hover {
-  border-color: rgba(16,185,129,0.2);
-  transform: translateY(-2px);
-}
+.app-card-link:hover { border-color:rgba(37,211,102,0.22); transform:translateY(-2px); }
 
-/* ═══════════════════════════════════════
-   SECCIÓN PRECIOS
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════
+   PRECIOS
+════════════════════════════════════════ */
 .pricing-include {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 24px 28px;
-  margin-bottom: 28px;
-  position: relative;
-  overflow: hidden;
+  background: linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  backdrop-filter:blur(12px); border:1px solid var(--border);
+  border-radius:var(--r); padding:24px 28px; margin-bottom:26px;
+  position:relative; overflow:hidden;
 }
 .pricing-include::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
   background: linear-gradient(90deg, var(--green), var(--green-l), transparent);
 }
 .pricing-include h4 {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--green);
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  margin-bottom: 16px;
+  font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700;
+  color:var(--green); letter-spacing:2.5px; text-transform:uppercase; margin-bottom:16px;
 }
-.include-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 9px;
-  list-style: none;
-}
-.include-list li {
-  font-size: 13px;
-  color: rgba(255,255,255,0.65);
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
+.include-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); gap:9px; list-style:none; }
+.include-list li { font-size:13px; color:rgba(255,255,255,0.62); display:flex; align-items:center; gap:9px; }
 .include-list li::before {
-  content: '';
-  display: inline-block;
-  width: 16px; height: 16px;
+  content:''; display:inline-block; width:16px; height:16px; flex-shrink:0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2310B981' stroke-width='2.5'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  flex-shrink: 0;
+  background-size:contain; background-repeat:no-repeat;
 }
-
 .pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin-bottom: 28px;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:13px; margin-bottom:26px;
 }
-
 .price-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 26px 20px 22px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.22s;
+  background: linear-gradient(145deg,rgba(15,23,42,0.85),rgba(10,15,30,0.7));
+  backdrop-filter:blur(16px); border:1px solid var(--border);
+  border-radius:var(--r); padding:26px 18px 22px;
+  text-align:center; position:relative; overflow:hidden; transition:all 0.22s;
 }
 .price-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transition: background 0.22s;
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background: rgba(255,255,255,0.06); transition:background 0.22s;
 }
-.price-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(16,185,129,0.2);
-  box-shadow: 0 16px 50px rgba(0,0,0,0.4);
-}
-.price-card.popular {
-  border-color: rgba(16,185,129,0.35);
-  background: rgba(16,185,129,0.04);
-}
-.price-card.popular::before {
-  background: linear-gradient(90deg, transparent, var(--green), transparent);
-}
-
+.price-card:hover { transform:translateY(-4px); border-color:rgba(16,185,129,0.22); box-shadow:0 16px 48px rgba(0,0,0,0.4); }
+.price-card.popular { border-color:rgba(16,185,129,0.38); background:linear-gradient(145deg,rgba(16,185,129,0.06),rgba(10,15,30,0.8)); }
+.price-card.popular::before { background: linear-gradient(90deg,transparent,var(--green),transparent); }
 .price-popular-badge {
-  position: absolute;
-  top: -1px; left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--green), var(--green-d));
-  color: #000;
-  font-size: 10px;
-  font-weight: 800;
-  padding: 4px 16px;
-  border-radius: 0 0 10px 10px;
-  white-space: nowrap;
-  letter-spacing: 0.5px;
+  position:absolute; top:-1px; left:50%; transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--green),var(--green-d));
+  color:#000; font-size:9px; font-weight:800;
+  padding:4px 16px; border-radius:0 0 10px 10px;
+  white-space:nowrap; letter-spacing:0.8px; text-transform:uppercase;
 }
-
-.price-save {
-  font-size: 11px;
-  font-weight: 700;
-  color: #F59E0B;
-  min-height: 16px;
-  margin-bottom: 4px;
-  letter-spacing: 0.5px;
-}
-.price-name {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-.price-amount {
-  font-size: 52px;
-  font-weight: 900;
-  color: #f8fafc;
-  line-height: 1.05;
-  margin: 10px 0 3px;
-  letter-spacing: -2px;
-}
-.price-amount .price-cur {
-  font-size: 22px;
-  vertical-align: super;
-  font-weight: 700;
-  letter-spacing: 0;
-}
-.price-period {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 18px;
-}
-.price-period strong { color: var(--green-l); }
-
+.price-save { font-size:10px; font-weight:700; color:var(--amber); min-height:16px; margin-bottom:4px; letter-spacing:0.5px; }
+.price-name { font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:2px; }
+.price-amount { font-family:'Space Grotesk',sans-serif; font-size:50px; font-weight:900; color:#f8fafc; line-height:1.05; margin:10px 0 4px; letter-spacing:-2px; }
+.price-cur { font-size:20px; vertical-align:super; font-weight:700; letter-spacing:0; }
+.price-period { font-size:11px; color:var(--muted); margin-bottom:18px; }
+.price-period strong { color:var(--green-l); }
 .price-btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  border-radius: 9px;
-  font-size: 13px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: all 0.18s;
-  letter-spacing: 0.2px;
+  display:block; width:100%; padding:10px; border-radius:8px;
+  font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:800;
+  text-decoration:none; transition:all 0.18s; letter-spacing:0.3px; cursor:pointer;
 }
-.price-card.popular .price-btn {
-  background: linear-gradient(135deg, var(--green), var(--green-d));
-  color: #000;
-  box-shadow: 0 4px 16px rgba(16,185,129,0.3);
-}
-.price-card.popular .price-btn:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 6px 24px rgba(16,185,129,0.45);
-}
-.price-card:not(.popular) .price-btn {
-  background: transparent;
-  color: var(--green);
-  border: 1px solid rgba(16,185,129,0.25);
-}
-.price-card:not(.popular) .price-btn:hover {
-  background: rgba(16,185,129,0.08);
-  border-color: rgba(16,185,129,0.4);
-}
+.price-card.popular .price-btn { background:linear-gradient(135deg,var(--green),var(--green-d)); color:#000; box-shadow:0 4px 16px rgba(16,185,129,0.3); }
+.price-card.popular .price-btn:hover { filter:brightness(1.1); box-shadow:0 6px 24px rgba(16,185,129,0.45); }
+.price-card:not(.popular) .price-btn { background:transparent; color:var(--green); border:1px solid rgba(16,185,129,0.25); }
+.price-card:not(.popular) .price-btn:hover { background:rgba(16,185,129,0.08); border-color:rgba(16,185,129,0.45); }
+.pricing-trust { display:flex; flex-wrap:wrap; gap:10px 28px; justify-content:center; margin:20px 0; font-size:12px; color:rgba(255,255,255,0.38); }
+.pricing-alt { text-align:center; font-size:13px; color:var(--muted); margin-top:18px; line-height:1.8; }
+.pricing-alt a { color:var(--green); text-decoration:none; font-weight:600; }
+.pricing-alt a:hover { text-decoration:underline; }
 
-.pricing-trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 28px;
-  justify-content: center;
-  margin: 22px 0;
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
+/* ════════════════════════════════════════
+   AGENTE IA
+════════════════════════════════════════ */
+.ia-features { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:13px; margin:26px 0; }
+.ia-card {
+  background:linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  border:1px solid var(--border); border-radius:var(--r); padding:22px;
+  transition:all 0.22s; position:relative; overflow:hidden;
 }
-
-.pricing-alt {
-  text-align: center;
-  font-size: 13px;
-  color: var(--muted);
-  margin-top: 18px;
-  line-height: 1.8;
-}
-.pricing-alt a { color: var(--green); text-decoration: none; font-weight: 600; }
-.pricing-alt a:hover { text-decoration: underline; }
-
-/* ═══════════════════════════════════════
-   SECCIÓN AGENTE IA
-═══════════════════════════════════════ */
-.ia-providers {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 22px 0;
-}
-.ia-provider {
-  background: rgba(11,17,32,0.7);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 7px 15px;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.65);
-  transition: all 0.18s;
-}
-.ia-provider:hover {
-  border-color: rgba(16,185,129,0.25);
-  color: var(--green-l);
-  background: rgba(16,185,129,0.04);
-}
-
-.ia-features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 14px;
-  margin: 28px 0;
-}
-.ia-feature-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 22px;
-  transition: border-color 0.2s, transform 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.ia-feature-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0; width: 2px;
-  background: var(--green);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.ia-feature-card:hover { border-color: rgba(16,185,129,0.2); transform: translateY(-2px); }
-.ia-feature-card:hover::before { opacity: 1; }
-
+.ia-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--mauve); opacity:0; transition:opacity 0.2s; }
+.ia-card:hover { border-color:rgba(192,132,252,0.22); transform:translateY(-2px); }
+.ia-card:hover::before { opacity:1; }
 .ia-icon {
-  width: 42px; height: 42px;
-  border-radius: 10px;
-  background: rgba(16,185,129,0.07);
-  border: 1px solid rgba(16,185,129,0.12);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  margin-bottom: 14px;
+  width:40px; height:40px; border-radius:10px;
+  background:rgba(192,132,252,0.07); border:1px solid rgba(192,132,252,0.13);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--mauve); margin-bottom:14px;
 }
-.ia-feature-card h4 { font-size: 14px; font-weight: 700; color: #f1f5f9; margin-bottom: 7px; }
-.ia-feature-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.ia-card h4 { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:#f1f5f9; margin-bottom:7px; }
+.ia-card p  { font-size:13px; color:var(--muted); line-height:1.6; }
+.ia-providers { display:flex; flex-wrap:wrap; gap:9px; margin:22px 0; }
+.ia-provider {
+  background:rgba(15,23,42,0.7); border:1px solid var(--border);
+  border-radius:8px; padding:7px 14px;
+  font-size:12px; font-weight:500; color:rgba(255,255,255,0.6);
+  transition:all 0.18s; cursor:default;
+}
+.ia-provider:hover { border-color:rgba(192,132,252,0.3); color:var(--mauve); background:rgba(192,132,252,0.04); }
 
-/* ═══════════════════════════════════════
-   SECCIÓN WEB
-═══════════════════════════════════════ */
-.web-plans {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 28px 0;
-}
+/* ════════════════════════════════════════
+   DISEÑO WEB
+════════════════════════════════════════ */
+.web-plans { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; margin:26px 0; }
 .web-plan-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 26px 22px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.22s;
+  background:linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  border:1px solid var(--border); border-radius:var(--r); padding:26px 20px;
+  position:relative; overflow:hidden; transition:all 0.22s;
 }
-.web-plan-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-  transition: background 0.22s;
-}
-.web-plan-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(56,189,248,0.2);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.3);
-}
-.web-plan-card.featured {
-  border-color: rgba(56,189,248,0.3);
-  background: rgba(56,189,248,0.03);
-}
-.web-plan-card.featured::before {
-  background: linear-gradient(90deg, transparent, rgba(56,189,248,0.5), transparent);
-}
+.web-plan-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:rgba(255,255,255,0.05); transition:background 0.22s; }
+.web-plan-card:hover { transform:translateY(-3px); border-color:rgba(56,189,248,0.22); box-shadow:0 14px 40px rgba(0,0,0,0.35); }
+.web-plan-card.featured { border-color:rgba(56,189,248,0.32); background:linear-gradient(145deg,rgba(56,189,248,0.04),rgba(10,15,30,0.8)); }
+.web-plan-card.featured::before { background:linear-gradient(90deg,transparent,var(--blue),transparent); }
 .wp-badge {
-  display: inline-block;
-  background: rgba(56,189,248,0.12);
-  border: 1px solid rgba(56,189,248,0.25);
-  color: #38BDF8;
-  font-size: 10px; font-weight: 800;
-  padding: 3px 12px;
-  border-radius: 20px;
-  margin-bottom: 14px;
-  letter-spacing: 0.5px;
+  display:inline-block; background:rgba(56,189,248,0.1); border:1px solid rgba(56,189,248,0.25);
+  color:var(--blue); font-size:9px; font-weight:800; padding:3px 12px;
+  border-radius:20px; margin-bottom:12px; letter-spacing:0.8px; text-transform:uppercase;
 }
-.wp-plan-name { font-size: 14px; font-weight: 700; color: #f1f5f9; }
-.wp-plan-price {
-  font-size: 32px; font-weight: 900;
-  background: linear-gradient(135deg, #38BDF8, #7DD3FC);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  margin: 8px 0 6px;
+.wp-name { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:700; color:#f1f5f9; }
+.wp-price { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:900; background:linear-gradient(135deg,var(--blue),#7DD3FC); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin:8px 0 6px; }
+.wp-desc  { font-size:12px; color:var(--muted); line-height:1.55; }
+.web-includes { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:9px; margin-top:22px; }
+.web-inc {
+  display:flex; align-items:center; gap:9px;
+  font-size:13px; color:rgba(255,255,255,0.62);
 }
-.wp-plan-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
-
-.web-includes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  margin-top: 24px;
-}
-.web-inc-item {
-  display: flex; align-items: center; gap: 9px;
-  font-size: 13px; color: rgba(255,255,255,0.65);
-}
-.web-inc-item::before {
-  content: '';
-  display: inline-block;
-  width: 16px; height: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338BDF8' stroke-width='2.5'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  flex-shrink: 0;
+.web-inc::before {
+  content:''; display:inline-block; width:16px; height:16px; flex-shrink:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2338BDF8' stroke-width='2.5'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+  background-size:contain; background-repeat:no-repeat;
 }
 
-/* ═══════════════════════════════════════
-   SECCIÓN SERVICIOS
-═══════════════════════════════════════ */
-.servicios-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 14px;
+/* ════════════════════════════════════════
+   SERVICIOS
+════════════════════════════════════════ */
+.servicios-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:13px; }
+.svc-card {
+  background:linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  border:1px solid var(--border); border-radius:var(--r); padding:26px 22px;
+  transition:all 0.22s; position:relative; overflow:hidden;
 }
-.servicio-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 26px 22px;
-  transition: all 0.22s;
-  position: relative;
-  overflow: hidden;
-}
-.servicio-card:hover {
-  border-color: rgba(251,146,60,0.2);
-  transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(0,0,0,0.3);
-}
+.svc-card:hover { border-color:rgba(251,146,60,0.22); transform:translateY(-3px); box-shadow:0 14px 40px rgba(0,0,0,0.35); }
 .svc-icon {
-  width: 46px; height: 46px;
-  border-radius: 12px;
-  background: rgba(251,146,60,0.07);
-  border: 1px solid rgba(251,146,60,0.12);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  margin-bottom: 16px;
+  width:44px; height:44px; border-radius:11px;
+  background:rgba(251,146,60,0.07); border:1px solid rgba(251,146,60,0.13);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--amber); margin-bottom:16px;
 }
-.servicio-card h3 { font-size: 15px; font-weight: 700; color: #f1f5f9; margin-bottom: 8px; }
-.servicio-card p  { font-size: 13px; color: var(--muted); line-height: 1.6; }
-
-.svc-list {
-  list-style: none;
-  margin-top: 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-.svc-list li {
-  font-size: 12px;
-  color: rgba(255,255,255,0.55);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.svc-card h3 { font-family:'Space Grotesk',sans-serif; font-size:15px; font-weight:700; color:#f1f5f9; margin-bottom:8px; }
+.svc-card p  { font-size:13px; color:var(--muted); line-height:1.6; }
+.svc-list { list-style:none; margin-top:14px; display:flex; flex-direction:column; gap:7px; }
+.svc-list li { font-size:12px; color:rgba(255,255,255,0.5); display:flex; align-items:center; gap:8px; }
 .svc-list li::before {
-  content: '';
-  display: inline-block;
-  width: 14px; height: 14px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FB923C' stroke-width='2.5'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");
-  background-size: contain;
-  background-repeat: no-repeat;
-  flex-shrink: 0;
+  content:''; display:inline-block; width:14px; height:14px; flex-shrink:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F59E0B' stroke-width='2.5'%3E%3Cpath d='M5 12h14M12 5l7 7-7 7'/%3E%3C/svg%3E");
+  background-size:contain; background-repeat:no-repeat;
 }
 
-/* ═══════════════════════════════════════
-   SECCIÓN CONTACTO
-═══════════════════════════════════════ */
+/* ════════════════════════════════════════
+   CONTACTO
+════════════════════════════════════════ */
 .wa-big {
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  background: rgba(37,211,102,0.05);
-  border: 1px solid rgba(37,211,102,0.2);
-  border-radius: var(--r);
-  padding: 26px 28px;
-  text-decoration: none;
-  margin-bottom: 24px;
-  transition: all 0.22s;
-  position: relative;
-  overflow: hidden;
+  display:flex; align-items:center; gap:18px;
+  background:linear-gradient(145deg,rgba(37,211,102,0.06),rgba(10,15,30,0.8));
+  border:1px solid rgba(37,211,102,0.22); border-radius:var(--r);
+  padding:26px 28px; text-decoration:none; margin-bottom:22px;
+  transition:all 0.22s; position:relative; overflow:hidden;
 }
-.wa-big::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(37,211,102,0.5), transparent);
+.wa-big::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(37,211,102,0.5),transparent); }
+.wa-big:hover { background:linear-gradient(145deg,rgba(37,211,102,0.1),rgba(10,15,30,0.8)); border-color:rgba(37,211,102,0.4); transform:translateY(-2px); box-shadow:0 12px 40px rgba(37,211,102,0.1); }
+.wa-icon {
+  width:54px; height:54px; border-radius:14px;
+  background:rgba(37,211,102,0.08); border:1px solid rgba(37,211,102,0.15);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--wa); flex-shrink:0;
 }
-.wa-big:hover {
-  background: rgba(37,211,102,0.09);
-  border-color: rgba(37,211,102,0.35);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(37,211,102,0.1);
+.wa-big-text h3 { font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:800; color:var(--wa); }
+.wa-big-text p  { font-size:13px; color:var(--muted); margin-top:3px; }
+.contacto-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:13px; }
+.cc-card {
+  background:linear-gradient(145deg,rgba(15,23,42,0.8),rgba(10,15,30,0.65));
+  border:1px solid var(--border); border-radius:var(--r); padding:22px;
+  text-decoration:none; display:flex; flex-direction:column; gap:7px;
+  transition:all 0.22s; cursor:pointer;
 }
-.wa-icon-wrap {
-  width: 56px; height: 56px;
-  border-radius: 14px;
-  background: rgba(37,211,102,0.08);
-  border: 1px solid rgba(37,211,102,0.15);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px;
-  flex-shrink: 0;
+.cc-card:hover { border-color:rgba(16,185,129,0.22); transform:translateY(-2px); box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+.cc-ico {
+  width:38px; height:38px; border-radius:9px;
+  background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.1);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--green); margin-bottom:4px;
 }
-.wa-big-text h3 { font-size: 17px; font-weight: 800; color: #25D366; }
-.wa-big-text p  { font-size: 13px; color: var(--muted); margin-top: 3px; }
+.cc-label { font-family:'Space Grotesk',sans-serif; font-size:9px; font-weight:700; color:var(--green); letter-spacing:2px; text-transform:uppercase; }
+.cc-value { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; color:#f1f5f9; }
+.cc-desc  { font-size:12px; color:var(--muted); line-height:1.5; }
 
-.contacto-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-}
-.contacto-card {
-  background: rgba(11,17,32,0.65);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 22px;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-  transition: all 0.22s;
-}
-.contacto-card:hover {
-  border-color: rgba(16,185,129,0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-.cc-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: rgba(16,185,129,0.06);
-  border: 1px solid rgba(16,185,129,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-  margin-bottom: 4px;
-}
-.cc-label { font-size: 10px; font-weight: 700; color: var(--green); letter-spacing: 2px; text-transform: uppercase; }
-.cc-value { font-size: 14px; font-weight: 600; color: #f1f5f9; }
-.cc-desc  { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
-@media (max-width: 900px) {
-  .hub-grid        { grid-template-columns: repeat(2, 1fr); }
-  .pricing-grid    { grid-template-columns: repeat(2, 1fr); }
-  .web-plans       { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  .hub-grid        { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 16px 100px; }
-  .hub-header      { padding: 44px 16px 32px; }
-  .sec-content     { padding: 32px 16px 120px; }
-  .pricing-grid    { grid-template-columns: 1fr 1fr; }
-  .app-grid        { grid-template-columns: 1fr 1fr; }
-  .wa-big          { flex-direction: column; text-align: center; gap: 12px; }
-  .sec-topbar      { padding: 12px 16px; }
-}
-@media (max-width: 420px) {
-  .hub-grid        { grid-template-columns: 1fr; }
-  .app-grid        { grid-template-columns: 1fr; }
-  .pricing-grid    { grid-template-columns: 1fr; }
-}
-
-/* ── Animación de entrada del hub ── */
+/* ════════════════════════════════════════
+   ANIMACIONES DE ENTRADA
+════════════════════════════════════════ */
 @keyframes fade-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity:0; transform:translateY(18px); }
+  to   { opacity:1; transform:translateY(0); }
 }
-.hub-header    { animation: fade-up 0.6s ease both; }
-.hub-grid      { animation: fade-up 0.6s 0.1s ease both; }
-.hub-footer    { animation: fade-up 0.6s 0.2s ease both; }
+.hub-statusbar { animation: fade-up 0.5s ease both; }
+.hub-header    { animation: fade-up 0.5s 0.05s ease both; }
+.hub-grid      { animation: fade-up 0.5s 0.12s ease both; }
+.hub-footer    { animation: fade-up 0.5s 0.2s ease both; }
 
-/* ── Respeta prefers-reduced-motion ── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
+@media (max-width:900px) {
+  .hub-grid     { grid-template-columns:repeat(2,1fr); }
+  .pricing-grid { grid-template-columns:repeat(2,1fr); }
+  .web-plans    { grid-template-columns:1fr; }
+}
+@media (max-width:640px) {
+  .hub-grid     { grid-template-columns:1fr 1fr; gap:12px; padding:0 16px 100px; }
+  .hub-header   { padding:40px 16px 36px; }
+  .hub-stats    { gap:0; }
+  .hub-stat     { padding:0 16px; }
+  .sec-content  { padding:32px 16px 120px; }
+  .pricing-grid { grid-template-columns:1fr 1fr; }
+  .app-grid     { grid-template-columns:1fr 1fr; }
+  .sec-topbar   { padding:12px 16px; }
+  .wa-big       { flex-direction:column; text-align:center; gap:12px; padding:22px 20px; }
+}
+@media (max-width:400px) {
+  .hub-grid     { grid-template-columns:1fr; }
+  .app-grid     { grid-template-columns:1fr; }
+  .pricing-grid { grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation:none !important; transition:none !important; }
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════
-     FONDO ANIMADO (capa 0)
-═══════════════════════════════════════ -->
-<div class="bg-layer" aria-hidden="true">
-  <div class="orb-1"></div>
-  <div class="orb-2"></div>
-  <div class="orb-3"></div>
+<!-- FONDO -->
+<div class="bg-canvas" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
   <div class="bg-grid"></div>
+  <div class="bg-scan"></div>
+  <div class="bg-vignette"></div>
 </div>
 
-<!-- ═══════════════════════════════════
-     HUB — MENÚ PRINCIPAL
-═══════════════════════════════════════ -->
+<!-- ════════════════════ HUB ════════════════════ -->
 <div id="hub" role="main">
 
+  <!-- Barra de estado -->
+  <div class="hub-statusbar" role="status">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Sistema operativo</span>
+    <span class="sep">·</span>
+    <span>Guayaquil, Ecuador</span>
+    <span class="sep">·</span>
+    <span>Licencias desde <strong style="color:var(--green)">$7/mes</strong></span>
+    <span class="sep">·</span>
+    <span>Soporte 24/7</span>
+  </div>
+
+  <!-- Logo + tagline + stats -->
   <header class="hub-header">
-    <div class="hub-logo">DeepCore</div>
-    <p class="hub-tagline">Software Empresarial con IA &nbsp;·&nbsp; Ecuador</p>
-    <div class="hub-badge" role="status">
-      <span class="hub-badge-dot" aria-hidden="true"></span>
-      Plataforma activa &nbsp;·&nbsp; Desde $7/mes &nbsp;·&nbsp; Todo incluido
+    <div class="hub-logo" aria-label="DeepCore">DeepCore</div>
+    <p class="hub-tagline">Software Empresarial con IA</p>
+
+    <div class="hub-stats" role="list" aria-label="Estadísticas">
+      <div class="hub-stat" role="listitem">
+        <span class="hub-stat-v">10+</span>
+        <span class="hub-stat-l">Programas</span>
+      </div>
+      <div class="hub-stat-sep" aria-hidden="true"></div>
+      <div class="hub-stat" role="listitem">
+        <span class="hub-stat-v">$7</span>
+        <span class="hub-stat-l">por mes</span>
+      </div>
+      <div class="hub-stat-sep" aria-hidden="true"></div>
+      <div class="hub-stat" role="listitem">
+        <span class="hub-stat-v">99.9%</span>
+        <span class="hub-stat-l">Uptime</span>
+      </div>
+      <div class="hub-stat-sep" aria-hidden="true"></div>
+      <div class="hub-stat" role="listitem">
+        <span class="hub-stat-v">8+</span>
+        <span class="hub-stat-l">Modelos IA</span>
+      </div>
     </div>
   </header>
 
-  <nav class="hub-grid" aria-label="Secciones principales">
+  <!-- Cards -->
+  <nav class="hub-grid" aria-label="Menú principal">
 
-    <!-- Programas -->
-    <div class="hub-card"
-         onclick="openSection('programas')"
-         role="button" tabindex="0"
+    <!-- 01 Programas -->
+    <div class="hub-card" onclick="openSection('programas')" role="button" tabindex="0"
          aria-label="Ver programas"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('programas')"
-         style="--c-accent:var(--green);--c-glow:rgba(16,185,129,0.09);--c-border:rgba(16,185,129,0.28);--c-shadow:0 0 30px rgba(16,185,129,0.08);--c-cta:var(--green);--c-icon-bg:rgba(16,185,129,0.08);--c-icon-border:rgba(16,185,129,0.15)">
-      <div class="hc-icon" aria-hidden="true">💻</div>
+         style="--c-accent:var(--green);--c-glow:rgba(16,185,129,0.09);--c-border-h:rgba(16,185,129,0.3);--c-shadow:0 0 40px rgba(16,185,129,0.07);--c-icon-bg:rgba(16,185,129,0.07);--c-icon-bd:rgba(16,185,129,0.14)">
+      <div class="hc-num">01 — PROGRAMAS</div>
+      <div class="hc-icon" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
       <div class="hc-title">Programas</div>
-      <p class="hc-desc">10+ herramientas empresariales con IA. CRM, RRHH, Inventario, POS, Facturación SRI y más para tu empresa.</p>
-      <div class="hc-cta" aria-hidden="true">
-        Ver todos los programas
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">10 herramientas empresariales con IA — CRM, RRHH, Inventario, POS, Facturación SRI y más.</p>
+      <div class="hc-cta" aria-hidden="true">Ver catálogo
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
-    <!-- Precios -->
-    <div class="hub-card"
-         onclick="openSection('precios')"
-         role="button" tabindex="0"
+    <!-- 02 Precios -->
+    <div class="hub-card" onclick="openSection('precios')" role="button" tabindex="0"
          aria-label="Ver precios"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('precios')"
-         style="--c-accent:#F59E0B;--c-glow:rgba(245,158,11,0.07);--c-border:rgba(245,158,11,0.25);--c-shadow:0 0 30px rgba(245,158,11,0.06);--c-cta:#F59E0B;--c-icon-bg:rgba(245,158,11,0.07);--c-icon-border:rgba(245,158,11,0.14)">
-      <div class="hc-icon" aria-hidden="true">💰</div>
+         style="--c-accent:var(--amber);--c-glow:rgba(245,158,11,0.07);--c-border-h:rgba(245,158,11,0.28);--c-shadow:0 0 40px rgba(245,158,11,0.05);--c-icon-bg:rgba(245,158,11,0.07);--c-icon-bd:rgba(245,158,11,0.14)">
+      <div class="hc-num" style="color:var(--amber)">02 — PRECIOS</div>
+      <div class="hc-icon" style="background:rgba(245,158,11,0.07);border-color:rgba(245,158,11,0.14);color:var(--amber)" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
       <div class="hc-title">Precios</div>
-      <p class="hc-desc">Desde $7/mes accedes a todos los programas. Planes mensual, trimestral, semestral y anual disponibles.</p>
-      <div class="hc-cta" aria-hidden="true" style="color:#F59E0B">
-        Ver planes y precios
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">Desde $7/mes, acceso total a todos los programas. Mensual, trimestral, semestral y anual.</p>
+      <div class="hc-cta" style="color:var(--amber)" aria-hidden="true">Ver planes
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
-    <!-- Agente IA -->
-    <div class="hub-card"
-         onclick="openSection('ia')"
-         role="button" tabindex="0"
+    <!-- 03 Agente IA -->
+    <div class="hub-card" onclick="openSection('ia')" role="button" tabindex="0"
          aria-label="Conocer el agente IA"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('ia')"
-         style="--c-accent:#C084FC;--c-glow:rgba(192,132,252,0.07);--c-border:rgba(192,132,252,0.25);--c-shadow:0 0 30px rgba(192,132,252,0.06);--c-cta:#C084FC;--c-icon-bg:rgba(192,132,252,0.07);--c-icon-border:rgba(192,132,252,0.14)">
-      <div class="hc-icon" aria-hidden="true">🤖</div>
+         style="--c-accent:var(--mauve);--c-glow:rgba(192,132,252,0.07);--c-border-h:rgba(192,132,252,0.28);--c-shadow:0 0 40px rgba(192,132,252,0.05);--c-icon-bg:rgba(192,132,252,0.07);--c-icon-bd:rgba(192,132,252,0.14)">
+      <div class="hc-num" style="color:var(--mauve)">03 — AGENTE IA</div>
+      <div class="hc-icon" style="background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.14);color:var(--mauve)" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2z"/><path d="M12 12v2m-4 4h8a2 2 0 0 0 2-2v-1a6 6 0 0 0-12 0v1a2 2 0 0 0 2 2z"/><circle cx="19" cy="7" r="2"/><circle cx="5" cy="7" r="2"/></svg>
+      </div>
       <div class="hc-title">Agente IA</div>
-      <p class="hc-desc">Conecta Claude, OpenAI, Gemini, DeepSeek o Groq. Tú traes la API Key — nosotros la integramos. Sin intermediarios.</p>
-      <div class="hc-cta" aria-hidden="true" style="color:#C084FC">
-        Conocer el agente
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">Conecta Claude, OpenAI, Gemini, DeepSeek o Groq con tu propia API Key. Sin intermediarios.</p>
+      <div class="hc-cta" style="color:var(--mauve)" aria-hidden="true">Conocer más
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
-    <!-- Diseño Web -->
-    <div class="hub-card"
-         onclick="openSection('web')"
-         role="button" tabindex="0"
+    <!-- 04 Diseño Web -->
+    <div class="hub-card" onclick="openSection('web')" role="button" tabindex="0"
          aria-label="Ver diseño web"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('web')"
-         style="--c-accent:#38BDF8;--c-glow:rgba(56,189,248,0.07);--c-border:rgba(56,189,248,0.25);--c-shadow:0 0 30px rgba(56,189,248,0.06);--c-cta:#38BDF8;--c-icon-bg:rgba(56,189,248,0.07);--c-icon-border:rgba(56,189,248,0.14)">
-      <div class="hc-icon" aria-hidden="true">🌐</div>
+         style="--c-accent:var(--blue);--c-glow:rgba(56,189,248,0.07);--c-border-h:rgba(56,189,248,0.28);--c-shadow:0 0 40px rgba(56,189,248,0.05);--c-icon-bg:rgba(56,189,248,0.07);--c-icon-bd:rgba(56,189,248,0.14)">
+      <div class="hc-num" style="color:var(--blue)">04 — DISEÑO WEB</div>
+      <div class="hc-icon" style="background:rgba(56,189,248,0.07);border-color:rgba(56,189,248,0.14);color:var(--blue)" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
       <div class="hc-title">Diseño Web</div>
-      <p class="hc-desc">Tu página web profesional desde $79. Diseño moderno, optimizada para Google. Entrega en 5 a 7 días.</p>
-      <div class="hc-cta" aria-hidden="true" style="color:#38BDF8">
-        Ver planes web
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">Tu página web profesional desde $79. Diseño moderno, adaptada al celular. Entrega en 5–7 días.</p>
+      <div class="hc-cta" style="color:var(--blue)" aria-hidden="true">Ver planes
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
-    <!-- Servicios -->
-    <div class="hub-card"
-         onclick="openSection('servicios')"
-         role="button" tabindex="0"
+    <!-- 05 Servicios -->
+    <div class="hub-card" onclick="openSection('servicios')" role="button" tabindex="0"
          aria-label="Ver servicios"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('servicios')"
-         style="--c-accent:#FB923C;--c-glow:rgba(251,146,60,0.07);--c-border:rgba(251,146,60,0.25);--c-shadow:0 0 30px rgba(251,146,60,0.06);--c-cta:#FB923C;--c-icon-bg:rgba(251,146,60,0.07);--c-icon-border:rgba(251,146,60,0.14)">
-      <div class="hc-icon" aria-hidden="true">🛠️</div>
+         style="--c-accent:var(--amber);--c-glow:rgba(251,146,60,0.07);--c-border-h:rgba(251,146,60,0.28);--c-shadow:0 0 40px rgba(251,146,60,0.05);--c-icon-bg:rgba(251,146,60,0.07);--c-icon-bd:rgba(251,146,60,0.14)">
+      <div class="hc-num" style="color:var(--amber)">05 — SERVICIOS</div>
+      <div class="hc-icon" style="background:rgba(251,146,60,0.07);border-color:rgba(251,146,60,0.14);color:var(--amber)" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      </div>
       <div class="hc-title">Servicios</div>
-      <p class="hc-desc">Mantenimiento de software, reparación de PCs, soporte remoto y desarrollo a medida para tu empresa.</p>
-      <div class="hc-cta" aria-hidden="true" style="color:#FB923C">
-        Ver servicios
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">Mantenimiento de software, reparación de PCs, soporte remoto y desarrollo a medida.</p>
+      <div class="hc-cta" style="color:var(--amber)" aria-hidden="true">Ver servicios
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
-    <!-- Contacto -->
-    <div class="hub-card"
-         onclick="openSection('contacto')"
-         role="button" tabindex="0"
+    <!-- 06 Contacto -->
+    <div class="hub-card" onclick="openSection('contacto')" role="button" tabindex="0"
          aria-label="Contactarnos"
          onkeydown="if(event.key==='Enter'||event.key===' ')openSection('contacto')"
-         style="--c-accent:#25D366;--c-glow:rgba(37,211,102,0.07);--c-border:rgba(37,211,102,0.25);--c-shadow:0 0 30px rgba(37,211,102,0.06);--c-cta:#25D366;--c-icon-bg:rgba(37,211,102,0.07);--c-icon-border:rgba(37,211,102,0.14)">
-      <div class="hc-icon" aria-hidden="true">📞</div>
+         style="--c-accent:var(--wa);--c-glow:rgba(37,211,102,0.07);--c-border-h:rgba(37,211,102,0.28);--c-shadow:0 0 40px rgba(37,211,102,0.05);--c-icon-bg:rgba(37,211,102,0.07);--c-icon-bd:rgba(37,211,102,0.14)">
+      <div class="hc-num" style="color:var(--wa)">06 — CONTACTO</div>
+      <div class="hc-icon" style="background:rgba(37,211,102,0.07);border-color:rgba(37,211,102,0.14);color:var(--wa)" aria-hidden="true">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
       <div class="hc-title">Contacto</div>
-      <p class="hc-desc">WhatsApp, email y redes sociales. Respondemos rápido. Guayaquil, Ecuador — atención presencial y remota.</p>
-      <div class="hc-cta" aria-hidden="true" style="color:#25D366">
-        Contactarnos ahora
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <p class="hc-desc">WhatsApp, email y redes sociales. Respondemos rápido. Guayaquil, Ecuador.</p>
+      <div class="hc-cta" style="color:var(--wa)" aria-hidden="true">Contactarnos
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
     </div>
 
@@ -1328,139 +929,118 @@ body {
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: PROGRAMAS
-═══════════════════════════════════════ -->
+<!-- ════════════ PROGRAMAS ════════════ -->
 <div id="sec-programas" class="sec-page" role="region" aria-label="Programas">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.3"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('programas')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('programas')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">💻 Programas</span>
+    <span class="sec-topbar-label">01 — Programas</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
       <p class="sec-eyebrow">Catálogo completo</p>
       <h1 class="sec-h">Todo el software<br><em>en una licencia.</em></h1>
-      <p class="sec-p">Con $7/mes accedes a todos los programas. Descarga, instala y activa con tu clave de licencia.</p>
+      <p class="sec-p">Con $7/mes accedes a todos los programas. Descarga, instala y activa con tu clave.</p>
     </div>
-
     <div class="app-grid">
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🤝</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">CRM Pro</div>
-        <p class="app-desc">Gestión de clientes, pipeline de ventas y agente IA</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreCRMPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">CRM Pro</div><p class="app-desc">Gestión de clientes, pipeline de ventas y agente IA</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreCRMPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">👥</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">HR Pro</div>
-        <p class="app-desc">RRHH, nómina multi-país y control de asistencia</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreHRPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">HR Pro</div><p class="app-desc">RRHH, nómina multi-país y control de asistencia</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreHRPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">📦</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Inventario Pro</div>
-        <p class="app-desc">Stock, ventas y reparaciones con IA integrada</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreInventarioPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Inventario Pro</div><p class="app-desc">Stock, ventas y reparaciones con IA integrada</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreInventarioPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">📊</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Contabilidad Pro</div>
-        <p class="app-desc">Contabilidad NIIF, asientos y estados financieros</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreContabilidadPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Contabilidad Pro</div><p class="app-desc">Contabilidad NIIF, asientos y estados financieros</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreContabilidadPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🛒</div><span class="app-badge badge-ec">Ecuador</span></div>
-        <div class="app-name">POS</div>
-        <p class="app-desc">Punto de venta táctil con tickets y reportes</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCorePOS-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div><span class="app-badge badge-ec">Ecuador</span></div>
+        <div class="app-name">POS</div><p class="app-desc">Punto de venta táctil con tickets y reportes</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCorePOS-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🧾</div><span class="app-badge badge-ec">Ecuador</span></div>
-        <div class="app-name">Facturación SRI</div>
-        <p class="app-desc">Facturas electrónicas válidas ante el SRI</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreFacturacionSRI-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><span class="app-badge badge-ec">Ecuador</span></div>
+        <div class="app-name">Facturación SRI</div><p class="app-desc">Facturas electrónicas válidas ante el SRI</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreFacturacionSRI-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🖥️</div><span class="app-badge badge-ec">Ecuador</span></div>
-        <div class="app-name">RemoteLAN</div>
-        <p class="app-desc">Control remoto de PCs en red local sin internet</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreRemoteLAN-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M8 9l4 4 4-4"/></svg></div><span class="app-badge badge-ec">Ecuador</span></div>
+        <div class="app-name">RemoteLAN</div><p class="app-desc">Control remoto de PCs en red local</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreRemoteLAN-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">📅</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Agenda Pro</div>
-        <p class="app-desc">Citas y turnos para clínicas, salones y servicios</p>
-        <a href="https://github.com/DeepCoreec/deepcore-agenda-pro/releases/latest/download/DeepCoreAgendaPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Agenda Pro</div><p class="app-desc">Citas y turnos para clínicas, salones y servicios</p>
+        <a href="https://github.com/DeepCoreec/deepcore-agenda-pro/releases/latest/download/DeepCoreAgendaPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🛡️</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Sentinel</div>
-        <p class="app-desc">Monitor de seguridad empresarial con alertas e IA</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreSentinel-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Sentinel</div><p class="app-desc">Monitor de seguridad empresarial con IA</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreSentinel-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🌐</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Traductor en Tiempo Real</div>
-        <p class="app-desc">Traduce tu voz al instante con IA</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreTradutorTiempoReal-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Traductor en Tiempo Real</div><p class="app-desc">Traduce tu voz al instante con IA</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreTradutorTiempoReal-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🧠</div><span class="app-badge badge-avail">Disponible</span></div>
-        <div class="app-name">Nexus Pro</div>
-        <p class="app-desc">Plataforma de agentes IA con chat, análisis y clientes</p>
-        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreNexusPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar para Windows</a>
+        <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="app-badge badge-avail">Disponible</span></div>
+        <div class="app-name">Nexus Pro</div><p class="app-desc">Plataforma de agentes IA con chat y análisis</p>
+        <a href="https://github.com/DeepCoreec/deepcore-releases/releases/latest/download/DeepCoreNexusPro-Setup.zip" class="app-dl" target="_blank" rel="noopener">⬇ Descargar Windows</a>
       </div>
       <div class="app-card">
-        <div class="app-card-head"><div class="app-icon">🤖</div><span class="app-badge badge-agent">En desarrollo</span></div>
-        <div class="app-name">DeepCore Agent</div>
-        <p class="app-desc">Controla todos los programas con IA autónoma</p>
+        <div class="app-card-head"><div class="app-icon" style="color:var(--mauve);background:rgba(192,132,252,0.07);border-color:rgba(192,132,252,0.13)"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div><span class="app-badge badge-dev">En desarrollo</span></div>
+        <div class="app-name">DeepCore Agent</div><p class="app-desc">Controla todos los programas con IA autónoma</p>
         <span class="app-dl disabled">⬇ Próximamente</span>
       </div>
     </div>
-
     <div class="sec-divider"></div>
-
-    <a href="https://wa.me/593986225038?text=Hola, necesito un software a medida" target="_blank" rel="noopener" class="app-card-link" style="max-width:360px">
-      <div class="app-card-head"><div class="app-icon">🔧</div><span class="app-badge badge-avail">A Medida</span></div>
+    <a href="https://wa.me/593986225038?text=Hola, necesito un software a medida" target="_blank" rel="noopener" class="app-card-link" style="max-width:340px">
+      <div class="app-card-head"><div class="app-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></div><span class="app-badge badge-avail">A Medida</span></div>
       <div class="app-name">Software a Medida</div>
-      <p class="app-desc">¿Necesitas algo diferente? Construimos tu idea desde cero.</p>
+      <p class="app-desc">¿Necesitas algo diferente? Lo construimos desde cero.</p>
       <span class="app-dl app-dl-wa">💬 Cotizar por WhatsApp</span>
     </a>
-
     <div class="btn-group">
       <a href="pago.html" class="btn-primary">Obtener licencia — desde $7/mes</a>
     </div>
     <div class="info-box">
-      Extrae el ZIP descargado y ejecuta el <strong>.exe</strong>. Necesitas tu clave de licencia para activar.
+      Extrae el ZIP y ejecuta el <strong>.exe</strong>. Necesitas tu clave de licencia para activar.
       <a href="https://wa.me/593986225038?text=Hola, necesito ayuda con la instalación" target="_blank" rel="noopener">¿Ayuda con la instalación?</a>
     </div>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: PRECIOS
-═══════════════════════════════════════ -->
+<!-- ════════════ PRECIOS ════════════ -->
 <div id="sec-precios" class="sec-page" role="region" aria-label="Precios">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s" style="background:radial-gradient(circle,rgba(245,158,11,0.06) 0%,transparent 70%)"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.25;background:radial-gradient(ellipse,rgba(245,158,11,0.08) 0%,transparent 65%)"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('precios')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('precios')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">💰 Precios</span>
+    <span class="sec-topbar-label">02 — Precios</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
       <p class="sec-eyebrow">Licencia universal</p>
       <h1 class="sec-h">Una clave.<br><em>Todo incluido.</em></h1>
-      <p class="sec-p">Un solo pago desbloquea todos los programas actuales y futuros de DeepCore.</p>
+      <p class="sec-p">Un solo pago desbloquea todos los programas actuales y futuros.</p>
     </div>
-
     <div class="pricing-include">
       <h4>¿Qué incluye tu licencia?</h4>
       <ul class="include-list">
@@ -1472,7 +1052,6 @@ body {
         <li>Sin contratos — cancela cuando quieras</li>
       </ul>
     </div>
-
     <div class="pricing-grid">
       <div class="price-card">
         <div class="price-save">&nbsp;</div>
@@ -1482,7 +1061,7 @@ body {
         <a href="pago.html" class="price-btn">Suscribirse →</a>
       </div>
       <div class="price-card popular">
-        <div class="price-popular-badge">⭐ Más popular</div>
+        <div class="price-popular-badge">Más popular</div>
         <div class="price-save">&nbsp;</div>
         <div class="price-name">Trimestral</div>
         <div class="price-amount"><span class="price-cur">$</span>18</div>
@@ -1504,86 +1083,70 @@ body {
         <a href="pago.html" class="price-btn">Suscribirse →</a>
       </div>
     </div>
-
-    <div class="pricing-trust" role="list">
-      <span role="listitem">🔒 Pago 100% seguro</span>
-      <span role="listitem">⚡ Clave por email al instante</span>
-      <span role="listitem">↩️ Sin contratos</span>
-      <span role="listitem">💳 Visa · Mastercard · Débito Ecuador</span>
+    <div class="pricing-trust">
+      <span>🔒 Pago seguro</span><span>⚡ Clave al instante</span>
+      <span>↩️ Sin contratos</span><span>💳 Visa · Mastercard · Débito</span>
     </div>
-
     <div class="info-box">
-      <strong>DeepCore cobra acceso a la plataforma.</strong> El consumo de IA (OpenAI, Claude, Gemini, etc.) va directamente a tu cuenta — nosotros no cobramos por tokens ni intermediamos.
+      <strong>DeepCore cobra el acceso a la plataforma.</strong> El consumo de IA (OpenAI, Claude, Gemini…) va directo a tu cuenta — sin intermediarios ni cobro por tokens.
     </div>
-
     <div class="pricing-alt">
-      ¿Prefieres pagar de otra forma? →
-      <a href="https://wa.me/593986225038?text=Hola DeepCore! Quiero pagar por transferencia bancaria" target="_blank" rel="noopener">Transferencia bancaria</a>
-      &nbsp;·&nbsp;
-      <a href="https://wa.me/593986225038?text=Hola DeepCore! Quiero comprar una licencia" target="_blank" rel="noopener">WhatsApp</a>
+      ¿Otro método de pago? →
+      <a href="https://wa.me/593986225038?text=Hola, quiero pagar por transferencia" target="_blank" rel="noopener">Transferencia bancaria</a> ·
+      <a href="https://wa.me/593986225038?text=Hola, quiero una licencia" target="_blank" rel="noopener">WhatsApp</a>
     </div>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: AGENTE IA
-═══════════════════════════════════════ -->
+<!-- ════════════ AGENTE IA ════════════ -->
 <div id="sec-ia" class="sec-page" role="region" aria-label="Agente IA">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s" style="background:radial-gradient(circle,rgba(192,132,252,0.06) 0%,transparent 70%)"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.25;background:radial-gradient(ellipse,rgba(192,132,252,0.08) 0%,transparent 65%)"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('ia')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('ia')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">🤖 Agente IA</span>
+    <span class="sec-topbar-label">03 — Agente IA</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
       <p class="sec-eyebrow">Inteligencia artificial</p>
       <h1 class="sec-h">Tu IA favorita,<br><em>en tu empresa.</em></h1>
-      <p class="sec-p">Cada programa DeepCore tiene un agente de IA integrado. Tú traes la API Key y nosotros la conectamos. Sin intermediarios, sin costos ocultos.</p>
+      <p class="sec-p">Cada programa DeepCore incluye un agente de IA. Tú traes la API Key — nosotros la conectamos. Sin intermediarios.</p>
     </div>
-
     <div class="ia-features">
-      <div class="ia-feature-card">
-        <div class="ia-icon">🔑</div>
+      <div class="ia-card">
+        <div class="ia-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h4>Tú controlas la IA</h4>
-        <p>Usa tu propia API Key de OpenAI, Claude, Gemini o cualquier proveedor. DeepCore no cobra por tokens ni almacena tus conversaciones.</p>
+        <p>Usa tu propia API Key. DeepCore no cobra por tokens ni almacena tus conversaciones. Total privacidad.</p>
       </div>
-      <div class="ia-feature-card">
-        <div class="ia-icon">⚡</div>
+      <div class="ia-card">
+        <div class="ia-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <h4>Acciones reales</h4>
-        <p>El agente no solo responde — ejecuta acciones dentro del programa: crea contactos, busca stock, genera reportes y más desde el chat.</p>
+        <p>El agente ejecuta tareas dentro del programa: crea contactos, busca stock, genera reportes — todo desde el chat.</p>
       </div>
-      <div class="ia-feature-card">
-        <div class="ia-icon">🔄</div>
+      <div class="ia-card">
+        <div class="ia-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
         <h4>Multi-proveedor</h4>
-        <p>Cambia de proveedor en cualquier momento sin reinstalar. OpenAI, Gemini, DeepSeek, Groq — tú decides cuál usar.</p>
+        <p>Cambia de proveedor en segundos. Si OpenAI sube precios, prueba Gemini o DeepSeek sin reinstalar nada.</p>
       </div>
-      <div class="ia-feature-card">
-        <div class="ia-icon">🔒</div>
+      <div class="ia-card">
+        <div class="ia-icon"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h4>Privacidad total</h4>
-        <p>Los datos van directo de tu computadora al proveedor de IA. DeepCore no ve ni almacena tus datos empresariales.</p>
+        <p>Los datos van directo de tu PC al proveedor de IA elegido. DeepCore no ve ni almacena datos empresariales.</p>
       </div>
     </div>
-
     <p class="sec-eyebrow" style="margin-top:8px">Proveedores compatibles</p>
-    <div class="ia-providers" role="list">
-      <div class="ia-provider" role="listitem">Claude — Anthropic</div>
-      <div class="ia-provider" role="listitem">OpenAI / ChatGPT</div>
-      <div class="ia-provider" role="listitem">Gemini — Google</div>
-      <div class="ia-provider" role="listitem">DeepSeek</div>
-      <div class="ia-provider" role="listitem">Groq</div>
-      <div class="ia-provider" role="listitem">Mistral</div>
-      <div class="ia-provider" role="listitem">Grok — xAI</div>
-      <div class="ia-provider" role="listitem">Ollama (local)</div>
+    <div class="ia-providers">
+      <div class="ia-provider">Claude — Anthropic</div><div class="ia-provider">OpenAI / ChatGPT</div>
+      <div class="ia-provider">Gemini — Google</div><div class="ia-provider">DeepSeek</div>
+      <div class="ia-provider">Groq</div><div class="ia-provider">Mistral</div>
+      <div class="ia-provider">Grok — xAI</div><div class="ia-provider">Ollama (local)</div>
     </div>
-
     <div class="info-box">
-      <strong>¿Cómo activarlo?</strong> En el programa: Configuración → Agente IA → ingresa tu API Key → listo. El agente queda activo de forma permanente y recuerda tu configuración.
+      <strong>Activación:</strong> En el programa → Configuración → Agente IA → ingresa tu API Key → listo. La configuración persiste.
     </div>
-
     <div class="btn-group">
       <a href="pago.html" class="btn-primary">Obtener licencia →</a>
       <a href="https://wa.me/593986225038?text=Hola, tengo dudas sobre el agente IA" target="_blank" rel="noopener" class="btn-secondary">Preguntar por WhatsApp</a>
@@ -1592,151 +1155,116 @@ body {
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: DISEÑO WEB
-═══════════════════════════════════════ -->
+<!-- ════════════ DISEÑO WEB ════════════ -->
 <div id="sec-web" class="sec-page" role="region" aria-label="Diseño Web">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s" style="background:radial-gradient(circle,rgba(56,189,248,0.06) 0%,transparent 70%)"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.25;background:radial-gradient(ellipse,rgba(56,189,248,0.07) 0%,transparent 65%)"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('web')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('web')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">🌐 Diseño Web</span>
+    <span class="sec-topbar-label">04 — Diseño Web</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
       <p class="sec-eyebrow">Presencia digital</p>
-      <h1 class="sec-h">Tu negocio en internet,<br><em>desde $79.</em></h1>
-      <p class="sec-p">El 70% de tus clientes busca en internet antes de comprar. Si no apareces, no existes. Te ponemos en el mapa rápido.</p>
+      <h1 class="sec-h">Tu negocio online,<br><em>desde $79.</em></h1>
+      <p class="sec-p">El 70% de los clientes busca en internet antes de comprar. Si no apareces, no existes.</p>
     </div>
-
     <div class="web-plans">
       <div class="web-plan-card">
-        <div class="wp-plan-name">Básica</div>
-        <div class="wp-plan-price">$79 – $120</div>
-        <p class="wp-plan-desc">Landing page, hasta 3 secciones, formulario de contacto. Perfecta para empezar.</p>
+        <div class="wp-name">Básica</div>
+        <div class="wp-price">$79 – $120</div>
+        <p class="wp-desc">Landing page, hasta 3 secciones, formulario de contacto. Perfecta para empezar.</p>
       </div>
       <div class="web-plan-card featured">
         <div class="wp-badge">Más solicitada</div>
-        <div class="wp-plan-name">Profesional</div>
-        <div class="wp-plan-price">$150 – $250</div>
-        <p class="wp-plan-desc">Diseño premium, múltiples páginas, chat de WhatsApp integrado, galería y más.</p>
+        <div class="wp-name">Profesional</div>
+        <div class="wp-price">$150 – $250</div>
+        <p class="wp-desc">Diseño premium, múltiples páginas, chat de WhatsApp, galería y más.</p>
       </div>
       <div class="web-plan-card">
-        <div class="wp-plan-name">Empresarial</div>
-        <div class="wp-plan-price">$300+</div>
-        <p class="wp-plan-desc">Tienda online, panel de administración o sistema completo. Cotiza sin compromiso.</p>
+        <div class="wp-name">Empresarial</div>
+        <div class="wp-price">$300+</div>
+        <p class="wp-desc">Tienda online, panel de administración o sistema completo a medida.</p>
       </div>
     </div>
-
-    <p class="sec-eyebrow">Todo incluido en cada plan</p>
+    <p class="sec-eyebrow">Todo incluido</p>
     <div class="web-includes">
-      <div class="web-inc-item">Diseño profesional y moderno</div>
-      <div class="web-inc-item">Adaptada a celular y computadora</div>
-      <div class="web-inc-item">Entrega en 5 a 7 días</div>
-      <div class="web-inc-item">Dominio y hosting el 1er año</div>
-      <div class="web-inc-item">Chat de WhatsApp integrado</div>
-      <div class="web-inc-item">SEO básico para Google</div>
+      <div class="web-inc">Diseño profesional y moderno</div>
+      <div class="web-inc">Adaptada a celular y computadora</div>
+      <div class="web-inc">Entrega en 5 a 7 días</div>
+      <div class="web-inc">Dominio y hosting el 1er año</div>
+      <div class="web-inc">Chat de WhatsApp integrado</div>
+      <div class="web-inc">SEO básico para Google</div>
     </div>
-
     <div class="btn-group">
-      <a href="https://wa.me/593986225038?text=Hola, me interesa una página web para mi negocio" target="_blank" rel="noopener" class="btn-primary">Quiero mi página web →</a>
+      <a href="https://wa.me/593986225038?text=Hola, me interesa una página web" target="_blank" rel="noopener" class="btn-primary">Quiero mi página web →</a>
     </div>
-    <div class="info-box">
-      Consulta <strong>gratuita y sin compromiso.</strong> Cuéntanos tu negocio por WhatsApp y te enviamos una propuesta en 24 horas.
-    </div>
+    <div class="info-box">Consulta <strong>gratuita y sin compromiso.</strong> Cuéntanos tu negocio por WhatsApp y te enviamos propuesta en 24 horas.</div>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: SERVICIOS
-═══════════════════════════════════════ -->
+<!-- ════════════ SERVICIOS ════════════ -->
 <div id="sec-servicios" class="sec-page" role="region" aria-label="Servicios">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s" style="background:radial-gradient(circle,rgba(251,146,60,0.06) 0%,transparent 70%)"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.25;background:radial-gradient(ellipse,rgba(251,146,60,0.07) 0%,transparent 65%)"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('servicios')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('servicios')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">🛠️ Servicios</span>
+    <span class="sec-topbar-label">05 — Servicios</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
       <p class="sec-eyebrow">Soporte técnico</p>
       <h1 class="sec-h">Más que software,<br><em>soporte completo.</em></h1>
-      <p class="sec-p">DeepCore no solo construye herramientas — también mantiene los equipos y sistemas que las corren.</p>
+      <p class="sec-p">DeepCore también mantiene los equipos y sistemas que corren tu empresa.</p>
     </div>
-
     <div class="servicios-grid">
-      <div class="servicio-card">
-        <div class="svc-icon">💻</div>
+      <div class="svc-card">
+        <div class="svc-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
         <h3>Soporte de Software</h3>
-        <p>Mantenimiento, actualización y resolución de problemas en tus programas y sistemas operativos.</p>
-        <ul class="svc-list">
-          <li>Instalación y configuración</li>
-          <li>Actualizaciones y parches</li>
-          <li>Resolución de errores</li>
-          <li>Capacitación de usuarios</li>
-        </ul>
+        <p>Mantenimiento, actualización y resolución de errores en tus programas y sistemas.</p>
+        <ul class="svc-list"><li>Instalación y configuración</li><li>Actualizaciones</li><li>Resolución de errores</li><li>Capacitación</li></ul>
       </div>
-      <div class="servicio-card">
-        <div class="svc-icon">🖥️</div>
-        <h3>Mantenimiento de Hardware</h3>
-        <p>Reparación, limpieza y optimización de computadoras y laptops para tu empresa.</p>
-        <ul class="svc-list">
-          <li>Limpieza interna</li>
-          <li>Cambio de pasta térmica</li>
-          <li>Reparación de componentes</li>
-          <li>Diagnóstico gratis</li>
-        </ul>
+      <div class="svc-card">
+        <div class="svc-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>
+        <h3>Mantenimiento Hardware</h3>
+        <p>Reparación, limpieza y optimización de computadoras y laptops.</p>
+        <ul class="svc-list"><li>Limpieza interna</li><li>Cambio pasta térmica</li><li>Reparación</li><li>Diagnóstico gratis</li></ul>
       </div>
-      <div class="servicio-card">
-        <div class="svc-icon">🌐</div>
+      <div class="svc-card">
+        <div class="svc-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></div>
         <h3>Soporte Remoto</h3>
-        <p>Soluciones desde cualquier lugar. Te ayudamos sin que tengas que salir de tu oficina.</p>
-        <ul class="svc-list">
-          <li>Acceso remoto seguro</li>
-          <li>Resolución en minutos</li>
-          <li>Sin desplazamiento</li>
-          <li>Via WhatsApp</li>
-        </ul>
+        <p>Te ayudamos sin que salgas de tu oficina, por WhatsApp o acceso remoto.</p>
+        <ul class="svc-list"><li>Acceso remoto seguro</li><li>Resolución rápida</li><li>Sin desplazamiento</li><li>Via WhatsApp</li></ul>
       </div>
-      <div class="servicio-card">
-        <div class="svc-icon">🔧</div>
-        <h3>Soluciones a Medida</h3>
-        <p>Software, automatizaciones y herramientas personalizadas para tu negocio específico.</p>
-        <ul class="svc-list">
-          <li>Desarrollo personalizado</li>
-          <li>Automatización de procesos</li>
-          <li>Integraciones con APIs</li>
-          <li>Cotización sin compromiso</li>
-        </ul>
+      <div class="svc-card">
+        <div class="svc-icon"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <h3>Desarrollo a Medida</h3>
+        <p>Software, automatizaciones e integraciones personalizadas para tu negocio.</p>
+        <ul class="svc-list"><li>Desarrollo personalizado</li><li>Automatización</li><li>Integraciones API</li><li>Cotización gratis</li></ul>
       </div>
     </div>
-
     <div class="btn-group">
       <a href="https://wa.me/593986225038?text=Hola, necesito soporte técnico" target="_blank" rel="noopener" class="btn-primary">Solicitar soporte →</a>
     </div>
-    <div class="info-box">
-      <strong>Diagnóstico gratis.</strong> Cuéntanos el problema por WhatsApp y evaluamos sin costo. Sin sorpresas en el presupuesto.
-    </div>
+    <div class="info-box"><strong>Diagnóstico gratis.</strong> Cuéntanos el problema por WhatsApp — evaluamos sin costo ni compromiso.</div>
   </div>
 </div>
 
 
-<!-- ═══════════════════════════════════
-     SECCIÓN: CONTACTO
-═══════════════════════════════════════ -->
+<!-- ════════════ CONTACTO ════════════ -->
 <div id="sec-contacto" class="sec-page" role="region" aria-label="Contacto">
-  <div class="sec-bg" aria-hidden="true"><div class="orb-s" style="background:radial-gradient(circle,rgba(37,211,102,0.06) 0%,transparent 70%)"></div><div class="grid-s"></div></div>
+  <div class="bg-canvas" aria-hidden="true" style="z-index:0"><div class="orb orb-1" style="opacity:0.25;background:radial-gradient(ellipse,rgba(37,211,102,0.07) 0%,transparent 65%)"></div><div class="bg-grid"></div><div class="bg-scan"></div></div>
   <div class="sec-topbar">
-    <button class="back-btn" onclick="closeSection('contacto')" aria-label="Volver al menú principal">
-      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Volver al menú
+    <button class="back-btn" onclick="closeSection('contacto')" aria-label="Volver al menú">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Volver
     </button>
-    <span class="sec-topbar-title">📞 Contacto</span>
+    <span class="sec-topbar-label">06 — Contacto</span>
   </div>
   <div class="sec-content">
     <div class="sec-head">
@@ -1744,104 +1272,80 @@ body {
       <h1 class="sec-h">Hablemos.<br><em>Sin rodeos.</em></h1>
       <p class="sec-p">Respondemos rápido. La forma más directa siempre es WhatsApp.</p>
     </div>
-
     <a href="https://wa.me/593986225038?text=Hola DeepCore! Quiero más información" target="_blank" rel="noopener" class="wa-big" aria-label="Contactar por WhatsApp">
-      <div class="wa-icon-wrap" aria-hidden="true">💬</div>
+      <div class="wa-icon"><svg width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
       <div class="wa-big-text">
         <h3>WhatsApp — +593 98 622 5038</h3>
         <p>Respuesta en minutos · Lunes a Sábado · Guayaquil, Ecuador</p>
       </div>
     </a>
-
     <div class="contacto-grid">
-      <a href="mailto:deepcoreec@gmail.com" class="contacto-card">
-        <div class="cc-icon" aria-hidden="true">📧</div>
+      <a href="mailto:deepcoreec@gmail.com" class="cc-card">
+        <div class="cc-ico"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
         <div class="cc-label">Email</div>
         <div class="cc-value">deepcoreec@gmail.com</div>
-        <p class="cc-desc">Para consultas formales o presupuestos detallados.</p>
+        <p class="cc-desc">Para consultas formales o presupuestos.</p>
       </a>
-      <a href="https://www.instagram.com/deepcoreec/" target="_blank" rel="noopener" class="contacto-card">
-        <div class="cc-icon" aria-hidden="true">📸</div>
+      <a href="https://www.instagram.com/deepcoreec/" target="_blank" rel="noopener" class="cc-card">
+        <div class="cc-ico"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
         <div class="cc-label">Instagram</div>
         <div class="cc-value">@deepcoreec</div>
-        <p class="cc-desc">Novedades, lanzamientos y contenido del equipo.</p>
+        <p class="cc-desc">Novedades y lanzamientos.</p>
       </a>
-      <a href="https://www.facebook.com/profile.php?id=61577433271167" target="_blank" rel="noopener" class="contacto-card">
-        <div class="cc-icon" aria-hidden="true">📘</div>
+      <a href="https://www.facebook.com/profile.php?id=61577433271167" target="_blank" rel="noopener" class="cc-card">
+        <div class="cc-ico"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
         <div class="cc-label">Facebook</div>
         <div class="cc-value">DeepCore Ecuador</div>
-        <p class="cc-desc">Comunidad y actualizaciones en redes sociales.</p>
+        <p class="cc-desc">Comunidad y actualizaciones.</p>
       </a>
-      <div class="contacto-card" style="cursor:default">
-        <div class="cc-icon" aria-hidden="true">📍</div>
+      <div class="cc-card" style="cursor:default">
+        <div class="cc-ico"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
         <div class="cc-label">Ubicación</div>
         <div class="cc-value">Guayaquil, Ecuador</div>
-        <p class="cc-desc">Atención presencial y remota disponible.</p>
+        <p class="cc-desc">Presencial y remoto disponible.</p>
       </div>
     </div>
-
-    <div class="info-box" style="margin-top:24px">
-      Para dudas sobre la licencia, instalación o pagos — escríbenos directamente. <strong>Respondemos el mismo día.</strong>
-    </div>
+    <div class="info-box" style="margin-top:22px">Para dudas sobre licencia, instalación o pagos — escríbenos directamente. <strong>Respondemos el mismo día.</strong></div>
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════
-     CHATBOT ALISSON
-═══════════════════════════════════════ -->
+<!-- CHATBOT -->
 <script src="chat.js"></script>
 
-<!-- ═══════════════════════════════════
-     NAVEGACIÓN
-═══════════════════════════════════════ -->
 <script>
-  var _active = null;
-
-  function openSection(id) {
-    var hub = document.getElementById('hub');
-    var sec = document.getElementById('sec-' + id);
-    if (!sec) return;
-    // Cerrar cualquier sección previa
-    if (_active && _active !== sec) {
-      _active.classList.remove('active');
-    }
-    hub.classList.add('hidden');
-    sec.classList.add('active');
-    sec.scrollTop = 0;
-    _active = sec;
-    window.history.pushState({ section: id }, '', '#' + id);
-    // Foco accesible
-    var first = sec.querySelector('button, [href], [tabindex="0"]');
-    if (first) setTimeout(function(){ first.focus(); }, 420);
-  }
-
-  function closeSection(id) {
-    var hub = document.getElementById('hub');
-    var sec = document.getElementById('sec-' + id);
-    if (!sec) return;
-    sec.classList.remove('active');
-    hub.classList.remove('hidden');
-    _active = null;
-    window.history.pushState({}, '', window.location.pathname);
-    window.scrollTo(0, 0);
-  }
-
-  // Botón atrás del navegador
-  window.addEventListener('popstate', function() {
-    document.querySelectorAll('.sec-page.active').forEach(function(s){ s.classList.remove('active'); });
-    document.getElementById('hub').classList.remove('hidden');
-    _active = null;
-  });
-
-  // Abrir sección desde URL hash (ej. deepcore.ec/#programas)
-  (function() {
-    var hash = window.location.hash.replace('#', '');
-    if (['programas','precios','ia','web','servicios','contacto'].indexOf(hash) !== -1) {
-      openSection(hash);
-    }
-  })();
+var _active=null;
+function openSection(id){
+  var hub=document.getElementById('hub');
+  var sec=document.getElementById('sec-'+id);
+  if(!sec)return;
+  if(_active&&_active!==sec)_active.classList.remove('active');
+  hub.classList.add('hidden');
+  sec.classList.add('active');
+  sec.scrollTop=0;
+  _active=sec;
+  history.pushState({section:id},'','#'+id);
+  var f=sec.querySelector('button,[href],[tabindex="0"]');
+  if(f)setTimeout(function(){f.focus();},430);
+}
+function closeSection(id){
+  var hub=document.getElementById('hub');
+  var sec=document.getElementById('sec-'+id);
+  if(!sec)return;
+  sec.classList.remove('active');
+  hub.classList.remove('hidden');
+  _active=null;
+  history.pushState({},'',location.pathname);
+  window.scrollTo(0,0);
+}
+window.addEventListener('popstate',function(){
+  document.querySelectorAll('.sec-page.active').forEach(function(s){s.classList.remove('active');});
+  document.getElementById('hub').classList.remove('hidden');
+  _active=null;
+});
+(function(){
+  var h=location.hash.replace('#','');
+  if(['programas','precios','ia','web','servicios','contacto'].indexOf(h)!==-1)openSection(h);
+})();
 </script>
-
 </body>
 </html>
