@@ -146,7 +146,21 @@
 }
 .dc-send:hover { background: #c0001f; transform: scale(1.06); }
 
+/* Voz toggle más compacto */
+#toggle-voz {
+  font-size: 12px;
+  padding: 3px 7px;
+  border-radius: 10px;
+  background: rgba(233,69,96,0.08);
+  border: 1px solid rgba(233,69,96,0.18);
+  transition: background .15s;
+}
+#toggle-voz:hover { background: rgba(233,69,96,0.18); }
+
+/* Send button — estado deshabilitado */
+.dc-send:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
+
 @media (max-width: 480px) {
   #dc-chat-widget { bottom: 16px; right: 12px; }
-  .dc-window { width: calc(100vw - 24px); right: -12px; bottom: 66px; }
+  .dc-window { width: calc(100vw - 24px); right: 0; bottom: 66px; }
 }
