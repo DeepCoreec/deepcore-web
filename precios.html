@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Precios — DeepCore Software Ecuador</title>
-  <meta name="description" content="Planes y precios de DeepCore: CRM, Inventario, Facturación SRI, HR Pro y más. Desde $5/mes. Pago con tarjeta. Licencia instantánea."/>
+  <meta name="description" content="Planes y precios de DeepCore: CRM, Inventario, Facturación SRI, HR Pro y más. Desde $7/mes. Pago con tarjeta. Licencia instantánea."/>
   <link rel="canonical" href="https://deepcore.ec/precios.html"/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <style>
@@ -211,7 +211,7 @@
         <p style="margin-top:4px">Los 8 programas + IA en cada uno. Una sola clave activa todo.</p>
       </div>
       <div style="margin-left:auto;text-align:center">
-        <div class="suite-price" id="precioDisplay"><sup>$</sup>5<span class="period">/mes</span></div>
+        <div class="suite-price" id="precioDisplay"><sup>$</sup>7<span class="period">/mes</span></div>
         <div style="font-size:12px;color:var(--muted);margin-top:4px" id="ahorroDisplay"></div>
       </div>
     </div>
@@ -464,14 +464,12 @@ async function irAlPago(){
   btn.disabled = true;
   btn.textContent = '⏳ Preparando pago...';
 
-  const fd = new FormData();
-  fd.append('programa', 'Suite Completa');
-  fd.append('meses',    modalMeses);
-  fd.append('nombre',   nombre);
-  fd.append('email',    email);
-
   try{
-    const r = await fetch(`${API}/api/pago/crear`, {method:'POST', body:fd});
+    const r = await fetch(`${API}/api/pago/crear`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, meses: modalMeses, nombre }),
+    });
     if(!r.ok) throw new Error('Error servidor');
     const d = await r.json();
     window.location.href = d.url;
